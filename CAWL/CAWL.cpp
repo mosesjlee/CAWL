@@ -10,6 +10,9 @@
 #include <iostream>
 #include "CAWL.hpp"
 
+//The static instance
+CAWL * CAWL::cawlInstance;
+
 CAWL::CAWL()
 {
 	setupAudioInputUnits();
@@ -21,17 +24,18 @@ CAWL::~CAWL()
 	
 	//Free buffers
 	
-	//Delete instance
+	//AUGraph clean up
+	cleanUp();
+	
+	//delete instance
+	delete cawlInstance;
 }
 
 CAWL * CAWL::Instance()
 {
-//	if(CAWL::cawlInstance == NULL)
-//	{
-//		CAWL::cawlInstance = new CAWL();
-//	}
-	
-	return new CAWL();
+	//static CAWL * instance;
+	if(cawlInstance == NULL) cawlInstance = new CAWL();
+	return cawlInstance;
 }
 
 /**
@@ -201,6 +205,8 @@ void CAWL::setupAudioInputUnits()
 		this->inputBuffer->mBuffers[i].mData = malloc(bufferSizeBytes);
 	}
 	
+	printf("Number of Channels: %d\n", this->streamFormat.mChannelsPerFrame);
+	
 	//Allocate a ring buffer
 	this->ringBuffer = new CARingBuffer();
 	this->ringBuffer->Allocate(this->streamFormat.mChannelsPerFrame,
@@ -295,6 +301,14 @@ void CAWL::setupGraph()
 	this->firstOutputSampleTime = -1;
 }
 
+//Clean up the graphs and shiz
+void CAWL::cleanUp()
+{
+	AUGraphStop(this->graph);
+	AUGraphUninitialize(this->graph);
+	AUGraphClose(this->graph);
+}
+
 //Callbacks
 OSStatus CAWL::InputRenderCallBack(void *inRefCon,
 							 AudioUnitRenderActionFlags * ioActionFlags,
@@ -360,10 +374,36 @@ OSStatus CAWL::OutputRenderCallBack(void *inRefCon,
 	
 	OSStatus error = noErr;
 	
+	
 	error = instance->ringBuffer->Fetch(ioData,
 										inNumberFrames,
 										inTimeStamp->mSampleTime +
 										instance->inToOutSampleTimeOffset);
+	
+	//This is where you can do some post processing
+	//For now i am just screwingaround in here to see what is possible
+	double j = instance->startingFrameCount;
+	//	double cycleLength = 44100. / 2200./*frequency*/;
+	
+	double cycleLength = 44100. / 440;
+	double cycleLength2 = 44100. /880;
+	int frame = 0;
+	for (frame = 0; frame < inNumberFrames; ++frame)
+	{
+		Float32 *leftChannel = (Float32*)ioData->mBuffers[0].mData;
+		(leftChannel)[frame] =(leftChannel)[frame] + (Float32)sin (2 * M_PI * (j / cycleLength));
+		
+		// copy to right channel too
+		Float32 * rightChannel = (Float32*)ioData->mBuffers[1].mData;
+		(rightChannel)[frame] = rightChannel[frame] + (Float32)sin (2 * M_PI * (j * 2 / cycleLength2));
+		
+		j += 1.0;
+		if (j > cycleLength)
+			j -= cycleLength;
+	}
+	
+	instance->startingFrameCount = j;
+	
 	
 	return error;
 }

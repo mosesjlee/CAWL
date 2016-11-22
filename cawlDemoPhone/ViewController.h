@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CAWL.hpp"
 @interface ViewController : UIViewController
-
+@property CAWL * instance;
 
 @end
 

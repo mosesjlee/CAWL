@@ -9,8 +9,13 @@
 
 #ifndef CAWL_
 #define CAWL_
+#include <TargetConditionals.h>
 
+#if TARGET_OS_IPHONE
+#else
 #include <CoreAudio/CoreAudio.h>
+#endif
+
 #include <AudioToolbox/AudioToolbox.h>
 
 #include <Block.h>
@@ -34,6 +39,10 @@ public:
 	static CAWL * Instance();
 	void startPlaying();
 	
+	//Enforce singleton pattern
+	CAWL(CAWL const&)            = delete;
+	void operator=(CAWL const&)  = delete;
+	
 	
 	//Private methods
 private:
@@ -41,20 +50,20 @@ private:
 	~CAWL();
 	void CheckError(OSStatus error, const char * operation);
 	void setupAudioInputUnits();
+	void setupGraph();
+	void cleanUp();
 	static OSStatus InputRenderCallBack(void *inRefCon,
 								 AudioUnitRenderActionFlags * ioActionFlags,
 								 const AudioTimeStamp *inTimeStamp,
 								 UInt32 inBusNumber,
 								 UInt32 inNumberFrames,
 								 AudioBufferList * ioData);
-	
 	static OSStatus OutputRenderCallBack(void *inRefCon,
 										 AudioUnitRenderActionFlags * ioActionFlags,
 										 const AudioTimeStamp *inTimeStamp,
 										 UInt32 inBusNumber,
 										 UInt32 inNumberFrames,
 										 AudioBufferList * ioData);
-	void setupGraph();
 	
 	
 	//Member variables
@@ -65,7 +74,6 @@ private:
 	cawlBuffers input;
 	cawlBuffers output;
 	
-	
 	AudioStreamBasicDescription streamFormat;
 	AUGraph graph;
 	AudioUnit inputUnit;
@@ -75,6 +83,8 @@ private:
 	Float64 firstOutputSampleTime;
 	Float64 inToOutSampleTimeOffset;
 	AudioBufferList * inputBuffer;
+	
+	int startingFrameCount;
 	
 #ifndef MYBUFFER
 	CARingBuffer * ringBuffer;
