@@ -32,6 +32,8 @@ class CAWL
 public:
 	float * getInputBufferAtChannel(const unsigned int channel, unsigned int & numSamples);
 	static CAWL * Instance();
+	void startPlaying();
+	
 	
 	//Private methods
 private:
@@ -45,6 +47,15 @@ private:
 								 UInt32 inBusNumber,
 								 UInt32 inNumberFrames,
 								 AudioBufferList * ioData);
+	
+	static OSStatus OutputRenderCallBack(void *inRefCon,
+										 AudioUnitRenderActionFlags * ioActionFlags,
+										 const AudioTimeStamp *inTimeStamp,
+										 UInt32 inBusNumber,
+										 UInt32 inNumberFrames,
+										 AudioBufferList * ioData);
+	void setupGraph();
+	
 	
 	//Member variables
 private:

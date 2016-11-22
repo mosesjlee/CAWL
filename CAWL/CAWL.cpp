@@ -12,8 +12,8 @@
 
 CAWL::CAWL()
 {
-	cawlInstance = NULL;
 	setupAudioInputUnits();
+	setupGraph();
 }
 
 CAWL::~CAWL()
@@ -26,12 +26,12 @@ CAWL::~CAWL()
 
 CAWL * CAWL::Instance()
 {
-	if(cawlInstance == NULL)
-	{
-		cawlInstance = new CAWL();
-	}
+//	if(CAWL::cawlInstance == NULL)
+//	{
+//		CAWL::cawlInstance = new CAWL();
+//	}
 	
-	return cawlInstance;
+	return new CAWL();
 }
 
 /**
@@ -230,6 +230,71 @@ void CAWL::setupAudioInputUnits()
 	printf("Finished setting up input unit\n");
 }
 
+void CAWL::setupGraph()
+{
+	//Initialize the new graph
+	CheckError(NewAUGraph(&this->graph),
+			   "Could not create graph");
+	
+	//Generate a description that matches the default output
+	AudioComponentDescription outputcd = {0};
+	outputcd.componentType = kAudioUnitType_Output;
+	outputcd.componentSubType = kAudioUnitSubType_DefaultOutput;
+	outputcd.componentManufacturer = kAudioUnitManufacturer_Apple;
+	
+	AudioComponent comp = AudioComponentFindNext(NULL, &outputcd);
+	if(comp == NULL)
+	{
+		printf("Can't get audio component");
+		exit(-1);
+	}
+	
+	AUNode outputNode;
+	CheckError(AUGraphAddNode(this->graph,
+							  &outputcd,
+							  &outputNode),
+			   "Could not add output node");
+	
+	//Open the graph
+	CheckError(AUGraphOpen(this->graph),
+			   "Could not open graph");
+	
+	//Get reference to the AudioUnit object for the graph
+	CheckError(AUGraphNodeInfo(this->graph,
+							   outputNode,
+							   NULL,
+							   &this->outputUnit),
+			   "Could not get reference to the output Audio Unit");
+	
+	//Set the stream format on the output unit's input scope
+	UInt32 propSize = sizeof(AudioStreamBasicDescription);
+	CheckError(AudioUnitSetProperty(this->outputUnit,
+									kAudioUnitProperty_StreamFormat,
+									kAudioUnitScope_Input,
+									0,
+									&this->streamFormat,
+									propSize),
+			   "Couldnt set stream format on output unit");
+	
+	AURenderCallbackStruct callbackStruct;
+	callbackStruct.inputProc = &CAWL::OutputRenderCallBack;
+	callbackStruct.inputProcRefCon = this;
+	
+	CheckError(AudioUnitSetProperty(this->outputUnit,
+									kAudioUnitProperty_SetRenderCallback,
+									kAudioUnitScope_Global,
+									0,
+									&callbackStruct,
+									sizeof(callbackStruct)),
+			   "Couldnt set render callback on output unit");
+	
+	//Now initialize the graph
+	CheckError(AUGraphInitialize(this->graph),
+			   "Could not initialize graph");
+	
+	this->firstOutputSampleTime = -1;
+}
+
 //Callbacks
 OSStatus CAWL::InputRenderCallBack(void *inRefCon,
 							 AudioUnitRenderActionFlags * ioActionFlags,
@@ -240,10 +305,76 @@ OSStatus CAWL::InputRenderCallBack(void *inRefCon,
 {
 	CAWL * instance = (CAWL *) inRefCon;
 	
+	//offset calculation
+	if(instance->firstInputSampleTime < 0.0)
+	{
+		instance->firstInputSampleTime = inTimeStamp->mSampleTime;
+		if ((instance->firstOutputSampleTime > -1.0) &&
+			(instance->inToOutSampleTimeOffset < 0.0))
+		{
+			instance->inToOutSampleTimeOffset =
+			instance->firstInputSampleTime - instance->firstOutputSampleTime;
+		}
+	}
+	
 	OSStatus error = noErr;
+	
+	error = AudioUnitRender(instance->inputUnit,
+							ioActionFlags,
+							inTimeStamp,
+							inBusNumber,
+							inNumberFrames,
+							instance->inputBuffer);
+	
+	if(!error)
+	{
+		error = instance->ringBuffer->Store(instance->inputBuffer,
+											inNumberFrames,
+											inTimeStamp->mSampleTime);
+	}
+	
 	return error;
 }
 
+OSStatus CAWL::OutputRenderCallBack(void *inRefCon,
+									 AudioUnitRenderActionFlags * ioActionFlags,
+									 const AudioTimeStamp *inTimeStamp,
+									 UInt32 inBusNumber,
+									 UInt32 inNumberFrames,
+									 AudioBufferList * ioData)
+{
+	CAWL * instance = (CAWL *) inRefCon;
+	
+	
+	//offset calculation
+	if(instance->firstOutputSampleTime < 0.0)
+	{
+		instance->firstOutputSampleTime = inTimeStamp->mSampleTime;
+		if ((instance->firstOutputSampleTime > -1.0) &&
+			(instance->inToOutSampleTimeOffset < 0.0))
+		{
+			instance->inToOutSampleTimeOffset =
+			instance->firstInputSampleTime - instance->firstOutputSampleTime;
+		}
+	}
+	
+	OSStatus error = noErr;
+	
+	error = instance->ringBuffer->Fetch(ioData,
+										inNumberFrames,
+										inTimeStamp->mSampleTime +
+										instance->inToOutSampleTimeOffset);
+	
+	return error;
+}
+
+void CAWL::startPlaying()
+{
+	CheckError(AudioOutputUnitStart(this->inputUnit),
+			   "AudioOutputUnitStart failed");
+	CheckError(AUGraphStart(this->graph),
+			   "AUGraphStart failed");
+}
 
 
 
