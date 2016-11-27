@@ -15,6 +15,7 @@ CAWL * CAWL::cawlInstance;
 
 CAWL::CAWL()
 {
+	numInputChannelsRegistered = 0;
 	setupAudioInputUnits();
 	setupGraph();
 }
@@ -205,7 +206,9 @@ void CAWL::setupAudioInputUnits()
 		this->inputBuffer->mBuffers[i].mData = malloc(bufferSizeBytes);
 	}
 	
-	printf("Number of Channels: %d\n", this->streamFormat.mChannelsPerFrame);
+	printf("Number of input channels: %d\n", this->streamFormat.mChannelsPerFrame);
+	numInputChannels = this->streamFormat.mChannelsPerFrame;
+	this->input = new cawlBuffers[numInputChannels];
 	
 	//Allocate a ring buffer
 	this->ringBuffer = new CARingBuffer();
@@ -309,6 +312,8 @@ void CAWL::cleanUp()
 	AUGraphClose(this->graph);
 }
 
+
+
 //Callbacks
 OSStatus CAWL::InputRenderCallBack(void *inRefCon,
 							 AudioUnitRenderActionFlags * ioActionFlags,
@@ -339,6 +344,8 @@ OSStatus CAWL::InputRenderCallBack(void *inRefCon,
 							inBusNumber,
 							inNumberFrames,
 							instance->inputBuffer);
+	
+	//There should be no post processing done here. You should store it ASAP to the ring buffer
 	
 	if(!error)
 	{
@@ -380,32 +387,39 @@ OSStatus CAWL::OutputRenderCallBack(void *inRefCon,
 										inTimeStamp->mSampleTime +
 										instance->inToOutSampleTimeOffset);
 	
+	
+	
 	//This is where you can do some post processing
 	//For now i am just screwingaround in here to see what is possible
-	double j = instance->startingFrameCount;
-	//	double cycleLength = 44100. / 2200./*frequency*/;
 	
-	double cycleLength = 44100. / 440;
-	double cycleLength2 = 44100. /880;
-	int frame = 0;
-	for (frame = 0; frame < inNumberFrames; ++frame)
+	if(instance->numInputChannelsRegistered > 0)
 	{
-		Float32 *leftChannel = (Float32*)ioData->mBuffers[0].mData;
-		(leftChannel)[frame] =(leftChannel)[frame] + (Float32)sin (2 * M_PI * (j / cycleLength));
-		
-		// copy to right channel too
-		Float32 * rightChannel = (Float32*)ioData->mBuffers[1].mData;
-		(rightChannel)[frame] = rightChannel[frame] + (Float32)sin (2 * M_PI * (j * 2 / cycleLength2));
-		
-		j += 1.0;
-		if (j > cycleLength)
-			j -= cycleLength;
+		for(unsigned i = 0; i < instance->numInputChannels; i++)
+		{
+			float * buf = (float *) ioData->mBuffers[i].mData;
+			instance->input[i](buf, inNumberFrames);
+		}
 	}
 	
-	instance->startingFrameCount = j;
-	
-	
 	return error;
+}
+
+cawlBuffers CAWL::getInputBufferAtChannel(const unsigned int channel)
+{
+	if(channel > numInputChannels)
+		return nullptr;
+	
+	return input[channel];
+}
+
+bool CAWL::registerInputBlockAtInputChannel(cawlBuffers buffer, const unsigned int channel)
+{
+	if(channel > numInputChannels)
+		return false;
+	
+	input[channel] = buffer;
+	numInputChannelsRegistered++;
+	return true;
 }
 
 void CAWL::startPlaying()
@@ -413,6 +427,14 @@ void CAWL::startPlaying()
 	CheckError(AudioOutputUnitStart(this->inputUnit),
 			   "AudioOutputUnitStart failed");
 	CheckError(AUGraphStart(this->graph),
+			   "AUGraphStart failed");
+}
+
+void CAWL::stopPlaying()
+{
+	CheckError(AudioOutputUnitStop(this->inputUnit),
+			   "AudioOutputUnitStart failed");
+	CheckError(AUGraphStop(this->graph),
 			   "AUGraphStart failed");
 }
 

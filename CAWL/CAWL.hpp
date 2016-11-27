@@ -27,17 +27,18 @@
 #include "CAWLRingBuffer.hpp"
 #endif
 
-typedef void (^cawlBuffers)(const unsigned int numChannels,
-							float * buffer,
+typedef void (^cawlBuffers)(float * buffer,
 							const unsigned int numSamples);
 
 class CAWL
 {
 	//Public methods
 public:
-	float * getInputBufferAtChannel(const unsigned int channel, unsigned int & numSamples);
+	cawlBuffers getInputBufferAtChannel(const unsigned int channel);
+	bool registerInputBlockAtInputChannel(cawlBuffers buffer, const unsigned int channel);
 	static CAWL * Instance();
 	void startPlaying();
+	void stopPlaying();
 	
 	//Enforce singleton pattern
 	CAWL(CAWL const&)            = delete;
@@ -52,6 +53,7 @@ private:
 	void setupAudioInputUnits();
 	void setupGraph();
 	void cleanUp();
+	
 	static OSStatus InputRenderCallBack(void *inRefCon,
 								 AudioUnitRenderActionFlags * ioActionFlags,
 								 const AudioTimeStamp *inTimeStamp,
@@ -69,10 +71,9 @@ private:
 	//Member variables
 private:
 	static CAWL * cawlInstance;
-	unsigned int numChannels;
 	float sampleRate;
-	cawlBuffers input;
-	cawlBuffers output;
+	cawlBuffers * input;
+	cawlBuffers * output;
 	
 	AudioStreamBasicDescription streamFormat;
 	AUGraph graph;
@@ -84,7 +85,8 @@ private:
 	Float64 inToOutSampleTimeOffset;
 	AudioBufferList * inputBuffer;
 	
-	int startingFrameCount;
+	unsigned int numInputChannels;
+	unsigned int numInputChannelsRegistered;
 	
 #ifndef MYBUFFER
 	CARingBuffer * ringBuffer;

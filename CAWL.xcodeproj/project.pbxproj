@@ -177,6 +177,13 @@
 			path = cawlTester;
 			sourceTree = "<group>";
 		};
+		912977BE1DE510340093134D /* SoundModules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SoundModules;
+			sourceTree = "<group>";
+		};
 		91CAEC731DC8584600CEF065 = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +210,7 @@
 		91CAEC7E1DC8584600CEF065 /* CAWL */ = {
 			isa = PBXGroup;
 			children = (
+				912977BE1DE510340093134D /* SoundModules */,
 				91062DD71DE397C900BCBDA0 /* RingBuffer */,
 				91CAEC7F1DC8584600CEF065 /* CAWL.hpp */,
 				91CAEC831DC8584600CEF065 /* CAWL.cpp */,
