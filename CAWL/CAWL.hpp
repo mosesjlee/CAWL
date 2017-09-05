@@ -11,13 +11,10 @@
 #define CAWL_
 #include <TargetConditionals.h>
 
-#if TARGET_OS_IPHONE
-#else
+
 #include <CoreAudio/CoreAudio.h>
-#endif
-
 #include <AudioToolbox/AudioToolbox.h>
-
+#include <AudioUnit/AudioUnit.h>
 #include <Block.h>
 
 //#define MYBUFFER

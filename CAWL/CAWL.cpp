@@ -167,6 +167,7 @@ void CAWL::setupAudioInputUnits()
 			   "Couldn't get ASBD from input unit");
 	
 	this->streamFormat.mSampleRate = deviceFormat.mSampleRate;
+    this->streamFormat.mChannelsPerFrame = deviceFormat.mChannelsPerFrame;
 	
 	propertySize = sizeof(AudioStreamBasicDescription);
 	CheckError(AudioUnitSetProperty(this->inputUnit,
@@ -392,14 +393,14 @@ OSStatus CAWL::OutputRenderCallBack(void *inRefCon,
 	//This is where you can do some post processing
 	//For now i am just screwingaround in here to see what is possible
 	
-//	if(instance->numInputChannelsRegistered > 0)
-//	{
-//		for(unsigned i = 0; i < instance->numInputChannels; i++)
-//		{
-//			float * buf = (float *) ioData->mBuffers[i].mData;
-//			instance->input[i](buf, inNumberFrames);
-//		}
-//	}
+	if(instance->numInputChannelsRegistered > 0)
+	{
+		for(unsigned i = 0; i < instance->numInputChannels; i++)
+		{
+			float * buf = (float *) ioData->mBuffers[i].mData;
+			instance->input[i](buf, inNumberFrames);
+		}
+	}
 	
 	return error;
 }
