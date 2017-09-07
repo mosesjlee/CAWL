@@ -177,7 +177,27 @@ void CAWL::setupAudioInputUnits()
 									&this->streamFormat,
 									propertySize),
 			   "Couldn't set ASBD on input unit");
-	
+    //Create channel Map
+    SInt32 *channelMap = NULL;
+    UInt32 numOfChannels = this->streamFormat.mChannelsPerFrame;
+    UInt32 mapSize = numOfChannels *sizeof(SInt32);
+    channelMap = (SInt32 *)malloc(mapSize);
+    
+    for(UInt32 i=0;i<numOfChannels;i++)
+    {
+        channelMap[i]=-1;
+    }
+    channelMap[0] = 0;
+    channelMap[1] = 1;
+    channelMap[2] = 0;
+    channelMap[3] = 1;
+    AudioUnitSetProperty(this->inputUnit,
+                         kAudioOutputUnitProperty_ChannelMap,
+                         kAudioUnitScope_Output,
+                         1,
+                         channelMap,
+                         mapSize);
+    free(channelMap);
 	//Calculate Capture buffer size for an I/O unit
 	UInt32 bufferSizeFrames = 0;
 	propertySize = sizeof(UInt32);
