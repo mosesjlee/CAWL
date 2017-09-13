@@ -178,26 +178,26 @@ void CAWL::setupAudioInputUnits()
 									propertySize),
 			   "Couldn't set ASBD on input unit");
     //Create channel Map
-    SInt32 *channelMap = NULL;
-    UInt32 numOfChannels = this->streamFormat.mChannelsPerFrame;
-    UInt32 mapSize = numOfChannels *sizeof(SInt32);
-    channelMap = (SInt32 *)malloc(mapSize);
-    
-    for(UInt32 i=0;i<numOfChannels;i++)
-    {
-        channelMap[i]=-1;
-    }
-    channelMap[0] = 0;
-    channelMap[1] = 1;
-    channelMap[2] = 0;
-    channelMap[3] = 1;
-    AudioUnitSetProperty(this->inputUnit,
-                         kAudioOutputUnitProperty_ChannelMap,
-                         kAudioUnitScope_Output,
-                         1,
-                         channelMap,
-                         mapSize);
-    free(channelMap);
+//    SInt32 *channelMap = NULL;
+//    UInt32 numOfChannels = this->streamFormat.mChannelsPerFrame;
+//    UInt32 mapSize = numOfChannels *sizeof(SInt32);
+//    channelMap = (SInt32 *)malloc(mapSize);
+//    
+//    for(UInt32 i=0;i<numOfChannels;i++)
+//    {
+//        channelMap[i]=-1;
+//    }
+//    channelMap[0] = 2;
+//    channelMap[1] = 2;
+//    channelMap[2] = 0;
+//    channelMap[3] = 1;
+//    AudioUnitSetProperty(this->inputUnit,
+//                         kAudioOutputUnitProperty_ChannelMap,
+//                         kAudioUnitScope_Output,
+//                         1,
+//                         channelMap,
+//                         mapSize);
+//    free(channelMap);
 	//Calculate Capture buffer size for an I/O unit
 	UInt32 bufferSizeFrames = 0;
 	propertySize = sizeof(UInt32);
@@ -317,6 +317,27 @@ void CAWL::setupGraph()
 									&callbackStruct,
 									sizeof(callbackStruct)),
 			   "Couldnt set render callback on output unit");
+    
+//    SInt32 *channelMap = NULL;
+//    UInt32 numOfChannels = this->streamFormat.mChannelsPerFrame;
+//    UInt32 mapSize = numOfChannels *sizeof(SInt32);
+//    channelMap = (SInt32 *)malloc(mapSize);
+//
+//    for(UInt32 i=0;i<numOfChannels;i++)
+//    {
+//        channelMap[i]=-1;
+//    }
+//    channelMap[0] = 2;
+//    channelMap[1] = 2;
+//    
+//    
+//    AudioUnitSetProperty(this->outputUnit,
+//                         kAudioOutputUnitProperty_ChannelMap,
+//                         kAudioUnitScope_Input,
+//                         0,
+//                         channelMap,
+//                         mapSize);
+//    free(channelMap);
 	
 	//Now initialize the graph
 	CheckError(AUGraphInitialize(this->graph),
@@ -413,15 +434,25 @@ OSStatus CAWL::OutputRenderCallBack(void *inRefCon,
 	//This is where you can do some post processing
 	//For now i am just screwingaround in here to see what is possible
 	
-	if(instance->numInputChannelsRegistered > 0)
-	{
-		for(unsigned i = 0; i < instance->numInputChannels; i++)
-		{
-			float * buf = (float *) ioData->mBuffers[i].mData;
-			instance->input[i](buf, inNumberFrames);
-		}
-	}
+//	if(instance->numInputChannelsRegistered > 0)
+//	{
+//		for(unsigned i = 0; i < instance->numInputChannels && i < instance->numInputChannelsRegistered; i++)
+//		{
+//			float * buf = (float *) ioData->mBuffers[i].mData;
+//			instance->input[i](buf, inNumberFrames);
+//		}
+//	}
 	
+    Float32 * data = (Float32 *) ioData->mBuffers[0].mData;
+    Float32 * data2 = (Float32 *) ioData->mBuffers[1].mData;
+    Float32 * data3 = (Float32 *) ioData->mBuffers[2].mData;
+    Float32 * data4 = (Float32 *) ioData->mBuffers[3].mData;
+    for(UInt32 frame = 0; frame < inNumberFrames; frame++)
+    {
+        Float32 sample =  data[frame] + data2[frame] + data3[frame] + data4[frame];;
+        data[frame] = data2[frame] = data3[frame] = data4[frame] = sample;
+    }
+    
 	return error;
 }
 

@@ -81,7 +81,7 @@ private:
 	Float64 firstOutputSampleTime;
 	Float64 inToOutSampleTimeOffset;
 	AudioBufferList * inputBuffer;
-	
+    float outputTest[132300];
 	unsigned int numInputChannels;
 	unsigned int numInputChannelsRegistered;
 	

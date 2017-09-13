@@ -17,7 +17,7 @@ int main(int argc, const char * argv[]) {
 	CAWL * instance = CAWL::Instance();
     float buffer[512], buffer2[512] , buffer3[512], buffer4[512];
     float * ptrToBuf1 = buffer, * ptrToBuf2 = buffer2, * ptrToBuf3 = buffer3, * ptrToBuf4 = buffer4;
-	int frameCount = 0, frameCount2 = 0, * fc, * fc2;
+	double frameCount = 0, frameCount2 = 0, * fc, * fc2;
 	fc = &frameCount; fc2 = &frameCount2;
 	double cycleLength = 44100. / 440;
 	
@@ -28,7 +28,7 @@ int main(int argc, const char * argv[]) {
 		{
 			ptrToBuf1[i] = data[i];
 			
-            data[i] = data[i];// + (float) sin (2 * M_PI * (j / cycleLength));
+            //data[i] = data[i] + (float) sin (2 * M_PI * (j / cycleLength));
 			
 			j += 1.0;
 			if (j > cycleLength)
@@ -44,7 +44,7 @@ int main(int argc, const char * argv[]) {
 		for(int i = 0; i < numSamples; i++)
 		{
 			ptrToBuf2[i] = data[i];
-            data[i] = data[i];// + (float) sin (2 * M_PI * (j / cycleLength));
+            //data[i] = data[i] + (float) sin (2 * M_PI * (j / cycleLength));
 			
 			j += 1.0;
 			if (j > cycleLength)
@@ -63,7 +63,7 @@ int main(int argc, const char * argv[]) {
         for(int i = 0; i < numSamples; i++)
         {
             ptrToBuf3[i] = data[i];
-            data[i] = data[i];// + (float) sin (2 * M_PI * (j / cycleLength));
+            data[i] = data[i] + (float) sin (2 * M_PI * (j / cycleLength));
             
             j += 1.0;
             if (j > cycleLength)
