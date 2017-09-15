@@ -24,6 +24,7 @@
 typedef void (^cawlBuffers)(float * buffer,
 							const unsigned int numSamples);
 
+
 class CAWL
 {
 	//Public methods
