@@ -11,7 +11,8 @@
 
 CAWLAudioUnit::CAWLAudioUnit()
 {
-	
+    setDefaultInputAudioUnit();
+    setupAudioUnitIO();
 }
 
 CAWLAudioUnit::~CAWLAudioUnit()
@@ -22,6 +23,11 @@ CAWLAudioUnit::~CAWLAudioUnit()
 OSStatus CAWLAudioUnit::setDefaultInputAudioUnit()
 {
 	OSStatus theStatus = noErr;
+    UInt32 disableFlag = 0;
+    UInt32 enableFlag = 1;
+    AudioUnitScope outputBus = 0;
+    AudioUnitScope inputBus = 1;
+    
     //Generate a description
     AudioComponentDescription inputcd = {0};
     inputcd.componentType = kAudioUnitType_Output;
@@ -39,8 +45,6 @@ OSStatus CAWLAudioUnit::setDefaultInputAudioUnit()
     CheckError(AudioComponentInstanceNew(comp, &this->inputUnit),
                "Couldn't open component for inputUnit");
     
-
-
     
     /***********************************************
      This next section specifies the audio

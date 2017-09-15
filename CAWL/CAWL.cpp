@@ -15,8 +15,8 @@ CAWL * CAWL::cawlInstance;
 
 CAWL::CAWL()
 {
-	numInputChannelsRegistered = 0;
-	setupAudioInputUnits();
+    aggregateAudioUnit = new CAWLAudioUnit();
+    setupBuffers();
 	setupGraph();
 }
 
@@ -27,8 +27,8 @@ CAWL::~CAWL()
 	
 	//AUGraph clean up
 	cleanUp();
-	
 	//delete instance
+    delete aggregateAudioUnit;
 	delete cawlInstance;
 }
 
@@ -44,135 +44,12 @@ CAWL * CAWL::Instance()
  Parts of this function is copied from the book Learning CoreAudio
  Authors: Chris Adamson, Kevin Avila
  **/
-void CAWL::setupAudioInputUnits()
+void CAWL::setupBuffers()
 {
-	//Generate a description
-	AudioComponentDescription inputcd = {0};
-	inputcd.componentType = kAudioUnitType_Output;
-	inputcd.componentSubType = kAudioUnitSubType_HALOutput;
-	inputcd.componentManufacturer = kAudioUnitManufacturer_Apple;
-	
-	AudioComponent comp = AudioComponentFindNext(NULL, &inputcd);
-	if(comp == NULL)
-	{
-		printf("Can't get output unit\n");
-		
-		//May need a more gracious way of exitting
-		exit(-1);
-	}
-	
-	CheckError(AudioComponentInstanceNew(comp, &this->inputUnit),
-			   "Couldn't open component for inputUnit");
-	
-	/***********************************************
-		This section enables the input and
-		disables the output for this AudioUnit
-		that we designated as the input
-	 ***********************************************/
-	UInt32 disableFlag = 0;
-	UInt32 enableFlag = 1;
-	AudioUnitScope outputBus = 0;
-	AudioUnitScope inputBus = 1;
-	
-	CheckError(AudioUnitSetProperty(this->inputUnit,
-									kAudioOutputUnitProperty_EnableIO,
-									kAudioUnitScope_Input,
-									inputBus,
-									&enableFlag,
-									sizeof(enableFlag)),
-			   "Couldn't enable input on I/O unit");
-	
-	CheckError(AudioUnitSetProperty(this->inputUnit,
-									kAudioOutputUnitProperty_EnableIO,
-									kAudioUnitScope_Output,
-									outputBus,
-									&disableFlag,
-									sizeof(disableFlag)),
-			   "Couldn't disable output on I/O unit");
-	
-	/***********************************************
-		This next section specifies the audio
-		device to get the audio input from
-	 ***********************************************/
-	AudioDeviceID defaultDevice = kAudioObjectUnknown;
-	UInt32 propertySize = sizeof(defaultDevice);
-	AudioObjectPropertyAddress defaultDeviceProperty;
-	defaultDeviceProperty.mSelector = kAudioHardwarePropertyDefaultInputDevice;
-	defaultDeviceProperty.mScope = kAudioObjectPropertyScopeGlobal;
-	defaultDeviceProperty.mElement = kAudioObjectPropertyElementMaster;
-	
-	CheckError(AudioObjectGetPropertyData(kAudioObjectSystemObject,
-										  &defaultDeviceProperty,
-										  0,
-										  NULL,
-										  &propertySize,
-										  &defaultDevice),
-			   "Couldn't get default input device");
-	
-	CheckError(AudioUnitSetProperty(this->inputUnit,
-									kAudioOutputUnitProperty_CurrentDevice,
-									kAudioUnitScope_Global,
-									outputBus,
-									&defaultDevice,
-									sizeof(defaultDevice)),
-			   "Couldn't set default device on I/O unit");
-	
-	//Get the ASBD from Input AUHAL
-	propertySize = sizeof(AudioStreamBasicDescription);
-	CheckError(AudioUnitGetProperty(this->inputUnit,
-									kAudioUnitProperty_StreamFormat,
-									kAudioUnitScope_Output,
-									inputBus,
-									&this->streamFormat,
-									&propertySize),
-			   "Couldn't get ASBD from Input unit");
-	
-	//Adopt Hardware input sample
-	AudioStreamBasicDescription deviceFormat;
-	CheckError(AudioUnitGetProperty(this->inputUnit,
-									kAudioUnitProperty_StreamFormat,
-									kAudioUnitScope_Input,
-									inputBus,
-									&deviceFormat,
-									&propertySize),
-			   "Couldn't get ASBD from input unit");
-	
-	this->streamFormat.mSampleRate = deviceFormat.mSampleRate;
-    this->streamFormat.mChannelsPerFrame = deviceFormat.mChannelsPerFrame;
-	
-	propertySize = sizeof(AudioStreamBasicDescription);
-	CheckError(AudioUnitSetProperty(this->inputUnit,
-									kAudioUnitProperty_StreamFormat,
-									kAudioUnitScope_Output,
-									inputBus,
-									&this->streamFormat,
-									propertySize),
-			   "Couldn't set ASBD on input unit");
-    //Create channel Map
-//    SInt32 *channelMap = NULL;
-//    UInt32 numOfChannels = this->streamFormat.mChannelsPerFrame;
-//    UInt32 mapSize = numOfChannels *sizeof(SInt32);
-//    channelMap = (SInt32 *)malloc(mapSize);
-//    
-//    for(UInt32 i=0;i<numOfChannels;i++)
-//    {
-//        channelMap[i]=-1;
-//    }
-//    channelMap[0] = 2;
-//    channelMap[1] = 2;
-//    channelMap[2] = 0;
-//    channelMap[3] = 1;
-//    AudioUnitSetProperty(this->inputUnit,
-//                         kAudioOutputUnitProperty_ChannelMap,
-//                         kAudioUnitScope_Output,
-//                         1,
-//                         channelMap,
-//                         mapSize);
-//    free(channelMap);
 	//Calculate Capture buffer size for an I/O unit
 	UInt32 bufferSizeFrames = 0;
-	propertySize = sizeof(UInt32);
-	CheckError(AudioUnitGetProperty(this->inputUnit,
+	UInt32 propertySize = sizeof(UInt32);
+	CheckError(AudioUnitGetProperty(aggregateAudioUnit->getInputUnit(),
 									kAudioDevicePropertyBufferSize,
 									kAudioUnitScope_Global,
 									0,
@@ -184,36 +61,36 @@ void CAWL::setupAudioInputUnits()
 	
 	//Create an AudioBufferList to receive Capture Data
 	UInt32 propSize = offsetof(AudioBufferList, mBuffers[0]) +
-						(sizeof(AudioBuffer) * this->streamFormat.mChannelsPerFrame);
+						(sizeof(AudioBuffer) * aggregateAudioUnit->getASBD().mChannelsPerFrame);
 	
 	//Malloc buffer lists
-	this->inputBuffer = (AudioBufferList *) malloc(propSize);
-	this->inputBuffer->mNumberBuffers = this->streamFormat.mChannelsPerFrame;
+	inputBuffer = (AudioBufferList *) malloc(propSize);
+	inputBuffer->mNumberBuffers = aggregateAudioUnit->getASBD().mChannelsPerFrame;
 	
 	//Premalloc buffers for AudioBufferLists
 	for(unsigned i = 0; i < this->inputBuffer->mNumberBuffers; i++)
 	{
-		this->inputBuffer->mBuffers[i].mNumberChannels = 1;
-		this->inputBuffer->mBuffers[i].mDataByteSize = bufferSizeBytes;
-		this->inputBuffer->mBuffers[i].mData = malloc(bufferSizeBytes);
+		inputBuffer->mBuffers[i].mNumberChannels = 1;
+		inputBuffer->mBuffers[i].mDataByteSize = bufferSizeBytes;
+		inputBuffer->mBuffers[i].mData = malloc(bufferSizeBytes);
 	}
 	
-	printf("Number of input channels: %d\n", this->streamFormat.mChannelsPerFrame);
-	numInputChannels = this->streamFormat.mChannelsPerFrame;
-	this->input = new cawlBuffers[numInputChannels];
+	printf("Number of input channels: %d\n", aggregateAudioUnit->getASBD().mChannelsPerFrame);
+	numInputChannels = aggregateAudioUnit->getASBD().mChannelsPerFrame;
+	input = new cawlBuffers[numInputChannels];
 	
 	//Allocate a ring buffer
-	this->ringBuffer = new CARingBuffer();
-	this->ringBuffer->Allocate(this->streamFormat.mChannelsPerFrame,
-							   this->streamFormat.mBytesPerFrame,
-							   bufferSizeFrames * 3);
+	ringBuffer = new CARingBuffer();
+	ringBuffer->Allocate(aggregateAudioUnit->getASBD().mChannelsPerFrame,
+                        aggregateAudioUnit->getASBD().mChannelsPerFrame,
+                        bufferSizeFrames * 3);
 	
 	//Set up Input callback on an AUHAL
 	AURenderCallbackStruct callbackStruct;
 	callbackStruct.inputProc = &CAWL::InputRenderCallBack;
 	callbackStruct.inputProcRefCon = this;
 	
-	CheckError(AudioUnitSetProperty(this->inputUnit,
+	CheckError(AudioUnitSetProperty(aggregateAudioUnit->getInputUnit(),
 									kAudioOutputUnitProperty_SetInputCallback,
 									kAudioUnitScope_Global,
 									0,
@@ -222,7 +99,7 @@ void CAWL::setupAudioInputUnits()
 			   "Couldn't set input callback");
 	
 	//Initialize
-	CheckError(AudioUnitInitialize(this->inputUnit),
+	CheckError(AudioUnitInitialize(aggregateAudioUnit->getInputUnit()),
 			   "Couldn't initialize input unit");
 	
 	firstInputSampleTime = -1;
@@ -260,20 +137,23 @@ void CAWL::setupGraph()
 	CheckError(AUGraphOpen(this->graph),
 			   "Could not open graph");
 	
+    AudioUnit output = aggregateAudioUnit->getOutputUnit();
+    AudioStreamBasicDescription asbd = aggregateAudioUnit->getASBD();
+    
 	//Get reference to the AudioUnit object for the graph
 	CheckError(AUGraphNodeInfo(this->graph,
 							   outputNode,
 							   NULL,
-							   &this->outputUnit),
+							   &output),
 			   "Could not get reference to the output Audio Unit");
 	
 	//Set the stream format on the output unit's input scope
 	UInt32 propSize = sizeof(AudioStreamBasicDescription);
-	CheckError(AudioUnitSetProperty(this->outputUnit,
+	CheckError(AudioUnitSetProperty(output,
 									kAudioUnitProperty_StreamFormat,
 									kAudioUnitScope_Input,
 									0,
-									&this->streamFormat,
+									&asbd,
 									propSize),
 			   "Couldnt set stream format on output unit");
 	
@@ -281,7 +161,7 @@ void CAWL::setupGraph()
 	callbackStruct.inputProc = &CAWL::OutputRenderCallBack;
 	callbackStruct.inputProcRefCon = this;
 	
-	CheckError(AudioUnitSetProperty(this->outputUnit,
+	CheckError(AudioUnitSetProperty(output,
 									kAudioUnitProperty_SetRenderCallback,
 									kAudioUnitScope_Global,
 									0,
@@ -351,7 +231,7 @@ OSStatus CAWL::InputRenderCallBack(void *inRefCon,
 	
 	OSStatus error = noErr;
 	
-	error = AudioUnitRender(instance->inputUnit,
+	error = AudioUnitRender(instance->aggregateAudioUnit->getInputUnit(),
 							ioActionFlags,
 							inTimeStamp,
 							inBusNumber,
@@ -440,14 +320,15 @@ bool CAWL::registerInputBlockAtInputChannel(cawlBuffers buffer, const unsigned i
 	if(channel > numInputChannels)
 		return false;
 	
-	input[channel] = buffer;
+	//input[channel] = buffer;
 	numInputChannelsRegistered++;
 	return true;
 }
 
 void CAWL::startPlaying()
 {
-	CheckError(AudioOutputUnitStart(this->inputUnit),
+    AudioUnit au = aggregateAudioUnit->getInputUnit();
+	CheckError(AudioOutputUnitStart(au),
 			   "AudioOutputUnitStart failed");
 	CheckError(AUGraphStart(this->graph),
 			   "AUGraphStart failed");
@@ -455,8 +336,9 @@ void CAWL::startPlaying()
 
 void CAWL::stopPlaying()
 {
-	CheckError(AudioOutputUnitStop(this->inputUnit),
-			   "AudioOutputUnitStart failed");
+    AudioUnit au = aggregateAudioUnit->getInputUnit();
+	CheckError(AudioOutputUnitStop(au),
+			   "AudioOutputUnitStop failed");
 	CheckError(AUGraphStop(this->graph),
 			   "AUGraphStart failed");
 }

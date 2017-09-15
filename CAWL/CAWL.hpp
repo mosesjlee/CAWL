@@ -11,10 +11,6 @@
 #define CAWL_
 #include <TargetConditionals.h>
 
-
-#include <CoreAudio/CoreAudio.h>
-#include <AudioToolbox/AudioToolbox.h>
-#include <AudioUnit/AudioUnit.h>
 #include <Block.h>
 
 //#define MYBUFFER
@@ -23,6 +19,7 @@
 #else
 #include "CAWLRingBuffer.hpp"
 #endif
+#include "CAWLAudioUnit.hpp"
 
 typedef void (^cawlBuffers)(float * buffer,
 							const unsigned int numSamples);
@@ -46,7 +43,6 @@ public:
 private:
 	CAWL();
 	~CAWL();
-	void setupAudioInputUnits();
 	void setupGraph();
     void setupBuffers();
 	void cleanUp();
@@ -70,23 +66,18 @@ private:
 	//Member variables
 private:
 	static CAWL * cawlInstance;
-	float sampleRate;
 	cawlBuffers * input;
-	cawlBuffers * output;
 	
-	AudioStreamBasicDescription streamFormat;
+    CAWLAudioUnit * aggregateAudioUnit;
 	AUGraph graph;
-	AudioUnit inputUnit;
-	AudioUnit outputUnit;
-	
+
 	Float64 firstInputSampleTime;
 	Float64 firstOutputSampleTime;
 	Float64 inToOutSampleTimeOffset;
 	AudioBufferList * inputBuffer;
-    float outputTest[132300];
-	unsigned int numInputChannels;
+
 	unsigned int numInputChannelsRegistered;
-	
+    unsigned int numInputChannels;
 #ifndef MYBUFFER
 	CARingBuffer * ringBuffer;
 #else

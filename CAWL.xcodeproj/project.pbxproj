@@ -41,6 +41,7 @@
 		912CE4461F6B3C1B009F41AA /* CAWLUtilities.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 912CE4441F6B3C1B009F41AA /* CAWLUtilities.hpp */; };
 		915F833E1F5F174B00D4F422 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91062DBA1DE396A700BCBDA0 /* AudioToolbox.framework */; };
 		915F83401F5F174B00D4F422 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 915F833F1F5F174B00D4F422 /* AudioUnit.framework */; };
+		917A9AD91F6C366000422478 /* CAWLAudioUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912CE43F1F6B3BB8009F41AA /* CAWLAudioUnit.cpp */; };
 		91CAEC801DC8584600CEF065 /* CAWL.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 91CAEC7F1DC8584600CEF065 /* CAWL.hpp */; };
 		91CAEC841DC8584600CEF065 /* CAWL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91CAEC831DC8584600CEF065 /* CAWL.cpp */; };
 		91CAEC921DC8587900CEF065 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91CAEC911DC8587900CEF065 /* AppDelegate.mm */; };
@@ -451,6 +452,7 @@
 				912977AE1DE4F8600093134D /* CARingBuffer.cpp in Sources */,
 				912977AF1DE4F8600093134D /* CAWLRingBuffer.cpp in Sources */,
 				912977B11DE4F8600093134D /* CAWL.cpp in Sources */,
+				917A9AD91F6C366000422478 /* CAWLAudioUnit.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

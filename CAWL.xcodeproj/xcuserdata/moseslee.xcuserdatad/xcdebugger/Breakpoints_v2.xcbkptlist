@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAWL/CAWL.cpp"
-            timestampString = "526804078.233286"
+            timestampString = "527185938.294991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "186"
             endingLineNumber = "186"
-            landmarkName = "CAWL::setupAudioInputUnits()"
+            landmarkName = "CAWL::setupBuffers()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAWL/CAWL.cpp"
-            timestampString = "526965857.390907"
+            timestampString = "527185938.294991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "700"
-            endingLineNumber = "700">
+            startingLineNumber = "705"
+            endingLineNumber = "705">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -40,11 +40,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAWL/CAWL.cpp"
-            timestampString = "526965857.390907"
+            timestampString = "527185938.294991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "554"
-            endingLineNumber = "554">
+            startingLineNumber = "559"
+            endingLineNumber = "559">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -54,11 +54,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAWL/CAWL.cpp"
-            timestampString = "526965857.390907"
+            timestampString = "527185938.294991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "593"
-            endingLineNumber = "593">
+            startingLineNumber = "598"
+            endingLineNumber = "598">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -68,12 +68,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAWL/CAWL.cpp"
-            timestampString = "526805874.466946"
+            timestampString = "527185938.294991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "442"
-            endingLineNumber = "442"
-            landmarkName = "CAWL::OutputRenderCallBack(void *inRefCon, AudioUnitRenderActionFlags * ioActionFlags, const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber, UInt32 inNumberFrames, AudioBufferList * ioData)"
+            startingLineNumber = "445"
+            endingLineNumber = "445"
+            landmarkName = "CAWL::registerInputBlockAtInputChannel(cawlBuffers buffer, const unsigned int channel)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -84,12 +84,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAWL/CAWL.cpp"
-            timestampString = "526805129.76008"
+            timestampString = "527185938.294991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "219"
             endingLineNumber = "219"
-            landmarkName = "CAWL::setupAudioInputUnits()"
+            landmarkName = "CAWL::setupBuffers()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -100,12 +100,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAWL/CAWL.cpp"
-            timestampString = "526806076.822844"
+            timestampString = "527185938.294991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "394"
-            endingLineNumber = "394"
-            landmarkName = "CAWL::InputRenderCallBack(void *inRefCon, AudioUnitRenderActionFlags * ioActionFlags, const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber, UInt32 inNumberFrames, AudioBufferList * ioData)"
+            startingLineNumber = "397"
+            endingLineNumber = "397"
+            landmarkName = "CAWL::OutputRenderCallBack(void *inRefCon, AudioUnitRenderActionFlags * ioActionFlags, const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber, UInt32 inNumberFrames, AudioBufferList * ioData)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

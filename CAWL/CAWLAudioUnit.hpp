@@ -29,8 +29,8 @@ private:
 public:
 	CAWLAudioUnit();
 	~CAWLAudioUnit();
-	UInt32 getNumOfChannels();
-	Float64 getSampleRate();
+    UInt32 getNumOfChannels() { return numOfChannels; }
+    Float64 getSampleRate() { return sampleRate; }
     AudioUnit getInputUnit() { return inputUnit; }
     AudioUnit getOutputUnit() { return outputUnit; }
     AudioStreamBasicDescription getASBD() { return aggregateASBD; }
