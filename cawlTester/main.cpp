@@ -9,6 +9,8 @@
 #include <iostream>
 #include "CAWL.hpp"
 
+#define SCALE 0.3
+
 int main(int argc, const char * argv[]) {
 	// insert code here...
 	std::cout << "Hello, World!\n";
@@ -19,14 +21,19 @@ int main(int argc, const char * argv[]) {
     float * ptrToBuf1 = buffer, * ptrToBuf2 = buffer2, * ptrToBuf3 = buffer3, * ptrToBuf4 = buffer4;
 	double frameCount = 0, frameCount2 = 0, * fc, * fc2;
 	fc = &frameCount; fc2 = &frameCount2;
+    double frameCount3 = 0, frameCount4 = 0, * fc3, * fc4;
+    fc3 = &frameCount3; fc4 = &frameCount4;
 	double cycleLength = 44100. / 440;
+    double cycleLength2 = 44100. / 544.37;
+    double * ptr2 = &cycleLength2;
+    double cycleLength3 = 44100. / 659.25;
 	
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
 		double j = *fc;
 		for(int i = 0; i < numSamples; i++)
 		{
-			ptrToBuf1[i] = data[i];
+			//ptrToBuf1[i] = data[i];
 			
             //data[i] = data[i] + (float) sin (2 * M_PI * (j / cycleLength));
 			
@@ -43,8 +50,8 @@ int main(int argc, const char * argv[]) {
 		double j = *fc2;
 		for(int i = 0; i < numSamples; i++)
 		{
-			ptrToBuf2[i] = data[i];
-            //data[i] = data[i] + (float) sin (2 * M_PI * (j / cycleLength));
+			//ptrToBuf2[i] = data[i];
+            data[i] = (data[i] + (float) sin (2 * M_PI * (j / cycleLength))) * SCALE * .2;
 			
 			j += 1.0;
 			if (j > cycleLength)
@@ -59,39 +66,39 @@ int main(int argc, const char * argv[]) {
     
     cawlBuffers inputChannel3 = (^(float * data,
                                    const unsigned int numSamples){
-        double j = *fc2;
+        double j = *fc3;
         for(int i = 0; i < numSamples; i++)
         {
-            ptrToBuf3[i] = data[i];
-            data[i] = data[i] + (float) sin (2 * M_PI * (j / cycleLength));
+            //ptrToBuf3[i] = data[i];
+            data[i] = (data[i] + (float) sin (2 * M_PI * (j / *ptr2))) * SCALE * .4;
             
             j += 1.0;
-            if (j > cycleLength)
-                j -= cycleLength;
+            if (j > *ptr2)
+                j -= *ptr2;
             
             //printf("data %f\n", data[i]);
         }
         
-        *fc2 = j;
+        *fc3 = j;
         //printf("%f ",j);
     });
 	
     cawlBuffers inputChannel4 = (^(float * data,
                                    const unsigned int numSamples){
-        double j = *fc2;
+        double j = *fc4;
         for(int i = 0; i < numSamples; i++)
         {
-            ptrToBuf4[i] = data[i];
-            data[i] = data[i];// + (float) sin (2 * M_PI * (j / cycleLength));
+            //ptrToBuf4[i] = data[i];
+            data[i] = (data[i] + (float) sin (2 * M_PI * (j / cycleLength3))) * SCALE * .3;
             
             j += 1.0;
-            if (j > cycleLength)
-                j -= cycleLength;
+            if (j > cycleLength3)
+                j -= cycleLength3;
             
             //printf("data %f\n", data[i]);
         }
         
-        *fc2 = j;
+        *fc4 = j;
         //printf("%f ",j);
     });
 	
@@ -111,6 +118,10 @@ int main(int argc, const char * argv[]) {
 		
 		if(c == 's')
 			instance->stopPlaying();
+        if(c == 'i')
+            *ptr2 = 523.25;
+        if(c == 'a')
+            *ptr2 = 544.37;
 	}
     return 0;
 }

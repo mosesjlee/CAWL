@@ -18,15 +18,20 @@ CAWL::CAWL()
     aggregateAudioUnit = new CAWLAudioUnit();
     setupBuffers();
 	setupGraph();
+    
+    firstInputSampleTime = -1;
+    inToOutSampleTimeOffset = -1;
+    firstOutputSampleTime = -1;
 }
 
 CAWL::~CAWL()
 {
-	
 	//Free buffers
 	
+    
 	//AUGraph clean up
 	cleanUp();
+    
 	//delete instance
     delete aggregateAudioUnit;
 	delete cawlInstance;
@@ -102,9 +107,6 @@ void CAWL::setupBuffers()
 	CheckError(AudioUnitInitialize(aggregateAudioUnit->getInputUnit()),
 			   "Couldn't initialize input unit");
 	
-	firstInputSampleTime = -1;
-	inToOutSampleTimeOffset = -1;
-	
 	printf("Finished setting up input unit\n");
 }
 
@@ -168,41 +170,19 @@ void CAWL::setupGraph()
 									&callbackStruct,
 									sizeof(callbackStruct)),
 			   "Couldnt set render callback on output unit");
-    
-//    SInt32 *channelMap = NULL;
-//    UInt32 numOfChannels = this->streamFormat.mChannelsPerFrame;
-//    UInt32 mapSize = numOfChannels *sizeof(SInt32);
-//    channelMap = (SInt32 *)malloc(mapSize);
-//
-//    for(UInt32 i=0;i<numOfChannels;i++)
-//    {
-//        channelMap[i]=-1;
-//    }
-//    channelMap[0] = 2;
-//    channelMap[1] = 2;
-//    
-//    
-//    AudioUnitSetProperty(this->outputUnit,
-//                         kAudioOutputUnitProperty_ChannelMap,
-//                         kAudioUnitScope_Input,
-//                         0,
-//                         channelMap,
-//                         mapSize);
-//    free(channelMap);
 	
 	//Now initialize the graph
 	CheckError(AUGraphInitialize(this->graph),
 			   "Could not initialize graph");
-	
-	this->firstOutputSampleTime = -1;
+
 }
 
 //Clean up the graphs and shiz
 void CAWL::cleanUp()
 {
-	AUGraphStop(this->graph);
-	AUGraphUninitialize(this->graph);
-	AUGraphClose(this->graph);
+	AUGraphStop(graph);
+	AUGraphUninitialize(graph);
+	AUGraphClose(graph);
 }
 
 
@@ -284,25 +264,42 @@ OSStatus CAWL::OutputRenderCallBack(void *inRefCon,
 	
 	//This is where you can do some post processing
 	//For now i am just screwingaround in here to see what is possible
+    float * buffers[instance->numInputChannels];
+	if(instance->numInputChannelsRegistered > 0)
+	{
+		for(unsigned i = 0; i < instance->numInputChannels && i < instance->numInputChannelsRegistered; i++)
+		{
+			buffers[i] = (float *) ioData->mBuffers[i].mData;
+			instance->input[i](buffers[i], inNumberFrames);
+		}
+        
+        for(UInt32 frame = 0; frame < inNumberFrames; frame++)
+        {
+            Float32 sample = 0.0;
+            for(unsigned i = 0; i < instance->numInputChannels; i++)
+            {
+                sample += buffers[i][frame];
+            }
+            for(unsigned i = 0; i < instance->numInputChannels; i++)
+            {
+                buffers[i][frame] = sample;
+            }
+
+        }
+	}
+    
+    
+
 	
-//	if(instance->numInputChannelsRegistered > 0)
-//	{
-//		for(unsigned i = 0; i < instance->numInputChannels && i < instance->numInputChannelsRegistered; i++)
-//		{
-//			float * buf = (float *) ioData->mBuffers[i].mData;
-//			instance->input[i](buf, inNumberFrames);
-//		}
-//	}
-	
-    Float32 * data = (Float32 *) ioData->mBuffers[0].mData;
-    Float32 * data2 = (Float32 *) ioData->mBuffers[1].mData;
-    Float32 * data3 = (Float32 *) ioData->mBuffers[2].mData;
-    Float32 * data4 = (Float32 *) ioData->mBuffers[3].mData;
-    for(UInt32 frame = 0; frame < inNumberFrames; frame++)
-    {
-        Float32 sample =  data[frame] + data2[frame] + data3[frame] + data4[frame];;
-        data[frame] = data2[frame] = data3[frame] = data4[frame] = sample;
-    }
+//    Float32 * data = (Float32 *) ioData->mBuffers[0].mData;
+//    Float32 * data2 = (Float32 *) ioData->mBuffers[1].mData;
+//    Float32 * data3 = (Float32 *) ioData->mBuffers[2].mData;
+//    Float32 * data4 = (Float32 *) ioData->mBuffers[3].mData;
+//    for(UInt32 frame = 0; frame < inNumberFrames; frame++)
+//    {
+//        Float32 sample =  data[frame] + data2[frame] + data3[frame] + data4[frame];;
+//        data[frame] = data2[frame] = data3[frame] = data4[frame] = sample;
+//    }
     
 	return error;
 }
@@ -320,7 +317,7 @@ bool CAWL::registerInputBlockAtInputChannel(cawlBuffers buffer, const unsigned i
 	if(channel > numInputChannels)
 		return false;
 	
-	//input[channel] = buffer;
+	input[channel] = buffer;
 	numInputChannelsRegistered++;
 	return true;
 }
