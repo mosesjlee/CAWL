@@ -46,9 +46,9 @@ public:
 private:
 	CAWL();
 	~CAWL();
-	void CheckError(OSStatus error, const char * operation);
 	void setupAudioInputUnits();
 	void setupGraph();
+    void setupBuffers();
 	void cleanUp();
 	
 	static OSStatus InputRenderCallBack(void *inRefCon,
@@ -63,6 +63,8 @@ private:
 										 UInt32 inBusNumber,
 										 UInt32 inNumberFrames,
 										 AudioBufferList * ioData);
+    
+    
 	
 	
 	//Member variables

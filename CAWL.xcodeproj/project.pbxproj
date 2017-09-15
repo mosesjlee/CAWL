@@ -21,6 +21,7 @@
 		91062DE11DE397E900BCBDA0 /* CARingBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 91062DDC1DE397E900BCBDA0 /* CARingBuffer.h */; };
 		91062DE41DE3983100BCBDA0 /* CAWLRingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91062DE21DE3983100BCBDA0 /* CAWLRingBuffer.cpp */; };
 		91062DE51DE3983100BCBDA0 /* CAWLRingBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 91062DE31DE3983100BCBDA0 /* CAWLRingBuffer.hpp */; };
+		910A953D1F6B760A009DA4A1 /* CAWLUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912CE4431F6B3C1B009F41AA /* CAWLUtilities.cpp */; };
 		912977AA1DE4F0E70093134D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912977A91DE4F0E70093134D /* main.cpp */; };
 		912977AE1DE4F8600093134D /* CARingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91062DDB1DE397E900BCBDA0 /* CARingBuffer.cpp */; };
 		912977AF1DE4F8600093134D /* CAWLRingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91062DE21DE3983100BCBDA0 /* CAWLRingBuffer.cpp */; };
@@ -446,6 +447,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				912977AA1DE4F0E70093134D /* main.cpp in Sources */,
+				910A953D1F6B760A009DA4A1 /* CAWLUtilities.cpp in Sources */,
 				912977AE1DE4F8600093134D /* CARingBuffer.cpp in Sources */,
 				912977AF1DE4F8600093134D /* CAWLRingBuffer.cpp in Sources */,
 				912977B11DE4F8600093134D /* CAWL.cpp in Sources */,
