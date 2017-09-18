@@ -7,9 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "CAWL.hpp"
 @interface ViewController : NSViewController
-@property CAWL * instance;
 
 @end
 

@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "CAWL.hpp"
+#include "CAWLAmpSimulator.hpp"
 
 #define SCALE 0.3
 
@@ -28,6 +29,10 @@ int main(int argc, const char * argv[]) {
     double * ptr2 = &cycleLength2;
     double cycleLength3 = 44100. / 659.25;
 	
+    
+    CAWLAmpSimulator ampSim;
+    CAWLAmpSimulator * ptrToAmp = &ampSim;
+    
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
 		double j = *fc;
@@ -36,6 +41,7 @@ int main(int argc, const char * argv[]) {
 			//ptrToBuf1[i] = data[i];
 			
             //data[i] = data[i] + (float) sin (2 * M_PI * (j / cycleLength));
+            ptrToAmp->processBuffer(data, numSamples);
 			
 			j += 1.0;
 			if (j > cycleLength)
@@ -51,7 +57,7 @@ int main(int argc, const char * argv[]) {
 		for(int i = 0; i < numSamples; i++)
 		{
 			//ptrToBuf2[i] = data[i];
-            data[i] = (data[i] + (float) sin (2 * M_PI * (j / cycleLength))) * SCALE * .2;
+            //data[i] = (data[i] + (float) sin (2 * M_PI * (j / cycleLength))) * SCALE * .2;
 			
 			j += 1.0;
 			if (j > cycleLength)
@@ -104,8 +110,8 @@ int main(int argc, const char * argv[]) {
 	
 	instance->registerInputBlockAtInputChannel(inputChannel1, 0);
 	instance->registerInputBlockAtInputChannel(inputChannel2, 1);
-    instance->registerInputBlockAtInputChannel(inputChannel3, 2);
-    instance->registerInputBlockAtInputChannel(inputChannel4, 3);
+    //instance->registerInputBlockAtInputChannel(inputChannel3, 2);
+    //instance->registerInputBlockAtInputChannel(inputChannel4, 3);
 
 
 
