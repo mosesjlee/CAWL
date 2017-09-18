@@ -18,7 +18,7 @@ CAWL::CAWL()
     aggregateAudioUnit = new CAWLAudioUnit();
     setupBuffers();
 	setupGraph();
-    
+    numInputChannelsRegistered = 0;
     firstInputSampleTime = -1;
     inToOutSampleTimeOffset = -1;
     firstOutputSampleTime = -1;
@@ -267,10 +267,11 @@ OSStatus CAWL::OutputRenderCallBack(void *inRefCon,
     float * buffers[instance->numInputChannels];
 	if(instance->numInputChannelsRegistered > 0)
 	{
-		for(unsigned i = 0; i < instance->numInputChannels && i < instance->numInputChannelsRegistered; i++)
+		for(unsigned i = 0; i < instance->numInputChannels; i++)
 		{
 			buffers[i] = (float *) ioData->mBuffers[i].mData;
-			instance->input[i](buffers[i], inNumberFrames);
+            if(i < instance->numInputChannelsRegistered)
+                instance->input[i](buffers[i], inNumberFrames);
 		}
         
         for(UInt32 frame = 0; frame < inNumberFrames; frame++)
@@ -280,9 +281,11 @@ OSStatus CAWL::OutputRenderCallBack(void *inRefCon,
             {
                 sample += buffers[i][frame];
             }
+            
             for(unsigned i = 0; i < instance->numInputChannels; i++)
             {
                 buffers[i][frame] = sample;
+                //printf("%f\n", sample);
             }
 
         }

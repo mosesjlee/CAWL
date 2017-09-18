@@ -9,10 +9,10 @@
 #include "CAWLAmpSimulator.hpp"
 
 CAWLAmpSimulator::CAWLAmpSimulator():
-mVolume(0.5),
-mGain(0.5),
-mDistortion(0.5),
-mMixLevel(0.5)
+mVolume(0.2),
+mGain(0.1),
+mDistortion(0.2),
+mMixLevel(0.01)
 {
     
 }
@@ -26,7 +26,7 @@ void CAWLAmpSimulator::processBuffer(float * buf, const unsigned int numOfSample
 {
     float xCurrSample = 0.0;
     float qLevel = 0.0;
-    float qWorkPoint = 0.0;
+    float qWorkPoint = 1.0;
     float yCurrOutput = 0.0;
     float zFactor = 0.0;
     float maxCurrSample = 0.0;
@@ -70,6 +70,11 @@ void CAWLAmpSimulator::processBuffer(float * buf, const unsigned int numOfSample
         yCurrOutput = yCurrOutput * absMaxCurrSample/fabs(yCurrOutput);
         
         //Fill it back in the buffer
+        if(yCurrOutput > 1.0)
+            yCurrOutput = 1.0;
+        else if(yCurrOutput < -1.0)
+            yCurrOutput = -1.0;
+        
         buf[i] = yCurrOutput;
     }
 }

@@ -40,7 +40,7 @@ int main(int argc, const char * argv[]) {
 		{
 			//ptrToBuf1[i] = data[i];
 			
-            //data[i] = data[i] + (float) sin (2 * M_PI * (j / cycleLength));
+            //data[i] = data[i];// + (float) sin (2 * M_PI * (j / cycleLength));
             ptrToAmp->processBuffer(data, numSamples);
 			
 			j += 1.0;
@@ -109,7 +109,7 @@ int main(int argc, const char * argv[]) {
     });
 	
 	instance->registerInputBlockAtInputChannel(inputChannel1, 0);
-	instance->registerInputBlockAtInputChannel(inputChannel2, 1);
+	//instance->registerInputBlockAtInputChannel(inputChannel2, 1);
     //instance->registerInputBlockAtInputChannel(inputChannel3, 2);
     //instance->registerInputBlockAtInputChannel(inputChannel4, 3);
 
