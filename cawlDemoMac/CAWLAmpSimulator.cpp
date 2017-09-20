@@ -7,12 +7,12 @@
 //
 
 #include "CAWLAmpSimulator.hpp"
-
+#define kEPSILON 0.00000000001
 CAWLAmpSimulator::CAWLAmpSimulator():
-mVolume(0.2),
-mGain(0.1),
-mDistortion(0.2),
-mMixLevel(0.01)
+mVolume(0.6),
+mGain(1.7),
+mDistortion(8),
+mMixLevel(0.5)
 {
     
 }
@@ -25,57 +25,46 @@ CAWLAmpSimulator::~CAWLAmpSimulator()
 void CAWLAmpSimulator::processBuffer(float * buf, const unsigned int numOfSamples)
 {
     float xCurrSample = 0.0;
-    float qLevel = 0.0;
-    float qWorkPoint = 1.0;
+    float qWorkPoint = -0.2;
     float yCurrOutput = 0.0;
     float zFactor = 0.0;
     float maxCurrSample = 0.0;
-    float absMaxCurrSample = 0.0;
+    float qLevel = 0.0;
     
-    maxCurrSample = buf[0];
+    //Find the largest value
+    maxCurrSample = fabs(buf[0]);
     for(unsigned i = 1; i < numOfSamples; i++)
     {
-        if(buf[i] > maxCurrSample)
-            maxCurrSample = buf[i];
+        if(maxCurrSample < fabs(buf[i]))
+            maxCurrSample = fabs(buf[i]);
     }
     
-    absMaxCurrSample = fabs(maxCurrSample);
+    //Normalize the samples
     
     //Step through numOfSamples sample
     for(unsigned i = 0; i < numOfSamples; i++)
     {
         //Copy the sample over
         xCurrSample = buf[i];
+        qLevel = xCurrSample * mGain/maxCurrSample;
         
-        //Calculate the qLevel
-        qLevel = xCurrSample * (mGain/absMaxCurrSample);
-        
-        
-        if(qWorkPoint == 0.0)
+        if(xCurrSample < (qWorkPoint + kEPSILON) && xCurrSample > (qWorkPoint - kEPSILON))
         {
-            if(qLevel == qWorkPoint)
-                zFactor = 1.0/mDistortion;
-            else
-                zFactor = qLevel / (1 - exp(-(mDistortion) * qLevel));
+            yCurrOutput = (1/mDistortion) + (qWorkPoint/(1 - exp(mDistortion * qWorkPoint)));
         }
         else
         {
-            float a = (qLevel - qWorkPoint)/(1-exp(-(mDistortion) * (qLevel - qWorkPoint)));
-            float b = qWorkPoint/(1-exp(mDistortion*mDistortion));
-            zFactor = a + b;
-            
+            yCurrOutput = (qLevel - qWorkPoint)/(1 - exp(-(mDistortion) * (qLevel-qWorkPoint))) +
+            (qWorkPoint/(1-exp(mDistortion * qWorkPoint)));
         }
-        
-        yCurrOutput = mMixLevel * zFactor * absMaxCurrSample/fabs(zFactor) + (1-mMixLevel) * xCurrSample;
-        yCurrOutput = yCurrOutput * absMaxCurrSample/fabs(yCurrOutput);
-        
+    
         //Fill it back in the buffer
         if(yCurrOutput > 1.0)
             yCurrOutput = 1.0;
-        else if(yCurrOutput < -1.0)
+        if(yCurrOutput < -1.0)
             yCurrOutput = -1.0;
-        
-        buf[i] = yCurrOutput;
+        //printf("%f\n", yCurrOutput);
+        buf[i] = yCurrOutput * mMixLevel + xCurrSample * (1.0 - mMixLevel);
     }
 }
 
