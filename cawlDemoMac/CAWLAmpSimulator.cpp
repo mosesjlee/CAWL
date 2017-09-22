@@ -12,7 +12,7 @@ CAWLAmpSimulator::CAWLAmpSimulator():
 mVolume(0.6),
 mGain(1.7),
 mDistortion(8),
-mMixLevel(0.5)
+mMixLevel(0.3)
 {
     
 }
@@ -25,46 +25,71 @@ CAWLAmpSimulator::~CAWLAmpSimulator()
 void CAWLAmpSimulator::processBuffer(float * buf, const unsigned int numOfSamples)
 {
     float xCurrSample = 0.0;
-    float qWorkPoint = -0.2;
-    float yCurrOutput = 0.0;
-    float zFactor = 0.0;
-    float maxCurrSample = 0.0;
-    float qLevel = 0.0;
+//    float qWorkPoint = -0.2;
+//    float yCurrOutput = 0.0;
+//    float zFactor = 0.0;
+//    float maxCurrSample = 0.0;
+//    float qLevel = 0.0;
+//    
+//    //Find the largest value
+//    maxCurrSample = fabs(buf[0]);
+//    for(unsigned i = 1; i < numOfSamples; i++)
+//    {
+//        if(maxCurrSample < fabs(buf[i]))
+//            maxCurrSample = fabs(buf[i]);
+//    }
+//    
+//    //Normalize the samples
+//    
+//    //Step through numOfSamples sample
+//    for(unsigned i = 0; i < numOfSamples; i++)
+//    {
+//        //Copy the sample over
+//        xCurrSample = buf[i];
+//        qLevel = xCurrSample * mGain/maxCurrSample;
+//        
+//        if(xCurrSample < (qWorkPoint + kEPSILON) && xCurrSample > (qWorkPoint - kEPSILON))
+//        {
+//            yCurrOutput = (1/mDistortion) + (qWorkPoint/(1 - exp(mDistortion * qWorkPoint)));
+//        }
+//        else
+//        {
+//            yCurrOutput = (qLevel - qWorkPoint)/(1 - exp(-(mDistortion) * (qLevel-qWorkPoint))) +
+//            (qWorkPoint/(1-exp(mDistortion * qWorkPoint)));
+//        }
+//    
+//        //Fill it back in the buffer
+//        if(yCurrOutput > 1.0)
+//            yCurrOutput = 1.0;
+//        if(yCurrOutput < -1.0)
+//            yCurrOutput = -1.0;
+//        //printf("%f\n", yCurrOutput);
+//        buf[i] = yCurrOutput * mMixLevel + xCurrSample * (1.0 - mMixLevel);
+//    }
     
-    //Find the largest value
-    maxCurrSample = fabs(buf[0]);
-    for(unsigned i = 1; i < numOfSamples; i++)
-    {
-        if(maxCurrSample < fabs(buf[i]))
-            maxCurrSample = fabs(buf[i]);
-    }
-    
-    //Normalize the samples
-    
-    //Step through numOfSamples sample
+    //This is David Yeh and Jyri Pakarinen's way of asymetrical clipping
     for(unsigned i = 0; i < numOfSamples; i++)
     {
-        //Copy the sample over
-        xCurrSample = buf[i];
-        qLevel = xCurrSample * mGain/maxCurrSample;
-        
-        if(xCurrSample < (qWorkPoint + kEPSILON) && xCurrSample > (qWorkPoint - kEPSILON))
+        xCurrSample = buf[i] * mVolume;
+        if(xCurrSample <= 1.0 && xCurrSample >= 0.320018)
         {
-            yCurrOutput = (1/mDistortion) + (qWorkPoint/(1 - exp(mDistortion * qWorkPoint)));
+            xCurrSample = 0.630035;
         }
-        else
+        else if (xCurrSample >= -0.08905 && xCurrSample < 0.320018)
         {
-            yCurrOutput = (qLevel - qWorkPoint)/(1 - exp(-(mDistortion) * (qLevel-qWorkPoint))) +
-            (qWorkPoint/(1-exp(mDistortion * qWorkPoint)));
+            xCurrSample = -6.153 * xCurrSample * xCurrSample + 3.9375 * xCurrSample;
         }
-    
-        //Fill it back in the buffer
-        if(yCurrOutput > 1.0)
-            yCurrOutput = 1.0;
-        if(yCurrOutput < -1.0)
-            yCurrOutput = -1.0;
-        //printf("%f\n", yCurrOutput);
-        buf[i] = yCurrOutput * mMixLevel + xCurrSample * (1.0 - mMixLevel);
+        else if(xCurrSample >= -1.0 && xCurrSample <= 0.08905)
+        {
+            float a = -.75*(1-pow((1-(fabs(xCurrSample) - 0.032847)),12));
+            float b = (1.0/3.0) * (fabs(xCurrSample)-0.032847);
+            xCurrSample = a + b + 0.01;
+        }
+        else if(xCurrSample < -1.0)
+        {
+            xCurrSample = -0.9818;
+        }
+        buf[i] = xCurrSample * mMixLevel + buf[i] * (1-mMixLevel);
     }
 }
 
