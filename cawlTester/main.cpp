@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include "CAWL.hpp"
-#include "CAWLAmpSimulator.hpp"
+#include "CAWLValveTubeSimulator.hpp"
 
 #define SCALE 0.3
 
@@ -30,8 +30,8 @@ int main(int argc, const char * argv[]) {
     double cycleLength3 = 44100. / 659.25;
 	
     
-    CAWLAmpSimulator ampSim;
-    CAWLAmpSimulator * ptrToAmp = &ampSim;
+    CAWLValveTubeSimulator ampSim;
+    CAWLValveTubeSimulator * ptrToAmp = &ampSim;
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
@@ -128,6 +128,15 @@ int main(int argc, const char * argv[]) {
             *ptr2 = 523.25;
         if(c == 'a')
             *ptr2 = 544.37;
+        
+        if(c == '+'){
+            ampSim.setGain(0.5);
+            std::cout << "new gain level " << ampSim.getGain() << std::endl;
+        }
+        if(c == '-'){
+            ampSim.setGain(0.2);
+            std::cout << "new gain level " << ampSim.getGain() << std::endl;
+        }
 	}
     return 0;
 }

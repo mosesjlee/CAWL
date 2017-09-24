@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include "CAWL.hpp"
-#include "CAWLAmpSimulator.hpp"
+#include "CAWLValveTubeSimulator.hpp"
 
 class CAWLSoundBoard
 {
@@ -20,7 +20,7 @@ public:
     ~CAWLSoundBoard();
 private:
     CAWL * cawlInstance;
-    CAWLAmpSimulator * ampArray;
+    CAWLValveTubeSimulator * ampArray;
     
 };
 
