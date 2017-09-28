@@ -22,7 +22,7 @@ typedef struct {
 class DCBlocker
 {
 public:
-	float processSample(float currSample)
+	inline float processSample(float currSample)
 	{
 		x = currSample;
 		y = x - x_1 + 0.995 * y_1;
@@ -326,7 +326,7 @@ CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
 	
 	for(int i = 0; i < numOfSamples; i++)
 	{
-		buf[i] = dcBlocker->processSample(buf[i]);
+		//buf[i] = dcBlocker->processSample(buf[i]);
 	}
 	
 	//2nd need to implement low shelving filter
@@ -339,7 +339,7 @@ CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
 
     for(int i =0 ; i < numOfSamples; i++)
     {
-		buf[i] = dcBlocker2->processSample(buf[i]);
+//		buf[i] = dcBlocker2->processSample(buf[i]);
         buf[i] = buf[i] * 2;
     }
 #if 0

@@ -51,8 +51,8 @@ int main(int argc, const char * argv[]) {
 			
 		}
 		*fc = j;*/
-		//ptrToAmp->processBuffer(data, numSamples);
-		ptrToValve->processBuffer(data,numSamples);
+		ptrToAmp->processBuffer(data, numSamples);
+		//ptrToValve->processBuffer(data,numSamples);
 	});
 	
 	cawlBuffers inputChannel2 = (^(float * data,
