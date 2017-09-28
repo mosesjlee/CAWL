@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "CAWL.hpp"
+#include "CAWLAmpSimulator.hpp"
 #include "CAWLValveTubeSimulator.hpp"
 
 #define SCALE 0.3
@@ -30,25 +31,28 @@ int main(int argc, const char * argv[]) {
     double cycleLength3 = 44100. / 659.25;
 	
     
-    CAWLValveTubeSimulator ampSim;
-    CAWLValveTubeSimulator * ptrToAmp = &ampSim;
+    CAWLAmpSimulator ampSim;
+    CAWLAmpSimulator * ptrToAmp = &ampSim;
+	CAWLValveTubeSimulator valveSim;
+	CAWLValveTubeSimulator * ptrToValve = &valveSim;
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
 		double j = *fc;
-		for(int i = 0; i < numSamples; i++)
+		/*for(int i = 0; i < numSamples; i++)
 		{
 			//ptrToBuf1[i] = data[i];
 			
             //data[i] = data[i];// + (float) sin (2 * M_PI * (j / cycleLength));
-            ptrToAmp->processBuffer(data, numSamples);
 			
 			j += 1.0;
 			if (j > cycleLength)
 				j -= cycleLength;
 			
 		}
-		*fc = j;
+		*fc = j;*/
+		ptrToAmp->processBuffer(data, numSamples);
+		//ptrToValve->processBuffer(data,numSamples);
 	});
 	
 	cawlBuffers inputChannel2 = (^(float * data,
@@ -130,12 +134,12 @@ int main(int argc, const char * argv[]) {
             *ptr2 = 544.37;
         
         if(c == '+'){
-            ampSim.setGain(0.5);
-            std::cout << "new gain level " << ampSim.getGain() << std::endl;
+			ampSim.setPreampGain(0.3);;
+            //std::cout << "new gain level " << ampSim.getGain() << std::endl;
         }
         if(c == '-'){
-            ampSim.setGain(0.2);
-            std::cout << "new gain level " << ampSim.getGain() << std::endl;
+            ampSim.setPreampGain(0.1);
+            //std::cout << "new gain level " << ampSim.getGain() << std::endl;
         }
 	}
     return 0;

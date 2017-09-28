@@ -74,6 +74,12 @@ public:
  This is not my work. I modified the process function, and the init functions
  to fit my design
  */
+
+#define k *1e3
+#define M *1e6
+#define nF *1e-9
+#define pF *1e-12
+TSParameters fender = {250 k, 1 M, 25 k, 56 k, 250 pF, 20 nF, 20 nF}  /* 59 Bassman 5F6-A */;
 class ToneStack
 {
 private:
@@ -91,7 +97,7 @@ private:
 public:
     /* in ../ToneStack.cc */
     static const char * presetdict;
-    static TSParameters presets[];
+	static TSParameters presets[];
     
     ToneStack()
     {
@@ -106,7 +112,8 @@ public:
     void reset() { filter.reset(); }
     void setmodel (int model)
     {
-        setparams (presets[model]);
+        //setparams (presets[model]);
+		setparams (fender);
         filter.reset();
     }
     
@@ -211,5 +218,73 @@ public:
 
 CAWLAmpSimulator::CAWLAmpSimulator()
 {
-    
+	stack = new ToneStack();
+	stack->init(sampleRate);
+	stack->setmodel(0);
 }
+
+CAWLAmpSimulator::~CAWLAmpSimulator()
+{
+	delete stack;
+}
+
+
+void
+CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
+{
+	//1st send it to be processed by the valve simulator
+	//valveTube.processBuffer(buf, numOfSamples);
+	
+	//2nd need to implement low shelving filter
+	
+	//3rd send it to be processed by the tone stack
+	stack->setmodel(0);
+	stack->updatecoefs(0.5, .5, 0.5);
+	stack->process(buf, numOfSamples);
+	
+#if 0
+	for(int i = 0; i < numOfSamples; i++)
+	{
+		printf("%f\n", buf[i]);
+	}
+#endif
+}
+
+void
+CAWLAmpSimulator::setPreampGain(float gain)
+{
+	valveTube.setGain(gain);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
