@@ -19,6 +19,26 @@ typedef struct {
     double C1, C2, C3;
 } TSParameters;
 
+class DCBlocker
+{
+public:
+	float processSample(float currSample)
+	{
+		x = currSample;
+		y = x - x_1 + 0.995 * y_1;
+		y_1 = y;
+		x_1 = x;
+		return y;
+	}
+	
+	void reset()
+	{
+		x =  x_1 = y = y_1 = 0.0f;
+	}
+private:
+	float x, x_1, y, y_1;
+};
+
 class HP1
 {
 public:
@@ -278,12 +298,19 @@ CAWLAmpSimulator::CAWLAmpSimulator()
     dc->set(100/(8 * 44100));
     
     hp1.changeCutOffFreq(200);
+	
+	dcBlocker = new DCBlocker();
+	dcBlocker->reset();
+	dcBlocker2 = new DCBlocker();
+	dcBlocker2->reset();
 }
 
 CAWLAmpSimulator::~CAWLAmpSimulator()
 {
 	delete stack;
     delete dc;
+	delete dcBlocker2;
+	delete dcBlocker;
 }
 
 
@@ -297,11 +324,14 @@ CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
 	//1st send it to be processed by the valve simulator
 	valveTube.processBuffer(buf, numOfSamples);
 	
+	for(int i = 0; i < numOfSamples; i++)
+	{
+		buf[i] = dcBlocker->processSample(buf[i]);
+	}
+	
 	//2nd need to implement low shelving filter
     //dc->process(buf, numOfSamples);
-    hp1.fillInputBuffer(buf, numOfSamples, 1);
-    hp1.processNextSamples();
-    hp1.fillOutputBuffer(buf, numOfSamples, 1);
+
 	//3rd send it to be processed by the tone stack
 	stack->setmodel(0);
 	stack->updatecoefs(0, 0, 0);
@@ -309,6 +339,7 @@ CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
 
     for(int i =0 ; i < numOfSamples; i++)
     {
+		buf[i] = dcBlocker2->processSample(buf[i]);
         buf[i] = buf[i] * 2;
     }
 #if 0
