@@ -279,7 +279,8 @@ OSStatus CAWL::OutputRenderCallBack(void *inRefCon,
             Float32 sample = 0.0;
             for(unsigned i = 0; i < instance->numInputChannels; i++)
             {
-                sample += buffers[i][frame];
+				if(i < instance->numInputChannelsRegistered)
+					sample += buffers[i][frame];
             }
             
             for(unsigned i = 0; i < instance->numInputChannels; i++)
