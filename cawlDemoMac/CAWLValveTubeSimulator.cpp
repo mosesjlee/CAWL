@@ -7,17 +7,13 @@
 //
 
 #include "CAWLValveTubeSimulator.hpp"
-#define kMaxGainLevel 0.0050
-#define kMinGainLevel 0.0001
 CAWLValveTubeSimulator::CAWLValveTubeSimulator():
-mGain(kMinGainLevel)
+mMixLevel(1)
 {
-    
 }
 
 CAWLValveTubeSimulator::~CAWLValveTubeSimulator()
 {
-    
 }
 
 /*
@@ -60,20 +56,9 @@ void CAWLValveTubeSimulator::processBuffer(float * buf, const unsigned int numOf
         }
     
         //For some reason the low mix level of the tube simulator yields the best results
-        buf[i] = xCurrSample * mGain + buf[i] * (1-mGain);
+        buf[i] = xCurrSample * mMixLevel + buf[i] * (1-mMixLevel);
     }
-}
-
-//This will blend in the amount of valve simulation
-//This acts like a gain for our purposes
-void CAWLValveTubeSimulator::setGain(float newGain)
-{
-    if(newGain > 1.0)
-        mGain = 1.0;
-    else if(newGain < 0.0)
-        mGain = 0.0;
-    else
-        mGain = newGain * kMaxGainLevel;
+    
 }
 
 

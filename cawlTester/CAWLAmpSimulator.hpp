@@ -21,17 +21,20 @@
 #include <stdio.h>
 #include "CAWLSoundModule.hpp"
 #include "CAWLValveTubeSimulator.hpp"
+#include "HighPassFilter.hpp"
 class ToneStack;
+class HP1;
 class CAWLAmpSimulator : public CAWLSoundModule
 {
 public:
     CAWLAmpSimulator();
     ~CAWLAmpSimulator();
 	virtual void processBuffer(float * buf, const unsigned int numOfSamples);
-	void setPreampGain(float gain);
   
 private:
     CAWLValveTubeSimulator valveTube;
 	ToneStack * stack;
+    HP1 * dc;
+    HighPassFilter hp1;
 };
 #endif /* CAWLAmpSimulator_hpp */

@@ -134,11 +134,11 @@ int main(int argc, const char * argv[]) {
             *ptr2 = 544.37;
         
         if(c == '+'){
-			ampSim.setPreampGain(0.3);;
+			//ampSim.setPreampGain(0.3);;
             //std::cout << "new gain level " << ampSim.getGain() << std::endl;
         }
         if(c == '-'){
-            ampSim.setPreampGain(0.1);
+            //ampSim.setPreampGain(0.1);
             //std::cout << "new gain level " << ampSim.getGain() << std::endl;
         }
 	}

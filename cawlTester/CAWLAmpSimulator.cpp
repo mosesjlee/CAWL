@@ -19,6 +19,54 @@ typedef struct {
     double C1, C2, C3;
 } TSParameters;
 
+class HP1
+{
+public:
+    float a0, a1, b1, x1, y1;
+    
+    HP1 (float d = 1.)
+    {
+        set (d);
+        reset();
+    }
+    
+    float last() {return y1;}
+    
+    void set_f (float f)
+    {
+        set (exp (-2*M_PI*f));
+    }
+    
+    inline void set (float d)
+    {
+        a0 = .5*(1. + d);
+        a1 = -.5*(1. + d);
+        b1 = d;
+    }
+    
+    inline void process (float * buf, const unsigned int numOfSamples)
+    {
+        for(int i = 0; i < numOfSamples; i++)
+        {
+            float x = buf[i];
+        y1 = a0*x + a1*x1 + b1*y1;
+        x1 = x;
+//            return y1;
+            buf[i] = y1;
+        }
+    }
+    
+    void identity()
+    {
+        a0=1;
+        a1=b1=0;
+    }
+    
+    void reset()
+    {
+        x1 = y1 = 0;
+    }
+};
 /*
  This class below is from CAPS written Tim Goetze and David Yeh.
  This is not my work. I only modified the process function to fit my design
@@ -80,6 +128,7 @@ public:
 #define nF *1e-9
 #define pF *1e-12
 TSParameters fender = {250 k, 1 M, 25 k, 56 k, 250 pF, 20 nF, 20 nF}  /* 59 Bassman 5F6-A */;
+TSParameters voxAC30 = {1 M, 1 M, 20 k, 100 k, 50 pF, 22 nF, 22 nF};
 class ToneStack
 {
 private:
@@ -113,7 +162,7 @@ public:
     void setmodel (int model)
     {
         //setparams (presets[model]);
-		setparams (fender);
+		setparams (voxAC30);
         filter.reset();
     }
     
@@ -210,6 +259,8 @@ public:
     }
 };
 
+
+
 /*
  Below is my CAWLAmpSimulator class that uses the Valve Tube
  simulator to the preamp processing and the buffer is then sent
@@ -221,27 +272,45 @@ CAWLAmpSimulator::CAWLAmpSimulator()
 	stack = new ToneStack();
 	stack->init(sampleRate);
 	stack->setmodel(0);
+    
+    dc = new HP1();
+    dc->reset();
+    dc->set(100/(8 * 44100));
+    
+    hp1.changeCutOffFreq(200);
 }
 
 CAWLAmpSimulator::~CAWLAmpSimulator()
 {
 	delete stack;
+    delete dc;
 }
 
 
 void
 CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
 {
+//    hp1.fillInputBuffer(buf, numOfSamples, 1);
+//    hp1.processNextSamples();
+//    hp1.fillOutputBuffer(buf, numOfSamples, 1);
+    
 	//1st send it to be processed by the valve simulator
-	//valveTube.processBuffer(buf, numOfSamples);
+	valveTube.processBuffer(buf, numOfSamples);
 	
 	//2nd need to implement low shelving filter
-	
+    //dc->process(buf, numOfSamples);
+    hp1.fillInputBuffer(buf, numOfSamples, 1);
+    hp1.processNextSamples();
+    hp1.fillOutputBuffer(buf, numOfSamples, 1);
 	//3rd send it to be processed by the tone stack
 	stack->setmodel(0);
-	stack->updatecoefs(0.5, .5, 0.5);
+	stack->updatecoefs(0, 0, 0);
 	stack->process(buf, numOfSamples);
-	
+
+    for(int i =0 ; i < numOfSamples; i++)
+    {
+        buf[i] = buf[i] * 2;
+    }
 #if 0
 	for(int i = 0; i < numOfSamples; i++)
 	{
@@ -249,13 +318,6 @@ CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
 	}
 #endif
 }
-
-void
-CAWLAmpSimulator::setPreampGain(float gain)
-{
-	valveTube.setGain(gain);
-}
-
 
 
 
