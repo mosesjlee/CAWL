@@ -29,6 +29,7 @@ class CAWLAmpSimulator : public CAWLSoundModule
 {
 public:
     CAWLAmpSimulator();
+    CAWLAmpSimulator(int model);
     ~CAWLAmpSimulator();
 	virtual void processBuffer(float * buf, const unsigned int numOfSamples);
   

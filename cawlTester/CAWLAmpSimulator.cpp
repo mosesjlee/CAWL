@@ -25,7 +25,7 @@ public:
 	inline float processSample(float currSample)
 	{
 		x = currSample;
-		y = x - x_1 + 0.995 * y_1;
+		y = x - x_1 + 0.990 * y_1;
 		y_1 = y;
 		x_1 = x;
 		return y;
@@ -122,17 +122,16 @@ public:
      */
     void process (float * buf, const unsigned int numSamples)
     {
-        for(unsigned i = 0; i < numSamples; i++)
+        for(unsigned j = 0; j < numSamples; j++)
         {
-            float s = buf[i];
+            float s = buf[j];
             double y = h[0] + b[0]*s;
-            
             for (int i=1; i<N; ++i)
                 h[i-1] = h[i] + b[i]*s - a[i]*y;
-            
+
             h[N-1] = b[N]*s - a[N]*y;
             
-            buf[i] =  (float) y;
+            buf[j] = (float) y;
         }
     }
 };
@@ -149,6 +148,7 @@ public:
 #define pF *1e-12
 TSParameters fender = {250 k, 1 M, 25 k, 56 k, 250 pF, 20 nF, 20 nF}  /* 59 Bassman 5F6-A */;
 TSParameters voxAC30 = {1 M, 1 M, 20 k, 100 k, 50 pF, 22 nF, 22 nF};
+TSParameters princeton = {250 k, 250 k, 4.8 k, 100 k, 250 pF, 100 nF, 47 nF};
 class ToneStack
 {
 private:
@@ -173,6 +173,11 @@ public:
         setmodel(0);
     }
     
+    ToneStack(TSParameters & p)
+    {
+        setparams(p);
+    }
+    
     void init (double _fs)
     {
         c = 2 * _fs;
@@ -182,8 +187,9 @@ public:
     void setmodel (int model)
     {
         //setparams (presets[model]);
-		setparams (voxAC30);
+		//setparams (fender);
         filter.reset();
+        filter.clear();
     }
     
     void setparams (TSParameters & p)
@@ -305,6 +311,32 @@ CAWLAmpSimulator::CAWLAmpSimulator()
 	dcBlocker2->reset();
 }
 
+CAWLAmpSimulator::CAWLAmpSimulator(int model)
+{
+    if(model == 0) {
+        stack = new ToneStack(fender);
+        std::cout << "fender" << std::endl;
+    } else if (model == 1){
+        stack = new ToneStack(voxAC30);
+        std::cout << "vox" << std::endl;
+    } else {
+        stack = new ToneStack(princeton);
+        std::cout << "princeton" << std::endl;
+    }
+    stack->init(sampleRate);
+    
+    dc = new HP1();
+    dc->reset();
+    dc->set(100/(8 * 44100));
+    
+    hp1.changeCutOffFreq(200);
+    
+    dcBlocker = new DCBlocker();
+    dcBlocker->reset();
+    dcBlocker2 = new DCBlocker();
+    dcBlocker2->reset();
+}
+
 CAWLAmpSimulator::~CAWLAmpSimulator()
 {
 	delete stack;
@@ -322,26 +354,28 @@ CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
 //    hp1.fillOutputBuffer(buf, numOfSamples, 1);
     
 	//1st send it to be processed by the valve simulator
-	valveTube.processBuffer(buf, numOfSamples);
+	//valveTube.processBuffer(buf, numOfSamples);
 	
 	for(int i = 0; i < numOfSamples; i++)
 	{
-		//buf[i] = dcBlocker->processSample(buf[i]);
+		buf[i] = dcBlocker->processSample(buf[i]);
 	}
 	
 	//2nd need to implement low shelving filter
     //dc->process(buf, numOfSamples);
 
 	//3rd send it to be processed by the tone stack
-	stack->setmodel(0);
-	stack->updatecoefs(0, 0, 0);
+    stack->updatecoefs(1, 0.5, 1);
 	stack->process(buf, numOfSamples);
-
+    
+    
     for(int i =0 ; i < numOfSamples; i++)
     {
-//		buf[i] = dcBlocker2->processSample(buf[i]);
+        //buf[i] = dcBlocker2->processSample(buf[i]);
         buf[i] = buf[i] * 2;
     }
+    //valveTube.processBuffer(buf, numOfSamples);
+    //valveTube.processBuffer(buf, numOfSamples);
 #if 0
 	for(int i = 0; i < numOfSamples; i++)
 	{

@@ -31,10 +31,10 @@ int main(int argc, const char * argv[]) {
     double cycleLength3 = 44100. / 659.25;
 	
     
-    CAWLAmpSimulator ampSim;
-    CAWLAmpSimulator * ptrToAmp = &ampSim;
-	CAWLValveTubeSimulator valveSim;
-	CAWLValveTubeSimulator * ptrToValve = &valveSim;
+    CAWLAmpSimulator ampSim(0), ampSim2(1), ampSim3(2);
+    CAWLAmpSimulator * ptrToAmp = &ampSim, *ptrToAmp2 = &ampSim2, *ptrToAmp3 = &ampSim3;
+	CAWLValveTubeSimulator valveSim, valveSim2, valveSim3;
+	CAWLValveTubeSimulator * ptrToValve = &valveSim, * ptrToValve2 = &valveSim2, *ptrToValve3 = &valveSim3;
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
@@ -52,44 +52,47 @@ int main(int argc, const char * argv[]) {
 		}
 		*fc = j;*/
 		ptrToAmp->processBuffer(data, numSamples);
-		//ptrToValve->processBuffer(data,numSamples);
+		ptrToValve->processBuffer(data,numSamples);
 	});
 	
 	cawlBuffers inputChannel2 = (^(float * data,
 								   const unsigned int numSamples){
-		double j = *fc2;
-		for(int i = 0; i < numSamples; i++)
-		{
-			//ptrToBuf2[i] = data[i];
-            //data[i] = (data[i] + (float) sin (2 * M_PI * (j / cycleLength))) * SCALE * .2;
-			
-			j += 1.0;
-			if (j > cycleLength)
-				j -= cycleLength;
-			
-			//printf("data %f\n", data[i]);
-		}
-		
-		*fc2 = j;
+//        double j = *fc2;
+//        for(int i = 0; i < numSamples; i++)
+//        {
+//            //ptrToBuf2[i] = data[i];
+//            //data[i] = (data[i] + (float) sin (2 * M_PI * (j / cycleLength))) * SCALE * .2;
+//
+//            j += 1.0;
+//            if (j > cycleLength)
+//                j -= cycleLength;
+//
+//            //printf("data %f\n", data[i]);
+//        }
+        ptrToAmp2->processBuffer(data, numSamples);
+        ptrToValve2->processBuffer(data, numSamples);
+//		*fc2 = j;
 		//printf("%f ",j);
 	});
     
     cawlBuffers inputChannel3 = (^(float * data,
                                    const unsigned int numSamples){
-        double j = *fc3;
-        for(int i = 0; i < numSamples; i++)
-        {
-            //ptrToBuf3[i] = data[i];
-            data[i] = (data[i] + (float) sin (2 * M_PI * (j / *ptr2))) * SCALE * .4;
-            
-            j += 1.0;
-            if (j > *ptr2)
-                j -= *ptr2;
-            
-            //printf("data %f\n", data[i]);
-        }
-        
-        *fc3 = j;
+//        double j = *fc3;
+//        for(int i = 0; i < numSamples; i++)
+//        {
+//            //ptrToBuf3[i] = data[i];
+//            data[i] = (data[i] + (float) sin (2 * M_PI * (j / *ptr2))) * SCALE * .4;
+//
+//            j += 1.0;
+//            if (j > *ptr2)
+//                j -= *ptr2;
+//
+//            //printf("data %f\n", data[i]);
+//        }
+//
+//        *fc3 = j;
+        ptrToAmp3->processBuffer(data, numSamples);
+        ptrToValve3->processBuffer(data, numSamples);
         //printf("%f ",j);
     });
 	
@@ -113,8 +116,8 @@ int main(int argc, const char * argv[]) {
     });
 	
 	instance->registerInputBlockAtInputChannel(inputChannel1, 0);
-	//instance->registerInputBlockAtInputChannel(inputChannel2, 1);
-    //instance->registerInputBlockAtInputChannel(inputChannel3, 2);
+	instance->registerInputBlockAtInputChannel(inputChannel2, 1);
+    instance->registerInputBlockAtInputChannel(inputChannel3, 2);
     //instance->registerInputBlockAtInputChannel(inputChannel4, 3);
 
 

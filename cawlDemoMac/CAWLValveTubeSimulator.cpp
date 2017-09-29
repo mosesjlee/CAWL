@@ -8,7 +8,7 @@
 
 #include "CAWLValveTubeSimulator.hpp"
 CAWLValveTubeSimulator::CAWLValveTubeSimulator():
-mMixLevel(1)
+mMixLevel(0.5)
 {
 }
 
@@ -34,7 +34,7 @@ void CAWLValveTubeSimulator::processBuffer(float * buf, const unsigned int numOf
     
     for(unsigned i = 0; i < numOfSamples; i++)
     {
-        xCurrSample = buf[i];
+        xCurrSample = buf[i] * 1.1;
         //if(xCurrSample <= 1.0 && xCurrSample >= 0.320018)
         if(xCurrSample <= 1.0 && xCurrSample >= upperLimit)
         {
@@ -46,9 +46,9 @@ void CAWLValveTubeSimulator::processBuffer(float * buf, const unsigned int numOf
         }
         else if(xCurrSample >= -1.0 && xCurrSample <= lowerLimit)
         {
-            float a = -.75*(1-pow((1-(fabs(xCurrSample) - 0.032847)),12));
+            float a = (1-pow((1-(fabs(xCurrSample) - 0.032847)),12));
             float b = (1.0/3.0) * (fabs(xCurrSample)-0.032847);
-            xCurrSample = a + b + 0.01;
+            xCurrSample = -0.75*(a + b) + 0.01;
         }
         else if(xCurrSample < -1.0)
         {
