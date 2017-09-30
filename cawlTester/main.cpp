@@ -10,7 +10,8 @@
 #include "CAWL.hpp"
 #include "CAWLAmpSimulator.hpp"
 #include "CAWLValveTubeSimulator.hpp"
-
+#include "CAWLFIRCombFilter.hpp"
+#include "CAWLIIRCombFilter.hpp"
 #define SCALE 0.3
 
 int main(int argc, const char * argv[]) {
@@ -35,6 +36,10 @@ int main(int argc, const char * argv[]) {
     CAWLAmpSimulator * ptrToAmp = &ampSim, *ptrToAmp2 = &ampSim2, *ptrToAmp3 = &ampSim3;
 	CAWLValveTubeSimulator valveSim, valveSim2, valveSim3;
 	CAWLValveTubeSimulator * ptrToValve = &valveSim, * ptrToValve2 = &valveSim2, *ptrToValve3 = &valveSim3;
+    CAWLFIRCombFilter fir;
+    CAWLFIRCombFilter *ptrToFir = &fir;
+    CAWLIIRCombFilter iir;
+    CAWLIIRCombFilter *ptrToiir = &iir;
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
@@ -51,8 +56,11 @@ int main(int argc, const char * argv[]) {
 			
 		}
 		*fc = j;*/
-		ptrToAmp->processBuffer(data, numSamples);
-		ptrToValve->processBuffer(data,numSamples);
+        //ptrToFir->processBuffer(data, numSamples);
+        ptrToiir->processBuffer(data, numSamples);
+		//ptrToAmp->processBuffer(data, numSamples);
+		//ptrToValve->processBuffer(data,numSamples);
+        
 	});
 	
 	cawlBuffers inputChannel2 = (^(float * data,
@@ -70,7 +78,7 @@ int main(int argc, const char * argv[]) {
 //            //printf("data %f\n", data[i]);
 //        }
         ptrToAmp2->processBuffer(data, numSamples);
-        ptrToValve2->processBuffer(data, numSamples);
+        //ptrToValve2->processBuffer(data, numSamples);
 //		*fc2 = j;
 		//printf("%f ",j);
 	});
@@ -92,7 +100,7 @@ int main(int argc, const char * argv[]) {
 //
 //        *fc3 = j;
         ptrToAmp3->processBuffer(data, numSamples);
-        ptrToValve3->processBuffer(data, numSamples);
+        //ptrToValve3->processBuffer(data, numSamples);
         //printf("%f ",j);
     });
 	
@@ -116,8 +124,8 @@ int main(int argc, const char * argv[]) {
     });
 	
 	instance->registerInputBlockAtInputChannel(inputChannel1, 0);
-	instance->registerInputBlockAtInputChannel(inputChannel2, 1);
-    instance->registerInputBlockAtInputChannel(inputChannel3, 2);
+	//instance->registerInputBlockAtInputChannel(inputChannel2, 1);
+    //instance->registerInputBlockAtInputChannel(inputChannel3, 2);
     //instance->registerInputBlockAtInputChannel(inputChannel4, 3);
 
 

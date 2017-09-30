@@ -354,12 +354,18 @@ CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
 //    hp1.fillOutputBuffer(buf, numOfSamples, 1);
     
 	//1st send it to be processed by the valve simulator
-	//valveTube.processBuffer(buf, numOfSamples);
+//	valveTube.processBuffer(buf, numOfSamples);
 	
-	for(int i = 0; i < numOfSamples; i++)
-	{
-		buf[i] = dcBlocker->processSample(buf[i]);
-	}
+//    for(int i = 0; i < numOfSamples; i++)
+//    {
+//        //buf[i] = dcBlocker->processSample(buf[i]);
+//        //buf[i] = ((3.0 * buf[i])/2.0) * (1 - ((buf[i] * buf[i])/3.0));
+//        int sign = 1.0;
+//        if (buf[i] < 0.0)
+//            sign = -1.0;
+//
+//        buf[i] = (fabs(2.5*buf[i]) - (buf[i] * buf[i])) * sign;
+//    }
 	
 	//2nd need to implement low shelving filter
     //dc->process(buf, numOfSamples);
@@ -371,7 +377,7 @@ CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
     
     for(int i =0 ; i < numOfSamples; i++)
     {
-        //buf[i] = dcBlocker2->processSample(buf[i]);
+        buf[i] = dcBlocker2->processSample(buf[i]);
         buf[i] = buf[i] * 2;
     }
     //valveTube.processBuffer(buf, numOfSamples);

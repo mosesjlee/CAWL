@@ -23,6 +23,5 @@ public:
     
 protected:
     float sampleRate = DEFAULT_SR;
-    
 };
 #endif /* CAWLSoundModules_hpp */

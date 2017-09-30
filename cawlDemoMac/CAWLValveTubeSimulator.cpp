@@ -8,7 +8,8 @@
 
 #include "CAWLValveTubeSimulator.hpp"
 CAWLValveTubeSimulator::CAWLValveTubeSimulator():
-mMixLevel(0.5)
+mMixLevel(0.5),
+mGain(1)
 {
 }
 
@@ -30,17 +31,22 @@ void CAWLValveTubeSimulator::processBuffer(float * buf, const unsigned int numOf
     float upperClipVal = 0.630035;
     float gainCoeff = 3.9375;
     float correctCoeff = -6.153;
+    float peakSample = fabs(buf[0]);
     
+    for(unsigned i = 1; i < numOfSamples; i++)
+    {
+        peakSample = fabs(buf[i]) > peakSample ? fabs(buf[i]) : peakSample;
+    }
     
+    //if(peakSample < 0.001) peakSample *= ;
     for(unsigned i = 0; i < numOfSamples; i++)
     {
-        xCurrSample = buf[i] * 1.1;
-        //if(xCurrSample <= 1.0 && xCurrSample >= 0.320018)
-        if(xCurrSample <= 1.0 && xCurrSample >= upperLimit)
+        xCurrSample = (buf[i] * 0.5)/peakSample;
+        if(xCurrSample >= upperLimit)
         {
             xCurrSample = upperClipVal;
         }
-        else if (xCurrSample >= lowerLimit && xCurrSample < 0.907423989749)
+        else if (xCurrSample >= lowerLimit && xCurrSample < upperLimit)
         {
             xCurrSample = correctCoeff * xCurrSample * xCurrSample + gainCoeff * xCurrSample;
         }
@@ -50,15 +56,11 @@ void CAWLValveTubeSimulator::processBuffer(float * buf, const unsigned int numOf
             float b = (1.0/3.0) * (fabs(xCurrSample)-0.032847);
             xCurrSample = -0.75*(a + b) + 0.01;
         }
-        else if(xCurrSample < -1.0)
-        {
-            xCurrSample = -0.9818;
-        }
-    
+        
         //For some reason the low mix level of the tube simulator yields the best results
         buf[i] = xCurrSample * mMixLevel + buf[i] * (1-mMixLevel);
+        xCurrSample = 0.0;
     }
-    
 }
 
 
