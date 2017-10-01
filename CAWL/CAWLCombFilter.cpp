@@ -13,7 +13,30 @@ void CAWLCombFilter::setDelay(unsigned int delay)
     delayLine.setDelayTime(delay);
 }
 
-void CAWLCombFilter::setGain(float gain)
+void CAWLCombFilter::setFeedForwardGain(float newGain)
 {
-    mGain = gain;
+    if(newGain > 1.0)
+        newGain = 1.0;
+    if(newGain < 0.0)
+        newGain = 0.0;
+    
+    mFeedForwardGain = newGain;
+}
+
+void CAWLCombFilter::setFeedbackGain(float newGain)
+{
+    if(newGain > 1.0)
+        newGain = 1.0;
+    if(newGain < 0.0)
+        newGain = 0.0;
+    mFeedbackGain = newGain;
+}
+
+void CAWLCombFilter::setMixLevel(float newMixLevel)
+{
+    if(newMixLevel > 1.0)
+        newMixLevel = 1.0;
+    if(newMixLevel < 0.0)
+        newMixLevel = 0.0;
+    mMixLevel = newMixLevel;
 }

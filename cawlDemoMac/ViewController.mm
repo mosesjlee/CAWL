@@ -12,6 +12,13 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    NSTabViewItem * tab1, * tab2, *tab3;
+    tab1 = [[NSTabViewItem alloc] init];
+    tab2 = [[NSTabViewItem alloc] init];
+    tab3 = [[NSTabViewItem alloc] init];
+    [_tabbedView insertTabViewItem:tab1 atIndex:0];
+    [_tabbedView insertTabViewItem:tab2 atIndex:1];
+    [_tabbedView insertTabViewItem:tab3 atIndex:2];
 }
 
 

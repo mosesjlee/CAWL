@@ -10,21 +10,19 @@
 
 #include <math.h>
 
-#define MAX_DELAY_IN_SAMPLES 8192.0
+#define MAX_DELAY_IN_SAMPLES 44100.0f * 2
 
 CAWLDelayLine::CAWLDelayLine():
-maxDelayInSamples(8192.0f),
+maxDelayInSamples(MAX_DELAY_IN_SAMPLES),
 currReadPos(0),
 currWritePos(0),
-currDelayInSamples(55)
+currDelayInSamples(0)
 {
     delayLine = new float[(int) maxDelayInSamples];
     
     //0 out the buffer
     for(int i = 0; i < maxDelayInSamples; i++)
         delayLine[i] = 0.0;
-    
-    setDelayTime(1000);
 }
 
 
@@ -36,7 +34,7 @@ CAWLDelayLine::~CAWLDelayLine()
 void CAWLDelayLine::setDelayTime(float delayTime)
 {
     //Input is in milliseconds so convert that to samples
-    currDelayInSamples = (float) delayTime * DEFAULT_SR/MILLISECONDS;
+    currDelayInSamples = delayTime * DEFAULT_SR/MILLISECONDS;
     
     //Enforce that the max delay is 1 sample less than the max delay
     if(currDelayInSamples > MAX_DELAY_IN_SAMPLES)
@@ -67,6 +65,13 @@ float CAWLDelayLine::processNextSample(float currSample)
     float yCurrOutput = 0.0;
 
     delayLine[(int) currWritePos] = currSample;
+    
+    //Get the current read position
+//    currReadPos = currWritePos - currDelayInSamples;
+//    if(currReadPos < 0.0)
+//        currReadPos = MAX_DELAY_IN_SAMPLES - fabs(currReadPos);
+    
+    
     float fracDelay = currReadPos - (int) currReadPos;
     
     if(fracDelay > 0.000000)

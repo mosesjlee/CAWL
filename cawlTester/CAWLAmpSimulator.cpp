@@ -354,7 +354,7 @@ CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
 //    hp1.fillOutputBuffer(buf, numOfSamples, 1);
     
 	//1st send it to be processed by the valve simulator
-//	valveTube.processBuffer(buf, numOfSamples);
+	valveTube.processBuffer(buf, numOfSamples);
 	
 //    for(int i = 0; i < numOfSamples; i++)
 //    {
@@ -389,13 +389,6 @@ CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
 	}
 #endif
 }
-
-
-
-
-
-
-
 
 
 

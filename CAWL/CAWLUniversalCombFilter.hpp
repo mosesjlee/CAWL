@@ -11,4 +11,12 @@
 
 #include <stdio.h>
 #include "CAWLCombFilter.hpp"
+
+class CAWLUniversalCombFilter : public CAWLCombFilter
+{
+public:
+    CAWLUniversalCombFilter();
+    ~CAWLUniversalCombFilter();
+    void processBuffer(float * buf, const unsigned int numSamples);
+};
 #endif /* CAWLUniversalCombFilter_hpp */

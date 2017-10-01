@@ -16,13 +16,17 @@ class CAWLCombFilter : public CAWLSoundModule
 {
 public:
     virtual void setDelay(unsigned int delay);
-    virtual void setGain(float gain);
+    virtual void setFeedForwardGain(float newGain);
+    virtual void setFeedbackGain(float newGain);
+    virtual void setMixLevel(float newMixLevel);
     
 protected:
     CAWLDelayLine delayLine;
     unsigned int delay;
     float lastSampleOfBlock;
-    float mGain;
+    float mFeedbackGain;
+    float mFeedForwardGain;
+    float mMixLevel;
 };
 
 

@@ -13,6 +13,7 @@
 #include "CAWLValveTubeSimulator.hpp"
 #include "CAWLFIRCombFilter.hpp"
 #include "CAWLIIRCombFilter.hpp"
+#include "CAWLUniversalCombFilter.hpp"
 #define SCALE 0.3
 
 int main(int argc, const char * argv[]) {
@@ -46,6 +47,8 @@ int main(int argc, const char * argv[]) {
     CAWLFIRCombFilter *ptrToFir = &fir;
     CAWLIIRCombFilter iir;
     CAWLIIRCombFilter *ptrToiir = &iir;
+    CAWLUniversalCombFilter ucf;
+    CAWLUniversalCombFilter * ptrToUcf = &ucf;
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
@@ -68,8 +71,9 @@ int main(int argc, const char * argv[]) {
 //        
 //        *fc = j;
         //ptrToFir->processBuffer(data, numSamples);
-        ptrToiir->processBuffer(data, numSamples);
-		ptrToAmp->processBuffer(data, numSamples);
+//        ptrToiir->processBuffer(data, numSamples);
+        ptrToUcf->processBuffer(data, numSamples);
+//		ptrToAmp->processBuffer(data, numSamples);
 		//ptrToValve->processBuffer(data,numSamples);
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 16) {

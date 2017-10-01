@@ -9,7 +9,7 @@
 #include "CAWLValveTubeSimulator.hpp"
 CAWLValveTubeSimulator::CAWLValveTubeSimulator():
 mMixLevel(0.5),
-mGain(1)
+mGain(0.5)
 {
 }
 
@@ -41,7 +41,7 @@ void CAWLValveTubeSimulator::processBuffer(float * buf, const unsigned int numOf
     //if(peakSample < 0.001) peakSample *= ;
     for(unsigned i = 0; i < numOfSamples; i++)
     {
-        xCurrSample = (buf[i] * 0.5)/peakSample;
+        xCurrSample = (buf[i] * mGain)/peakSample;
         if(xCurrSample >= upperLimit)
         {
             xCurrSample = upperClipVal;

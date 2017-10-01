@@ -9,7 +9,7 @@
 #include "CAWLFIRCombFilter.hpp"
 CAWLFIRCombFilter::CAWLFIRCombFilter()
 {
-    mGain = 1.0;
+    mFeedForwardGain = 1.0;
     lastSampleOfBlock = 0.0;
     delayLine.setDelayTime(0);
 }
@@ -26,7 +26,7 @@ void CAWLFIRCombFilter::processBuffer(float * buf, const unsigned int numSamples
     {
         float xCurrSample = buf[i];
         float zCurrSample = delayLine.processNextSample(xCurrSample);
-        yCurrSample = zCurrSample * mGain + xCurrSample;
+        yCurrSample = zCurrSample * mFeedForwardGain + xCurrSample;
         buf[i] = yCurrSample;
     }
     lastSampleOfBlock = yCurrSample;
