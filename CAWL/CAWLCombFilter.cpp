@@ -7,3 +7,13 @@
 //
 
 #include "CAWLCombFilter.hpp"
+
+void CAWLCombFilter::setDelay(unsigned int delay)
+{
+    delayLine.setDelayTime(delay);
+}
+
+void CAWLCombFilter::setGain(float gain)
+{
+    mGain = gain;
+}

@@ -16,9 +16,8 @@ public:
     CAWLIIRCombFilter();
     ~CAWLIIRCombFilter();
     void processBuffer(float * buf, const unsigned int numSamples);
+    //void setDelay(unsigned int delay);
 private:
     float mMixLevel;
-    float lastSampleOfBlock;
-    CAWLDelayLine delayLine;
 };
 #endif /* CAWLIIRFilter_hpp */

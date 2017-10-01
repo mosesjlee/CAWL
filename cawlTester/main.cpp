@@ -163,9 +163,11 @@ int main(int argc, const char * argv[]) {
         
         if(c == '+'){
 			//ampSim.setPreampGain(0.3);;
+            iir.setDelay(346);
             //std::cout << "new gain level " << ampSim.getGain() << std::endl;
         }
         if(c == '-'){
+            iir.setDelay(400);
             //ampSim.setPreampGain(0.1);
             //std::cout << "new gain level " << ampSim.getGain() << std::endl;
         }

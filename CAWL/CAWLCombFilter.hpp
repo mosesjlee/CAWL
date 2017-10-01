@@ -8,20 +8,23 @@
 
 #ifndef CAWLFilter_hpp
 #define CAWLFilter_hpp
+#include <stdio.h>
 #include "CAWLSoundModule.hpp"
 #include "CAWLDelayLine.hpp"
+
 class CAWLCombFilter : public CAWLSoundModule
 {
 public:
-    void processBuffer(float * buf, const unsigned int numSamples) = 0;
-    void setDelay(unsigned int delay) { delayLine.setDelayTime(delay); }
-    void setGain(float gain) { mGain = gain; };
+    virtual void setDelay(unsigned int delay);
+    virtual void setGain(float gain);
+    
 protected:
     CAWLDelayLine delayLine;
     unsigned int delay;
+    float lastSampleOfBlock;
     float mGain;
 };
 
-#include <stdio.h>
+
 
 #endif /* CAWLFilter_hpp */

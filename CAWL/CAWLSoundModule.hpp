@@ -16,8 +16,6 @@
 class CAWLSoundModule
 {
 public:
-    CAWLSoundModule(){};
-    ~CAWLSoundModule(){};
     virtual void processBuffer(float * buf, const unsigned int numOfSamples) = 0;
     virtual void setSampleRate(float newSampleRate) { sampleRate = newSampleRate; }
     

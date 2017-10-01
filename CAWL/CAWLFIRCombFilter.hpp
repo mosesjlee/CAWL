@@ -18,6 +18,5 @@ public:
     CAWLFIRCombFilter();
     ~CAWLFIRCombFilter();
     void processBuffer(float * buf, const unsigned int numSamples);
-    void setNewDelay(float delay);
 };
 #endif /* CAWLFIRFilter_hpp */

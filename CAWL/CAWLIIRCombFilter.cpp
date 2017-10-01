@@ -10,15 +10,21 @@
 
 CAWLIIRCombFilter::CAWLIIRCombFilter()
 {
-    mGain = .7;
+    mGain = .4;
     mMixLevel = .9;
     lastSampleOfBlock = 0.0;
+    delayLine.setDelayTime(50);
 }
 
 CAWLIIRCombFilter::~CAWLIIRCombFilter()
 {
     
 }
+
+//void CAWLIIRCombFilter::setDelay(unsigned int delay)
+//{
+//    delayLine.setDelayTime(delay);
+//}
 
 void CAWLIIRCombFilter::processBuffer(float *buf, const unsigned int numSamples)
 {
