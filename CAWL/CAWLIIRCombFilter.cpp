@@ -10,8 +10,9 @@
 
 CAWLIIRCombFilter::CAWLIIRCombFilter()
 {
-    mGain = 0.5;
-    mMixLevel = 0.5;
+    mGain = .7;
+    mMixLevel = .9;
+    lastSampleOfBlock = 0.0;
 }
 
 CAWLIIRCombFilter::~CAWLIIRCombFilter()
@@ -21,7 +22,7 @@ CAWLIIRCombFilter::~CAWLIIRCombFilter()
 
 void CAWLIIRCombFilter::processBuffer(float *buf, const unsigned int numSamples)
 {
-    float yCurrOutput = 0.0;
+    float yCurrOutput = lastSampleOfBlock;
     float xCurrSample = 0.0;
     float zSample = 0.0;
     for(unsigned i = 0; i < numSamples; i++)
@@ -29,7 +30,13 @@ void CAWLIIRCombFilter::processBuffer(float *buf, const unsigned int numSamples)
         xCurrSample = buf[i] *mMixLevel;
         zSample = mGain * delayLine.processNextSample(yCurrOutput);
         yCurrOutput = xCurrSample + zSample;
+
+        if(yCurrOutput > 1.0)
+            yCurrOutput = 1.0;
+        else if(yCurrOutput < -1.0)
+            yCurrOutput = -1.0;
         
         buf[i] = yCurrOutput;
     }
+    lastSampleOfBlock = yCurrOutput;
 }

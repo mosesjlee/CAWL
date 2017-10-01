@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include <fstream>
 #include "CAWL.hpp"
 #include "CAWLAmpSimulator.hpp"
 #include "CAWLValveTubeSimulator.hpp"
@@ -30,9 +31,14 @@ int main(int argc, const char * argv[]) {
     double cycleLength2 = 44100. / 544.37;
     double * ptr2 = &cycleLength2;
     double cycleLength3 = 44100. / 659.25;
+    
+    float debugBuffer[8192];
+    float *debugPtr = debugBuffer;
+    int debugBufWriteCount = 0;
+    int * debugCountPtr = &debugBufWriteCount;
 	
     
-    CAWLAmpSimulator ampSim(0), ampSim2(1), ampSim3(2);
+    CAWLAmpSimulator ampSim(2), ampSim2(1), ampSim3(2);
     CAWLAmpSimulator * ptrToAmp = &ampSim, *ptrToAmp2 = &ampSim2, *ptrToAmp3 = &ampSim3;
 	CAWLValveTubeSimulator valveSim, valveSim2, valveSim3;
 	CAWLValveTubeSimulator * ptrToValve = &valveSim, * ptrToValve2 = &valveSim2, *ptrToValve3 = &valveSim3;
@@ -43,23 +49,34 @@ int main(int argc, const char * argv[]) {
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
-		double j = *fc;
-		/*for(int i = 0; i < numSamples; i++)
-		{
-			//ptrToBuf1[i] = data[i];
-			
-            //data[i] = data[i];// + (float) sin (2 * M_PI * (j / cycleLength));
-			
-			j += 1.0;
-			if (j > cycleLength)
-				j -= cycleLength;
-			
-		}
-		*fc = j;*/
+//        double j = *fc;
+//            for(int i = 0; i < 441; i++)
+//            {
+//                //ptrToBuf1[i] = data[i];
+//                if(j < 100 ) {
+//                data[i] = (float) sin (2 * M_PI * (j / cycleLength));
+//                
+//                j += 1.0;
+//                if (j > cycleLength)
+//                    j -= cycleLength;
+//                }
+//                else {
+//                    data[i] = 0.0;
+//                }
+//            }
+//        
+//        
+//        *fc = j;
         //ptrToFir->processBuffer(data, numSamples);
         ptrToiir->processBuffer(data, numSamples);
-		//ptrToAmp->processBuffer(data, numSamples);
+		ptrToAmp->processBuffer(data, numSamples);
 		//ptrToValve->processBuffer(data,numSamples);
+#ifdef WRITE_TO_FILE
+        if(*debugCountPtr < 16) {
+            memcpy(debugPtr + (*debugCountPtr) * numSamples, data, (512 *sizeof(float)));
+            (*debugCountPtr)++;
+        }
+#endif
         
 	});
 	
@@ -153,5 +170,11 @@ int main(int argc, const char * argv[]) {
             //std::cout << "new gain level " << ampSim.getGain() << std::endl;
         }
 	}
+#ifdef WRITE_TO_FILE
+    std::ofstream out;
+    out.open("/Users/moseslee/Desktop/delayfloat", std::ios::out | std::ios::binary);
+    out.write(reinterpret_cast <const char*> (debugBuffer) , 8192 * sizeof(float));
+    out.close();
+#endif
     return 0;
 }

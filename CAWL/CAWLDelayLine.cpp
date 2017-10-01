@@ -24,7 +24,7 @@ currDelayInSamples(55)
     for(int i = 0; i < maxDelayInSamples; i++)
         delayLine[i] = 0.0;
     
-    setDelayTime(1025);
+    setDelayTime(1000);
 }
 
 
@@ -33,7 +33,7 @@ CAWLDelayLine::~CAWLDelayLine()
     delete [] delayLine;
 }
 
-void CAWLDelayLine::setDelayTime(unsigned int delayTime)
+void CAWLDelayLine::setDelayTime(float delayTime)
 {
     //Input is in milliseconds so convert that to samples
     currDelayInSamples = (float) delayTime * DEFAULT_SR/MILLISECONDS;
@@ -43,7 +43,7 @@ void CAWLDelayLine::setDelayTime(unsigned int delayTime)
         currDelayInSamples = MAX_DELAY_IN_SAMPLES - 1;
     
     //Update the read and write index
-    currReadPos = currWritePos - currDelayInSamples;
+    currReadPos = currWritePos - (currDelayInSamples-1);
     
     if(currReadPos < 0.0)
         currReadPos = MAX_DELAY_IN_SAMPLES - fabs(currReadPos);
@@ -81,8 +81,8 @@ float CAWLDelayLine::processNextSample(float currSample)
     else
         yCurrOutput = delayLine[(int) currReadPos];
     
-    currReadPos = (currReadPos + 1.0) > maxDelayInSamples ?  (0 + fracDelay) : (currReadPos + 1.0);
-    currWritePos = (currWritePos + 1.0) > maxDelayInSamples ? 0 : (currWritePos + 1.0);
+    currReadPos = (currReadPos + 1.0) >= maxDelayInSamples ?  (0 + fracDelay) : (currReadPos + 1.0);
+    currWritePos = (currWritePos + 1.0) >= maxDelayInSamples ? 0 : (currWritePos + 1.0);
     return yCurrOutput;
 }
 

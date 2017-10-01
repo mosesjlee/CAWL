@@ -18,6 +18,7 @@ public:
     void processBuffer(float * buf, const unsigned int numSamples);
 private:
     float mMixLevel;
+    float lastSampleOfBlock;
     CAWLDelayLine delayLine;
 };
 #endif /* CAWLIIRFilter_hpp */

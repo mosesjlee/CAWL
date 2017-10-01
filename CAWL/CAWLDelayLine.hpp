@@ -16,7 +16,7 @@ class CAWLDelayLine
 public:
     CAWLDelayLine();
     ~CAWLDelayLine();
-    void setDelayTime(unsigned int delayTime);
+    void setDelayTime(float delayTime);
     float processNextSample(float currSample);
     
 private:
