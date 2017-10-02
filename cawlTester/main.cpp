@@ -15,6 +15,7 @@
 #include "CAWLIIRCombFilter.hpp"
 #include "CAWLUniversalCombFilter.hpp"
 #define SCALE 0.3
+#define WRITE_TO_FILE
 
 int main(int argc, const char * argv[]) {
 	// insert code here...
@@ -45,31 +46,30 @@ int main(int argc, const char * argv[]) {
 	CAWLValveTubeSimulator * ptrToValve = &valveSim, * ptrToValve2 = &valveSim2, *ptrToValve3 = &valveSim3;
     CAWLFIRCombFilter fir;
     CAWLFIRCombFilter *ptrToFir = &fir;
-    CAWLIIRCombFilter iir;
+    CAWLIIRCombFilter iir; iir.setDelay(2.2675736961);
     CAWLIIRCombFilter *ptrToiir = &iir;
-    CAWLUniversalCombFilter ucf;
+    CAWLUniversalCombFilter ucf; ucf.setDelay(2.2675736961);
     CAWLUniversalCombFilter * ptrToUcf = &ucf;
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
-//        double j = *fc;
-//            for(int i = 0; i < 441; i++)
-//            {
-//                //ptrToBuf1[i] = data[i];
-//                if(j < 100 ) {
-//                data[i] = (float) sin (2 * M_PI * (j / cycleLength));
-//                
-//                j += 1.0;
-//                if (j > cycleLength)
-//                    j -= cycleLength;
-//                }
-//                else {
-//                    data[i] = 0.0;
-//                }
-//            }
-//        
-//        
-//        *fc = j;
+        double j = *fc;
+        for(int i = 0; i < numSamples; i++)
+        {
+            //ptrToBuf1[i] = data[i];
+            if(j < 100 ) {
+                data[i] = (float) sin (2 * M_PI * (j / cycleLength));
+            
+                j += 1.0;
+                if (j > cycleLength)
+                    j -= cycleLength;
+            }
+            else {
+                data[i] = 0.0;
+            }
+        }
+        *fc = j;
+        
         //ptrToFir->processBuffer(data, numSamples);
 //        ptrToiir->processBuffer(data, numSamples);
         ptrToUcf->processBuffer(data, numSamples);

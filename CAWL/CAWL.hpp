@@ -35,6 +35,8 @@ public:
 	void startPlaying();
 	void stopPlaying();
 	
+    int getNumChannels() { return numInputChannels; }
+    
 	//Enforce singleton pattern
 	CAWL(CAWL const&)            = delete;
 	void operator=(CAWL const&)  = delete;

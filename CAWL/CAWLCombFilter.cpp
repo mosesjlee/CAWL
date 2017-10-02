@@ -8,7 +8,7 @@
 
 #include "CAWLCombFilter.hpp"
 
-void CAWLCombFilter::setDelay(unsigned int delay)
+void CAWLCombFilter::setDelay(float delay)
 {
     delayLine.setDelayTime(delay);
 }

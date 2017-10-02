@@ -20,7 +20,7 @@ public:
     ~CAWLSoundBoard();
 private:
     CAWL * cawlInstance;
-    CAWLValveTubeSimulator * ampArray;
+    CAWLValveTubeSimulator ampSim;
     
 };
 
