@@ -329,7 +329,6 @@ CAWLAmpSimulator::CAWLAmpSimulator(int model)
     dc->reset();
     dc->set(100/(8 * 44100));
     
-    hp1.changeCutOffFreq(200);
     
     dcBlocker = new DCBlocker();
     dcBlocker->reset();

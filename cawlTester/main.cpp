@@ -14,6 +14,8 @@
 #include "CAWLFIRCombFilter.hpp"
 #include "CAWLIIRCombFilter.hpp"
 #include "CAWLUniversalCombFilter.hpp"
+#include "CAWLLowPassFilter.hpp"
+#include "CAWLHighPassFilter.hpp"
 #define SCALE 0.3
 #define WRITE_TO_FILE
 
@@ -51,6 +53,11 @@ int main(int argc, const char * argv[]) {
     CAWLUniversalCombFilter ucf; ucf.setDelay(2.2675736961);
     CAWLUniversalCombFilter * ptrToUcf = &ucf;
     
+    CAWLLowPassFilter lpf(1000.0);
+    CAWLHighPassFilter hpf(100.0);
+    CAWLLowPassFilter * lpfPtr = &lpf;
+    CAWLHighPassFilter * hpfPtr = &hpf;
+    
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
         double j = *fc;
@@ -72,9 +79,11 @@ int main(int argc, const char * argv[]) {
         
         //ptrToFir->processBuffer(data, numSamples);
 //        ptrToiir->processBuffer(data, numSamples);
-        ptrToUcf->processBuffer(data, numSamples);
+//        ptrToUcf->processBuffer(data, numSamples);
 //		ptrToAmp->processBuffer(data, numSamples);
 		//ptrToValve->processBuffer(data,numSamples);
+        lpfPtr->processBuffer(data, numSamples);
+        //hpfPtr->processBuffer(data, numSamples);
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 16) {
             memcpy(debugPtr + (*debugCountPtr) * numSamples, data, (512 *sizeof(float)));
