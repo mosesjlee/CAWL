@@ -20,6 +20,6 @@ public:
     ~CAWLBiQuadFilter();
 private:
     CAWLDelayLine delayLine;
-}
+};
 
 #endif /* CAWLBiQuadFilter_hpp */

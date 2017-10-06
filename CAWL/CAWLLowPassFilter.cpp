@@ -11,6 +11,7 @@ CAWLLowPassFilter::CAWLLowPassFilter(float cutOffFreq)
 {
     cutOffFrequency = cutOffFreq; //Default;
     calculateCoefficients();
+    delayLine.setDelayTimeInSamples(1.0);
 }
 
 CAWLLowPassFilter::~CAWLLowPassFilter()

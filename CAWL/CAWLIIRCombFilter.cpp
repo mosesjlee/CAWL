@@ -13,7 +13,7 @@ CAWLIIRCombFilter::CAWLIIRCombFilter()
     mFeedbackGain = 1;
     mMixLevel = 1;
     lastSampleOfBlock = 0.0;
-    delayLine.setDelayTime(100);
+    delayLine.setDelayTimeInMilliseconds(100);
 }
 
 CAWLIIRCombFilter::~CAWLIIRCombFilter()

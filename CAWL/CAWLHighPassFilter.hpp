@@ -28,6 +28,7 @@ public:
     CAWLHighPassFilter(float cutOffFreq);
     ~CAWLHighPassFilter();
     void changeCutOffFreq(float newFreq);
+    void setFeedbackGain(float newGain);
 };
 
 #endif /* simpleEq_hpp */

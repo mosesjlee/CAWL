@@ -31,11 +31,25 @@ CAWLDelayLine::~CAWLDelayLine()
     delete [] delayLine;
 }
 
-void CAWLDelayLine::setDelayTime(float delayTime)
+void CAWLDelayLine::setDelayTimeInMilliseconds(float delayTime)
 {
     //Input is in milliseconds so convert that to samples
     currDelayInSamples = delayTime * DEFAULT_SR/MILLISECONDS;
     
+    //Enforce that the max delay is 1 sample less than the max delay
+    if(currDelayInSamples > MAX_DELAY_IN_SAMPLES)
+        currDelayInSamples = MAX_DELAY_IN_SAMPLES - 1;
+    
+    //Update the read and write index
+    currReadPos = currWritePos - (currDelayInSamples-1);
+    
+    if(currReadPos < 0.0)
+        currReadPos = MAX_DELAY_IN_SAMPLES - fabs(currReadPos);
+}
+
+void CAWLDelayLine::setDelayTimeInSamples(float delaySamples)
+{
+    currDelayInSamples = delaySamples;
     //Enforce that the max delay is 1 sample less than the max delay
     if(currDelayInSamples > MAX_DELAY_IN_SAMPLES)
         currDelayInSamples = MAX_DELAY_IN_SAMPLES - 1;

@@ -36,7 +36,7 @@ int main(int argc, const char * argv[]) {
     double * ptr2 = &cycleLength2;
     double cycleLength3 = 44100. / 659.25;
     
-    float debugBuffer[8192];
+    float debugBuffer[44544];
     float *debugPtr = debugBuffer;
     int debugBufWriteCount = 0;
     int * debugCountPtr = &debugBufWriteCount;
@@ -53,39 +53,39 @@ int main(int argc, const char * argv[]) {
     CAWLUniversalCombFilter ucf; ucf.setDelay(2.2675736961);
     CAWLUniversalCombFilter * ptrToUcf = &ucf;
     
-    CAWLLowPassFilter lpf(1000.0);
+    CAWLLowPassFilter lpf(300.0);
     CAWLHighPassFilter hpf(100.0);
     CAWLLowPassFilter * lpfPtr = &lpf;
     CAWLHighPassFilter * hpfPtr = &hpf;
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
-        double j = *fc;
-        for(int i = 0; i < numSamples; i++)
-        {
-            //ptrToBuf1[i] = data[i];
-            if(j < 100 ) {
-                data[i] = (float) sin (2 * M_PI * (j / cycleLength));
-            
-                j += 1.0;
-                if (j > cycleLength)
-                    j -= cycleLength;
-            }
-            else {
-                data[i] = 0.0;
-            }
-        }
-        *fc = j;
+//        double j = *fc;
+//        for(int i = 0; i < numSamples; i++)
+//        {
+//            //ptrToBuf1[i] = data[i];
+//            if(j < 100 ) {
+//                data[i] = (float) sin (2 * M_PI * (j / cycleLength));
+//            
+//                j += 1.0;
+//                if (j > cycleLength)
+//                    j -= cycleLength;
+//            }
+//            else {
+//                data[i] = 0.0;
+//            }
+//        }
+//        *fc = j;
         
         //ptrToFir->processBuffer(data, numSamples);
 //        ptrToiir->processBuffer(data, numSamples);
 //        ptrToUcf->processBuffer(data, numSamples);
-//		ptrToAmp->processBuffer(data, numSamples);
+		ptrToAmp->processBuffer(data, numSamples);
 		//ptrToValve->processBuffer(data,numSamples);
-        lpfPtr->processBuffer(data, numSamples);
+//        lpfPtr->processBuffer(data, numSamples);
         //hpfPtr->processBuffer(data, numSamples);
 #ifdef WRITE_TO_FILE
-        if(*debugCountPtr < 16) {
+        if(*debugCountPtr < 87) {
             memcpy(debugPtr + (*debugCountPtr) * numSamples, data, (512 *sizeof(float)));
             (*debugCountPtr)++;
         }
@@ -176,11 +176,13 @@ int main(int argc, const char * argv[]) {
         
         if(c == '+'){
 			//ampSim.setPreampGain(0.3);;
-            iir.setDelay(346);
+            //iir.setDelay(346);
+            ampSim.setCutOff(2000.0);
             //std::cout << "new gain level " << ampSim.getGain() << std::endl;
         }
         if(c == '-'){
-            iir.setDelay(400);
+            //iir.setDelay(400);
+            ampSim.setCutOff(10.0);
             //ampSim.setPreampGain(0.1);
             //std::cout << "new gain level " << ampSim.getGain() << std::endl;
         }
@@ -188,7 +190,7 @@ int main(int argc, const char * argv[]) {
 #ifdef WRITE_TO_FILE
     std::ofstream out;
     out.open("/Users/moseslee/Desktop/delayfloat", std::ios::out | std::ios::binary);
-    out.write(reinterpret_cast <const char*> (debugBuffer) , 8192 * sizeof(float));
+    out.write(reinterpret_cast <const char*> (debugBuffer) , 44544 * sizeof(float));
     out.close();
 #endif
     return 0;

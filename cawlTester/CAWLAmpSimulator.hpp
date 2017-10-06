@@ -32,12 +32,15 @@ public:
     CAWLAmpSimulator(int model);
     ~CAWLAmpSimulator();
 	virtual void processBuffer(float * buf, const unsigned int numOfSamples);
+    
+    //debug only
+    void setCutOff(float freq);
   
 private:
     CAWLValveTubeSimulator valveTube;
 	ToneStack * stack;
     HP1 * dc;
-    CAWLHighPassFilter hp1 = CAWLHighPassFilter(200);
+    CAWLHighPassFilter hp1 = CAWLHighPassFilter(4000);
 	DCBlocker * dcBlocker, * dcBlocker2;
 };
 #endif /* CAWLAmpSimulator_hpp */

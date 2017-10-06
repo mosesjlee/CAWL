@@ -11,6 +11,7 @@
 CAWLHighPassFilter::CAWLHighPassFilter(float cutOffFreq)
 {
     cutOffFrequency = cutOffFreq; //Default;
+    delayLine.setDelayTimeInSamples(1.0);
     calculateCoefficients();
 }
 
@@ -27,7 +28,7 @@ void CAWLHighPassFilter::calculateCoefficients()
     
     //Update the IIR Filter specs
     setMixLevel(a_0);
-    setFeedbackGain(-b_1);
+    CAWLHighPassFilter::setFeedbackGain(-b_1);
 }
 
 void CAWLHighPassFilter::changeCutOffFreq(float newFreq)
@@ -36,5 +37,9 @@ void CAWLHighPassFilter::changeCutOffFreq(float newFreq)
     calculateCoefficients();
 }
 
+void CAWLHighPassFilter::setFeedbackGain(float newGain)
+{
+    mFeedbackGain = newGain;
+}
 
 

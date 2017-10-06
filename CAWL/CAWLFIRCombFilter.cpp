@@ -11,7 +11,7 @@ CAWLFIRCombFilter::CAWLFIRCombFilter()
 {
     mFeedForwardGain = 1.0;
     lastSampleOfBlock = 0.0;
-    delayLine.setDelayTime(0);
+    delayLine.setDelayTimeInMilliseconds(0);
 }
 
 CAWLFIRCombFilter::~CAWLFIRCombFilter()

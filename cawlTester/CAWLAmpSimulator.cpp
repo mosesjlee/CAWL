@@ -354,7 +354,7 @@ CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
     
 	//1st send it to be processed by the valve simulator
 	valveTube.processBuffer(buf, numOfSamples);
-	
+    hp1.processBuffer(buf, numOfSamples);
 //    for(int i = 0; i < numOfSamples; i++)
 //    {
 //        //buf[i] = dcBlocker->processSample(buf[i]);
@@ -391,6 +391,10 @@ CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
 
 
 
+void CAWLAmpSimulator::setCutOff(float freq)
+{
+    hp1.changeCutOffFreq(freq);
+}
 
 
 
