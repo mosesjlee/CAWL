@@ -22,12 +22,13 @@ public:
     
 protected:
     CAWLDelayLine firstOrderDelayLine, secondOrderDelayLine;
-	float a_0, a_1, a_2, b_1, b_2, c_0, d_0;
+	double a_0, a_1, a_2, b_1, b_2, c_0, d_0;
     
 private:
 	//Intermediary values for signal processing
-	float x_a_0 = 0.0, x_a_1 = 0.0, x_a_2 = 0.0;
-	float x_b_1 = 0.0, x_b_2 = 0.0;
+	double x_a_0 = 0.0, x_a_1 = 0.0, x_a_2 = 0.0;
+	double x_b_1 = 0.0, x_b_2 = 0.0;
+    double delayedSample1 = 0.0, delayedSample2 = 0.0;
 	
 };
 

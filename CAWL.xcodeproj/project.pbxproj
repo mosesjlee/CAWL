@@ -77,6 +77,9 @@
 		91DC3E511F871F5B00E3DB09 /* CAWLLowShelfFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3E4F1F871DF600E3DB09 /* CAWLLowShelfFilter.cpp */; };
 		91DC3E521F871F5C00E3DB09 /* CAWLLowShelfFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3E4F1F871DF600E3DB09 /* CAWLLowShelfFilter.cpp */; };
 		91DC3E531F871F6500E3DB09 /* CAWLLowShelfFilter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3E501F871DF600E3DB09 /* CAWLLowShelfFilter.hpp */; };
+		91DC3E571F874D6C00E3DB09 /* CAWLHighShelfFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3E551F874D6C00E3DB09 /* CAWLHighShelfFilter.cpp */; };
+		91DC3E581F874D6C00E3DB09 /* CAWLHighShelfFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3E551F874D6C00E3DB09 /* CAWLHighShelfFilter.cpp */; };
+		91DC3E591F874D6C00E3DB09 /* CAWLHighShelfFilter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3E561F874D6C00E3DB09 /* CAWLHighShelfFilter.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -149,6 +152,8 @@
 		91CAECA31DC8597C00CEF065 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		91DC3E4F1F871DF600E3DB09 /* CAWLLowShelfFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLLowShelfFilter.cpp; sourceTree = "<group>"; };
 		91DC3E501F871DF600E3DB09 /* CAWLLowShelfFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLLowShelfFilter.hpp; sourceTree = "<group>"; };
+		91DC3E551F874D6C00E3DB09 /* CAWLHighShelfFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLHighShelfFilter.cpp; sourceTree = "<group>"; };
+		91DC3E561F874D6C00E3DB09 /* CAWLHighShelfFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLHighShelfFilter.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +223,8 @@
 				9191B3B01F85F62B004C6F33 /* CAWLBiQuadFilter.hpp */,
 				91DC3E4F1F871DF600E3DB09 /* CAWLLowShelfFilter.cpp */,
 				91DC3E501F871DF600E3DB09 /* CAWLLowShelfFilter.hpp */,
+				91DC3E551F874D6C00E3DB09 /* CAWLHighShelfFilter.cpp */,
+				91DC3E561F874D6C00E3DB09 /* CAWLHighShelfFilter.hpp */,
 				9177E63D1F7CCE4600D36C46 /* CAWLHighPassFilter.cpp */,
 				9177E63C1F7CCE4500D36C46 /* CAWLHighPassFilter.hpp */,
 				9177E63A1F7CCDF600D36C46 /* CAWLLowPassFilter.cpp */,
@@ -317,6 +324,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91DC3E591F874D6C00E3DB09 /* CAWLHighShelfFilter.hpp in Headers */,
 				911098071F6F2393002A9A92 /* CAWLIIRCombFilter.hpp in Headers */,
 				91062DDE1DE397E900BCBDA0 /* CAAutoDisposer.h in Headers */,
 				912CE4421F6B3BB8009F41AA /* CAWLAudioUnit.hpp in Headers */,
@@ -458,6 +466,7 @@
 				912E051A1F8023BF00C13E55 /* CAWLUniversalCombFilter.cpp in Sources */,
 				9177E6391F785D5500D36C46 /* CAWLAmpSimulator.cpp in Sources */,
 				9191B3A11F804543004C6F33 /* CAWLIIRCombFilter.cpp in Sources */,
+				91DC3E581F874D6C00E3DB09 /* CAWLHighShelfFilter.cpp in Sources */,
 				912E05151F8023AE00C13E55 /* CAWLCombFilter.cpp in Sources */,
 				912E051C1F80254800C13E55 /* CAWLFIRCombFilter.cpp in Sources */,
 				91DC3E511F871F5B00E3DB09 /* CAWLLowShelfFilter.cpp in Sources */,
@@ -489,6 +498,7 @@
 				91CAEC841DC8584600CEF065 /* CAWL.cpp in Sources */,
 				912E05191F8023BF00C13E55 /* CAWLUniversalCombFilter.cpp in Sources */,
 				911098061F6F2393002A9A92 /* CAWLIIRCombFilter.cpp in Sources */,
+				91DC3E571F874D6C00E3DB09 /* CAWLHighShelfFilter.cpp in Sources */,
 				912E05141F8023AE00C13E55 /* CAWLCombFilter.cpp in Sources */,
 				912CE4411F6B3BB8009F41AA /* CAWLAudioUnit.cpp in Sources */,
 			);

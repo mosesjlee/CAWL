@@ -273,7 +273,7 @@ CAWLAmpSimulator::CAWLAmpSimulator(int model)
     }
     stack->init(sampleRate);
     
-    lsf.setCutOffFreq(9000);
+    lsf.setCutOffFreq(700);
     dcBlocker = new DCBlocker();
     dcBlocker->reset();
     dcBlocker2 = new DCBlocker();

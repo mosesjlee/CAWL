@@ -9,8 +9,8 @@
 #include "CAWLLowShelfFilter.hpp"
 CAWLLowShelfFilter::CAWLLowShelfFilter()
 {
-    mGain = 6.0;                //Start at 0
-    centerFrequency = 100.0;    //In Hz
+    mGain = -10.0;                //Start at 0
+    centerFrequency = 700.0;    //In Hz
     calculateCoefficients();
 }
 
@@ -32,7 +32,7 @@ void CAWLLowShelfFilter::calculateCoefficients()
     b_1     = -1 * gamma;
     b_2     = 0.0;
     c_0     = mu - 1.0;
-    d_0     = .50;
+    d_0     = 1.0;
 }
 
 void CAWLLowShelfFilter::setGain(float newGain)
@@ -41,6 +41,7 @@ void CAWLLowShelfFilter::setGain(float newGain)
         newGain = 12.0;
     
     mGain = newGain;
+    calculateCoefficients();
 }
 void CAWLLowShelfFilter::setCutOffFreq(float newFreq)
 {

@@ -65,7 +65,8 @@ int main(int argc, const char * argv[]) {
     CAWLHighPassFilter hpf(100.0);
     CAWLLowPassFilter * lpfPtr = &lpf;
     CAWLHighPassFilter * hpfPtr = &hpf;
-    CAWLLowShelfFilter lsf, * lsfPter = &lsf; lsf.setCutOffFreq(700);
+    CAWLLowShelfFilter lsf, * lsfPter = &lsf;
+    lsf.setCutOffFreq(700); lsf.setGain(-15.0);
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
@@ -73,23 +74,24 @@ int main(int argc, const char * argv[]) {
         for(int i = 0; i < numSamples; i++)
         {
             //ptrToBuf1[i] = data[i];
-//            if(*ptrToWhteCout < 44100 ) {
-//            data[i] = whiteBufferPtr[*ptrToWhteCout];//(float) sin (2 * M_PI * (j / cycleLength));
-//            (*ptrToWhteCout)++;
-//                j += 1.0;
-//                if (j > cycleLength)
-//                    j -= cycleLength;
-//            }
-//            else {
-//                data[i] = 0.0;
-//            }
+            if(*ptrToWhteCout < 44100 ) {
+            data[i] = whiteBufferPtr[*ptrToWhteCout];//(float) sin (2 * M_PI * (j / cycleLength));
+            (*ptrToWhteCout)++;
+                j += 1.0;
+                if (j > cycleLength)
+                    j -= cycleLength;
+            }
+            else {
+                data[i] = 0.0;
+            }
         }
 //        *fc = j;
-//        lsfPter->processBuffer(data, numSamples);
+
         //ptrToFir->processBuffer(data, numSamples);
 //        ptrToiir->processBuffer(data, numSamples);
 //        ptrToUcf->processBuffer(data, numSamples);
-		ptrToAmp->processBuffer(data, numSamples);
+//		ptrToAmp->processBuffer(data, numSamples);
+        lsfPter->processBuffer(data, numSamples);
 		//ptrToValve->processBuffer(data,numSamples);
 //        lpfPtr->processBuffer(data, numSamples);
         //hpfPtr->processBuffer(data, numSamples);
