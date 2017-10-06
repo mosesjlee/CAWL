@@ -16,8 +16,10 @@
 #include "CAWLUniversalCombFilter.hpp"
 #include "CAWLLowPassFilter.hpp"
 #include "CAWLHighPassFilter.hpp"
+#include "CAWLLowShelfFilter.hpp"
 #define SCALE 0.3
 #define WRITE_TO_FILE
+void getWhiteNoiseStream(float * stream);
 
 int main(int argc, const char * argv[]) {
 	// insert code here...
@@ -38,9 +40,15 @@ int main(int argc, const char * argv[]) {
     
     float debugBuffer[44544];
     float *debugPtr = debugBuffer;
+    
     int debugBufWriteCount = 0;
     int * debugCountPtr = &debugBufWriteCount;
-	
+    
+    float whiteNoiseBuffer[44533];
+    float * whiteBufferPtr = whiteNoiseBuffer;
+    int whiteNoiseCount = 0, * ptrToWhteCout = &whiteNoiseCount;
+    getWhiteNoiseStream(whiteNoiseBuffer);
+    
     
     CAWLAmpSimulator ampSim(2), ampSim2(1), ampSim3(2);
     CAWLAmpSimulator * ptrToAmp = &ampSim, *ptrToAmp2 = &ampSim2, *ptrToAmp3 = &ampSim3;
@@ -57,16 +65,17 @@ int main(int argc, const char * argv[]) {
     CAWLHighPassFilter hpf(100.0);
     CAWLLowPassFilter * lpfPtr = &lpf;
     CAWLHighPassFilter * hpfPtr = &hpf;
+    CAWLLowShelfFilter lsf, * lsfPter = &lsf; lsf.setCutOffFreq(700);
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
-//        double j = *fc;
-//        for(int i = 0; i < numSamples; i++)
-//        {
-//            //ptrToBuf1[i] = data[i];
-//            if(j < 100 ) {
-//                data[i] = (float) sin (2 * M_PI * (j / cycleLength));
-//            
+        double j = *fc;
+        for(int i = 0; i < numSamples; i++)
+        {
+            //ptrToBuf1[i] = data[i];
+//            if(*ptrToWhteCout < 44100 ) {
+//            data[i] = whiteBufferPtr[*ptrToWhteCout];//(float) sin (2 * M_PI * (j / cycleLength));
+//            (*ptrToWhteCout)++;
 //                j += 1.0;
 //                if (j > cycleLength)
 //                    j -= cycleLength;
@@ -74,9 +83,9 @@ int main(int argc, const char * argv[]) {
 //            else {
 //                data[i] = 0.0;
 //            }
-//        }
+        }
 //        *fc = j;
-        
+//        lsfPter->processBuffer(data, numSamples);
         //ptrToFir->processBuffer(data, numSamples);
 //        ptrToiir->processBuffer(data, numSamples);
 //        ptrToUcf->processBuffer(data, numSamples);
@@ -195,3 +204,28 @@ int main(int argc, const char * argv[]) {
 #endif
     return 0;
 }
+
+
+void getWhiteNoiseStream(float * stream)
+{
+    FILE * file;
+    std::string path = "/Users/moseslee/Desktop/CAWL/whiteNoiseRaw.aiff";
+    file = fopen(path.c_str(), "r");
+    
+    float temp;
+    
+    if(file != NULL){
+        int i = 0;
+        while(!feof(file)){
+            fread((void *)(&temp), sizeof(temp), 1, file);
+            stream[i] = temp;
+            i++;
+        }
+    }
+    
+}
+
+
+
+
+

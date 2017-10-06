@@ -15,7 +15,20 @@
 class CAWLLowShelfFilter : public CAWLBiQuadFilter
 {
 	double theta;
-	double gamma;
+	double mu;
+    double beta;
+    double delta;
+    double gamma;
+    float centerFrequency;
+    float mGain;
+    
+    void calculateCoefficients();
+    
+public:
+    CAWLLowShelfFilter();
+    ~CAWLLowShelfFilter();
+    void setGain(float newGain);
+    void setCutOffFreq(float newFreq);
 };
 
 #endif /* CAWLLowShelfFilter_hpp */

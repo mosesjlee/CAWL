@@ -24,5 +24,6 @@ public:
 private:
     float mGain;
     float mMixLevel;
+    //float peakSample;
 };
 #endif /* CAWLAmpSimulator_hpp */

@@ -22,8 +22,9 @@
 #include "CAWLSoundModule.hpp"
 #include "CAWLValveTubeSimulator.hpp"
 #include "CAWLHighPassFilter.hpp"
+#include "CAWLLowShelfFilter.hpp"
+
 class ToneStack;
-class HP1;
 class DCBlocker;
 class CAWLAmpSimulator : public CAWLSoundModule
 {
@@ -39,8 +40,8 @@ public:
 private:
     CAWLValveTubeSimulator valveTube;
 	ToneStack * stack;
-    HP1 * dc;
     CAWLHighPassFilter hp1 = CAWLHighPassFilter(4000);
+    CAWLLowShelfFilter lsf;
 	DCBlocker * dcBlocker, * dcBlocker2;
 };
 #endif /* CAWLAmpSimulator_hpp */
