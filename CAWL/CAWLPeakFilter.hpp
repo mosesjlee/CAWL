@@ -25,5 +25,6 @@ class CAWLPeakFilter : public CAWLBiQuadFilter
 public:
     CAWLPeakFilter();
     ~CAWLPeakFilter();
+    void setQFactor(float newQFactor);
 };
 #endif /* CAWLPeakFilter_hpp */

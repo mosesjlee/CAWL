@@ -17,6 +17,8 @@
 #include "CAWLLowPassFilter.hpp"
 #include "CAWLHighPassFilter.hpp"
 #include "CAWLLowShelfFilter.hpp"
+#include "CAWLHighShelfFilter.hpp"
+
 #define SCALE 0.3
 #define WRITE_TO_FILE
 void getWhiteNoiseStream(float * stream);
@@ -67,6 +69,9 @@ int main(int argc, const char * argv[]) {
     CAWLHighPassFilter * hpfPtr = &hpf;
     CAWLLowShelfFilter lsf, * lsfPter = &lsf;
     lsf.setCutOffFreq(7000); lsf.setGain(-24.0);
+    CAWLHighShelfFilter hsf, * hsfPtr = &hsf;
+    hsf.setCutOffFreq(1000); hsf.setGain(10);
+    
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
@@ -91,7 +96,8 @@ int main(int argc, const char * argv[]) {
 //        ptrToiir->processBuffer(data, numSamples);
 //        ptrToUcf->processBuffer(data, numSamples);
 //		ptrToAmp->processBuffer(data, numSamples);
-        lsfPter->processBuffer(data, numSamples);
+//        lsfPter->processBuffer(data, numSamples);
+        hsfPtr->processBuffer(data, numSamples);
 		//ptrToValve->processBuffer(data,numSamples);
 //        lpfPtr->processBuffer(data, numSamples);
         //hpfPtr->processBuffer(data, numSamples);
