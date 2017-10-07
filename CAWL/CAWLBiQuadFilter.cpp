@@ -32,18 +32,29 @@ void CAWLBiQuadFilter::processBuffer(float * buf, const unsigned int numSamples)
         x_a_0 = xCurrSample * a_0;
         x_a_1 = xCurrSample * a_1;
         x_a_2 = xCurrSample * a_2;
-        yCurrOutput = (x_a_0 + delayedSample2);
-		
-
+        yCurrOutput = (x_a_0 + delayedSample1);
         x_b_1 = yCurrOutput * (b_1 * -1);
         x_b_2 = yCurrOutput * (b_2 * -1);
-        
         delayedSample1 = firstOrderDelayLine.processNextSample(x_a_1 + x_b_1);
 		delayedSample2 = secondOrderDelayLine.processNextSample(x_a_2 + delayedSample1 + x_b_2);
-        
 		
     
         buf[i] = yCurrOutput * c_0 + xCurrSample * d_0;
 	}
 }
 
+void CAWLBiQuadFilter::setGain(float newGain)
+{
+    if(newGain > 12.0)
+        newGain = 12.0;
+    if(newGain < -24.0)
+        newGain = -24.0;
+    
+    mGain = newGain;
+    calculateCoefficients();
+}
+void CAWLBiQuadFilter::setCutOffFreq(float newFreq)
+{
+    centerFrequency = newFreq;
+    calculateCoefficients();
+}

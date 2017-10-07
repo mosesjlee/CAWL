@@ -7,6 +7,15 @@
 //
 
 #include "CAWLHighShelfFilter.hpp"
+CAWLHighShelfFilter::CAWLHighShelfFilter()
+{
+    
+}
+
+CAWLHighShelfFilter::~CAWLHighShelfFilter()
+{
+    
+}
 
 void CAWLHighShelfFilter::calculateCoefficients()
 {
@@ -23,3 +32,6 @@ void CAWLHighShelfFilter::calculateCoefficients()
     c_0     = mu - 1.0;
     d_0     = 1.0;
 }
+
+
+    

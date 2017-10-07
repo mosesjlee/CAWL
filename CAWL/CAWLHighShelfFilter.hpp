@@ -19,15 +19,11 @@ class CAWLHighShelfFilter : public CAWLBiQuadFilter
     double beta;
     double delta;
     double gamma;
-    float centerFrequency;
-    float mGain;
 
     void calculateCoefficients();
 
 public:
     CAWLHighShelfFilter();
     ~CAWLHighShelfFilter();
-    void setGain(float newGain);
-    void setCutOffFreq(float newFreq);
 };
 #endif /* CAWLHighShelfFilter_hpp */

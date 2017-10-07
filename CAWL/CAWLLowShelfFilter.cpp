@@ -35,16 +35,4 @@ void CAWLLowShelfFilter::calculateCoefficients()
     d_0     = 1.0;
 }
 
-void CAWLLowShelfFilter::setGain(float newGain)
-{
-    if(newGain > 12.0)
-        newGain = 12.0;
-    
-    mGain = newGain;
-    calculateCoefficients();
-}
-void CAWLLowShelfFilter::setCutOffFreq(float newFreq)
-{
-    centerFrequency = newFreq;
-    calculateCoefficients();
-}
+

@@ -19,10 +19,15 @@ public:
     CAWLBiQuadFilter();
     ~CAWLBiQuadFilter();
 	virtual void processBuffer(float * buf, const unsigned int numSamples);
+    virtual void setGain(float newGain);
+    virtual void setCutOffFreq(float newFreq);
+    virtual void calculateCoefficients() = 0; 
     
 protected:
     CAWLDelayLine firstOrderDelayLine, secondOrderDelayLine;
 	double a_0, a_1, a_2, b_1, b_2, c_0, d_0;
+    float mGain;
+    float centerFrequency;
     
 private:
 	//Intermediary values for signal processing

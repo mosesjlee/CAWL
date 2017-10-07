@@ -66,7 +66,7 @@ int main(int argc, const char * argv[]) {
     CAWLLowPassFilter * lpfPtr = &lpf;
     CAWLHighPassFilter * hpfPtr = &hpf;
     CAWLLowShelfFilter lsf, * lsfPter = &lsf;
-    lsf.setCutOffFreq(6000); lsf.setGain(-25.0);
+    lsf.setCutOffFreq(7000); lsf.setGain(-24.0);
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
