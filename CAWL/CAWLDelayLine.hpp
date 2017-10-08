@@ -18,12 +18,12 @@ public:
     ~CAWLDelayLine();
     void setDelayTimeInMilliseconds(float delayTime);
     void setDelayTimeInSamples(float delaySamples);
-    float processNextSample(float currSample);
+    double processNextSample(double currSample);
     
 private:
     inline float linear_interp(float x_1, float y_1, float x_2, float y_2, float frac);
     
-    float * delayLine;
+    double * delayLine;
     float currReadPos;
     float currWritePos;
     float currDelayInSamples;

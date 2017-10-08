@@ -18,7 +18,7 @@ currReadPos(0),
 currWritePos(0),
 currDelayInSamples(0)
 {
-    delayLine = new float[(int) maxDelayInSamples];
+    delayLine = new double[(int) maxDelayInSamples];
     
     //0 out the buffer
     for(int i = 0; i < maxDelayInSamples; i++)
@@ -74,9 +74,9 @@ inline float CAWLDelayLine::linear_interp(float x_1, float y_1, float x_2, float
     return retval;
 }
 
-float CAWLDelayLine::processNextSample(float currSample)
+double CAWLDelayLine::processNextSample(double currSample)
 {
-    float yCurrOutput = 0.0;
+    double yCurrOutput = 0.0;
 
     delayLine[(int) currWritePos] = currSample;
     
