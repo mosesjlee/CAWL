@@ -18,9 +18,11 @@
 #include "CAWLHighPassFilter.hpp"
 #include "CAWLLowShelfFilter.hpp"
 #include "CAWLHighShelfFilter.hpp"
+#include "CAWLPeakFilter.hpp"
 
 #define SCALE 0.3
 #define WRITE_TO_FILE
+#define SHOW_DEBUG_SAMPLES
 void getWhiteNoiseStream(float * stream);
 
 int main(int argc, const char * argv[]) {
@@ -71,6 +73,8 @@ int main(int argc, const char * argv[]) {
     lsf.setCutOffFreq(7000); lsf.setGain(-24.0);
     CAWLHighShelfFilter hsf, * hsfPtr = &hsf;
     hsf.setCutOffFreq(1000); hsf.setGain(10);
+    CAWLPeakFilter pf, * pfPtr = &pf;
+    pf.setQFactor(.7070); pf.setCutOffFreq(1000); pf.setGain(4.0);
     
     
 	cawlBuffers inputChannel1 = (^(float * data,
@@ -79,6 +83,7 @@ int main(int argc, const char * argv[]) {
         for(int i = 0; i < numSamples; i++)
         {
             //ptrToBuf1[i] = data[i];
+            //Testing BiQuads
             if(*ptrToWhteCout < 44100 ) {
             data[i] = whiteBufferPtr[*ptrToWhteCout];//(float) sin (2 * M_PI * (j / cycleLength));
             (*ptrToWhteCout)++;
@@ -89,15 +94,26 @@ int main(int argc, const char * argv[]) {
             else {
                 data[i] = 0.0;
             }
+            //To test IIR/UCF Filters
+//            if(j < 100 ) {
+//                data[i] = (float) sin (2 * M_PI * (j / cycleLength));
+//                j += 1.0;
+//                if (j > cycleLength)
+//                    j -= cycleLength;
+//            }
+//            else {
+//                data[i] = 0.0;
+//            }
         }
-//        *fc = j;
+        *fc = j;
 
         //ptrToFir->processBuffer(data, numSamples);
 //        ptrToiir->processBuffer(data, numSamples);
 //        ptrToUcf->processBuffer(data, numSamples);
 //		ptrToAmp->processBuffer(data, numSamples);
 //        lsfPter->processBuffer(data, numSamples);
-        hsfPtr->processBuffer(data, numSamples);
+//        hsfPtr->processBuffer(data, numSamples);
+        pfPtr->processBuffer(data, numSamples);
 		//ptrToValve->processBuffer(data,numSamples);
 //        lpfPtr->processBuffer(data, numSamples);
         //hpfPtr->processBuffer(data, numSamples);
@@ -209,6 +225,12 @@ int main(int argc, const char * argv[]) {
     out.open("/Users/moseslee/Desktop/delayfloat", std::ios::out | std::ios::binary);
     out.write(reinterpret_cast <const char*> (debugBuffer) , 44544 * sizeof(float));
     out.close();
+#endif
+#ifdef SHOW_DEBUG_SAMPLES
+    for(int i =0; i <44544; i++)
+    {
+        printf("%f\n", debugBuffer[i]);
+    }
 #endif
     return 0;
 }
