@@ -70,11 +70,11 @@ int main(int argc, const char * argv[]) {
     CAWLLowPassFilter * lpfPtr = &lpf;
     CAWLHighPassFilter * hpfPtr = &hpf;
     CAWLLowShelfFilter lsf, * lsfPtr = &lsf;
-    lsf.setCutOffFreq(100); lsf.setGain(-24.0);
+    lsf.setCutOffFreq(100); lsf.setGain(10.0);
     CAWLHighShelfFilter hsf, * hsfPtr = &hsf;
-    hsf.setCutOffFreq(10000); hsf.setGain(10);
+    hsf.setCutOffFreq(17000); hsf.setGain(10);
     CAWLPeakFilter pf, * pfPtr = &pf;
-    pf.setQFactor(2); pf.setCutOffFreq(1000); pf.setGain(-10.0);
+    pf.setQFactor(8); pf.setCutOffFreq(2000); pf.setGain(-10.0);
     
     
 	cawlBuffers inputChannel1 = (^(float * data,
@@ -111,9 +111,9 @@ int main(int argc, const char * argv[]) {
 //        ptrToiir->processBuffer(data, numSamples);
 //        ptrToUcf->processBuffer(data, numSamples);
 //		ptrToAmp->processBuffer(data, numSamples);
-//        lsfPtr->processBuffer(data, numSamples);
+        lsfPtr->processBuffer(data, numSamples);
         hsfPtr->processBuffer(data, numSamples);
-//        pfPtr->processBuffer(data, numSamples);
+        pfPtr->processBuffer(data, numSamples);
 		//ptrToValve->processBuffer(data,numSamples);
 //        lpfPtr->processBuffer(data, numSamples);
         //hpfPtr->processBuffer(data, numSamples);
