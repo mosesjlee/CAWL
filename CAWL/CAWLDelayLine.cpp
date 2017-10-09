@@ -55,7 +55,7 @@ void CAWLDelayLine::setDelayTimeInSamples(float delaySamples)
         currDelayInSamples = MAX_DELAY_IN_SAMPLES - 1;
     
     //Update the read and write index
-    currReadPos = currWritePos - currDelayInSamples;
+    currReadPos = currWritePos - (currDelayInSamples-1);
     
     if(currReadPos < 0.0)
         currReadPos = MAX_DELAY_IN_SAMPLES - fabs(currReadPos);
