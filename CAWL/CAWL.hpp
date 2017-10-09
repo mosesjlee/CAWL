@@ -11,10 +11,6 @@
 #define CAWL_
 #include <TargetConditionals.h>
 
-
-#include <CoreAudio/CoreAudio.h>
-#include <AudioToolbox/AudioToolbox.h>
-#include <AudioUnit/AudioUnit.h>
 #include <Block.h>
 
 //#define MYBUFFER
@@ -23,9 +19,11 @@
 #else
 #include "CAWLRingBuffer.hpp"
 #endif
+#include "CAWLAudioUnit.hpp"
 
 typedef void (^cawlBuffers)(float * buffer,
 							const unsigned int numSamples);
+
 
 class CAWL
 {
@@ -37,6 +35,8 @@ public:
 	void startPlaying();
 	void stopPlaying();
 	
+    int getNumChannels() { return numInputChannels; }
+    
 	//Enforce singleton pattern
 	CAWL(CAWL const&)            = delete;
 	void operator=(CAWL const&)  = delete;
@@ -46,9 +46,8 @@ public:
 private:
 	CAWL();
 	~CAWL();
-	void CheckError(OSStatus error, const char * operation);
-	void setupAudioInputUnits();
 	void setupGraph();
+    void setupBuffers();
 	void cleanUp();
 	
 	static OSStatus InputRenderCallBack(void *inRefCon,
@@ -63,28 +62,25 @@ private:
 										 UInt32 inBusNumber,
 										 UInt32 inNumberFrames,
 										 AudioBufferList * ioData);
+    
+    
 	
 	
 	//Member variables
 private:
 	static CAWL * cawlInstance;
-	float sampleRate;
 	cawlBuffers * input;
-	cawlBuffers * output;
 	
-	AudioStreamBasicDescription streamFormat;
+    CAWLAudioUnit * aggregateAudioUnit;
 	AUGraph graph;
-	AudioUnit inputUnit;
-	AudioUnit outputUnit;
-	
+
 	Float64 firstInputSampleTime;
 	Float64 firstOutputSampleTime;
 	Float64 inToOutSampleTimeOffset;
 	AudioBufferList * inputBuffer;
-    float outputTest[132300];
-	unsigned int numInputChannels;
+
 	unsigned int numInputChannelsRegistered;
-	
+    unsigned int numInputChannels;
 #ifndef MYBUFFER
 	CARingBuffer * ringBuffer;
 #else

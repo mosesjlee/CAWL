@@ -8,12 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		91062DBB1DE396A700BCBDA0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91062DBA1DE396A700BCBDA0 /* AudioToolbox.framework */; };
-		91062DC41DE397AD00BCBDA0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 91062DC31DE397AD00BCBDA0 /* main.m */; };
-		91062DC71DE397AD00BCBDA0 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91062DC61DE397AD00BCBDA0 /* AppDelegate.mm */; };
-		91062DCA1DE397AD00BCBDA0 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91062DC91DE397AD00BCBDA0 /* ViewController.mm */; };
-		91062DCD1DE397AD00BCBDA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91062DCB1DE397AD00BCBDA0 /* Main.storyboard */; };
-		91062DCF1DE397AD00BCBDA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91062DCE1DE397AD00BCBDA0 /* Assets.xcassets */; };
-		91062DD21DE397AD00BCBDA0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91062DD01DE397AD00BCBDA0 /* LaunchScreen.storyboard */; };
 		91062DDD1DE397E900BCBDA0 /* CAAtomic.h in Headers */ = {isa = PBXBuildFile; fileRef = 91062DD81DE397E900BCBDA0 /* CAAtomic.h */; };
 		91062DDE1DE397E900BCBDA0 /* CAAutoDisposer.h in Headers */ = {isa = PBXBuildFile; fileRef = 91062DD91DE397E900BCBDA0 /* CAAutoDisposer.h */; };
 		91062DDF1DE397E900BCBDA0 /* CABitOperations.h in Headers */ = {isa = PBXBuildFile; fileRef = 91062DDA1DE397E900BCBDA0 /* CABitOperations.h */; };
@@ -21,25 +15,53 @@
 		91062DE11DE397E900BCBDA0 /* CARingBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 91062DDC1DE397E900BCBDA0 /* CARingBuffer.h */; };
 		91062DE41DE3983100BCBDA0 /* CAWLRingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91062DE21DE3983100BCBDA0 /* CAWLRingBuffer.cpp */; };
 		91062DE51DE3983100BCBDA0 /* CAWLRingBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 91062DE31DE3983100BCBDA0 /* CAWLRingBuffer.hpp */; };
+		910A953D1F6B760A009DA4A1 /* CAWLUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912CE4431F6B3C1B009F41AA /* CAWLUtilities.cpp */; };
+		911097F01F6DA0D7002A9A92 /* CAWLSoundBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 911097EE1F6DA0D7002A9A92 /* CAWLSoundBoard.cpp */; };
+		911097F31F6DA127002A9A92 /* CAWLValveTubeSimulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 911097F11F6DA127002A9A92 /* CAWLValveTubeSimulator.cpp */; };
+		911097F41F6DF9F7002A9A92 /* CAWLSoundBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 911097EE1F6DA0D7002A9A92 /* CAWLSoundBoard.cpp */; };
+		911097F51F6DF9F7002A9A92 /* CAWLValveTubeSimulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 911097F11F6DA127002A9A92 /* CAWLValveTubeSimulator.cpp */; };
+		911097F61F6DFA82002A9A92 /* CAWLAudioUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912CE43F1F6B3BB8009F41AA /* CAWLAudioUnit.cpp */; };
+		911097F71F6DFA85002A9A92 /* CAWLUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912CE4431F6B3C1B009F41AA /* CAWLUtilities.cpp */; };
+		911097FB1F6F16B2002A9A92 /* CAWLSoundModule.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 911097F91F6F16B2002A9A92 /* CAWLSoundModule.hpp */; };
+		911097FE1F6F22F2002A9A92 /* CAWLDelayLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 911097FC1F6F22F2002A9A92 /* CAWLDelayLine.cpp */; };
+		911097FF1F6F22F2002A9A92 /* CAWLDelayLine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 911097FD1F6F22F2002A9A92 /* CAWLDelayLine.hpp */; };
+		911098021F6F2387002A9A92 /* CAWLFIRCombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 911098001F6F2387002A9A92 /* CAWLFIRCombFilter.cpp */; };
+		911098031F6F2387002A9A92 /* CAWLFIRCombFilter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 911098011F6F2387002A9A92 /* CAWLFIRCombFilter.hpp */; };
+		911098061F6F2393002A9A92 /* CAWLIIRCombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 911098041F6F2393002A9A92 /* CAWLIIRCombFilter.cpp */; };
+		911098071F6F2393002A9A92 /* CAWLIIRCombFilter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 911098051F6F2393002A9A92 /* CAWLIIRCombFilter.hpp */; };
 		912977AA1DE4F0E70093134D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912977A91DE4F0E70093134D /* main.cpp */; };
 		912977AE1DE4F8600093134D /* CARingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91062DDB1DE397E900BCBDA0 /* CARingBuffer.cpp */; };
 		912977AF1DE4F8600093134D /* CAWLRingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91062DE21DE3983100BCBDA0 /* CAWLRingBuffer.cpp */; };
 		912977B11DE4F8600093134D /* CAWL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91CAEC831DC8584600CEF065 /* CAWL.cpp */; };
-		912977B21DE4F8600093134D /* CARingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91062DDB1DE397E900BCBDA0 /* CARingBuffer.cpp */; };
-		912977B31DE4F8600093134D /* CAWLRingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91062DE21DE3983100BCBDA0 /* CAWLRingBuffer.cpp */; };
-		912977B51DE4F8600093134D /* CAWL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91CAEC831DC8584600CEF065 /* CAWL.cpp */; };
 		912977B61DE4F8610093134D /* CARingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91062DDB1DE397E900BCBDA0 /* CARingBuffer.cpp */; };
 		912977B71DE4F8610093134D /* CAWLRingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91062DE21DE3983100BCBDA0 /* CAWLRingBuffer.cpp */; };
 		912977B91DE4F8610093134D /* CAWL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91CAEC831DC8584600CEF065 /* CAWL.cpp */; };
 		912977BA1DE4F8850093134D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91062DBA1DE396A700BCBDA0 /* AudioToolbox.framework */; };
 		912977BB1DE4F8850093134D /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CAECA31DC8597C00CEF065 /* CoreAudio.framework */; };
-		912977BC1DE4F8880093134D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91062DBA1DE396A700BCBDA0 /* AudioToolbox.framework */; };
 		912CE4411F6B3BB8009F41AA /* CAWLAudioUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912CE43F1F6B3BB8009F41AA /* CAWLAudioUnit.cpp */; };
 		912CE4421F6B3BB8009F41AA /* CAWLAudioUnit.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 912CE4401F6B3BB8009F41AA /* CAWLAudioUnit.hpp */; };
 		912CE4451F6B3C1B009F41AA /* CAWLUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912CE4431F6B3C1B009F41AA /* CAWLUtilities.cpp */; };
 		912CE4461F6B3C1B009F41AA /* CAWLUtilities.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 912CE4441F6B3C1B009F41AA /* CAWLUtilities.hpp */; };
+		912E05111F8019F800C13E55 /* CAWLDelayLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 911097FC1F6F22F2002A9A92 /* CAWLDelayLine.cpp */; };
+		912E05141F8023AE00C13E55 /* CAWLCombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912E05121F8023AE00C13E55 /* CAWLCombFilter.cpp */; };
+		912E05151F8023AE00C13E55 /* CAWLCombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912E05121F8023AE00C13E55 /* CAWLCombFilter.cpp */; };
+		912E05161F8023AE00C13E55 /* CAWLCombFilter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 912E05131F8023AE00C13E55 /* CAWLCombFilter.hpp */; };
+		912E05191F8023BF00C13E55 /* CAWLUniversalCombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912E05171F8023BF00C13E55 /* CAWLUniversalCombFilter.cpp */; };
+		912E051A1F8023BF00C13E55 /* CAWLUniversalCombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912E05171F8023BF00C13E55 /* CAWLUniversalCombFilter.cpp */; };
+		912E051B1F8023BF00C13E55 /* CAWLUniversalCombFilter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 912E05181F8023BF00C13E55 /* CAWLUniversalCombFilter.hpp */; };
+		912E051C1F80254800C13E55 /* CAWLFIRCombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 911098001F6F2387002A9A92 /* CAWLFIRCombFilter.cpp */; };
 		915F833E1F5F174B00D4F422 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91062DBA1DE396A700BCBDA0 /* AudioToolbox.framework */; };
 		915F83401F5F174B00D4F422 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 915F833F1F5F174B00D4F422 /* AudioUnit.framework */; };
+		9177E6391F785D5500D36C46 /* CAWLAmpSimulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9177E6371F78347D00D36C46 /* CAWLAmpSimulator.cpp */; };
+		9177E63E1F7CCEFA00D36C46 /* CAWLHighPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9177E63D1F7CCE4600D36C46 /* CAWLHighPassFilter.cpp */; };
+		9177E63F1F7CCEFC00D36C46 /* CAWLHighPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9177E63D1F7CCE4600D36C46 /* CAWLHighPassFilter.cpp */; };
+		917A9AD91F6C366000422478 /* CAWLAudioUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912CE43F1F6B3BB8009F41AA /* CAWLAudioUnit.cpp */; };
+		9191B3A11F804543004C6F33 /* CAWLIIRCombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 911098041F6F2393002A9A92 /* CAWLIIRCombFilter.cpp */; };
+		9191B3AD1F819300004C6F33 /* SoundTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 9191B3AC1F819300004C6F33 /* SoundTab.m */; };
+		9191B3AE1F85EEC5004C6F33 /* CAWLLowPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9177E63A1F7CCDF600D36C46 /* CAWLLowPassFilter.cpp */; };
+		9191B3B11F85F62B004C6F33 /* CAWLBiQuadFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9191B3AF1F85F62B004C6F33 /* CAWLBiQuadFilter.cpp */; };
+		9191B3B21F85F62B004C6F33 /* CAWLBiQuadFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9191B3AF1F85F62B004C6F33 /* CAWLBiQuadFilter.cpp */; };
+		9191B3B31F85F62B004C6F33 /* CAWLBiQuadFilter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9191B3B01F85F62B004C6F33 /* CAWLBiQuadFilter.hpp */; };
 		91CAEC801DC8584600CEF065 /* CAWL.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 91CAEC7F1DC8584600CEF065 /* CAWL.hpp */; };
 		91CAEC841DC8584600CEF065 /* CAWL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91CAEC831DC8584600CEF065 /* CAWL.cpp */; };
 		91CAEC921DC8587900CEF065 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91CAEC911DC8587900CEF065 /* AppDelegate.mm */; };
@@ -49,6 +71,14 @@
 		91CAEC9D1DC8587900CEF065 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91CAEC9B1DC8587900CEF065 /* Main.storyboard */; };
 		91CAECA41DC8597C00CEF065 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CAECA31DC8597C00CEF065 /* CoreAudio.framework */; };
 		91CAECA51DC8598500CEF065 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CAECA31DC8597C00CEF065 /* CoreAudio.framework */; };
+		91DC3E511F871F5B00E3DB09 /* CAWLLowShelfFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3E4F1F871DF600E3DB09 /* CAWLLowShelfFilter.cpp */; };
+		91DC3E521F871F5C00E3DB09 /* CAWLLowShelfFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3E4F1F871DF600E3DB09 /* CAWLLowShelfFilter.cpp */; };
+		91DC3E531F871F6500E3DB09 /* CAWLLowShelfFilter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3E501F871DF600E3DB09 /* CAWLLowShelfFilter.hpp */; };
+		91DC3E571F874D6C00E3DB09 /* CAWLHighShelfFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3E551F874D6C00E3DB09 /* CAWLHighShelfFilter.cpp */; };
+		91DC3E581F874D6C00E3DB09 /* CAWLHighShelfFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3E551F874D6C00E3DB09 /* CAWLHighShelfFilter.cpp */; };
+		91DC3E591F874D6C00E3DB09 /* CAWLHighShelfFilter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3E561F874D6C00E3DB09 /* CAWLHighShelfFilter.hpp */; };
+		91DC3E631F88995800E3DB09 /* CAWLPeakFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3E621F88991600E3DB09 /* CAWLPeakFilter.cpp */; };
+		91DC3E641F88995900E3DB09 /* CAWLPeakFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3E621F88991600E3DB09 /* CAWLPeakFilter.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -65,16 +95,6 @@
 
 /* Begin PBXFileReference section */
 		91062DBA1DE396A700BCBDA0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		91062DC01DE397AD00BCBDA0 /* cawlDemoPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cawlDemoPhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		91062DC31DE397AD00BCBDA0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		91062DC51DE397AD00BCBDA0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		91062DC61DE397AD00BCBDA0 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
-		91062DC81DE397AD00BCBDA0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		91062DC91DE397AD00BCBDA0 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
-		91062DCC1DE397AD00BCBDA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		91062DCE1DE397AD00BCBDA0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		91062DD11DE397AD00BCBDA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		91062DD31DE397AD00BCBDA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91062DD81DE397E900BCBDA0 /* CAAtomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAAtomic.h; sourceTree = "<group>"; };
 		91062DD91DE397E900BCBDA0 /* CAAutoDisposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAAutoDisposer.h; sourceTree = "<group>"; };
 		91062DDA1DE397E900BCBDA0 /* CABitOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CABitOperations.h; sourceTree = "<group>"; };
@@ -82,13 +102,38 @@
 		91062DDC1DE397E900BCBDA0 /* CARingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CARingBuffer.h; sourceTree = "<group>"; };
 		91062DE21DE3983100BCBDA0 /* CAWLRingBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLRingBuffer.cpp; sourceTree = "<group>"; };
 		91062DE31DE3983100BCBDA0 /* CAWLRingBuffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CAWLRingBuffer.hpp; sourceTree = "<group>"; };
+		911097EE1F6DA0D7002A9A92 /* CAWLSoundBoard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAWLSoundBoard.cpp; path = ../cawlDemoMac/CAWLSoundBoard.cpp; sourceTree = "<group>"; };
+		911097EF1F6DA0D7002A9A92 /* CAWLSoundBoard.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CAWLSoundBoard.hpp; path = ../cawlDemoMac/CAWLSoundBoard.hpp; sourceTree = "<group>"; };
+		911097F11F6DA127002A9A92 /* CAWLValveTubeSimulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAWLValveTubeSimulator.cpp; path = ../cawlDemoMac/CAWLValveTubeSimulator.cpp; sourceTree = "<group>"; };
+		911097F21F6DA127002A9A92 /* CAWLValveTubeSimulator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CAWLValveTubeSimulator.hpp; path = ../cawlDemoMac/CAWLValveTubeSimulator.hpp; sourceTree = "<group>"; };
+		911097F91F6F16B2002A9A92 /* CAWLSoundModule.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CAWLSoundModule.hpp; sourceTree = "<group>"; };
+		911097FC1F6F22F2002A9A92 /* CAWLDelayLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLDelayLine.cpp; sourceTree = "<group>"; };
+		911097FD1F6F22F2002A9A92 /* CAWLDelayLine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CAWLDelayLine.hpp; sourceTree = "<group>"; };
+		911098001F6F2387002A9A92 /* CAWLFIRCombFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLFIRCombFilter.cpp; sourceTree = "<group>"; };
+		911098011F6F2387002A9A92 /* CAWLFIRCombFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CAWLFIRCombFilter.hpp; sourceTree = "<group>"; };
+		911098041F6F2393002A9A92 /* CAWLIIRCombFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLIIRCombFilter.cpp; sourceTree = "<group>"; };
+		911098051F6F2393002A9A92 /* CAWLIIRCombFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CAWLIIRCombFilter.hpp; sourceTree = "<group>"; };
 		912977A71DE4F0E70093134D /* cawlTester */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cawlTester; sourceTree = BUILT_PRODUCTS_DIR; };
 		912977A91DE4F0E70093134D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		912CE43F1F6B3BB8009F41AA /* CAWLAudioUnit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLAudioUnit.cpp; sourceTree = "<group>"; };
 		912CE4401F6B3BB8009F41AA /* CAWLAudioUnit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CAWLAudioUnit.hpp; sourceTree = "<group>"; };
 		912CE4431F6B3C1B009F41AA /* CAWLUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLUtilities.cpp; sourceTree = "<group>"; };
 		912CE4441F6B3C1B009F41AA /* CAWLUtilities.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CAWLUtilities.hpp; sourceTree = "<group>"; };
+		912E05121F8023AE00C13E55 /* CAWLCombFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLCombFilter.cpp; sourceTree = "<group>"; };
+		912E05131F8023AE00C13E55 /* CAWLCombFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLCombFilter.hpp; sourceTree = "<group>"; };
+		912E05171F8023BF00C13E55 /* CAWLUniversalCombFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLUniversalCombFilter.cpp; sourceTree = "<group>"; };
+		912E05181F8023BF00C13E55 /* CAWLUniversalCombFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLUniversalCombFilter.hpp; sourceTree = "<group>"; };
 		915F833F1F5F174B00D4F422 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		9177E6371F78347D00D36C46 /* CAWLAmpSimulator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = CAWLAmpSimulator.cpp; path = cawlTester/CAWLAmpSimulator.cpp; sourceTree = SOURCE_ROOT; };
+		9177E6381F78347D00D36C46 /* CAWLAmpSimulator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = CAWLAmpSimulator.hpp; path = cawlTester/CAWLAmpSimulator.hpp; sourceTree = SOURCE_ROOT; };
+		9177E63A1F7CCDF600D36C46 /* CAWLLowPassFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLLowPassFilter.cpp; sourceTree = "<group>"; };
+		9177E63B1F7CCDF600D36C46 /* CAWLLowPassFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLLowPassFilter.hpp; sourceTree = "<group>"; };
+		9177E63C1F7CCE4500D36C46 /* CAWLHighPassFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLHighPassFilter.hpp; sourceTree = "<group>"; };
+		9177E63D1F7CCE4600D36C46 /* CAWLHighPassFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLHighPassFilter.cpp; sourceTree = "<group>"; };
+		9191B3AB1F819300004C6F33 /* SoundTab.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundTab.h; sourceTree = "<group>"; };
+		9191B3AC1F819300004C6F33 /* SoundTab.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoundTab.m; sourceTree = "<group>"; };
+		9191B3AF1F85F62B004C6F33 /* CAWLBiQuadFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLBiQuadFilter.cpp; sourceTree = "<group>"; };
+		9191B3B01F85F62B004C6F33 /* CAWLBiQuadFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLBiQuadFilter.hpp; sourceTree = "<group>"; };
 		91CAEC7C1DC8584600CEF065 /* libCAWL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCAWL.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		91CAEC7F1DC8584600CEF065 /* CAWL.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWL.hpp; sourceTree = "<group>"; };
 		91CAEC831DC8584600CEF065 /* CAWL.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWL.cpp; sourceTree = "<group>"; };
@@ -102,17 +147,15 @@
 		91CAEC9C1DC8587900CEF065 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		91CAEC9E1DC8587900CEF065 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91CAECA31DC8597C00CEF065 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		91DC3E4F1F871DF600E3DB09 /* CAWLLowShelfFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLLowShelfFilter.cpp; sourceTree = "<group>"; };
+		91DC3E501F871DF600E3DB09 /* CAWLLowShelfFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLLowShelfFilter.hpp; sourceTree = "<group>"; };
+		91DC3E551F874D6C00E3DB09 /* CAWLHighShelfFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLHighShelfFilter.cpp; sourceTree = "<group>"; };
+		91DC3E561F874D6C00E3DB09 /* CAWLHighShelfFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLHighShelfFilter.hpp; sourceTree = "<group>"; };
+		91DC3E611F88991600E3DB09 /* CAWLPeakFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLPeakFilter.hpp; sourceTree = "<group>"; };
+		91DC3E621F88991600E3DB09 /* CAWLPeakFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLPeakFilter.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		91062DBD1DE397AD00BCBDA0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				912977BC1DE4F8880093134D /* AudioToolbox.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		912977A41DE4F0E70093134D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -144,30 +187,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		91062DC11DE397AD00BCBDA0 /* cawlDemoPhone */ = {
-			isa = PBXGroup;
-			children = (
-				91062DC51DE397AD00BCBDA0 /* AppDelegate.h */,
-				91062DC61DE397AD00BCBDA0 /* AppDelegate.mm */,
-				91062DC81DE397AD00BCBDA0 /* ViewController.h */,
-				91062DC91DE397AD00BCBDA0 /* ViewController.mm */,
-				91062DCB1DE397AD00BCBDA0 /* Main.storyboard */,
-				91062DCE1DE397AD00BCBDA0 /* Assets.xcassets */,
-				91062DD01DE397AD00BCBDA0 /* LaunchScreen.storyboard */,
-				91062DD31DE397AD00BCBDA0 /* Info.plist */,
-				91062DC21DE397AD00BCBDA0 /* Supporting Files */,
-			);
-			path = cawlDemoPhone;
-			sourceTree = "<group>";
-		};
-		91062DC21DE397AD00BCBDA0 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				91062DC31DE397AD00BCBDA0 /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		91062DD71DE397C900BCBDA0 /* RingBuffer */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +212,35 @@
 		912977BE1DE510340093134D /* SoundModules */ = {
 			isa = PBXGroup;
 			children = (
+				911097EE1F6DA0D7002A9A92 /* CAWLSoundBoard.cpp */,
+				911097EF1F6DA0D7002A9A92 /* CAWLSoundBoard.hpp */,
+				9177E6371F78347D00D36C46 /* CAWLAmpSimulator.cpp */,
+				9177E6381F78347D00D36C46 /* CAWLAmpSimulator.hpp */,
+				911097F11F6DA127002A9A92 /* CAWLValveTubeSimulator.cpp */,
+				911097F21F6DA127002A9A92 /* CAWLValveTubeSimulator.hpp */,
+				9191B3AF1F85F62B004C6F33 /* CAWLBiQuadFilter.cpp */,
+				9191B3B01F85F62B004C6F33 /* CAWLBiQuadFilter.hpp */,
+				91DC3E4F1F871DF600E3DB09 /* CAWLLowShelfFilter.cpp */,
+				91DC3E501F871DF600E3DB09 /* CAWLLowShelfFilter.hpp */,
+				91DC3E551F874D6C00E3DB09 /* CAWLHighShelfFilter.cpp */,
+				91DC3E561F874D6C00E3DB09 /* CAWLHighShelfFilter.hpp */,
+				91DC3E621F88991600E3DB09 /* CAWLPeakFilter.cpp */,
+				91DC3E611F88991600E3DB09 /* CAWLPeakFilter.hpp */,
+				9177E63D1F7CCE4600D36C46 /* CAWLHighPassFilter.cpp */,
+				9177E63C1F7CCE4500D36C46 /* CAWLHighPassFilter.hpp */,
+				9177E63A1F7CCDF600D36C46 /* CAWLLowPassFilter.cpp */,
+				9177E63B1F7CCDF600D36C46 /* CAWLLowPassFilter.hpp */,
+				911098001F6F2387002A9A92 /* CAWLFIRCombFilter.cpp */,
+				911098011F6F2387002A9A92 /* CAWLFIRCombFilter.hpp */,
+				911098041F6F2393002A9A92 /* CAWLIIRCombFilter.cpp */,
+				911098051F6F2393002A9A92 /* CAWLIIRCombFilter.hpp */,
+				912E05171F8023BF00C13E55 /* CAWLUniversalCombFilter.cpp */,
+				912E05181F8023BF00C13E55 /* CAWLUniversalCombFilter.hpp */,
+				912E05121F8023AE00C13E55 /* CAWLCombFilter.cpp */,
+				912E05131F8023AE00C13E55 /* CAWLCombFilter.hpp */,
+				911097FC1F6F22F2002A9A92 /* CAWLDelayLine.cpp */,
+				911097FD1F6F22F2002A9A92 /* CAWLDelayLine.hpp */,
+				911097F91F6F16B2002A9A92 /* CAWLSoundModule.hpp */,
 			);
 			name = SoundModules;
 			sourceTree = "<group>";
@@ -202,7 +250,6 @@
 			children = (
 				91CAEC7E1DC8584600CEF065 /* CAWL */,
 				91CAEC8F1DC8587900CEF065 /* cawlDemoMac */,
-				91062DC11DE397AD00BCBDA0 /* cawlDemoPhone */,
 				912977A81DE4F0E70093134D /* cawlTester */,
 				91CAEC7D1DC8584600CEF065 /* Products */,
 				91CAECA21DC8597C00CEF065 /* Frameworks */,
@@ -214,7 +261,6 @@
 			children = (
 				91CAEC7C1DC8584600CEF065 /* libCAWL.a */,
 				91CAEC8E1DC8587900CEF065 /* cawlDemoMac.app */,
-				91062DC01DE397AD00BCBDA0 /* cawlDemoPhone.app */,
 				912977A71DE4F0E70093134D /* cawlTester */,
 			);
 			name = Products;
@@ -242,6 +288,8 @@
 				91CAEC911DC8587900CEF065 /* AppDelegate.mm */,
 				91CAEC961DC8587900CEF065 /* ViewController.h */,
 				91CAEC971DC8587900CEF065 /* ViewController.mm */,
+				9191B3AB1F819300004C6F33 /* SoundTab.h */,
+				9191B3AC1F819300004C6F33 /* SoundTab.m */,
 				91CAEC991DC8587900CEF065 /* Assets.xcassets */,
 				91CAEC9B1DC8587900CEF065 /* Main.storyboard */,
 				91CAEC9E1DC8587900CEF065 /* Info.plist */,
@@ -275,37 +323,29 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91DC3E591F874D6C00E3DB09 /* CAWLHighShelfFilter.hpp in Headers */,
+				911098071F6F2393002A9A92 /* CAWLIIRCombFilter.hpp in Headers */,
 				91062DDE1DE397E900BCBDA0 /* CAAutoDisposer.h in Headers */,
 				912CE4421F6B3BB8009F41AA /* CAWLAudioUnit.hpp in Headers */,
 				912CE4461F6B3C1B009F41AA /* CAWLUtilities.hpp in Headers */,
+				911097FF1F6F22F2002A9A92 /* CAWLDelayLine.hpp in Headers */,
 				91062DDD1DE397E900BCBDA0 /* CAAtomic.h in Headers */,
+				912E051B1F8023BF00C13E55 /* CAWLUniversalCombFilter.hpp in Headers */,
 				91062DE11DE397E900BCBDA0 /* CARingBuffer.h in Headers */,
+				911097FB1F6F16B2002A9A92 /* CAWLSoundModule.hpp in Headers */,
+				91DC3E531F871F6500E3DB09 /* CAWLLowShelfFilter.hpp in Headers */,
 				91062DE51DE3983100BCBDA0 /* CAWLRingBuffer.hpp in Headers */,
 				91062DDF1DE397E900BCBDA0 /* CABitOperations.h in Headers */,
 				91CAEC801DC8584600CEF065 /* CAWL.hpp in Headers */,
+				9191B3B31F85F62B004C6F33 /* CAWLBiQuadFilter.hpp in Headers */,
+				912E05161F8023AE00C13E55 /* CAWLCombFilter.hpp in Headers */,
+				911098031F6F2387002A9A92 /* CAWLFIRCombFilter.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		91062DBF1DE397AD00BCBDA0 /* cawlDemoPhone */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 91062DD41DE397AD00BCBDA0 /* Build configuration list for PBXNativeTarget "cawlDemoPhone" */;
-			buildPhases = (
-				91062DBC1DE397AD00BCBDA0 /* Sources */,
-				91062DBD1DE397AD00BCBDA0 /* Frameworks */,
-				91062DBE1DE397AD00BCBDA0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = cawlDemoPhone;
-			productName = cawlDemoPhone;
-			productReference = 91062DC01DE397AD00BCBDA0 /* cawlDemoPhone.app */;
-			productType = "com.apple.product-type.application";
-		};
 		912977A61DE4F0E70093134D /* cawlTester */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 912977AD1DE4F0E70093134D /* Build configuration list for PBXNativeTarget "cawlTester" */;
@@ -366,10 +406,6 @@
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Moses Lee";
 				TargetAttributes = {
-					91062DBF1DE397AD00BCBDA0 = {
-						CreatedOnToolsVersion = 8.1;
-						ProvisioningStyle = Automatic;
-					};
 					912977A61DE4F0E70093134D = {
 						CreatedOnToolsVersion = 8.1;
 						ProvisioningStyle = Automatic;
@@ -399,23 +435,12 @@
 			targets = (
 				91CAEC7B1DC8584600CEF065 /* CAWL */,
 				91CAEC8D1DC8587900CEF065 /* cawlDemoMac */,
-				91062DBF1DE397AD00BCBDA0 /* cawlDemoPhone */,
 				912977A61DE4F0E70093134D /* cawlTester */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		91062DBE1DE397AD00BCBDA0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				91062DD21DE397AD00BCBDA0 /* LaunchScreen.storyboard in Resources */,
-				91062DCF1DE397AD00BCBDA0 /* Assets.xcassets in Resources */,
-				91062DCD1DE397AD00BCBDA0 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		91CAEC8C1DC8587900CEF065 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -428,27 +453,30 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		91062DBC1DE397AD00BCBDA0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				91062DCA1DE397AD00BCBDA0 /* ViewController.mm in Sources */,
-				91062DC71DE397AD00BCBDA0 /* AppDelegate.mm in Sources */,
-				912977B31DE4F8600093134D /* CAWLRingBuffer.cpp in Sources */,
-				91062DC41DE397AD00BCBDA0 /* main.m in Sources */,
-				912977B21DE4F8600093134D /* CARingBuffer.cpp in Sources */,
-				912977B51DE4F8600093134D /* CAWL.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		912977A31DE4F0E70093134D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				912977AA1DE4F0E70093134D /* main.cpp in Sources */,
+				910A953D1F6B760A009DA4A1 /* CAWLUtilities.cpp in Sources */,
+				9177E63E1F7CCEFA00D36C46 /* CAWLHighPassFilter.cpp in Sources */,
+				912E051A1F8023BF00C13E55 /* CAWLUniversalCombFilter.cpp in Sources */,
+				9177E6391F785D5500D36C46 /* CAWLAmpSimulator.cpp in Sources */,
+				9191B3A11F804543004C6F33 /* CAWLIIRCombFilter.cpp in Sources */,
+				91DC3E581F874D6C00E3DB09 /* CAWLHighShelfFilter.cpp in Sources */,
+				912E05151F8023AE00C13E55 /* CAWLCombFilter.cpp in Sources */,
+				912E051C1F80254800C13E55 /* CAWLFIRCombFilter.cpp in Sources */,
+				91DC3E511F871F5B00E3DB09 /* CAWLLowShelfFilter.cpp in Sources */,
+				911097F51F6DF9F7002A9A92 /* CAWLValveTubeSimulator.cpp in Sources */,
 				912977AE1DE4F8600093134D /* CARingBuffer.cpp in Sources */,
+				9191B3AE1F85EEC5004C6F33 /* CAWLLowPassFilter.cpp in Sources */,
+				9191B3B21F85F62B004C6F33 /* CAWLBiQuadFilter.cpp in Sources */,
 				912977AF1DE4F8600093134D /* CAWLRingBuffer.cpp in Sources */,
 				912977B11DE4F8600093134D /* CAWL.cpp in Sources */,
+				911097F41F6DF9F7002A9A92 /* CAWLSoundBoard.cpp in Sources */,
+				91DC3E641F88995900E3DB09 /* CAWLPeakFilter.cpp in Sources */,
+				912E05111F8019F800C13E55 /* CAWLDelayLine.cpp in Sources */,
+				917A9AD91F6C366000422478 /* CAWLAudioUnit.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,10 +484,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				911098021F6F2387002A9A92 /* CAWLFIRCombFilter.cpp in Sources */,
 				91062DE41DE3983100BCBDA0 /* CAWLRingBuffer.cpp in Sources */,
+				9177E63F1F7CCEFC00D36C46 /* CAWLHighPassFilter.cpp in Sources */,
 				912CE4451F6B3C1B009F41AA /* CAWLUtilities.cpp in Sources */,
+				911097FE1F6F22F2002A9A92 /* CAWLDelayLine.cpp in Sources */,
+				91DC3E521F871F5C00E3DB09 /* CAWLLowShelfFilter.cpp in Sources */,
+				9191B3B11F85F62B004C6F33 /* CAWLBiQuadFilter.cpp in Sources */,
 				91062DE01DE397E900BCBDA0 /* CARingBuffer.cpp in Sources */,
 				91CAEC841DC8584600CEF065 /* CAWL.cpp in Sources */,
+				912E05191F8023BF00C13E55 /* CAWLUniversalCombFilter.cpp in Sources */,
+				911098061F6F2393002A9A92 /* CAWLIIRCombFilter.cpp in Sources */,
+				91DC3E571F874D6C00E3DB09 /* CAWLHighShelfFilter.cpp in Sources */,
+				91DC3E631F88995800E3DB09 /* CAWLPeakFilter.cpp in Sources */,
+				912E05141F8023AE00C13E55 /* CAWLCombFilter.cpp in Sources */,
 				912CE4411F6B3BB8009F41AA /* CAWLAudioUnit.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,10 +507,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				91CAEC981DC8587900CEF065 /* ViewController.mm in Sources */,
+				911097F71F6DFA85002A9A92 /* CAWLUtilities.cpp in Sources */,
 				91CAEC951DC8587900CEF065 /* main.m in Sources */,
+				911097F61F6DFA82002A9A92 /* CAWLAudioUnit.cpp in Sources */,
+				911097F31F6DA127002A9A92 /* CAWLValveTubeSimulator.cpp in Sources */,
 				912977B71DE4F8610093134D /* CAWLRingBuffer.cpp in Sources */,
 				91CAEC921DC8587900CEF065 /* AppDelegate.mm in Sources */,
 				912977B61DE4F8610093134D /* CARingBuffer.cpp in Sources */,
+				9191B3AD1F819300004C6F33 /* SoundTab.m in Sources */,
+				911097F01F6DA0D7002A9A92 /* CAWLSoundBoard.cpp in Sources */,
 				912977B91DE4F8610093134D /* CAWL.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,22 +523,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		91062DCB1DE397AD00BCBDA0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				91062DCC1DE397AD00BCBDA0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		91062DD01DE397AD00BCBDA0 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				91062DD11DE397AD00BCBDA0 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		91CAEC9B1DC8587900CEF065 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -507,37 +534,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		91062DD51DE397AD00BCBDA0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = cawlDemoPhone/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = moseslee.cawlDemoPhone;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		91062DD61DE397AD00BCBDA0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = cawlDemoPhone/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = moseslee.cawlDemoPhone;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 		912977AB1DE4F0E70093134D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -686,15 +682,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		91062DD41DE397AD00BCBDA0 /* Build configuration list for PBXNativeTarget "cawlDemoPhone" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				91062DD51DE397AD00BCBDA0 /* Debug */,
-				91062DD61DE397AD00BCBDA0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		912977AD1DE4F0E70093134D /* Build configuration list for PBXNativeTarget "cawlTester" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

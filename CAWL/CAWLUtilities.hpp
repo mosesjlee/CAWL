@@ -12,4 +12,5 @@
 #include <stdio.h>
 #include <CoreAudio/CoreAudio.h>
 void CheckError(OSStatus error, const char * operation);
+
 #endif /* CAWLUtilities_hpp */

@@ -7,9 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "CAWL.hpp"
 @interface ViewController : NSViewController
-@property CAWL * instance;
+@property (weak) IBOutlet NSTabView *tabbedView;
 
 @end
 

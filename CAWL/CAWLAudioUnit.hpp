@@ -23,14 +23,16 @@ private:
 	Float64 sampleRate;
 	UInt32 numOfChannels;
 	
-	OSStatus setDefaultAudioUnits();
-	OSStatus setAudioStreamBasicDescription();
+	OSStatus setDefaultInputAudioUnit();
 	OSStatus setupAudioUnitIO();
 	
 public:
 	CAWLAudioUnit();
 	~CAWLAudioUnit();
-	UInt32 getNumOfChannels();
-	Float64 getSampleRate();
+    UInt32 getNumOfChannels() { return numOfChannels; }
+    Float64 getSampleRate() { return sampleRate; }
+    AudioUnit getInputUnit() { return inputUnit; }
+    AudioUnit getOutputUnit() { return outputUnit; }
+    AudioStreamBasicDescription getASBD() { return aggregateASBD; }
 };
 #endif /* CAWLAudioUnit_hpp */
