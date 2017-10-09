@@ -75,6 +75,7 @@ int main(int argc, const char * argv[]) {
     hsf.setCutOffFreq(17000); hsf.setGain(10);
     CAWLPeakFilter pf, * pfPtr = &pf;
     pf.setQFactor(8); pf.setCutOffFreq(2000); pf.setGain(-10.0);
+
     
     
 	cawlBuffers inputChannel1 = (^(float * data,

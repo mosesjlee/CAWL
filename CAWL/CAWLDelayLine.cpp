@@ -55,7 +55,7 @@ void CAWLDelayLine::setDelayTimeInSamples(float delaySamples)
         currDelayInSamples = MAX_DELAY_IN_SAMPLES - 1;
     
     //Update the read and write index
-    currReadPos = currWritePos - (currDelayInSamples-1);
+    currReadPos = currWritePos - currDelayInSamples;
     
     if(currReadPos < 0.0)
         currReadPos = MAX_DELAY_IN_SAMPLES - fabs(currReadPos);
@@ -88,9 +88,9 @@ double CAWLDelayLine::processNextSample(double currSample)
     
     float fracDelay = currReadPos - (int) currReadPos;
     
-    if(fracDelay > 0.000000)
+    if(fracDelay > 0.00000000)
     {
-        float lookAheadPos = (currReadPos + 1.0) > maxDelayInSamples ? 0 : (currReadPos + 1.0);
+        float lookAheadPos = (currReadPos + 1.0) > maxDelayInSamples ? (0 + fracDelay) : (currReadPos + 1.0);
         yCurrOutput = linear_interp(delayLine[(int) currReadPos],
                                     currReadPos,
                                     delayLine[(int) lookAheadPos],
@@ -102,6 +102,7 @@ double CAWLDelayLine::processNextSample(double currSample)
     
     currReadPos = (currReadPos + 1.0) >= maxDelayInSamples ?  (0 + fracDelay) : (currReadPos + 1.0);
     currWritePos = (currWritePos + 1.0) >= maxDelayInSamples ? 0 : (currWritePos + 1.0);
+    
     return yCurrOutput;
 }
 
