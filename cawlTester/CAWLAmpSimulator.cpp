@@ -19,26 +19,6 @@ typedef struct {
     double C1, C2, C3;
 } TSParameters;
 
-class DCBlocker
-{
-public:
-	inline float processSample(float currSample)
-	{
-		x = currSample;
-		y = x - x_1 + 0.990 * y_1;
-		y_1 = y;
-		x_1 = x;
-		return y;
-	}
-	
-	void reset()
-	{
-		x =  x_1 = y = y_1 = 0.0f;
-	}
-private:
-	float x, x_1, y, y_1;
-};
-
 /*
  This class below is from CAPS written Tim Goetze and David Yeh.
  This is not my work. I only modified the process function to fit my design
@@ -250,12 +230,6 @@ CAWLAmpSimulator::CAWLAmpSimulator()
 	stack = new ToneStack();
 	stack->init(sampleRate);
 	stack->setmodel(0);
-    
-	
-	dcBlocker = new DCBlocker();
-	dcBlocker->reset();
-	dcBlocker2 = new DCBlocker();
-	dcBlocker2->reset();
 }
 
 CAWLAmpSimulator::CAWLAmpSimulator(int model)
@@ -273,17 +247,11 @@ CAWLAmpSimulator::CAWLAmpSimulator(int model)
     stack->init(sampleRate);
     
     lsf.setCutOffFreq(700);
-    dcBlocker = new DCBlocker();
-    dcBlocker->reset();
-    dcBlocker2 = new DCBlocker();
-    dcBlocker2->reset();
 }
 
 CAWLAmpSimulator::~CAWLAmpSimulator()
 {
 	delete stack;
-	delete dcBlocker2;
-	delete dcBlocker;
 }
 
 

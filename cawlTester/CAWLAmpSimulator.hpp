@@ -25,7 +25,6 @@
 #include "CAWLLowShelfFilter.hpp"
 
 class ToneStack;
-class DCBlocker;
 class CAWLAmpSimulator : public CAWLSoundModule
 {
 public:
@@ -42,6 +41,5 @@ private:
 	ToneStack * stack;
     CAWLHighPassFilter hp1 = CAWLHighPassFilter(4000);
     CAWLLowShelfFilter lsf;
-	DCBlocker * dcBlocker, * dcBlocker2;
 };
 #endif /* CAWLAmpSimulator_hpp */
