@@ -80,9 +80,9 @@ double CAWLDelayLine::processNextSample(double currSample)
     delayLine[(int) currWritePos] = currSample;
     
     //Get the current read position
-    float currReadPos = currWritePos - currDelayInSamples;
+    float currReadPos = currWritePos - (currDelayInSamples - 1.0);
     if(currReadPos < 0.0)
-        currReadPos = MAX_DELAY_IN_SAMPLES - (fabs(currReadPos) + 1);
+        currReadPos = MAX_DELAY_IN_SAMPLES - fabs(currReadPos);
     
     
     float fracDelay = currReadPos - (int) currReadPos;

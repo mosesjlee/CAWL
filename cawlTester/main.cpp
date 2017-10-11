@@ -23,6 +23,8 @@
 #define SCALE 0.3
 #define WRITE_TO_FILE
 #define SHOW_DEBUG_SAMPLES
+#define TEST_BIQUAD 1
+
 void getWhiteNoiseStream(float * stream);
 
 int main(int argc, const char * argv[]) {
@@ -70,11 +72,11 @@ int main(int argc, const char * argv[]) {
     CAWLLowPassFilter * lpfPtr = &lpf;
     CAWLHighPassFilter * hpfPtr = &hpf;
     CAWLLowShelfFilter lsf, * lsfPtr = &lsf;
-    lsf.setCutOffFreq(100); lsf.setGain(-10.0);
+    lsf.setCutOffFreq(100); lsf.setGain(10.0);
     CAWLHighShelfFilter hsf, * hsfPtr = &hsf;
-    hsf.setCutOffFreq(15000); hsf.setGain(-10);
+    hsf.setCutOffFreq(15000); hsf.setGain(10);
     CAWLPeakFilter pf, * pfPtr = &pf;
-    pf.setQFactor(8); pf.setCutOffFreq(4000); pf.setGain(10.0);
+    pf.setQFactor(8); pf.setCutOffFreq(3000); pf.setGain(10.0);
 
     
     
@@ -84,17 +86,19 @@ int main(int argc, const char * argv[]) {
         for(int i = 0; i < numSamples; i++)
         {
             //ptrToBuf1[i] = data[i];
+#if TEST_BIQUAD
             //Testing BiQuads
-//            if(*ptrToWhteCout < 44100 ) {
-//            data[i] = whiteBufferPtr[*ptrToWhteCout];//(float) sin (2 * M_PI * (j / cycleLength));
-//            (*ptrToWhteCout)++;
-//                j += 1.0;
-//                if (j > cycleLength)
-//                    j -= cycleLength;
-//            }
-//            else {
-//                data[i] = 0.0;
-//            }
+            if(*ptrToWhteCout < 44100 ) {
+            data[i] = whiteBufferPtr[*ptrToWhteCout];//(float) sin (2 * M_PI * (j / cycleLength));
+            (*ptrToWhteCout)++;
+                j += 1.0;
+                if (j > cycleLength)
+                    j -= cycleLength;
+            }
+            else {
+                data[i] = 0.0;
+            }
+#else
             //To test IIR/UCF Filters
             if(j < 100 ) {
                 data[i] = (float) sin (2 * M_PI * (j / cycleLength));
@@ -105,16 +109,18 @@ int main(int argc, const char * argv[]) {
             else {
                 data[i] = 0.0;
             }
+#endif
         }
         *fc = j;
 
+
         //ptrToFir->processBuffer(data, numSamples);
 //        ptrToiir->processBuffer(data, numSamples);
-        ptrToUcf->processBuffer(data, numSamples);
+//        ptrToUcf->processBuffer(data, numSamples);
 //		ptrToAmp->processBuffer(data, numSamples);
-//        lsfPtr->processBuffer(data, numSamples);
-//        hsfPtr->processBuffer(data, numSamples);
-//        pfPtr->processBuffer(data, numSamples);
+        lsfPtr->processBuffer(data, numSamples);
+        hsfPtr->processBuffer(data, numSamples);
+        pfPtr->processBuffer(data, numSamples);
 		//ptrToValve->processBuffer(data,numSamples);
 //        lpfPtr->processBuffer(data, numSamples);
         //hpfPtr->processBuffer(data, numSamples);
