@@ -10,7 +10,7 @@
 
 CAWLIIRCombFilter::CAWLIIRCombFilter()
 {
-    mFeedbackGain = 1;
+    mFeedbackGain = 1.0;
     mMixLevel = 1;
     lastSampleOfBlock = 0.0;
     delayLine.setDelayTimeInMilliseconds(100);

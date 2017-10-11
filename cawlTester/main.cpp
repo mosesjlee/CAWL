@@ -23,7 +23,7 @@
 #define SCALE 0.3
 #define WRITE_TO_FILE
 #define SHOW_DEBUG_SAMPLES
-#define TEST_BIQUAD 0
+#define TEST_BIQUAD 1
 
 void getWhiteNoiseStream(float * stream);
 
@@ -62,21 +62,24 @@ int main(int argc, const char * argv[]) {
 	CAWLValveTubeSimulator * ptrToValve = &valveSim, * ptrToValve2 = &valveSim2, *ptrToValve3 = &valveSim3;
     CAWLFIRCombFilter fir;
     CAWLFIRCombFilter *ptrToFir = &fir;
-    CAWLIIRCombFilter iir; iir.setDelay(500); //iir.setDelay(2.2675736961);
+    CAWLIIRCombFilter iir; iir.setDelay(2.2675736961);
     CAWLIIRCombFilter *ptrToiir = &iir;
     CAWLUniversalCombFilter ucf; ucf.setDelay(2.2675736961);
     CAWLUniversalCombFilter * ptrToUcf = &ucf;
     
-    CAWLLowPassFilter lpf(300.0);
-    CAWLHighPassFilter hpf(100.0);
+    CAWLLowPassFilter lpf; lpf.setCutOffFreq(1000);
+    CAWLHighPassFilter hpf(1000.0);
     CAWLLowPassFilter * lpfPtr = &lpf;
     CAWLHighPassFilter * hpfPtr = &hpf;
     CAWLLowShelfFilter lsf, * lsfPtr = &lsf;
-    lsf.setCutOffFreq(100); lsf.setGain(10.0);
+    lsf.setCutOffFreq(200); lsf.setGain(-60.0);
     CAWLHighShelfFilter hsf, * hsfPtr = &hsf;
-    hsf.setCutOffFreq(15000); hsf.setGain(10);
+    hsf.setCutOffFreq(700); hsf.setGain(-30.0);
     CAWLPeakFilter pf, * pfPtr = &pf;
-    pf.setQFactor(8); pf.setCutOffFreq(3000); pf.setGain(10.0);
+    pf.setQFactor(10); pf.setCutOffFreq(440); pf.setGain(10.0);
+    CAWLPeakFilter pf2, * pf2Ptr = &pf2;
+    pf2.setQFactor(10); pf2.setCutOffFreq(880); pf2.setGain(10.0);
+    
 
     
     
@@ -115,15 +118,16 @@ int main(int argc, const char * argv[]) {
 
 
         //ptrToFir->processBuffer(data, numSamples);
-        ptrToiir->processBuffer(data, numSamples);
+//        ptrToiir->processBuffer(data, numSamples);
 //        ptrToUcf->processBuffer(data, numSamples);
 //		ptrToAmp->processBuffer(data, numSamples);
 //        lsfPtr->processBuffer(data, numSamples);
 //        hsfPtr->processBuffer(data, numSamples);
 //        pfPtr->processBuffer(data, numSamples);
+//        pf2Ptr->processBuffer(data, numSamples);
 		//ptrToValve->processBuffer(data,numSamples);
-//        lpfPtr->processBuffer(data, numSamples);
-        //hpfPtr->processBuffer(data, numSamples);
+ //       lpfPtr->processBuffer(data, numSamples);
+        hpfPtr->processBuffer(data, numSamples);
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 87) {
             memcpy(debugPtr + (*debugCountPtr) * numSamples, data, (512 *sizeof(float)));
@@ -216,13 +220,13 @@ int main(int argc, const char * argv[]) {
         
         if(c == '+'){
 			//ampSim.setPreampGain(0.3);;
-            //iir.setDelay(346);
-            ampSim.setCutOff(2000.0);
+            iir.setDelay(400);
+            //ampSim.setCutOff(2000.0);
             //std::cout << "new gain level " << ampSim.getGain() << std::endl;
         }
         if(c == '-'){
-            //iir.setDelay(400);
-            ampSim.setCutOff(10.0);
+            iir.setDelay(600);
+            //ampSim.setCutOff(10.0);
             //ampSim.setPreampGain(0.1);
             //std::cout << "new gain level " << ampSim.getGain() << std::endl;
         }
@@ -259,7 +263,6 @@ void getWhiteNoiseStream(float * stream)
             i++;
         }
     }
-    
 }
 
 

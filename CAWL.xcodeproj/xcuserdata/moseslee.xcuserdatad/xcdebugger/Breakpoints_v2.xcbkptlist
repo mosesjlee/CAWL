@@ -144,7 +144,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "cawlTester/CAWLAmpSimulator.cpp"
-            timestampString = "529217601.790925"
+            timestampString = "529394398.393204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "85"
@@ -176,27 +176,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAWL/CAWLDelayLine.cpp"
-            timestampString = "529390032.632815"
+            timestampString = "529394398.393295"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "CAWLDelayLine::setDelayTimeInMilliseconds(float delayTime)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CAWL/CAWLDelayLine.cpp"
-            timestampString = "529390032.632932"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "CAWLDelayLine::processNextSample(double currSample)"
             landmarkType = "7">
          </BreakpointContent>
@@ -208,11 +192,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "cawlTester/main.cpp"
-            timestampString = "529390032.633026"
+            timestampString = "529394398.393388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "main(int argc, const char * argv[])"
             landmarkType = "9">
          </BreakpointContent>
@@ -224,7 +208,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAWL/CAWLIIRCombFilter.cpp"
-            timestampString = "528876349.655185"
+            timestampString = "529394398.393462"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "31"
@@ -240,11 +224,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAWL/CAWLDelayLine.cpp"
-            timestampString = "529390032.633495"
+            timestampString = "529394398.393516"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "CAWLDelayLine::processNextSample(double currSample)"
             landmarkType = "7">
          </BreakpointContent>
@@ -272,7 +256,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAWL/CAWLIIRCombFilter.cpp"
-            timestampString = "528876349.655396"
+            timestampString = "529394398.393621"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "33"
@@ -288,11 +272,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "cawlTester/main.cpp"
-            timestampString = "529390032.633591"
+            timestampString = "529394398.393693"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "main(int argc, const char * argv[])"
             landmarkType = "9">
          </BreakpointContent>
@@ -303,44 +287,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CAWL/CAWLHighPassFilter.cpp"
-            timestampString = "528876349.655559"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "CAWLHighPassFilter::calculateCoefficients()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CAWL/CAWLHighPassFilter.cpp"
-            timestampString = "528876349.655611"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "CAWLHighPassFilter::calculateCoefficients()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "cawlTester/main.cpp"
-            timestampString = "529390032.63392"
+            timestampString = "529394398.393753"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "main(int argc, const char * argv[])"
             landmarkType = "9">
          </BreakpointContent>
@@ -352,11 +304,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAWL/CAWLDelayLine.cpp"
-            timestampString = "529390032.63422"
+            timestampString = "529394398.393808"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "CAWLDelayLine::setDelayTimeInSamples(float delaySamples)"
             landmarkType = "7">
          </BreakpointContent>
@@ -400,23 +352,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAWL/CAWLBiQuadFilter.cpp"
-            timestampString = "529390032.634316"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "CAWLBiQuadFilter::processBuffer(float * buf, const unsigned int numSamples)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CAWL/CAWLBiQuadFilter.cpp"
-            timestampString = "529390032.634362"
+            timestampString = "529394398.393916"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "39"
@@ -432,11 +368,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAWL/CAWLDelayLine.cpp"
-            timestampString = "529390032.634402"
+            timestampString = "529394398.393965"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "CAWLDelayLine::linear_interp(float x_1, float y_1, float x_2, float y_2, float frac)"
             landmarkType = "7">
          </BreakpointContent>
@@ -448,11 +384,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAWL/CAWLDelayLine.cpp"
-            timestampString = "529390032.634447"
+            timestampString = "529394398.394019"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "CAWLDelayLine::processNextSample(double currSample)"
             landmarkType = "7">
          </BreakpointContent>

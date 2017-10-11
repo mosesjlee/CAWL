@@ -12,23 +12,17 @@
 #include <stdio.h>
 #include <iostream>
 #include <math.h>
-#include "CAWLLowPassFilter.hpp"
+#include "CAWLBiQuadFilter.hpp"
 
-class CAWLHighPassFilter : public CAWLIIRCombFilter
+class CAWLHighPassFilter : public CAWLBiQuadFilter
 {
 private:
     float theta_c;
-    float gamma;
-    float a_0;
-    float b_1;
-    float cutOffFrequency;
     void calculateCoefficients();
     
 public:
     CAWLHighPassFilter(float cutOffFreq);
     ~CAWLHighPassFilter();
-    void changeCutOffFreq(float newFreq);
-    void setFeedbackGain(float newGain);
 };
 
 #endif /* simpleEq_hpp */

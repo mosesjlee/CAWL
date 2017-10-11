@@ -9,9 +9,13 @@
 #include "CAWLLowPassFilter.hpp"
 CAWLLowPassFilter::CAWLLowPassFilter(float cutOffFreq)
 {
-    cutOffFrequency = cutOffFreq; //Default;
+    centerFrequency = cutOffFreq; //Default;
     calculateCoefficients();
-    delayLine.setDelayTimeInSamples(1.0);
+}
+
+CAWLLowPassFilter::CAWLLowPassFilter()
+{
+    
 }
 
 CAWLLowPassFilter::~CAWLLowPassFilter()
@@ -20,20 +24,17 @@ CAWLLowPassFilter::~CAWLLowPassFilter()
 
 void CAWLLowPassFilter::calculateCoefficients()
 {
-    theta_c = 2 * M_PI * cutOffFrequency/sampleRate;
-    gamma   = 2 - cos(theta_c);
-    b_1     = sqrt(gamma * gamma - 1) - gamma;
-    a_0     = 1 + b_1;
-    
-    //Update the IIR Filter specs
-    setMixLevel(a_0);
-    setFeedbackGain(-b_1);
-}
-
-void CAWLLowPassFilter::changeCutOffFreq(float newFreq)
-{
-    cutOffFrequency = newFreq;
-    calculateCoefficients();
+    theta_c         = M_PI * centerFrequency/sampleRate;
+    double omega    = M_PI * centerFrequency;
+    double kappa    = omega/tan(theta_c);
+    double phi      = (kappa * kappa) + (omega * omega) + (2 * (kappa * omega));
+    a_0 = omega * omega/phi;
+    a_1 = 2 * omega * omega/phi;
+    a_2 = omega * omega / phi;
+    b_1 = ((-2 * kappa * kappa) + (2 * omega * omega))/phi;
+    b_2 = ((-2 * kappa * omega) + (kappa*kappa) + (omega * omega))/phi;
+    c_0 = 1.0;
+    d_0 = 0.0;
 }
 
 

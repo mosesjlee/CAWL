@@ -1,6 +1,2 @@
 .DS_Store
-*.swp
-.Trashes
-DerivedData/
-build/
-
+*.xcbkptlist

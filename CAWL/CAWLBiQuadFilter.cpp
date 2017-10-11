@@ -40,21 +40,6 @@ void CAWLBiQuadFilter::processBuffer(float * buf, const unsigned int numSamples)
         delayedSample2 = secondOrderDelayLine.processNextSample(x_a_2 + x_b_2);
 
         buf[i] = yCurrOutput * c_0 + xCurrSample * d_0;
-        
-        //New way
-//        xCurrSample = buf[i];
-//        x_a_0 = xCurrSample * a_0;
-//        yCurrOutput = x_a_0 + delayedSample1;
-//        x_a_1 = xCurrSample * a_1;
-//        x_a_2 = xCurrSample * a_2;
-//        x_b_1 = yCurrOutput * (b_1 * -1);
-//        x_b_2 = yCurrOutput * (b_2 * -1);
-//        delayedSample1 = firstOrderDelayLine.processNextSample(x_a_1 + delayedSample2 + x_b_1);
-//        delayedSample2 = secondOrderDelayLine.processNextSample(x_a_2 + x_b_2);
-//        float y_c = yCurrOutput * c_0;
-//        float x_d = xCurrSample * d_0;
-//        float writeSample = y_c + x_d;
-//        buf[i] = writeSample;
 	}
 }
 

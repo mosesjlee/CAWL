@@ -17,6 +17,7 @@ maxDelayInSamples(MAX_DELAY_IN_SAMPLES),
 currWritePos(0),
 currDelayInSamples(0)
 {
+    //Allocate buffer
     delayLine = new double[(int) maxDelayInSamples];
     
     //0 out the buffer
@@ -33,17 +34,7 @@ CAWLDelayLine::~CAWLDelayLine()
 void CAWLDelayLine::setDelayTimeInMilliseconds(float delayTime)
 {
     //Input is in milliseconds so convert that to samples
-    currDelayInSamples = delayTime * DEFAULT_SR/MILLISECONDS;
-    
-    //Enforce that the max delay is 1 sample less than the max delay
-    if(currDelayInSamples > MAX_DELAY_IN_SAMPLES)
-        currDelayInSamples = MAX_DELAY_IN_SAMPLES - 1;
-    
-//    //Update the read and write index
-//    currReadPos = currWritePos - (currDelayInSamples-1);
-//
-//    if(currReadPos < 0.0)
-//        currReadPos = MAX_DELAY_IN_SAMPLES - fabs(currReadPos);
+    setDelayTimeInSamples(delayTime * DEFAULT_SR/MILLISECONDS);
 }
 
 void CAWLDelayLine::setDelayTimeInSamples(float delaySamples)
@@ -52,12 +43,6 @@ void CAWLDelayLine::setDelayTimeInSamples(float delaySamples)
     //Enforce that the max delay is 1 sample less than the max delay
     if(currDelayInSamples > MAX_DELAY_IN_SAMPLES)
         currDelayInSamples = MAX_DELAY_IN_SAMPLES - 1;
-    
-//    //Update the read and write index
-//    currReadPos = currWritePos - (currDelayInSamples-1);
-//
-//    if(currReadPos < 0.0)
-//        currReadPos = MAX_DELAY_IN_SAMPLES - fabs(currReadPos);
 }
 
 inline double CAWLDelayLine::linear_interp(float x_1, float y_1, float x_2, float y_2, float frac)
@@ -84,7 +69,7 @@ double CAWLDelayLine::processNextSample(double currSample)
     if(currReadPos < 0.0)
         currReadPos = MAX_DELAY_IN_SAMPLES - fabs(currReadPos);
     
-    
+    //Check if there is a fractional delay
     float fracDelay = currReadPos - (int) currReadPos;
     
     if(fracDelay > 0.00000000)
@@ -99,9 +84,10 @@ double CAWLDelayLine::processNextSample(double currSample)
     else
         yCurrOutput = delayLine[(int) currReadPos];
     
-//    currReadPos = (currReadPos + 1.0) >= maxDelayInSamples ?  (0 + fracDelay) : (currReadPos + 1.0);
+    //Update the write position
     currWritePos = (currWritePos + 1.0) >= maxDelayInSamples ? 0 : (currWritePos + 1.0);
     
+    //Return the output
     return yCurrOutput;
 }
 

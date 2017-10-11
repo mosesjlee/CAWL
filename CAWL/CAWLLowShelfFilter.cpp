@@ -19,6 +19,7 @@ CAWLLowShelfFilter::~CAWLLowShelfFilter()
     
 }
 
+//Based on the Linkwitz and Riley LPF/HPF
 void CAWLLowShelfFilter::calculateCoefficients()
 {
     theta   = 2 * M_PI * centerFrequency/sampleRate;
