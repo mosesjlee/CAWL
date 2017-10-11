@@ -14,7 +14,6 @@
 
 CAWLDelayLine::CAWLDelayLine():
 maxDelayInSamples(MAX_DELAY_IN_SAMPLES),
-currReadPos(0),
 currWritePos(0),
 currDelayInSamples(0)
 {
@@ -40,11 +39,11 @@ void CAWLDelayLine::setDelayTimeInMilliseconds(float delayTime)
     if(currDelayInSamples > MAX_DELAY_IN_SAMPLES)
         currDelayInSamples = MAX_DELAY_IN_SAMPLES - 1;
     
-    //Update the read and write index
-    currReadPos = currWritePos - (currDelayInSamples-1);
-    
-    if(currReadPos < 0.0)
-        currReadPos = MAX_DELAY_IN_SAMPLES - fabs(currReadPos);
+//    //Update the read and write index
+//    currReadPos = currWritePos - (currDelayInSamples-1);
+//
+//    if(currReadPos < 0.0)
+//        currReadPos = MAX_DELAY_IN_SAMPLES - fabs(currReadPos);
 }
 
 void CAWLDelayLine::setDelayTimeInSamples(float delaySamples)
@@ -54,18 +53,18 @@ void CAWLDelayLine::setDelayTimeInSamples(float delaySamples)
     if(currDelayInSamples > MAX_DELAY_IN_SAMPLES)
         currDelayInSamples = MAX_DELAY_IN_SAMPLES - 1;
     
-    //Update the read and write index
-    currReadPos = currWritePos - (currDelayInSamples-1);
-    
-    if(currReadPos < 0.0)
-        currReadPos = MAX_DELAY_IN_SAMPLES - fabs(currReadPos);
+//    //Update the read and write index
+//    currReadPos = currWritePos - (currDelayInSamples-1);
+//
+//    if(currReadPos < 0.0)
+//        currReadPos = MAX_DELAY_IN_SAMPLES - fabs(currReadPos);
 }
 
-inline float CAWLDelayLine::linear_interp(float x_1, float y_1, float x_2, float y_2, float frac)
+inline double CAWLDelayLine::linear_interp(float x_1, float y_1, float x_2, float y_2, float frac)
 {
-    float retval = 0.0;
-    float denominator = x_1 - x_2;
-    float numerator = y_1 * (x_2 - frac) + y_2 * (frac - x_1);
+    double retval = 0.0;
+    double denominator = x_2 - x_1;
+    double numerator = y_1 * (x_2 - frac) + y_2 * (frac - x_1);
     //0 Check
     if(fabs(denominator - 0.0) < 1e-6)
         return 0.0;
@@ -81,26 +80,26 @@ double CAWLDelayLine::processNextSample(double currSample)
     delayLine[(int) currWritePos] = currSample;
     
     //Get the current read position
-//    currReadPos = currWritePos - currDelayInSamples;
-//    if(currReadPos < 0.0)
-//        currReadPos = MAX_DELAY_IN_SAMPLES - fabs(currReadPos);
+    float currReadPos = currWritePos - currDelayInSamples;
+    if(currReadPos < 0.0)
+        currReadPos = MAX_DELAY_IN_SAMPLES - (fabs(currReadPos) + 1);
     
     
     float fracDelay = currReadPos - (int) currReadPos;
     
     if(fracDelay > 0.00000000)
     {
-        float lookAheadPos = (currReadPos + 1.0) > maxDelayInSamples ? (0 + fracDelay) : (currReadPos + 1.0);
-        yCurrOutput = linear_interp(delayLine[(int) currReadPos],
-                                    currReadPos,
-                                    delayLine[(int) lookAheadPos],
+        float lookAheadPos = (currReadPos + 1.0) > maxDelayInSamples ? 0 + fracDelay : currReadPos + 1.0;
+        yCurrOutput = linear_interp((int) currReadPos,
+                                    delayLine[(int) currReadPos],
                                     lookAheadPos,
-                                    fracDelay);
+                                    delayLine[(int) lookAheadPos],
+                                    currReadPos + fracDelay);
     }
     else
         yCurrOutput = delayLine[(int) currReadPos];
     
-    currReadPos = (currReadPos + 1.0) >= maxDelayInSamples ?  (0 + fracDelay) : (currReadPos + 1.0);
+//    currReadPos = (currReadPos + 1.0) >= maxDelayInSamples ?  (0 + fracDelay) : (currReadPos + 1.0);
     currWritePos = (currWritePos + 1.0) >= maxDelayInSamples ? 0 : (currWritePos + 1.0);
     
     return yCurrOutput;
