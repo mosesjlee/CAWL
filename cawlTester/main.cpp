@@ -23,7 +23,7 @@
 #define SCALE 0.3
 #define WRITE_TO_FILE
 #define SHOW_DEBUG_SAMPLES
-#define TEST_BIQUAD 1
+#define TEST_BIQUAD 0
 
 void getWhiteNoiseStream(float * stream);
 
@@ -62,7 +62,7 @@ int main(int argc, const char * argv[]) {
 	CAWLValveTubeSimulator * ptrToValve = &valveSim, * ptrToValve2 = &valveSim2, *ptrToValve3 = &valveSim3;
     CAWLFIRCombFilter fir;
     CAWLFIRCombFilter *ptrToFir = &fir;
-    CAWLIIRCombFilter iir; iir.setDelay(2.2675736961);
+    CAWLIIRCombFilter iir; iir.setDelay(500); //iir.setDelay(2.2675736961);
     CAWLIIRCombFilter *ptrToiir = &iir;
     CAWLUniversalCombFilter ucf; ucf.setDelay(2.2675736961);
     CAWLUniversalCombFilter * ptrToUcf = &ucf;
@@ -115,12 +115,12 @@ int main(int argc, const char * argv[]) {
 
 
         //ptrToFir->processBuffer(data, numSamples);
-//        ptrToiir->processBuffer(data, numSamples);
+        ptrToiir->processBuffer(data, numSamples);
 //        ptrToUcf->processBuffer(data, numSamples);
 //		ptrToAmp->processBuffer(data, numSamples);
-        lsfPtr->processBuffer(data, numSamples);
-        hsfPtr->processBuffer(data, numSamples);
-        pfPtr->processBuffer(data, numSamples);
+//        lsfPtr->processBuffer(data, numSamples);
+//        hsfPtr->processBuffer(data, numSamples);
+//        pfPtr->processBuffer(data, numSamples);
 		//ptrToValve->processBuffer(data,numSamples);
 //        lpfPtr->processBuffer(data, numSamples);
         //hpfPtr->processBuffer(data, numSamples);
