@@ -15,7 +15,10 @@
 }
 @property (weak) IBOutlet NSTabView *tabbedView;
 @property NSMutableArray<SoundTab *> * soundPageArray;
+@property NSMutableArray<NSButton *> * channelActivationButtons;
 @property unsigned int numChannels;
 @property CAWL * cawlInstance;
+@property (weak) IBOutlet NSButton *playStopButton;
+@property BOOL isPlaying;
 @end
 
