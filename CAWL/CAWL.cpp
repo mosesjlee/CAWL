@@ -26,11 +26,13 @@ CAWL::CAWL()
 
 CAWL::~CAWL()
 {
-	//Free buffers
 	
     
 	//AUGraph clean up
 	cleanUp();
+    
+    //Free buffers
+    delete [] sampleBuffer;
     
 	//delete instance
     delete aggregateAudioUnit;
@@ -82,7 +84,7 @@ void CAWL::setupBuffers()
 	
 	printf("Number of input channels: %d\n", aggregateAudioUnit->getASBD().mChannelsPerFrame);
 	numInputChannels = aggregateAudioUnit->getASBD().mChannelsPerFrame;
-	input = new cawlBuffers[numInputChannels];
+	sampleBuffer = new cawlBuffers[numInputChannels];
 	
 	//Allocate a ring buffer
 	ringBuffer = new CARingBuffer();
@@ -271,7 +273,7 @@ OSStatus CAWL::OutputRenderCallBack(void *inRefCon,
 		{
 			buffers[i] = (float *) ioData->mBuffers[i].mData;
             if(i < instance->numInputChannelsRegistered)
-                instance->input[i](buffers[i], inNumberFrames);
+                instance->sampleBuffer[i](buffers[i], inNumberFrames);
 		}
         
         for(UInt32 frame = 0; frame < inNumberFrames; frame++)
@@ -313,7 +315,7 @@ cawlBuffers CAWL::getInputBufferAtChannel(const unsigned int channel)
 	if(channel > numInputChannels)
 		return nullptr;
 	
-	return input[channel];
+	return sampleBuffer[channel];
 }
 
 bool CAWL::registerInputBlockAtInputChannel(cawlBuffers buffer, const unsigned int channel)
@@ -321,7 +323,7 @@ bool CAWL::registerInputBlockAtInputChannel(cawlBuffers buffer, const unsigned i
 	if(channel > numInputChannels)
 		return false;
 	
-	input[channel] = buffer;
+	sampleBuffer[channel] = buffer;
 	numInputChannelsRegistered++;
 	return true;
 }

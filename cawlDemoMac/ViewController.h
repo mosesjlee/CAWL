@@ -7,8 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
-@interface ViewController : NSViewController
-@property (weak) IBOutlet NSTabView *tabbedView;
+#import "SoundTab.h"
+#import "CAWL.hpp"
 
+@interface ViewController : NSViewController {
+    
+}
+@property (weak) IBOutlet NSTabView *tabbedView;
+@property NSMutableArray<SoundTab *> * soundPageArray;
+@property unsigned int numChannels;
+@property CAWL * cawlInstance;
 @end
 

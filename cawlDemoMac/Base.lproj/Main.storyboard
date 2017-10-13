@@ -686,11 +686,11 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="1161" height="367"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1242" height="426"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tabView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B4d-jO-eDd">
-                                <rect key="frame" x="-8" y="-10" width="1177" height="383"/>
+                                <rect key="frame" x="-8" y="-10" width="1258" height="442"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems/>
@@ -703,7 +703,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="415.5" y="703.5"/>
+            <point key="canvasLocation" x="456" y="733"/>
         </scene>
     </scenes>
 </document>

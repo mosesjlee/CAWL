@@ -69,7 +69,8 @@ private:
 	//Member variables
 private:
 	static CAWL * cawlInstance;
-	cawlBuffers * input;
+    
+	__weak cawlBuffers * sampleBuffer;
 	
     CAWLAudioUnit * aggregateAudioUnit;
 	AUGraph graph;

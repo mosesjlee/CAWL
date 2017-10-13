@@ -9,5 +9,13 @@
 #import <Cocoa/Cocoa.h>
 
 @interface SoundTab : NSTabViewItem
+- (instancetype)initWithIdentifier:(id)identifier;
+- (void)drawLabel:(BOOL)shouldTruncateLabel
+           inRect:(NSRect)labelRect;
 
+@property (strong) NSPopUpButton * ampSelector;
+@property (strong) NSPopUpButton * effectSelector1;
+@property (strong) NSPopUpButton * effectSelector2;
+@property (strong) NSPopUpButton * effectSelector3;
+@property (strong) NSPopUpButton * effectSelector4;
 @end
