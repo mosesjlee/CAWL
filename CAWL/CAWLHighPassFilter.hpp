@@ -17,11 +17,10 @@
 class CAWLHighPassFilter : public CAWLBiQuadFilter
 {
 private:
-    float theta_c;
     void calculateCoefficients();
     
 public:
-    CAWLHighPassFilter(float cutOffFreq);
+    CAWLHighPassFilter(double cutOffFreq);
     ~CAWLHighPassFilter();
 };
 

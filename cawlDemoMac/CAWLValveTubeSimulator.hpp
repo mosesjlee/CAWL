@@ -18,12 +18,12 @@ public:
     CAWLValveTubeSimulator();
     ~CAWLValveTubeSimulator();
     void setGain(float newGain);
-    float getGain() { return mGain; }
+    double getGain() { return mGain; }
     virtual void processBuffer(float * buf, const unsigned int numOfSamples);
     
 private:
-    float mGain;
-    float mMixLevel;
+    double mGain;
+    double mMixLevel;
     //float peakSample;
 };
 #endif /* CAWLAmpSimulator_hpp */

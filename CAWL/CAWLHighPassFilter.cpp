@@ -20,7 +20,7 @@ CAWLHighPassFilter::~CAWLHighPassFilter()
 
 void CAWLHighPassFilter::calculateCoefficients()
 {
-    theta_c         = M_PI * centerFrequency/sampleRate;
+    double theta_c         = M_PI * centerFrequency/sampleRate;
     double omega    = M_PI * centerFrequency;
     double kappa    = omega/tan(theta_c);
     double phi      = (kappa * kappa) + (omega * omega) + (2 * (kappa * omega));

@@ -23,10 +23,10 @@ CAWLUniversalCombFilter::~CAWLUniversalCombFilter()
 
 void CAWLUniversalCombFilter::processBuffer(float * buf, const unsigned int numSamples)
 {
-    float yCurrSample = 0.0;
-    float xCurrSample = 0.0;
-    float xHCurrSample = lastSampleOfBlock;
-    float zDelayedSample = 0.0;
+    double yCurrSample = 0.0;
+    double xCurrSample = 0.0;
+    double xHCurrSample = lastSampleOfBlock;
+    double zDelayedSample = 0.0;
     for(unsigned i = 0; i < numSamples; i++)
     {
         xCurrSample = buf[i];

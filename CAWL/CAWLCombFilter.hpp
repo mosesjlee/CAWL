@@ -23,10 +23,10 @@ public:
 protected:
     CAWLDelayLine delayLine;
     unsigned int delay;
-    float lastSampleOfBlock;
-    float mFeedbackGain;
-    float mFeedForwardGain;
-    float mMixLevel;
+    double lastSampleOfBlock;
+    double mFeedbackGain;
+    double mFeedForwardGain;
+    double mMixLevel;
 };
 
 

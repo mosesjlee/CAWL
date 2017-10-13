@@ -17,11 +17,10 @@
 class CAWLLowPassFilter : public CAWLBiQuadFilter
 {
 private:
-    float theta_c;
     void calculateCoefficients();
     
 public:
-    CAWLLowPassFilter(float cutOffFreq);
+    CAWLLowPassFilter(double cutOffFreq);
     CAWLLowPassFilter();
     ~CAWLLowPassFilter();
 };

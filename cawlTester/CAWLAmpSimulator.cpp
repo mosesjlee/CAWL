@@ -258,9 +258,7 @@ CAWLAmpSimulator::~CAWLAmpSimulator()
 void
 CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
 {
-//    hp1.fillInputBuffer(buf, numOfSamples, 1);
-//    hp1.processNextSamples();
-//    hp1.fillOutputBuffer(buf, numOfSamples, 1);
+
     
 	//1st send it to be processed by the valve simulator
 	valveTube.processBuffer(buf, numOfSamples);
@@ -284,20 +282,6 @@ CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
     stack->updatecoefs(0.2, 0.2, 1);
 	stack->process(buf, numOfSamples);
     
-    
-//    for(int i =0 ; i < numOfSamples; i++)
-//    {
-//        buf[i] = dcBlocker2->processSample(buf[i]);
-//        buf[i] = buf[i] * 2;
-//    }
-    //valveTube.processBuffer(buf, numOfSamples);
-    //valveTube.processBuffer(buf, numOfSamples);
-#if 0
-	for(int i = 0; i < numOfSamples; i++)
-	{
-		printf("%f\n", buf[i]);
-	}
-#endif
 }
 
 

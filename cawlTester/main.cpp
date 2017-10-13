@@ -74,7 +74,7 @@ int main(int argc, const char * argv[]) {
     CAWLLowShelfFilter lsf, * lsfPtr = &lsf;
     lsf.setCutOffFreq(200); lsf.setGain(-60.0);
     CAWLHighShelfFilter hsf, * hsfPtr = &hsf;
-    hsf.setCutOffFreq(700); hsf.setGain(-30.0);
+    hsf.setCutOffFreq(700); hsf.setGain(0.0);
     CAWLPeakFilter pf, * pfPtr = &pf;
     pf.setQFactor(10); pf.setCutOffFreq(440); pf.setGain(10.0);
     CAWLPeakFilter pf2, * pf2Ptr = &pf2;
@@ -122,12 +122,12 @@ int main(int argc, const char * argv[]) {
 //        ptrToUcf->processBuffer(data, numSamples);
 //		ptrToAmp->processBuffer(data, numSamples);
 //        lsfPtr->processBuffer(data, numSamples);
-//        hsfPtr->processBuffer(data, numSamples);
+        hsfPtr->processBuffer(data, numSamples);
 //        pfPtr->processBuffer(data, numSamples);
 //        pf2Ptr->processBuffer(data, numSamples);
 		//ptrToValve->processBuffer(data,numSamples);
  //       lpfPtr->processBuffer(data, numSamples);
-        hpfPtr->processBuffer(data, numSamples);
+//        hpfPtr->processBuffer(data, numSamples);
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 87) {
             memcpy(debugPtr + (*debugCountPtr) * numSamples, data, (512 *sizeof(float)));

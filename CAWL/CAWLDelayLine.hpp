@@ -24,7 +24,6 @@ private:
     inline double linear_interp(float x_1, float y_1, float x_2, float y_2, float frac);
     
     double * delayLine;
-    //float currReadPos;
     float currWritePos;
     float currDelayInSamples;
     float maxDelayInSamples;

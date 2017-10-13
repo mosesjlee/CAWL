@@ -25,13 +25,13 @@ CAWLValveTubeSimulator::~CAWLValveTubeSimulator()
  */
 void CAWLValveTubeSimulator::processBuffer(float * buf, const unsigned int numOfSamples)
 {
-    float xCurrSample = 0.0;
-    float upperLimit = 0.320018;
-    float lowerLimit = -0.08905;
-    float upperClipVal = 0.630035;
-    float gainCoeff = 3.9375;
-    float correctCoeff = -6.153;
-    float peakSample = fabs(buf[0]);
+    double xCurrSample = 0.0;
+    double upperLimit = 0.320018;
+    double lowerLimit = -0.08905;
+    double upperClipVal = 0.630035;
+    double gainCoeff = 3.9375;
+    double correctCoeff = -6.153;
+    double peakSample = fabs(buf[0]);
     
     for(unsigned i = 0; i < numOfSamples; i++)
     {
@@ -52,8 +52,8 @@ void CAWLValveTubeSimulator::processBuffer(float * buf, const unsigned int numOf
         }
         else if(xCurrSample >= -1.0 && xCurrSample <= lowerLimit)
         {
-            float a = (1-pow((1-(fabs(xCurrSample) - 0.032847)),12));
-            float b = (1.0/3.0) * (fabs(xCurrSample)-0.032847);
+            double a = (1-pow((1-(fabs(xCurrSample) - 0.032847)),12));
+            double b = (1.0/3.0) * (fabs(xCurrSample)-0.032847);
             xCurrSample = -0.75*(a + b) + 0.01;
         }
         
