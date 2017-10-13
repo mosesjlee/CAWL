@@ -43,7 +43,7 @@ void CAWLBiQuadFilter::processBuffer(float * buf, const unsigned int numSamples)
 	}
 }
 
-void CAWLBiQuadFilter::setGain(float newGain)
+void CAWLBiQuadFilter::setGain(double newGain)
 {
     if(newGain > 12.0)
         newGain = 12.0;
@@ -53,7 +53,7 @@ void CAWLBiQuadFilter::setGain(float newGain)
     mGain = newGain;
     calculateCoefficients();
 }
-void CAWLBiQuadFilter::setCutOffFreq(float newFreq)
+void CAWLBiQuadFilter::setCutOffFreq(double newFreq)
 {
     centerFrequency = newFreq;
     calculateCoefficients();

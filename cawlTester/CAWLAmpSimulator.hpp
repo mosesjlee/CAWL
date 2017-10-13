@@ -39,7 +39,7 @@ public:
 private:
     CAWLValveTubeSimulator valveTube;
 	ToneStack * stack;
-    CAWLHighPassFilter hp1 = CAWLHighPassFilter(4000);
+    CAWLHighPassFilter hp1 = CAWLHighPassFilter(150);
     CAWLLowShelfFilter lsf;
 };
 #endif /* CAWLAmpSimulator_hpp */

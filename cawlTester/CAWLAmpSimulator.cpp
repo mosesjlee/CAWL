@@ -245,8 +245,7 @@ CAWLAmpSimulator::CAWLAmpSimulator(int model)
         std::cout << "princeton" << std::endl;
     }
     stack->init(sampleRate);
-    
-    lsf.setCutOffFreq(700);
+    lsf.setCutOffFreq(1000);
 }
 
 CAWLAmpSimulator::~CAWLAmpSimulator()
@@ -262,8 +261,9 @@ CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
     
 	//1st send it to be processed by the valve simulator
 	valveTube.processBuffer(buf, numOfSamples);
-//    hp1.processBuffer(buf, numOfSamples);
-    lsf.processBuffer(buf, numOfSamples);
+    hp1.processBuffer(buf, numOfSamples);
+//    lsf.processBuffer(buf, numOfSamples);
+    
 //    for(int i = 0; i < numOfSamples; i++)
 //    {
 //        //buf[i] = dcBlocker->processSample(buf[i]);

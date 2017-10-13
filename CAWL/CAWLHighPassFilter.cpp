@@ -8,7 +8,7 @@
 
 #include "CAWLHighPassFilter.hpp"
 
-CAWLHighPassFilter::CAWLHighPassFilter(float cutOffFreq)
+CAWLHighPassFilter::CAWLHighPassFilter(double cutOffFreq)
 {
     centerFrequency = cutOffFreq; //Default;
     calculateCoefficients();

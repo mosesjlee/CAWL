@@ -36,5 +36,4 @@ private:
     double delayedSample1 = 0.0, delayedSample2 = 0.0;
 	
 };
-
 #endif /* CAWLBiQuadFilter_hpp */

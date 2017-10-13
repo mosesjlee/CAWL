@@ -76,7 +76,7 @@ void CAWLPeakFilter::calculateCoefficients()
     
 }
 
-void CAWLPeakFilter::setQFactor(float newQFactor)
+void CAWLPeakFilter::setQFactor(double newQFactor)
 {
     qFactor = newQFactor;
     calculateCoefficients();

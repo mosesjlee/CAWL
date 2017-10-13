@@ -21,9 +21,10 @@
 #include "CAWLPeakFilter.hpp"
 
 #define SCALE 0.3
-#define WRITE_TO_FILE
-#define SHOW_DEBUG_SAMPLES
-#define TEST_BIQUAD 1
+//#define WRITE_TO_FILE
+//#define SHOW_DEBUG_SAMPLES
+#define TEST_BIQUAD 0
+#define TEST_COMB 0
 
 void getWhiteNoiseStream(float * stream);
 
@@ -64,7 +65,8 @@ int main(int argc, const char * argv[]) {
     CAWLFIRCombFilter *ptrToFir = &fir;
     CAWLIIRCombFilter iir; iir.setDelay(2.2675736961);
     CAWLIIRCombFilter *ptrToiir = &iir;
-    CAWLUniversalCombFilter ucf; ucf.setDelay(2.2675736961);
+//    CAWLUniversalCombFilter ucf; ucf.setDelay(2.2675736961);
+    CAWLUniversalCombFilter ucf; ucf.setDelay(400); ucf.setMixLevel(0.7); ucf.setFeedbackGain(0.7); ucf.setFeedForwardGain(1.0); 
     CAWLUniversalCombFilter * ptrToUcf = &ucf;
     
     CAWLLowPassFilter lpf; lpf.setCutOffFreq(1000);
@@ -101,7 +103,7 @@ int main(int argc, const char * argv[]) {
             else {
                 data[i] = 0.0;
             }
-#else
+#elif TEST_COMB
             //To test IIR/UCF Filters
             if(j < 100 ) {
                 data[i] = (float) sin (2 * M_PI * (j / cycleLength));
@@ -119,10 +121,10 @@ int main(int argc, const char * argv[]) {
 
         //ptrToFir->processBuffer(data, numSamples);
 //        ptrToiir->processBuffer(data, numSamples);
-//        ptrToUcf->processBuffer(data, numSamples);
-//		ptrToAmp->processBuffer(data, numSamples);
+        ptrToUcf->processBuffer(data, numSamples);
+		ptrToAmp->processBuffer(data, numSamples);
 //        lsfPtr->processBuffer(data, numSamples);
-        hsfPtr->processBuffer(data, numSamples);
+//        hsfPtr->processBuffer(data, numSamples);
 //        pfPtr->processBuffer(data, numSamples);
 //        pf2Ptr->processBuffer(data, numSamples);
 		//ptrToValve->processBuffer(data,numSamples);

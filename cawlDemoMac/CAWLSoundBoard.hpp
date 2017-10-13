@@ -10,8 +10,9 @@
 #define CAWLSoundBoard_hpp
 
 #include <stdio.h>
-#include "CAWL.hpp"
-#include "CAWLValveTubeSimulator.hpp"
+
+#include "CAWLAmpSimulator.hpp"
+#include "CAWLEqualizer.hpp"
 
 class CAWLSoundBoard
 {
@@ -19,8 +20,6 @@ public:
     CAWLSoundBoard();
     ~CAWLSoundBoard();
 private:
-    CAWL * cawlInstance;
-    CAWLValveTubeSimulator ampSim;
     
 };
 

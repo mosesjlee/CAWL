@@ -7,7 +7,7 @@
 //
 
 #include "CAWLLowPassFilter.hpp"
-CAWLLowPassFilter::CAWLLowPassFilter(float cutOffFreq)
+CAWLLowPassFilter::CAWLLowPassFilter(double cutOffFreq)
 {
     centerFrequency = cutOffFreq; //Default;
     calculateCoefficients();

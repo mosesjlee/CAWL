@@ -28,7 +28,4 @@ protected:
     double mFeedForwardGain;
     double mMixLevel;
 };
-
-
-
 #endif /* CAWLFilter_hpp */

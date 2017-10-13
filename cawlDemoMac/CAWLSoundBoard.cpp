@@ -7,3 +7,13 @@
 //
 
 #include "CAWLSoundBoard.hpp"
+
+CAWLSoundBoard::CAWLSoundBoard()
+{
+    
+}
+
+CAWLSoundBoard::~CAWLSoundBoard()
+{
+    
+}
