@@ -2,13 +2,12 @@
 //  SoundTab.h
 //  cawlDemoMac
 //
-//  Created by Moses Lee on 10/1/17.
+//  Created by Moses Lee on 10/12/17.
 //  Copyright © 2017 Moses Lee. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
-#import "CAWLSoundBoard.hpp"
 
-@interface SoundTab : NSTabView
+@interface SoundTab : NSTabViewItem
 
 @end
