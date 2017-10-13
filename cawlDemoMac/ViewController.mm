@@ -32,7 +32,7 @@
         [[_channelActivationButtons objectAtIndex:i] setButtonType:NSPushOnPushOffButton];
         [[_channelActivationButtons objectAtIndex:i] setBezelStyle:NSBezelStyleRoundRect];
         [[_channelActivationButtons objectAtIndex:i] setTitle:[NSString stringWithFormat:@"Channel %d", i + 1]];
-        //[[_channelActivationButtons objectAtIndex:i] setAction:(SEL _Nullable)];
+        [[_channelActivationButtons objectAtIndex:i] setAction:@selector(updateChannelOnOff)];
         [[_channelActivationButtons objectAtIndex:i] setNeedsDisplay:YES];
     }
 }
@@ -41,6 +41,10 @@
 	[super setRepresentedObject:representedObject];
 
 	// Update the view, if already loaded.
+}
+
+- (void) updateChannelOnOff {
+    NSLog(@"On off");
 }
 
 - (IBAction)playStopAction:(id)sender {

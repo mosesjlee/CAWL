@@ -87,6 +87,9 @@
 		91E056F51F907340008A5B25 /* CAWLChorus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E056F21F907340008A5B25 /* CAWLChorus.cpp */; };
 		91E056F61F907340008A5B25 /* CAWLChorus.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 91E056F31F907340008A5B25 /* CAWLChorus.hpp */; };
 		91E056F91F909910008A5B25 /* SoundTab.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91E056F81F909910008A5B25 /* SoundTab.mm */; };
+		91E056FC1F9146B8008A5B25 /* TapTempoCounter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91E056FB1F9146B8008A5B25 /* TapTempoCounter.mm */; };
+		91E056FF1F914A8E008A5B25 /* DelayUI.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91E056FE1F914A8E008A5B25 /* DelayUI.mm */; };
+		91E057021F914B9F008A5B25 /* AmpUI.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91E057011F914B9F008A5B25 /* AmpUI.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -167,6 +170,12 @@
 		91E056F31F907340008A5B25 /* CAWLChorus.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLChorus.hpp; sourceTree = "<group>"; };
 		91E056F71F909910008A5B25 /* SoundTab.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundTab.h; sourceTree = "<group>"; };
 		91E056F81F909910008A5B25 /* SoundTab.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundTab.mm; sourceTree = "<group>"; };
+		91E056FA1F9146B8008A5B25 /* TapTempoCounter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TapTempoCounter.h; sourceTree = "<group>"; };
+		91E056FB1F9146B8008A5B25 /* TapTempoCounter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TapTempoCounter.mm; sourceTree = "<group>"; };
+		91E056FD1F914A8E008A5B25 /* DelayUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DelayUI.h; sourceTree = "<group>"; };
+		91E056FE1F914A8E008A5B25 /* DelayUI.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DelayUI.mm; sourceTree = "<group>"; };
+		91E057001F914B9F008A5B25 /* AmpUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AmpUI.h; sourceTree = "<group>"; };
+		91E057011F914B9F008A5B25 /* AmpUI.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AmpUI.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,6 +316,12 @@
 				91CAEC971DC8587900CEF065 /* ViewController.mm */,
 				91E056F71F909910008A5B25 /* SoundTab.h */,
 				91E056F81F909910008A5B25 /* SoundTab.mm */,
+				91E056FD1F914A8E008A5B25 /* DelayUI.h */,
+				91E056FE1F914A8E008A5B25 /* DelayUI.mm */,
+				91E057001F914B9F008A5B25 /* AmpUI.h */,
+				91E057011F914B9F008A5B25 /* AmpUI.mm */,
+				91E056FA1F9146B8008A5B25 /* TapTempoCounter.h */,
+				91E056FB1F9146B8008A5B25 /* TapTempoCounter.mm */,
 				91CAEC991DC8587900CEF065 /* Assets.xcassets */,
 				91CAEC9B1DC8587900CEF065 /* Main.storyboard */,
 				91CAEC9E1DC8587900CEF065 /* Info.plist */,
@@ -558,9 +573,12 @@
 				911097F61F6DFA82002A9A92 /* CAWLAudioUnit.cpp in Sources */,
 				912977B71DE4F8610093134D /* CAWLRingBuffer.cpp in Sources */,
 				91CAEC921DC8587900CEF065 /* AppDelegate.mm in Sources */,
+				91E057021F914B9F008A5B25 /* AmpUI.mm in Sources */,
 				912977B61DE4F8610093134D /* CARingBuffer.cpp in Sources */,
 				912977B91DE4F8610093134D /* CAWL.cpp in Sources */,
+				91E056FC1F9146B8008A5B25 /* TapTempoCounter.mm in Sources */,
 				91E056F91F909910008A5B25 /* SoundTab.mm in Sources */,
+				91E056FF1F914A8E008A5B25 /* DelayUI.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
