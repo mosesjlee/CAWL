@@ -40,8 +40,9 @@ NSArray * effectsList = @[@"Off",
     
     [self drawAmpUI];
     ampUI.soundTabRef = self;
+    __block CAWLSoundBoard * weak = &_soundBoard;
     _buffer = ^(float * buf, const unsigned int numSamples) {
-        _soundBoard.processBuffer(buf, numSamples);
+        weak->processBuffer(buf, numSamples);
     };
     return self;
 }
