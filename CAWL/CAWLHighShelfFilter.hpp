@@ -9,7 +9,6 @@
 #ifndef CAWLHighShelfFilter_hpp
 #define CAWLHighShelfFilter_hpp
 
-#include <stdio.h>
 #include "CAWLBiQuadFilter.hpp"
 
 class CAWLHighShelfFilter : public CAWLBiQuadFilter

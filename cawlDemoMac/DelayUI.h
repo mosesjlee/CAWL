@@ -7,7 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "SoundTab.h"
 
 @interface DelayUI : NSView
-
+- (instancetype)initWithFrame:(NSRect)frameRect;
+@property SoundTab * soundTabRef;
 @end

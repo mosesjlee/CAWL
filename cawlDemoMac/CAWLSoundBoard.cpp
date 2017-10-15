@@ -22,7 +22,9 @@ CAWLSoundBoard::~CAWLSoundBoard()
 
 void CAWLSoundBoard::processBuffer(float * buf, const unsigned int numSamples)
 {
-    iir.processBuffer(buf, numSamples);
+    if(isDelayOn) {
+        iir.processBuffer(buf, numSamples);
+    }
     ampSim.processBuffer(buf, numSamples);
 }
 
@@ -34,4 +36,9 @@ void CAWLSoundBoard::setNewAmpGain(float gain)
 void CAWLSoundBoard::setNewDelayTime(float time)
 {
     iir.setDelay(time);
+}
+
+void CAWLSoundBoard::setDelayOnOff(bool onOff)
+{
+    isDelayOn = onOff;
 }

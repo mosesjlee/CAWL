@@ -10,9 +10,9 @@
 
 CAWLBiQuadFilter::CAWLBiQuadFilter()
 {
-	a_0 = a_1 = a_2 = b_1 = b_2 = c_0 = d_0 = 0.0f;
-	firstOrderDelayLine.setDelayTimeInSamples(1.0);
-	secondOrderDelayLine.setDelayTimeInSamples(1.0);
+    a_0 = a_1 = a_2 = b_1 = b_2 = c_0 = d_0 = 0.0f;
+    firstOrderDelayLine.setDelayTimeInSamples(1.0);
+    secondOrderDelayLine.setDelayTimeInSamples(1.0);
 }
 
 CAWLBiQuadFilter::~CAWLBiQuadFilter()

@@ -9,7 +9,6 @@
 #ifndef CAWLUniversalCombFilter_hpp
 #define CAWLUniversalCombFilter_hpp
 
-#include <stdio.h>
 #include "CAWLCombFilter.hpp"
 
 class CAWLUniversalCombFilter : public CAWLCombFilter

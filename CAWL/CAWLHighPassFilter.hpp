@@ -9,18 +9,19 @@
 #ifndef CAWLHighPassFilter_hpp
 #define CAWLHighPassFilter_hpp
 
-#include <stdio.h>
-#include <iostream>
-#include <math.h>
 #include "CAWLBiQuadFilter.hpp"
 
 class CAWLHighPassFilter : public CAWLBiQuadFilter
 {
 private:
     void calculateCoefficients();
+    double theta_c;
+    double omega;
+    double kappa;
+    double phi;
     
 public:
-    CAWLHighPassFilter(double cutOffFreq);
+    CAWLHighPassFilter();
     ~CAWLHighPassFilter();
 };
 

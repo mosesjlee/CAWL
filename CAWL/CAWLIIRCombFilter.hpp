@@ -9,7 +9,7 @@
 #ifndef CAWLIIRCombFilter_hpp
 #define CAWLIIRCombFilter_hpp
 #include "CAWLCombFilter.hpp"
-#include <stdio.h>
+
 class CAWLIIRCombFilter : public CAWLCombFilter
 {
 public:

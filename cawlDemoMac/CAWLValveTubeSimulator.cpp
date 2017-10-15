@@ -8,8 +8,8 @@
 
 #include "CAWLValveTubeSimulator.hpp"
 CAWLValveTubeSimulator::CAWLValveTubeSimulator():
-mMixLevel(1.0),
-mGain(1)
+mMixLevel(0.7),
+mGain(1.0)
 {
 }
 

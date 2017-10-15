@@ -23,9 +23,12 @@ public:
     void processBuffer(float * buf, const unsigned int numSamples);
     void setNewAmpGain(float gain);
     void setNewDelayTime(float time);
+    void setDelayOnOff(bool onOff);
 private:
     CAWLAmpSimulator ampSim;
     CAWLIIRCombFilter iir;
+    bool isDelayOn = false;
+    
 };
 
 #endif /* CAWLSoundBoard_hpp */

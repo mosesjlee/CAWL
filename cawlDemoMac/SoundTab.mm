@@ -8,6 +8,7 @@
 
 #import "SoundTab.h"
 #import "AmpUI.h"
+#import "DelayUI.h"
 
 
 NSArray * ampList = @[@"Phender BassWoman",
@@ -21,12 +22,15 @@ NSArray * effectsList = @[@"Off",
                           @"Chorus",
                           @"Overdrive",
                           @"Fuzz",
-                          @"Compressor"];
+                          @"Compressor",
+                          @"Equalizer"];
+
 @implementation SoundTab {
     NSString * currAmp;
     NSString * currEffect1, * currEffect2, * currEffect3, * currEffect4;
     AmpUI * ampUI;
- 
+    DelayUI * delayUI;
+    
 }
 - (instancetype)initWithIdentifier:(id)identifier
 {
@@ -38,12 +42,14 @@ NSArray * effectsList = @[@"Off",
     [self setupEffectSelector4];
     currAmp = [_ampSelector selectedItem].title;
     
-    [self drawAmpUI];
-    ampUI.soundTabRef = self;
-    __block CAWLSoundBoard * weak = &_soundBoard;
+    [self createAmpUI];
+    [self createDelayUI];
+    _soundBoard = new CAWLSoundBoard();
+    __block CAWLSoundBoard * weak = _soundBoard;
     _buffer = ^(float * buf, const unsigned int numSamples) {
         weak->processBuffer(buf, numSamples);
     };
+    
     return self;
 }
 
@@ -83,6 +89,11 @@ NSArray * effectsList = @[@"Off",
 - (void) updateEffect1Selection:(id)sender {
     currEffect1 =  [_effectSelector1 selectedItem].title;
     NSLog(@"Effect 1 selection %@ for %@", currEffect1, self.label);
+    
+    if([currEffect1 isEqualToString:effectsList[1]]) {
+        [self drawDelayUI];
+        _soundBoard->setDelayOnOff(true);
+    }
 }
 
 - (void)setupEffectSelector2 {
@@ -128,15 +139,55 @@ NSArray * effectsList = @[@"Off",
     NSLog(@"Effect 4 selection %@ for %@", currEffect4, self.label);
 }
 
-- (void) drawAmpUI {
-    ampUI = [[AmpUI alloc] initWithFrame:NSMakeRect(0, 300, 300, 600)];
+#pragma mark UI_Creation
+- (void) createAmpUI {
+    ampUI = [[AmpUI alloc] initWithFrame:NSMakeRect(0, 0, 300, 600)];
     [ampUI setFrameOrigin:NSMakePoint(0, 0)];
     [self.view addSubview:ampUI];
     [ampUI setNeedsLayout:YES];
+    ampUI.soundTabRef = self;
+}
+
+- (void)createDelayUI {
+    delayUI = [[DelayUI alloc] initWithFrame:NSMakeRect(0, 0, 300, 600)];
+    [delayUI setFrameOrigin:NSMakePoint(300, 0)];
+    [self.view addSubview:delayUI];
+    [delayUI setHidden:YES];
+    [delayUI setNeedsLayout:YES];
+    delayUI.soundTabRef = self;
+}
+
+- (void)createReverbUI {
+    
+}
+
+- (void)createWahUI {
+    
+}
+
+- (void)createChorusUI {
+    
+}
+
+- (void)createOverdriveUI {
+    
+}
+
+- (void)createFuzzUI {
+    
+}
+
+- (void)createCompressorUI {
+    
+}
+
+#pragma mark UI_drawing
+- (void)drawAmpUI {
+    
 }
 
 - (void)drawDelayUI {
-    
+    [delayUI setHidden:NO];
 }
 
 - (void)drawReverbUI {

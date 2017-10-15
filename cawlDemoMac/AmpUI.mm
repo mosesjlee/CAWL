@@ -39,7 +39,7 @@
 
 - (void) updateGain {
     gainLabel.stringValue = [NSString stringWithFormat:@"%f", gainSlider.doubleValue * 10.0];
-    _soundTabRef.soundBoard.setNewAmpGain(gainSlider.doubleValue);
+    _soundTabRef.soundBoard->setNewAmpGain(gainSlider.doubleValue);
     NSLog(@"New Gain: %f", gainSlider.doubleValue);
 }
 
@@ -51,6 +51,7 @@
     [volumeSlider setMaxValue:1.0];
     [volumeSlider setMinValue:0.0];
     [volumeSlider setAction:@selector(updateVolume)];
+    
     volumeLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(60, 270, 30, 20)];
     [self addSubview:volumeLabel];
     [volumeLabel setNeedsDisplay:YES];

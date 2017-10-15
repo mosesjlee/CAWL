@@ -7,6 +7,7 @@
 //
 
 #include "CAWLAmpSimulator.hpp"
+
 #define N 3
 
 /*
@@ -242,7 +243,8 @@ CAWLAmpSimulator::CAWLAmpSimulator(int model)
         std::cout << "princeton" << std::endl;
     }
     stack.init(sampleRate);
-    lsf.setCutOffFreq(1000);
+    lsf.setCutOffFreq(720);
+    hp1.setCutOffFreq(120);
 }
 
 CAWLAmpSimulator::~CAWLAmpSimulator()

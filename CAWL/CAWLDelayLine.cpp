@@ -10,7 +10,7 @@
 
 #include <math.h>
 
-#define MAX_DELAY_IN_SAMPLES 44100.0f * 2
+
 
 CAWLDelayLine::CAWLDelayLine():
 maxDelayInSamples(MAX_DELAY_IN_SAMPLES),
