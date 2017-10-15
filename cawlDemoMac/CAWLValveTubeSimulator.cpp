@@ -38,7 +38,7 @@ void CAWLValveTubeSimulator::processBuffer(float * buf, const unsigned int numOf
         peakSample = fabs(buf[i]) > peakSample ? fabs(buf[i]) : peakSample;
     }
     
-    
+    //if(peakSample < 0.0001) peakSample = mGain * .70;
     for(unsigned i = 0; i < numOfSamples; i++)
     {
         xCurrSample = (buf[i] * mGain)/peakSample;
@@ -59,8 +59,12 @@ void CAWLValveTubeSimulator::processBuffer(float * buf, const unsigned int numOf
         
         //For some reason the low mix level of the tube simulator yields the best results
         buf[i] = xCurrSample * mMixLevel + buf[i] * (1-mMixLevel);
-        xCurrSample = 0.0;
     }
 }
 
+void CAWLValveTubeSimulator::setGain(float newGain)
+{
+    mGain = newGain;
+    printf("New gain: %f\n", mGain);
+}
 

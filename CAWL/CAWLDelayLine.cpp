@@ -28,7 +28,7 @@ currDelayInSamples(0)
 
 CAWLDelayLine::~CAWLDelayLine()
 {
-    delete [] delayLine;
+    //delete [] delayLine;
 }
 
 void CAWLDelayLine::setDelayTimeInMilliseconds(float delayTime)

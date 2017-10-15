@@ -8,7 +8,8 @@
 
 #import "ViewController.h"
 
-@implementation ViewController
+@implementation ViewController {
+}
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -23,6 +24,24 @@
     }
     [self setupChannelActivationButtons];
     _isPlaying = NO;
+
+    //Just register here for now
+    _cawlInstance->registerInputBlockAtInputChannel([[_soundPageArray objectAtIndex:0] getSoundBoardRef], 0);
+    NSLog(@"Finished setting up View");
+}
+
+- (void)viewWillAppear
+{
+    [super viewWillAppear];
+    
+    //_board = new CAWLSoundBoard();
+//    __block CAWLSoundBoard * weakRef = &board;
+//    ca = ^(float * data,
+//                           const unsigned int numSamples){
+//        weakRef->processBuffer(data, numSamples);
+//    };
+    
+
 }
 
 - (void)setupChannelActivationButtons {
@@ -52,12 +71,12 @@
     //If its playing then stop
     if(_isPlaying) {
         _playStopButton.title = @"Play";
-        //_cawlInstance->stopPlaying();
+        _cawlInstance->stopPlaying();
     }
     //If its not playing then play
     else {
         _playStopButton.title = @"Stop";
-        //_cawlInstance->startPlaying();
+        _cawlInstance->startPlaying();
     }
     _isPlaying =! _isPlaying;
 }

@@ -7,9 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "SoundTab.h"
 
 
 @interface AmpUI : NSView
 - (instancetype)initWithFrame:(NSRect)frameRect;
+@property SoundTab * soundTabRef;
 @end

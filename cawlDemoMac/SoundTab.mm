@@ -9,6 +9,7 @@
 #import "SoundTab.h"
 #import "AmpUI.h"
 
+
 NSArray * ampList = @[@"Phender BassWoman",
                       @"Box DC30",
                       @"Phender Princesston"];
@@ -25,6 +26,7 @@ NSArray * effectsList = @[@"Off",
     NSString * currAmp;
     NSString * currEffect1, * currEffect2, * currEffect3, * currEffect4;
     AmpUI * ampUI;
+ 
 }
 - (instancetype)initWithIdentifier:(id)identifier
 {
@@ -35,7 +37,12 @@ NSArray * effectsList = @[@"Off",
     [self setupEffectSelector3];
     [self setupEffectSelector4];
     currAmp = [_ampSelector selectedItem].title;
+    
     [self drawAmpUI];
+    ampUI.soundTabRef = self;
+    _buffer = ^(float * buf, const unsigned int numSamples) {
+        _soundBoard.processBuffer(buf, numSamples);
+    };
     return self;
 }
 
@@ -43,6 +50,10 @@ NSArray * effectsList = @[@"Off",
            inRect:(NSRect)labelRect
 {
     [super drawLabel:shouldTruncateLabel inRect:labelRect];
+}
+
+- (cawlBuffers) getSoundBoardRef {
+    return _buffer;
 }
 
 - (void)setupAmpSelector {

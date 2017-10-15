@@ -11,7 +11,8 @@
 #import "CAWL.hpp"
 
 @interface ViewController : NSViewController {
-    
+    CAWLSoundBoard board;
+    cawlBuffers ca;
 }
 @property (weak) IBOutlet NSTabView *tabbedView;
 @property NSMutableArray<SoundTab *> * soundPageArray;

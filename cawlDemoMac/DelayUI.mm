@@ -8,7 +8,11 @@
 
 #import "DelayUI.h"
 
-@implementation DelayUI
+@implementation DelayUI {
+    NSSlider * feedbackSlider;
+    NSSlider * wetMixSlider;
+    NSSlider * delayTime;
+}
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];

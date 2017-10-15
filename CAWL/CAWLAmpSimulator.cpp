@@ -217,8 +217,7 @@ public:
     }
 };
 
-
-
+ToneStack stack;
 /*
  Below is my CAWLAmpSimulator class that uses the Valve Tube
  simulator to the preamp processing and the buffer is then sent
@@ -227,30 +226,28 @@ public:
 
 CAWLAmpSimulator::CAWLAmpSimulator()
 {
-	stack = new ToneStack();
-	stack->init(sampleRate);
-	stack->setmodel(0);
+    CAWLAmpSimulator(0);
 }
 
 CAWLAmpSimulator::CAWLAmpSimulator(int model)
 {
     if(model == 0) {
-        stack = new ToneStack(fender);
+        stack = ToneStack(fender);
         std::cout << "fender" << std::endl;
     } else if (model == 1){
-        stack = new ToneStack(voxAC30);
+        stack = ToneStack(voxAC30);
         std::cout << "vox" << std::endl;
     } else {
-        stack = new ToneStack(princeton);
+        stack = ToneStack(princeton);
         std::cout << "princeton" << std::endl;
     }
-    stack->init(sampleRate);
+    stack.init(sampleRate);
     lsf.setCutOffFreq(1000);
 }
 
 CAWLAmpSimulator::~CAWLAmpSimulator()
 {
-	delete stack;
+//	delete stack;
 }
 
 
@@ -279,19 +276,14 @@ CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
     //dc->process(buf, numOfSamples);
 
 	//3rd send it to be processed by the tone stack
-    stack->updatecoefs(0.2, 0.2, 1);
-	stack->process(buf, numOfSamples);
-    
+    stack.updatecoefs(0.2, 0.2, 1);
+	stack.process(buf, numOfSamples);
 }
 
-
-
-void CAWLAmpSimulator::setCutOff(float freq)
+void CAWLAmpSimulator::setGain(float gain)
 {
-    lsf.setCutOffFreq(freq);
+    valveTube.setGain(gain);
 }
-
-
 
 
 

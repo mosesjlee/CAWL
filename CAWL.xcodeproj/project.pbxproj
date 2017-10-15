@@ -16,8 +16,8 @@
 		91062DE41DE3983100BCBDA0 /* CAWLRingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91062DE21DE3983100BCBDA0 /* CAWLRingBuffer.cpp */; };
 		91062DE51DE3983100BCBDA0 /* CAWLRingBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 91062DE31DE3983100BCBDA0 /* CAWLRingBuffer.hpp */; };
 		910A953D1F6B760A009DA4A1 /* CAWLUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912CE4431F6B3C1B009F41AA /* CAWLUtilities.cpp */; };
-		911097F61F6DFA82002A9A92 /* CAWLAudioUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912CE43F1F6B3BB8009F41AA /* CAWLAudioUnit.cpp */; };
-		911097F71F6DFA85002A9A92 /* CAWLUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912CE4431F6B3C1B009F41AA /* CAWLUtilities.cpp */; };
+		911097F61F6DFA82002A9A92 /* CAWLAudioUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912CE43F1F6B3BB8009F41AA /* CAWLAudioUnit.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		911097F71F6DFA85002A9A92 /* CAWLUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912CE4431F6B3C1B009F41AA /* CAWLUtilities.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		911097FB1F6F16B2002A9A92 /* CAWLSoundModule.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 911097F91F6F16B2002A9A92 /* CAWLSoundModule.hpp */; };
 		911097FE1F6F22F2002A9A92 /* CAWLDelayLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 911097FC1F6F22F2002A9A92 /* CAWLDelayLine.cpp */; };
 		911097FF1F6F22F2002A9A92 /* CAWLDelayLine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 911097FD1F6F22F2002A9A92 /* CAWLDelayLine.hpp */; };
@@ -29,9 +29,9 @@
 		912977AE1DE4F8600093134D /* CARingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91062DDB1DE397E900BCBDA0 /* CARingBuffer.cpp */; };
 		912977AF1DE4F8600093134D /* CAWLRingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91062DE21DE3983100BCBDA0 /* CAWLRingBuffer.cpp */; };
 		912977B11DE4F8600093134D /* CAWL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91CAEC831DC8584600CEF065 /* CAWL.cpp */; };
-		912977B61DE4F8610093134D /* CARingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91062DDB1DE397E900BCBDA0 /* CARingBuffer.cpp */; };
-		912977B71DE4F8610093134D /* CAWLRingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91062DE21DE3983100BCBDA0 /* CAWLRingBuffer.cpp */; };
-		912977B91DE4F8610093134D /* CAWL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91CAEC831DC8584600CEF065 /* CAWL.cpp */; };
+		912977B61DE4F8610093134D /* CARingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91062DDB1DE397E900BCBDA0 /* CARingBuffer.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		912977B71DE4F8610093134D /* CAWLRingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91062DE21DE3983100BCBDA0 /* CAWLRingBuffer.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		912977B91DE4F8610093134D /* CAWL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91CAEC831DC8584600CEF065 /* CAWL.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		912977BA1DE4F8850093134D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91062DBA1DE396A700BCBDA0 /* AudioToolbox.framework */; };
 		912977BB1DE4F8850093134D /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CAECA31DC8597C00CEF065 /* CoreAudio.framework */; };
 		912CE4411F6B3BB8009F41AA /* CAWLAudioUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912CE43F1F6B3BB8009F41AA /* CAWLAudioUnit.cpp */; };
@@ -76,8 +76,6 @@
 		91E056E01F906749008A5B25 /* CAWLEqualizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E056DE1F906749008A5B25 /* CAWLEqualizer.cpp */; };
 		91E056E11F906749008A5B25 /* CAWLEqualizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E056DE1F906749008A5B25 /* CAWLEqualizer.cpp */; };
 		91E056E21F906749008A5B25 /* CAWLEqualizer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 91E056DF1F906749008A5B25 /* CAWLEqualizer.hpp */; };
-		91E056E91F907040008A5B25 /* CAWLAmpSimulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E056E41F9069A0008A5B25 /* CAWLAmpSimulator.cpp */; };
-		91E056EA1F907041008A5B25 /* CAWLAmpSimulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E056E41F9069A0008A5B25 /* CAWLAmpSimulator.cpp */; };
 		91E056EB1F907044008A5B25 /* CAWLValveTubeSimulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E056E61F9069A0008A5B25 /* CAWLValveTubeSimulator.cpp */; };
 		91E056EC1F907044008A5B25 /* CAWLValveTubeSimulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E056E61F9069A0008A5B25 /* CAWLValveTubeSimulator.cpp */; };
 		91E056EF1F907334008A5B25 /* CAWLDelayEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E056ED1F907334008A5B25 /* CAWLDelayEffect.cpp */; };
@@ -90,6 +88,23 @@
 		91E056FC1F9146B8008A5B25 /* TapTempoCounter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91E056FB1F9146B8008A5B25 /* TapTempoCounter.mm */; };
 		91E056FF1F914A8E008A5B25 /* DelayUI.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91E056FE1F914A8E008A5B25 /* DelayUI.mm */; };
 		91E057021F914B9F008A5B25 /* AmpUI.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91E057011F914B9F008A5B25 /* AmpUI.mm */; };
+		91E057031F9168A5008A5B25 /* CAWLSoundBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E056E81F9069A4008A5B25 /* CAWLSoundBoard.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		91E057051F91779E008A5B25 /* CAWLEqualizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E056DE1F906749008A5B25 /* CAWLEqualizer.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		91E057061F9177A1008A5B25 /* CAWLDelayEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E056ED1F907334008A5B25 /* CAWLDelayEffect.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		91E057071F9177A3008A5B25 /* CAWLChorus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E056F21F907340008A5B25 /* CAWLChorus.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		91E057081F9177A6008A5B25 /* CAWLValveTubeSimulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E056E61F9069A0008A5B25 /* CAWLValveTubeSimulator.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		91E057091F9177BC008A5B25 /* CAWLBiQuadFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9191B3AF1F85F62B004C6F33 /* CAWLBiQuadFilter.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		91E0570A1F9177BC008A5B25 /* CAWLLowShelfFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3E4F1F871DF600E3DB09 /* CAWLLowShelfFilter.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		91E0570B1F9177BC008A5B25 /* CAWLHighShelfFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3E551F874D6C00E3DB09 /* CAWLHighShelfFilter.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		91E0570C1F9177BC008A5B25 /* CAWLPeakFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3E621F88991600E3DB09 /* CAWLPeakFilter.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		91E0570D1F9177BC008A5B25 /* CAWLHighPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9177E63D1F7CCE4600D36C46 /* CAWLHighPassFilter.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		91E0570E1F9177BC008A5B25 /* CAWLLowPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9177E63A1F7CCDF600D36C46 /* CAWLLowPassFilter.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		91E0570F1F9177BC008A5B25 /* CAWLFIRCombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 911098001F6F2387002A9A92 /* CAWLFIRCombFilter.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		91E057101F9177BC008A5B25 /* CAWLIIRCombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 911098041F6F2393002A9A92 /* CAWLIIRCombFilter.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		91E057111F9177BC008A5B25 /* CAWLUniversalCombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912E05171F8023BF00C13E55 /* CAWLUniversalCombFilter.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		91E057121F9177BC008A5B25 /* CAWLCombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912E05121F8023AE00C13E55 /* CAWLCombFilter.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		91E057131F9177BC008A5B25 /* CAWLDelayLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 911097FC1F6F22F2002A9A92 /* CAWLDelayLine.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		91E057161F92BF8D008A5B25 /* CAWLAmpSimulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E057151F92BF6E008A5B25 /* CAWLAmpSimulator.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -158,8 +173,6 @@
 		91DC3E621F88991600E3DB09 /* CAWLPeakFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLPeakFilter.cpp; sourceTree = "<group>"; };
 		91E056DE1F906749008A5B25 /* CAWLEqualizer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLEqualizer.cpp; sourceTree = "<group>"; };
 		91E056DF1F906749008A5B25 /* CAWLEqualizer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLEqualizer.hpp; sourceTree = "<group>"; };
-		91E056E31F9069A0008A5B25 /* CAWLAmpSimulator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = CAWLAmpSimulator.hpp; path = cawlTester/CAWLAmpSimulator.hpp; sourceTree = SOURCE_ROOT; };
-		91E056E41F9069A0008A5B25 /* CAWLAmpSimulator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = CAWLAmpSimulator.cpp; path = cawlTester/CAWLAmpSimulator.cpp; sourceTree = SOURCE_ROOT; };
 		91E056E51F9069A0008A5B25 /* CAWLValveTubeSimulator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = CAWLValveTubeSimulator.hpp; path = cawlDemoMac/CAWLValveTubeSimulator.hpp; sourceTree = SOURCE_ROOT; };
 		91E056E61F9069A0008A5B25 /* CAWLValveTubeSimulator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = CAWLValveTubeSimulator.cpp; path = cawlDemoMac/CAWLValveTubeSimulator.cpp; sourceTree = SOURCE_ROOT; };
 		91E056E71F9069A3008A5B25 /* CAWLSoundBoard.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = CAWLSoundBoard.hpp; path = cawlDemoMac/CAWLSoundBoard.hpp; sourceTree = SOURCE_ROOT; };
@@ -176,6 +189,8 @@
 		91E056FE1F914A8E008A5B25 /* DelayUI.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DelayUI.mm; sourceTree = "<group>"; };
 		91E057001F914B9F008A5B25 /* AmpUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AmpUI.h; sourceTree = "<group>"; };
 		91E057011F914B9F008A5B25 /* AmpUI.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AmpUI.mm; sourceTree = "<group>"; };
+		91E057141F92BF6D008A5B25 /* CAWLAmpSimulator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLAmpSimulator.hpp; sourceTree = "<group>"; };
+		91E057151F92BF6E008A5B25 /* CAWLAmpSimulator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLAmpSimulator.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -359,8 +374,8 @@
 				91E056EE1F907334008A5B25 /* CAWLDelayEffect.hpp */,
 				91E056F21F907340008A5B25 /* CAWLChorus.cpp */,
 				91E056F31F907340008A5B25 /* CAWLChorus.hpp */,
-				91E056E41F9069A0008A5B25 /* CAWLAmpSimulator.cpp */,
-				91E056E31F9069A0008A5B25 /* CAWLAmpSimulator.hpp */,
+				91E057151F92BF6E008A5B25 /* CAWLAmpSimulator.cpp */,
+				91E057141F92BF6D008A5B25 /* CAWLAmpSimulator.hpp */,
 				91E056E61F9069A0008A5B25 /* CAWLValveTubeSimulator.cpp */,
 				91E056E51F9069A0008A5B25 /* CAWLValveTubeSimulator.hpp */,
 			);
@@ -515,7 +530,6 @@
 				91E056EC1F907044008A5B25 /* CAWLValveTubeSimulator.cpp in Sources */,
 				912977AA1DE4F0E70093134D /* main.cpp in Sources */,
 				910A953D1F6B760A009DA4A1 /* CAWLUtilities.cpp in Sources */,
-				91E056EA1F907041008A5B25 /* CAWLAmpSimulator.cpp in Sources */,
 				9177E63E1F7CCEFA00D36C46 /* CAWLHighPassFilter.cpp in Sources */,
 				912E051A1F8023BF00C13E55 /* CAWLUniversalCombFilter.cpp in Sources */,
 				9191B3A11F804543004C6F33 /* CAWLIIRCombFilter.cpp in Sources */,
@@ -554,7 +568,6 @@
 				912E05191F8023BF00C13E55 /* CAWLUniversalCombFilter.cpp in Sources */,
 				911098061F6F2393002A9A92 /* CAWLIIRCombFilter.cpp in Sources */,
 				91E056E01F906749008A5B25 /* CAWLEqualizer.cpp in Sources */,
-				91E056E91F907040008A5B25 /* CAWLAmpSimulator.cpp in Sources */,
 				91DC3E571F874D6C00E3DB09 /* CAWLHighShelfFilter.cpp in Sources */,
 				91DC3E631F88995800E3DB09 /* CAWLPeakFilter.cpp in Sources */,
 				912E05141F8023AE00C13E55 /* CAWLCombFilter.cpp in Sources */,
@@ -567,17 +580,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91E0570B1F9177BC008A5B25 /* CAWLHighShelfFilter.cpp in Sources */,
+				91E0570A1F9177BC008A5B25 /* CAWLLowShelfFilter.cpp in Sources */,
+				91E057101F9177BC008A5B25 /* CAWLIIRCombFilter.cpp in Sources */,
+				91E057031F9168A5008A5B25 /* CAWLSoundBoard.cpp in Sources */,
+				91E0570D1F9177BC008A5B25 /* CAWLHighPassFilter.cpp in Sources */,
 				91CAEC981DC8587900CEF065 /* ViewController.mm in Sources */,
 				911097F71F6DFA85002A9A92 /* CAWLUtilities.cpp in Sources */,
 				91CAEC951DC8587900CEF065 /* main.m in Sources */,
+				91E057161F92BF8D008A5B25 /* CAWLAmpSimulator.cpp in Sources */,
+				91E057071F9177A3008A5B25 /* CAWLChorus.cpp in Sources */,
 				911097F61F6DFA82002A9A92 /* CAWLAudioUnit.cpp in Sources */,
+				91E0570C1F9177BC008A5B25 /* CAWLPeakFilter.cpp in Sources */,
 				912977B71DE4F8610093134D /* CAWLRingBuffer.cpp in Sources */,
+				91E0570E1F9177BC008A5B25 /* CAWLLowPassFilter.cpp in Sources */,
+				91E057081F9177A6008A5B25 /* CAWLValveTubeSimulator.cpp in Sources */,
+				91E057061F9177A1008A5B25 /* CAWLDelayEffect.cpp in Sources */,
+				91E0570F1F9177BC008A5B25 /* CAWLFIRCombFilter.cpp in Sources */,
+				91E057051F91779E008A5B25 /* CAWLEqualizer.cpp in Sources */,
 				91CAEC921DC8587900CEF065 /* AppDelegate.mm in Sources */,
 				91E057021F914B9F008A5B25 /* AmpUI.mm in Sources */,
 				912977B61DE4F8610093134D /* CARingBuffer.cpp in Sources */,
+				91E057121F9177BC008A5B25 /* CAWLCombFilter.cpp in Sources */,
 				912977B91DE4F8610093134D /* CAWL.cpp in Sources */,
 				91E056FC1F9146B8008A5B25 /* TapTempoCounter.mm in Sources */,
+				91E057091F9177BC008A5B25 /* CAWLBiQuadFilter.cpp in Sources */,
 				91E056F91F909910008A5B25 /* SoundTab.mm in Sources */,
+				91E057111F9177BC008A5B25 /* CAWLUniversalCombFilter.cpp in Sources */,
+				91E057131F9177BC008A5B25 /* CAWLDelayLine.cpp in Sources */,
 				91E056FF1F914A8E008A5B25 /* DelayUI.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -722,7 +752,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = cawlDemoMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.moseslee.cawlDemoMac;
@@ -735,6 +770,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = cawlDemoMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

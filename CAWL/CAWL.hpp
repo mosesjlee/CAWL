@@ -70,7 +70,8 @@ private:
 private:
 	static CAWL * cawlInstance;
     
-	__weak cawlBuffers * sampleBuffer;
+	//__weak cawlBuffers * sampleBuffer;
+    __weak cawlBuffers * sampleBuffer;
 	
     CAWLAudioUnit * aggregateAudioUnit;
 	AUGraph graph;

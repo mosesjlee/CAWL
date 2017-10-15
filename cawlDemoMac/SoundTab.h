@@ -7,15 +7,21 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "CAWLSoundBoard.hpp"
+#import "CAWL.hpp"
 
 @interface SoundTab : NSTabViewItem
 - (instancetype)initWithIdentifier:(id)identifier;
 - (void)drawLabel:(BOOL)shouldTruncateLabel
            inRect:(NSRect)labelRect;
+- (cawlBuffers) getSoundBoardRef;
 
 @property (strong) NSPopUpButton * ampSelector;
 @property (strong) NSPopUpButton * effectSelector1;
 @property (strong) NSPopUpButton * effectSelector2;
 @property (strong) NSPopUpButton * effectSelector3;
 @property (strong) NSPopUpButton * effectSelector4;
+
+@property CAWLSoundBoard soundBoard;
+@property cawlBuffers buffer;
 @end
