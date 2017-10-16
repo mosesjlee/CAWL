@@ -92,9 +92,10 @@ NSArray * effectsList = @[@"Off",
 
 - (void) updateEffect1Selection:(id)sender {
     //See if the selectd effect is used
-    if([currEffect2 isEqualToString:[_effectSelector1 selectedItem].title] ||
+    if(([currEffect2 isEqualToString:[_effectSelector1 selectedItem].title] ||
        [currEffect3 isEqualToString:[_effectSelector1 selectedItem].title] ||
-       [currEffect4 isEqualToString:[_effectSelector1 selectedItem].title]) {
+       [currEffect4 isEqualToString:[_effectSelector1 selectedItem].title]) &&
+       ![[_effectSelector1 selectedItem].title isEqualToString:effectsList[0]]) {
         NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle:@"OK"];
         [alert setInformativeText:@"Effect already being used."];
