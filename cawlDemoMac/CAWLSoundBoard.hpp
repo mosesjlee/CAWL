@@ -22,13 +22,18 @@ public:
     ~CAWLSoundBoard();
     void processBuffer(float * buf, const unsigned int numSamples);
     void setNewAmpGain(float gain);
+    void setTurnOnAmp(bool onOff);
     void setNewDelayTime(float time);
     void setDelayOnOff(bool onOff);
+    void setDelayWetMixLevel(double wetMixLevel);
+    void setDelayFeedbackGain(double gain);
+    
 private:
     CAWLAmpSimulator ampSim;
+    CAWLEqualizer equalizer;
     CAWLIIRCombFilter iir;
     bool isDelayOn = false;
-    
+    bool isAmpOn = false;
 };
 
 #endif /* CAWLSoundBoard_hpp */

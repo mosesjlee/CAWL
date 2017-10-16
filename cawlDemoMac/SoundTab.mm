@@ -9,9 +9,11 @@
 #import "SoundTab.h"
 #import "AmpUI.h"
 #import "DelayUI.h"
+#import "EqualizerUI.h"
 
 
-NSArray * ampList = @[@"Phender BassWoman",
+NSArray * ampList = @[@"Off",
+                      @"Phender BassWoman",
                       @"Box DC30",
                       @"Phender Princesston"];
 
@@ -30,8 +32,9 @@ NSArray * effectsList = @[@"Off",
     NSString * currEffect1, * currEffect2, * currEffect3, * currEffect4;
     AmpUI * ampUI;
     DelayUI * delayUI;
-    
+    EqualizerUI * equalizerUI;
 }
+
 - (instancetype)initWithIdentifier:(id)identifier
 {
     self = [super initWithIdentifier:identifier];
@@ -75,6 +78,7 @@ NSArray * effectsList = @[@"Off",
 - (void) updateAmpSelection:(id)sender {
     currAmp =  [_ampSelector selectedItem].title;
     NSLog(@"Amp selection %@ for %@", currAmp, self.label);
+    [self drawAmpUI];
 }
      
 - (void)setupEffectSelector1 {
@@ -87,11 +91,24 @@ NSArray * effectsList = @[@"Off",
 }
 
 - (void) updateEffect1Selection:(id)sender {
+    //See if the selectd effect is used
+    if([currEffect2 isEqualToString:[_effectSelector1 selectedItem].title] ||
+       [currEffect3 isEqualToString:[_effectSelector1 selectedItem].title] ||
+       [currEffect4 isEqualToString:[_effectSelector1 selectedItem].title]) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setInformativeText:@"Effect already being used."];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        if ([alert runModal] == NSAlertFirstButtonReturn) {
+            return;
+        }
+    }
+    
     currEffect1 =  [_effectSelector1 selectedItem].title;
     NSLog(@"Effect 1 selection %@ for %@", currEffect1, self.label);
     
     if([currEffect1 isEqualToString:effectsList[1]]) {
-        [self drawDelayUI];
+        [self drawDelayUI:NSMakePoint(300, 0)];
         _soundBoard->setDelayOnOff(true);
     }
 }
@@ -106,8 +123,25 @@ NSArray * effectsList = @[@"Off",
 }
 
 - (void) updateEffect2Selection:(id)sender {
+    if([currEffect1 isEqualToString:[_effectSelector1 selectedItem].title] ||
+       [currEffect3 isEqualToString:[_effectSelector1 selectedItem].title] ||
+       [currEffect4 isEqualToString:[_effectSelector1 selectedItem].title]) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setInformativeText:@"Effect already being used."];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        if ([alert runModal] == NSAlertFirstButtonReturn) {
+            return;
+        }
+    }
+    
     currEffect2 =  [_effectSelector2 selectedItem].title;
     NSLog(@"Effect 2 selection %@ for %@", currEffect2, self.label);
+    
+    if([currEffect2 isEqualToString:effectsList[1]]) {
+        [self drawDelayUI:NSMakePoint(530, 0)];
+        _soundBoard->setDelayOnOff(true);
+    }
 }
 
 - (void)setupEffectSelector3 {
@@ -121,8 +155,23 @@ NSArray * effectsList = @[@"Off",
 }
 
 - (void) updateEffect3Selection:(id)sender {
+    if([currEffect1 isEqualToString:[_effectSelector1 selectedItem].title] ||
+       [currEffect2 isEqualToString:[_effectSelector1 selectedItem].title] ||
+       [currEffect4 isEqualToString:[_effectSelector1 selectedItem].title]) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setInformativeText:@"Effect already being used."];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        if ([alert runModal] == NSAlertFirstButtonReturn) {
+            return;
+        }
+    }
     currEffect3 =  [_effectSelector3 selectedItem].title;
     NSLog(@"Effect 3 selection %@ for %@", currEffect3, self.label);
+    if([currEffect3 isEqualToString:effectsList[1]]) {
+        [self drawDelayUI:NSMakePoint(750, 0)];
+        _soundBoard->setDelayOnOff(true);
+    }
 }
 
 - (void)setupEffectSelector4 {
@@ -135,8 +184,23 @@ NSArray * effectsList = @[@"Off",
 }
 
 - (void) updateEffect4Selection:(id)sender {
+    if([currEffect1 isEqualToString:[_effectSelector1 selectedItem].title] ||
+       [currEffect2 isEqualToString:[_effectSelector1 selectedItem].title] ||
+       [currEffect3 isEqualToString:[_effectSelector1 selectedItem].title]) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setInformativeText:@"Effect already being used."];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        if ([alert runModal] == NSAlertFirstButtonReturn) {
+            return;
+        }
+    }
     currEffect4 =  [_effectSelector4 selectedItem].title;
     NSLog(@"Effect 4 selection %@ for %@", currEffect4, self.label);
+    if([currEffect4 isEqualToString:effectsList[1]]) {
+        [self drawDelayUI:NSMakePoint(970, 0)];
+        _soundBoard->setDelayOnOff(true);
+    }
 }
 
 #pragma mark UI_Creation
@@ -144,13 +208,13 @@ NSArray * effectsList = @[@"Off",
     ampUI = [[AmpUI alloc] initWithFrame:NSMakeRect(0, 0, 300, 600)];
     [ampUI setFrameOrigin:NSMakePoint(0, 0)];
     [self.view addSubview:ampUI];
+    [ampUI setHidden:YES];
     [ampUI setNeedsLayout:YES];
     ampUI.soundTabRef = self;
 }
 
 - (void)createDelayUI {
     delayUI = [[DelayUI alloc] initWithFrame:NSMakeRect(0, 0, 300, 600)];
-    [delayUI setFrameOrigin:NSMakePoint(300, 0)];
     [self.view addSubview:delayUI];
     [delayUI setHidden:YES];
     [delayUI setNeedsLayout:YES];
@@ -183,10 +247,11 @@ NSArray * effectsList = @[@"Off",
 
 #pragma mark UI_drawing
 - (void)drawAmpUI {
-    
+    [ampUI setHidden:NO];
 }
 
-- (void)drawDelayUI {
+- (void)drawDelayUI:(NSPoint) newPoint{
+    [delayUI setFrameOrigin:newPoint];
     [delayUI setHidden:NO];
 }
 
@@ -211,6 +276,40 @@ NSArray * effectsList = @[@"Off",
 }
 
 - (void)drawCompressorUI {
+    
+}
+
+#pragma mark Hide_UI
+
+- (void)hideAmpUI {
+    [ampUI setHidden:YES];
+}
+
+- (void)hideDelayUI{
+    [delayUI setHidden:YES];
+}
+
+- (void)hideReverbUI {
+    
+}
+
+- (void)hideWahUI {
+    
+}
+
+- (void)hideChorusUI {
+    
+}
+
+- (void)hideOverdriveUI {
+    
+}
+
+- (void)hideFuzzUI {
+    
+}
+
+- (void)hideCompressorUI {
     
 }
 @end

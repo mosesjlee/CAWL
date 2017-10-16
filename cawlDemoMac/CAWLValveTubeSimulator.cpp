@@ -38,7 +38,7 @@ void CAWLValveTubeSimulator::processBuffer(float * buf, const unsigned int numOf
         peakSample = fabs(buf[i]) > peakSample ? fabs(buf[i]) : peakSample;
     }
     
-    //if(peakSample < 0.0001) peakSample = mGain * .70;
+    if(peakSample < 0.00006) peakSample = mGain * .70;
     for(unsigned i = 0; i < numOfSamples; i++)
     {
         xCurrSample = (buf[i] * mGain)/peakSample;

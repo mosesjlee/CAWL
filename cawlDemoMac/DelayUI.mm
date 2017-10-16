@@ -47,7 +47,8 @@
 }
 
 - (void)updateFeedbackGainLevel {
-    NSLog(@"Update Feedback gain");
+    feedbackLabel.stringValue = [NSString stringWithFormat:@"%f", feedbackSlider.doubleValue];
+    _soundTabRef.soundBoard->setDelayFeedbackGain(feedbackSlider.doubleValue);
 }
 
 - (void)setupWetMixUI {
@@ -65,7 +66,8 @@
 }
 
 - (void)updateWetMixLevel {
-    NSLog(@"Update WetMix gain");
+    wetMixLabel.stringValue = [NSString stringWithFormat:@"%f", wetMixSlider.doubleValue];
+    _soundTabRef.soundBoard->setDelayWetMixLevel(wetMixSlider.doubleValue);
 }
 
 - (void)setupDelayTimeUI {
@@ -84,7 +86,6 @@
 
 - (void)updateDelayTime {
     delayTimeLabel.stringValue = [NSString stringWithFormat:@"%d", delayTimeSlider.intValue];
-    NSLog(@"New delay %@", delayTimeLabel.stringValue);
     _soundTabRef.soundBoard->setNewDelayTime(delayTimeSlider.intValue);
 }
 
