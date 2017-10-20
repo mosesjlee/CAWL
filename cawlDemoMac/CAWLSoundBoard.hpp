@@ -35,6 +35,16 @@ public:
     
     //Equalizer Controls
     void turnOnEqualizer(bool onOff);
+    void setLowShelfCenterFreq(double centFreq);
+    void setHighShelfCenterFreq(double centFreq);
+    void setLowMidCenterFreq(double centFreq);
+    void setHighMidCenterFreq(double centFreq);
+    void setLowShelfGain(double centFreq);
+    void setHighShelfGain(double centFreq);
+    void setLowMidGain(double centFreq);
+    void setHighMidGain(double centFreq);
+    void setLowQFactor(double centFreq);
+    void setHighQFactor(double centFreq);
     
     //Chorus controls
     void turnOnChorus(bool onOff);
@@ -50,6 +60,10 @@ public:
     
     //Compressor Controls
     void turnOnCompressor(bool onOff);
+    void setThreshold();
+    void setCompressorGain();
+    void setCompressorKnee();
+    void setCompressorRatio();
     
 private:
     CAWLAmpSimulator * ampSim;
