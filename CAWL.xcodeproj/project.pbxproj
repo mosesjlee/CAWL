@@ -93,6 +93,8 @@
 		91E057161F92BF8D008A5B25 /* CAWLAmpSimulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E057151F92BF6E008A5B25 /* CAWLAmpSimulator.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		91E057171F9406C9008A5B25 /* CAWLAmpSimulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E057151F92BF6E008A5B25 /* CAWLAmpSimulator.cpp */; };
 		91E057181F940C09008A5B25 /* CAWLSoundBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E056E81F9069A4008A5B25 /* CAWLSoundBoard.cpp */; };
+		91E9D2691F9996CD00491E6A /* DelayEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E9D2671F9996CD00491E6A /* DelayEffect.cpp */; };
+		91E9D26A1F9996CD00491E6A /* DelayEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E9D2671F9996CD00491E6A /* DelayEffect.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -195,6 +197,8 @@
 		91E057011F914B9F008A5B25 /* AmpUI.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AmpUI.mm; sourceTree = "<group>"; };
 		91E057141F92BF6D008A5B25 /* CAWLAmpSimulator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLAmpSimulator.hpp; sourceTree = "<group>"; };
 		91E057151F92BF6E008A5B25 /* CAWLAmpSimulator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLAmpSimulator.cpp; sourceTree = "<group>"; };
+		91E9D2671F9996CD00491E6A /* DelayEffect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DelayEffect.cpp; sourceTree = "<group>"; };
+		91E9D2681F9996CD00491E6A /* DelayEffect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DelayEffect.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +280,8 @@
 				912E05131F8023AE00C13E55 /* CAWLCombFilter.hpp */,
 				911097FC1F6F22F2002A9A92 /* CAWLDelayLine.cpp */,
 				911097FD1F6F22F2002A9A92 /* CAWLDelayLine.hpp */,
+				91E9D2671F9996CD00491E6A /* DelayEffect.cpp */,
+				91E9D2681F9996CD00491E6A /* DelayEffect.hpp */,
 				911097F91F6F16B2002A9A92 /* CAWLSoundModule.hpp */,
 			);
 			name = SoundModules;
@@ -550,6 +556,7 @@
 				9191B3B21F85F62B004C6F33 /* CAWLBiQuadFilter.cpp in Sources */,
 				912977AF1DE4F8600093134D /* CAWLRingBuffer.cpp in Sources */,
 				912977B11DE4F8600093134D /* CAWL.cpp in Sources */,
+				91E9D26A1F9996CD00491E6A /* DelayEffect.cpp in Sources */,
 				91DC3E641F88995900E3DB09 /* CAWLPeakFilter.cpp in Sources */,
 				912E05111F8019F800C13E55 /* CAWLDelayLine.cpp in Sources */,
 				917A9AD91F6C366000422478 /* CAWLAudioUnit.cpp in Sources */,
@@ -596,6 +603,7 @@
 				91CAEC921DC8587900CEF065 /* AppDelegate.mm in Sources */,
 				91E057021F914B9F008A5B25 /* AmpUI.mm in Sources */,
 				912977B61DE4F8610093134D /* CARingBuffer.cpp in Sources */,
+				91E9D2691F9996CD00491E6A /* DelayEffect.cpp in Sources */,
 				910FB50E1F9489A1000ED66C /* ChorusUI.mm in Sources */,
 				91E057121F9177BC008A5B25 /* CAWLCombFilter.cpp in Sources */,
 				912977B91DE4F8610093134D /* CAWL.cpp in Sources */,

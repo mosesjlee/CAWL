@@ -13,6 +13,8 @@
     NSSlider * volumeSlider;
     NSTextField * volumeLabel;
     NSTextField * gainLabel;
+    NSTextField * volumeTitle;
+    NSTextField * gainTitle;
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect {
@@ -23,6 +25,16 @@
 }
 
 - (void)setupGainUI {
+    //Adding title
+    gainTitle = [[NSTextField alloc] initWithFrame:NSMakeRect(10, 240, 40, 20)];
+    [self addSubview:gainTitle];
+    [gainTitle setEditable:NO];
+    [gainTitle setBordered:NO];
+    [gainTitle setDrawsBackground:NO];
+    gainTitle.stringValue = @"Gain";
+    [gainLabel setNeedsDisplay:YES];
+    
+    //The slider
     gainSlider = [[NSSlider alloc] initWithFrame:NSMakeRect(10, 300, 30, 30)];
     [self addSubview:gainSlider];
     [gainSlider setSliderType:NSSliderTypeCircular];
@@ -40,10 +52,17 @@
 - (void) updateGain {
     gainLabel.stringValue = [NSString stringWithFormat:@"%f", gainSlider.doubleValue * 10.0];
     _soundTabRef.soundBoard->setNewAmpGain(gainSlider.doubleValue);
-    NSLog(@"New Gain: %f", gainSlider.doubleValue);
 }
 
 - (void)setupVolumeUI {
+    volumeTitle = [[NSTextField alloc] initWithFrame:NSMakeRect(55, 240, 50, 20)];
+    [self addSubview:volumeTitle];
+    [volumeTitle setEditable:NO];
+    [volumeTitle setBordered:NO];
+    [volumeTitle setDrawsBackground:NO];
+    volumeTitle.stringValue = @"Volume";
+    [volumeTitle setNeedsDisplay:YES];
+    
     volumeSlider = [[NSSlider alloc] initWithFrame:NSMakeRect(60, 300, 30, 30)];
     [self addSubview:volumeSlider];
     [volumeSlider setSliderType:NSSliderTypeCircular];
