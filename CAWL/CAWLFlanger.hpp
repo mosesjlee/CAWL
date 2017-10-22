@@ -9,8 +9,6 @@
 #ifndef CAWLFlanger_hpp
 #define CAWLFlanger_hpp
 
-#include <stdio.h>
-
 class CAWLFlanger
 {
     

@@ -9,7 +9,6 @@
 #ifndef CAWLCompressor_hpp
 #define CAWLCompressor_hpp
 
-#include <stdio.h>
 class CAWLCompressor
 {
     

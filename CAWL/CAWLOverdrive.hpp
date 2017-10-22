@@ -9,7 +9,6 @@
 #ifndef CAWLOverdrive_hpp
 #define CAWLOverdrive_hpp
 
-#include <stdio.h>
 class CAWLOverdrive
 {
     

@@ -9,5 +9,5 @@
 #import "EffectUI.h"
 
 @interface ReverbUI : EffectUI
-
+- (instancetype)initWithFrame:(NSRect)frameRect;
 @end

@@ -9,5 +9,5 @@
 #import "EffectUI.h"
 
 @interface FuzzUI : EffectUI
-
+- (instancetype)initWithFrame:(NSRect)frameRect;
 @end

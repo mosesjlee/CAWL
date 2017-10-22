@@ -18,7 +18,7 @@
 #import "CompressorUI.h"
 #import "PhaserUI.h"
 #import "FlangerUI.h"
-
+#define MAX_HEIGHT 400
 NSArray * ampList = @[@"Off",
                       @"Phender BassWoman",
                       @"Box DC30",
@@ -63,14 +63,23 @@ NSArray * effectsList = @[@"Off",
     [self setupEffectSelector4];
     currAmp = [_ampSelector selectedItem].title;
     currentEffectsList = [[NSMutableArray alloc] init];
+    
+    //Create the UI Elements
     [self createAmpUI];
     [self createDelayUI];
+    [self createEqualizerUI];
+    [self createReverbUI];
+    [self createChorusUI];
+    [self createWahUI];
+    
+    //Create soundboard object
     _soundBoard = new CAWLSoundBoard();
+    
+    //Register the block
     __block CAWLSoundBoard * weak = _soundBoard;
     _buffer = ^(float * buf, const unsigned int numSamples) {
         weak->processBuffer(buf, numSamples);
     };
-    
     return self;
 }
 
@@ -164,7 +173,7 @@ NSArray * effectsList = @[@"Off",
     NSLog(@"Effect 1 selection %@ for %@", currEffect1, self.label);
     
     //Turn on new effect and draw new UI
-    [self turnOnSelectedEffect:currEffect1 with:NSMakePoint(300, 0)];
+    [self turnOnSelectedEffect:currEffect1 with:NSMakePoint(280, 0)];
 }
 
 - (void) updateEffect2Selection:(id)sender {
@@ -184,7 +193,7 @@ NSArray * effectsList = @[@"Off",
     
     //Update the new currEffect
     currEffect2 =  [_effectSelector2 selectedItem].title;
-    NSLog(@"Effect 1 selection %@ for %@", currEffect2, self.label);
+    NSLog(@"Effect 2 selection %@ for %@", currEffect2, self.label);
     
     //Turn on new effect and draw new UI
     [self turnOnSelectedEffect:currEffect2 with:NSMakePoint(530, 0)];
@@ -192,7 +201,8 @@ NSArray * effectsList = @[@"Off",
 }
 
 - (void) updateEffect3Selection:(id)sender {
-    if([currentEffectsList containsObject:[_effectSelector3 selectedItem].title]) {
+    if([currentEffectsList containsObject:[_effectSelector3 selectedItem].title] &&
+       ![[_effectSelector3 selectedItem].title isEqualToString:effectsList[0]]) {
         NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle:@"OK"];
         [alert setInformativeText:@"Effect already being used."];
@@ -201,16 +211,22 @@ NSArray * effectsList = @[@"Off",
             return;
         }
     }
+    
+    //Turn off previous effect and disable previous UI
+    [self turnOffSelectedEffect:currEffect3];
+    
+    //Update the new currEffect
     currEffect3 =  [_effectSelector3 selectedItem].title;
-    NSLog(@"Effect 3 selection %@ for %@", currEffect3, self.label);
-    if([currEffect3 isEqualToString:effectsList[1]]) {
-        //[self drawDelayUI:NSMakePoint(750, 0)];
-        _soundBoard->turnOnDelay(true);
-    }
+    NSLog(@"Effect 1 selection %@ for %@", currEffect2, self.label);
+    
+    //Turn on new effect and draw new UI
+    [self turnOnSelectedEffect:currEffect3 with:NSMakePoint(750, 0)];
+    NSLog(@"Effect 2 selection %@ for %@", currEffect3, self.label);
 }
 
 - (void) updateEffect4Selection:(id)sender {
-    if([currentEffectsList containsObject:[_effectSelector4 selectedItem].title]) {
+    if([currentEffectsList containsObject:[_effectSelector4 selectedItem].title] &&
+       ![[_effectSelector4 selectedItem].title isEqualToString:effectsList[0]]) {
         NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle:@"OK"];
         [alert setInformativeText:@"Effect already being used."];
@@ -219,12 +235,16 @@ NSArray * effectsList = @[@"Off",
             return;
         }
     }
+    
+    //Turn off previous effect and disable previous UI
+    [self turnOffSelectedEffect:currEffect4];
+    
+    //Update the new currEffect
     currEffect4 =  [_effectSelector4 selectedItem].title;
     NSLog(@"Effect 4 selection %@ for %@", currEffect4, self.label);
-    if([currEffect4 isEqualToString:effectsList[1]]) {
-        //[self drawDelayUI:NSMakePoint(970, 0)];
-        _soundBoard->turnOnDelay(true);
-    }
+    
+    //Turn on new effect and draw new UI
+    [self turnOnSelectedEffect:currEffect4 with:NSMakePoint(970, 0)];
 }
 
 #pragma mark UI_Utilities
@@ -275,6 +295,7 @@ NSArray * effectsList = @[@"Off",
     }
     else if([effect isEqualToString:effectsList[2]]) {
         _soundBoard->turnOnReverb(false);
+        [self hideEffectUI:reverbUI];
     }
     else if([effect isEqualToString:effectsList[3]]) {
         _soundBoard->turnOnWah(false);
@@ -293,6 +314,7 @@ NSArray * effectsList = @[@"Off",
     }
     else if([effect isEqualToString:effectsList[8]]) {
         _soundBoard->turnOnEqualizer(false);
+        [self hideEffectUI:equalizerUI];
     }
     else if([effect isEqualToString:effectsList[9]]) {
         _soundBoard->turnOnPhaser(false);
@@ -314,6 +336,7 @@ NSArray * effectsList = @[@"Off",
     }
     else if([effect isEqualToString:effectsList[2]]) {
         _soundBoard->turnOnReverb(true);
+        [self drawEffectUI:reverbUI with:coordinate];
         [self drawEffectUI:reverbUI with:coordinate];
     }
     else if([effect isEqualToString:effectsList[3]]) {
@@ -338,6 +361,7 @@ NSArray * effectsList = @[@"Off",
     }
     else if([effect isEqualToString:effectsList[8]]) {
         _soundBoard->turnOnEqualizer(true);
+        [self drawEffectUI:equalizerUI with:coordinate];
         
     }
     else if([effect isEqualToString:effectsList[9]]) {
@@ -353,7 +377,7 @@ NSArray * effectsList = @[@"Off",
 
 #pragma mark UI_Creation
 - (void) createAmpUI {
-    ampUI = [[AmpUI alloc] initWithFrame:NSMakeRect(0, 0, 300, 600)];
+    ampUI = [[AmpUI alloc] initWithFrame:NSMakeRect(0, 0, 300, MAX_HEIGHT)];
     [ampUI setFrameOrigin:NSMakePoint(0, 0)];
     [self.view addSubview:ampUI];
     [ampUI setHidden:YES];
@@ -362,19 +386,35 @@ NSArray * effectsList = @[@"Off",
 }
 
 - (void)createDelayUI {
-    delayUI = [[DelayUI alloc] initWithFrame:NSMakeRect(0, 0, 300, 600)];
+    delayUI = [[DelayUI alloc] initWithFrame:NSMakeRect(0, 0, 230, MAX_HEIGHT)];
     [self.view addSubview:delayUI];
     [delayUI setHidden:YES];
     [delayUI setNeedsLayout:YES];
     delayUI.soundTabRef = self;
 }
 
+- (void)createEqualizerUI {
+    equalizerUI = [[EqualizerUI alloc] initWithFrame:NSMakeRect(0, 0, 300, MAX_HEIGHT)];
+    [self.view addSubview:equalizerUI];
+    [equalizerUI setHidden:YES];
+    [equalizerUI setNeedsLayout:YES];
+    equalizerUI.soundTabRef = self;
+}
+
 - (void)createReverbUI {
-    
+    reverbUI = [[ReverbUI alloc] initWithFrame:NSMakeRect(0, 0, 300, MAX_HEIGHT)];
+    [self.view addSubview:reverbUI];
+    [reverbUI setHidden:YES];
+    [reverbUI setNeedsLayout:YES];
+    reverbUI.soundTabRef = self;
 }
 
 - (void)createWahUI {
-    
+    wahUI = [[WahUI alloc] initWithFrame:NSMakeRect(0, 0, 300, MAX_HEIGHT)];
+    [self.view addSubview:wahUI];
+    [wahUI setHidden:YES];
+    [wahUI setNeedsLayout:YES];
+    wahUI.soundTabRef = self;
 }
 
 - (void)createChorusUI {

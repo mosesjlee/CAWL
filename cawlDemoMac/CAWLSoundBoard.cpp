@@ -57,12 +57,12 @@ void CAWLSoundBoard::setNewDelayTime(float time)
 
 void CAWLSoundBoard::setDelayWetMixLevel(double wetMixLevel)
 {
-    
+    delayEffect->setDryMix(wetMixLevel);
 }
 
 void CAWLSoundBoard::setDelayFeedbackGain(double gain)
 {
-    
+    delayEffect->setFeedbackLevel(gain);
 }
 
 void CAWLSoundBoard::turnOnDelay(bool onOff)

@@ -9,5 +9,5 @@
 #import "EffectUI.h"
 
 @interface PhaserUI : EffectUI
-
+- (instancetype)initWithFrame:(NSRect)frameRect;
 @end

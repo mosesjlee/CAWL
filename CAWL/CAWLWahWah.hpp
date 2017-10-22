@@ -9,7 +9,6 @@
 #ifndef CAWLWahWah_hpp
 #define CAWLWahWah_hpp
 
-#include <stdio.h>
 class CAWLWahWah
 {
     

@@ -9,7 +9,6 @@
 #ifndef CAWLFuzz_hpp
 #define CAWLFuzz_hpp
 
-#include <stdio.h>
 class CAWLFuzz
 {
     

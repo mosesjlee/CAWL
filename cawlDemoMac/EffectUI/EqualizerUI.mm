@@ -40,6 +40,8 @@
 
 - (instancetype)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
+    [self setupLowShelfUI];
+    [self drawBorder:frameRect];
     return self;
 }
 
@@ -50,7 +52,10 @@
 }
 
 - (void)setupLowShelfUI {
-    //lowShelfFreqSlider = [[NSSlider alloc] initWithFrame:NSMakeRect(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat w#>, <#CGFloat h#>)];
+    lowShelfFreqSlider = [self drawCircularSliderWithRect:NSMakeRect(90, 320, 30, 30)
+                                               WithMaxVal:10
+                                            AndWithMinVal:100];
+    [self addSubview:lowShelfFreqSlider];
 }
 
 - (void)setupHighShelfUI {

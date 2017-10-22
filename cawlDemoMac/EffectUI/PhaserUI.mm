@@ -9,7 +9,11 @@
 #import "PhaserUI.h"
 
 @implementation PhaserUI
-
+- (instancetype)initWithFrame:(NSRect)frameRect {
+    self = [super initWithFrame:frameRect];
+    [self drawBorder:frameRect];
+    return self;
+}
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     

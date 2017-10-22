@@ -9,5 +9,5 @@
 #import "EffectUI.h"
 
 @interface FlangerUI : EffectUI
-
+- (instancetype)initWithFrame:(NSRect)frameRect;
 @end

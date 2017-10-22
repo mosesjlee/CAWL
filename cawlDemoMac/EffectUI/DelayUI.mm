@@ -25,6 +25,7 @@
     [self setupFeedbackUI];
     [self setupWetMixUI];
     [self setupDelayTimeUI];
+    [self drawBorder:frameRect];
     return self;
 }
 
@@ -36,7 +37,7 @@
 
 - (void)setupFeedbackUI {
     //The title
-    feedbackTitle = [[NSTextField alloc] initWithFrame:NSMakeRect(5, 250, 50, 30)];
+    feedbackTitle = [[NSTextField alloc] initWithFrame:NSMakeRect(15, 250, 50, 30)];
     [self addSubview:feedbackTitle];
     feedbackTitle.stringValue = @"FB Gain";
     [feedbackTitle setEditable:NO];
@@ -45,12 +46,12 @@
     [feedbackTitle setNeedsDisplay:YES];
     
     //The value label
-    feedbackLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(5, 280, 30, 20)];
+    feedbackLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(15, 280, 30, 20)];
     [self addSubview:feedbackLabel];
     [feedbackLabel setNeedsDisplay:YES];
     
     //The slider
-    feedbackSlider = [[NSSlider alloc] initWithFrame:NSMakeRect(5, 320, 30, 30)];
+    feedbackSlider = [[NSSlider alloc] initWithFrame:NSMakeRect(15, 320, 30, 30)];
     [feedbackSlider setSliderType:NSSliderTypeCircular];
     [feedbackSlider setNeedsDisplay:YES];
     [feedbackSlider setMaxValue:1.0];
@@ -65,7 +66,7 @@
 }
 
 - (void)setupWetMixUI {
-    wetMixTitle = [[NSTextField alloc] initWithFrame:NSMakeRect(50, 250, 30, 30)];
+    wetMixTitle = [[NSTextField alloc] initWithFrame:NSMakeRect(60, 250, 30, 30)];
     wetMixTitle.stringValue = @"Wet Mix";
     [wetMixTitle setEditable:NO];
     [wetMixTitle setBordered:NO];
@@ -73,12 +74,12 @@
     [self addSubview:wetMixTitle];
     [wetMixTitle setNeedsDisplay:YES];
     
-    wetMixLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(50, 280, 30, 20)];
+    wetMixLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(60, 280, 30, 20)];
     [self addSubview:wetMixLabel];
     [wetMixLabel setNeedsDisplay:YES];
 
     
-    wetMixSlider = [[NSSlider alloc] initWithFrame:NSMakeRect(50, 320, 30, 30)];
+    wetMixSlider = [[NSSlider alloc] initWithFrame:NSMakeRect(60, 320, 30, 30)];
     [wetMixSlider setSliderType:NSSliderTypeCircular];
     [wetMixSlider setNeedsDisplay:YES];
     [wetMixSlider setMaxValue:1.0];
@@ -93,23 +94,16 @@
 }
 
 - (void)setupDelayTimeUI {
-    delayTimeTitle = [[NSTextField alloc] initWithFrame:NSMakeRect(90, 250, 70, 30)];
-    delayTimeTitle.stringValue = @"Delay Time";
-    [delayTimeTitle setEditable:NO];
-    [delayTimeTitle setBordered:NO];
-    [delayTimeTitle setDrawsBackground:NO];
+    delayTimeTitle = [self drawLabelTextFieldWithRect:NSMakeRect(100, 250, 70, 30) WithTitle:@"Delay Time"];
     [self addSubview:delayTimeTitle];
-    [delayTimeTitle setNeedsDisplay:YES];
     
-    delayTimeLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(90, 280, 50, 20)];
+    
+    delayTimeLabel = [self drawValueTextFieldWithRect:NSMakeRect(100, 280, 50, 20)];
     [self addSubview:delayTimeLabel];
-    [delayTimeLabel setNeedsDisplay:YES];
     
-    delayTimeSlider = [[NSSlider alloc] initWithFrame:NSMakeRect(90, 320, 30, 30)];
-    [delayTimeSlider setSliderType:NSSliderTypeCircular];
-    [delayTimeSlider setNeedsDisplay:YES];
-    [delayTimeSlider setMaxValue:1500];
-    [delayTimeSlider setMinValue:5];
+    delayTimeSlider = [self drawCircularSliderWithRect:NSMakeRect(100, 320, 30, 30)
+                                            WithMaxVal:1500
+                                         AndWithMinVal:5];
     [delayTimeSlider setAction:@selector(updateDelayTime)];
     [self addSubview:delayTimeSlider];
 }

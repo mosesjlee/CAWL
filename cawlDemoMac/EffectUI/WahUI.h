@@ -9,5 +9,5 @@
 #import "EffectUI.h"
 
 @interface WahUI : EffectUI
-
+- (instancetype)initWithFrame:(NSRect)frameRect;
 @end

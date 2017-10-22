@@ -9,5 +9,5 @@
 #import "EffectUI.h"
 
 @interface CompressorUI : EffectUI
-
+- (instancetype)initWithFrame:(NSRect)frameRect;
 @end

@@ -9,5 +9,5 @@
 #import "EffectUI.h"
 
 @interface OverdriveUI : EffectUI
-
+- (instancetype)initWithFrame:(NSRect)frameRect;
 @end

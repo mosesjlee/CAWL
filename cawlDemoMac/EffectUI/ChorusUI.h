@@ -8,5 +8,5 @@
 
 #import "EffectUI.h"
 @interface ChorusUI : EffectUI
-
+- (instancetype)initWithFrame:(NSRect)frameRect;
 @end

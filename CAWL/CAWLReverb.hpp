@@ -9,8 +9,6 @@
 #ifndef CAWLReverb_hpp
 #define CAWLReverb_hpp
 
-#include <stdio.h>
-
 class CAWLReverb
 {
     

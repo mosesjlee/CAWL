@@ -9,7 +9,6 @@
 #ifndef CAWLPhaser_hpp
 #define CAWLPhaser_hpp
 
-#include <stdio.h>
 class CAWLPhaser
 {
     
