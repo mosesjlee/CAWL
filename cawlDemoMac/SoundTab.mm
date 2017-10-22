@@ -10,7 +10,14 @@
 #import "AmpUI.h"
 #import "DelayUI.h"
 #import "EqualizerUI.h"
-
+#import "ReverbUI.h"
+#import "ChorusUI.h"
+#import "WahUI.h"
+#import "OverdriveUI.h"
+#import "FuzzUI.h"
+#import "CompressorUI.h"
+#import "PhaserUI.h"
+#import "FlangerUI.h"
 
 NSArray * ampList = @[@"Off",
                       @"Phender BassWoman",
@@ -32,9 +39,18 @@ NSArray * effectsList = @[@"Off",
 @implementation SoundTab {
     NSString * currAmp;
     NSString * currEffect1, * currEffect2, * currEffect3, * currEffect4;
-    AmpUI * ampUI;
-    DelayUI * delayUI;
-    EqualizerUI * equalizerUI;
+    NSMutableArray<NSString *> * currentEffectsList;
+    AmpUI           *ampUI;
+    DelayUI         *delayUI;
+    EqualizerUI     *equalizerUI;
+    ReverbUI        *reverbUI;
+    ChorusUI        *chorusUI;
+    WahUI           *wahUI;
+    OverdriveUI     *overdriveUI;
+    FuzzUI          *fuzzUI;
+    CompressorUI    *compressorUI;
+    PhaserUI        *phaserUI;
+    FlangerUI       *flangerUI;
 }
 
 - (instancetype)initWithIdentifier:(id)identifier
@@ -46,7 +62,7 @@ NSArray * effectsList = @[@"Off",
     [self setupEffectSelector3];
     [self setupEffectSelector4];
     currAmp = [_ampSelector selectedItem].title;
-    
+    currentEffectsList = [[NSMutableArray alloc] init];
     [self createAmpUI];
     [self createDelayUI];
     _soundBoard = new CAWLSoundBoard();
@@ -80,9 +96,16 @@ NSArray * effectsList = @[@"Off",
 - (void) updateAmpSelection:(id)sender {
     currAmp =  [_ampSelector selectedItem].title;
     NSLog(@"Amp selection %@ for %@", currAmp, self.label);
-    [self drawAmpUI];
+    if([currAmp isEqualToString:ampList[0]]) {
+        _soundBoard->setTurnOnAmp(false);
+        [self hideAmpUI];
+    } else if ([currAmp isEqualToString:ampList[1]]) {
+        _soundBoard->setTurnOnAmp(true);
+        [self drawAmpUI];
+    }
 }
-     
+
+#pragma mark SETUP_EFFECT_MENU
 - (void)setupEffectSelector1 {
     _effectSelector1 = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(300, 350, 175, 50) pullsDown:NO];
     [_effectSelector1 addItemsWithTitles:effectsList];;
@@ -90,31 +113,6 @@ NSArray * effectsList = @[@"Off",
     [_effectSelector1 setNeedsDisplay:YES];
     [_effectSelector1 setAction:@selector(updateEffect1Selection:)];
     [_effectSelector1 setTarget:self];
-}
-
-- (void) updateEffect1Selection:(id)sender {
-    //See if the selectd effect is used
-    if(([currEffect2 isEqualToString:[_effectSelector1 selectedItem].title] ||
-       [currEffect3 isEqualToString:[_effectSelector1 selectedItem].title] ||
-       [currEffect4 isEqualToString:[_effectSelector1 selectedItem].title]) &&
-       ![[_effectSelector1 selectedItem].title isEqualToString:effectsList[0]]) {
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert addButtonWithTitle:@"OK"];
-        [alert setInformativeText:@"Effect already being used."];
-        [alert setAlertStyle:NSWarningAlertStyle];
-        if ([alert runModal] == NSAlertFirstButtonReturn) {
-            
-            return;
-        }
-    }
-    
-    currEffect1 =  [_effectSelector1 selectedItem].title;
-    NSLog(@"Effect 1 selection %@ for %@", currEffect1, self.label);
-    
-    if([currEffect1 isEqualToString:effectsList[1]]) {
-        [self drawDelayUI:NSMakePoint(300, 0)];
-        _soundBoard->setDelayOnOff(true);
-    }
 }
 
 - (void)setupEffectSelector2 {
@@ -126,28 +124,6 @@ NSArray * effectsList = @[@"Off",
     [_effectSelector2 setTarget:self];
 }
 
-- (void) updateEffect2Selection:(id)sender {
-    if([currEffect1 isEqualToString:[_effectSelector1 selectedItem].title] ||
-       [currEffect3 isEqualToString:[_effectSelector1 selectedItem].title] ||
-       [currEffect4 isEqualToString:[_effectSelector1 selectedItem].title]) {
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert addButtonWithTitle:@"OK"];
-        [alert setInformativeText:@"Effect already being used."];
-        [alert setAlertStyle:NSWarningAlertStyle];
-        if ([alert runModal] == NSAlertFirstButtonReturn) {
-            return;
-        }
-    }
-    
-    currEffect2 =  [_effectSelector2 selectedItem].title;
-    NSLog(@"Effect 2 selection %@ for %@", currEffect2, self.label);
-    
-    if([currEffect2 isEqualToString:effectsList[1]]) {
-        [self drawDelayUI:NSMakePoint(530, 0)];
-        _soundBoard->setDelayOnOff(true);
-    }
-}
-
 - (void)setupEffectSelector3 {
     _effectSelector3 = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(750, 350, 175, 50) pullsDown:NO];
     [_effectSelector3 addItemsWithTitles:effectsList];;
@@ -155,27 +131,6 @@ NSArray * effectsList = @[@"Off",
     [_effectSelector3 setNeedsDisplay:YES];
     [_effectSelector3 setAction:@selector(updateEffect3Selection:)];
     [_effectSelector3 setTarget:self];
-    
-}
-
-- (void) updateEffect3Selection:(id)sender {
-    if([currEffect1 isEqualToString:[_effectSelector1 selectedItem].title] ||
-       [currEffect2 isEqualToString:[_effectSelector1 selectedItem].title] ||
-       [currEffect4 isEqualToString:[_effectSelector1 selectedItem].title]) {
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert addButtonWithTitle:@"OK"];
-        [alert setInformativeText:@"Effect already being used."];
-        [alert setAlertStyle:NSWarningAlertStyle];
-        if ([alert runModal] == NSAlertFirstButtonReturn) {
-            return;
-        }
-    }
-    currEffect3 =  [_effectSelector3 selectedItem].title;
-    NSLog(@"Effect 3 selection %@ for %@", currEffect3, self.label);
-    if([currEffect3 isEqualToString:effectsList[1]]) {
-        [self drawDelayUI:NSMakePoint(750, 0)];
-        _soundBoard->setDelayOnOff(true);
-    }
 }
 
 - (void)setupEffectSelector4 {
@@ -187,10 +142,75 @@ NSArray * effectsList = @[@"Off",
     [_effectSelector4 setTarget:self];
 }
 
+#pragma mark UPDATE_EFFECT_MENU
+- (void) updateEffect1Selection:(id)sender {
+    //See if the selectd effect is used
+    if([currentEffectsList containsObject:[_effectSelector1 selectedItem].title] &&
+       ![[_effectSelector1 selectedItem].title isEqualToString:effectsList[0]]) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setInformativeText:@"Effect already being used."];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        if ([alert runModal] == NSAlertFirstButtonReturn) {
+            return;
+        }
+    }
+    
+    //Turn off previous effect and disable previous UI
+    [self turnOffSelectedEffect:currEffect1];
+    
+    //Update the new currEffect
+    currEffect1 =  [_effectSelector1 selectedItem].title;
+    NSLog(@"Effect 1 selection %@ for %@", currEffect1, self.label);
+    
+    //Turn on new effect and draw new UI
+    [self turnOnSelectedEffect:currEffect1 with:NSMakePoint(300, 0)];
+}
+
+- (void) updateEffect2Selection:(id)sender {
+    if([currentEffectsList containsObject:[_effectSelector2 selectedItem].title] &&
+       ![[_effectSelector2 selectedItem].title isEqualToString:effectsList[0]]) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setInformativeText:@"Effect already being used."];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        if ([alert runModal] == NSAlertFirstButtonReturn) {
+            return;
+        }
+    }
+    
+    //Turn off previous effect and disable previous UI
+    [self turnOffSelectedEffect:currEffect2];
+    
+    //Update the new currEffect
+    currEffect2 =  [_effectSelector2 selectedItem].title;
+    NSLog(@"Effect 1 selection %@ for %@", currEffect2, self.label);
+    
+    //Turn on new effect and draw new UI
+    [self turnOnSelectedEffect:currEffect2 with:NSMakePoint(530, 0)];
+    NSLog(@"Effect 2 selection %@ for %@", currEffect2, self.label);
+}
+
+- (void) updateEffect3Selection:(id)sender {
+    if([currentEffectsList containsObject:[_effectSelector3 selectedItem].title]) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setInformativeText:@"Effect already being used."];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        if ([alert runModal] == NSAlertFirstButtonReturn) {
+            return;
+        }
+    }
+    currEffect3 =  [_effectSelector3 selectedItem].title;
+    NSLog(@"Effect 3 selection %@ for %@", currEffect3, self.label);
+    if([currEffect3 isEqualToString:effectsList[1]]) {
+        //[self drawDelayUI:NSMakePoint(750, 0)];
+        _soundBoard->turnOnDelay(true);
+    }
+}
+
 - (void) updateEffect4Selection:(id)sender {
-    if([currEffect1 isEqualToString:[_effectSelector1 selectedItem].title] ||
-       [currEffect2 isEqualToString:[_effectSelector1 selectedItem].title] ||
-       [currEffect3 isEqualToString:[_effectSelector1 selectedItem].title]) {
+    if([currentEffectsList containsObject:[_effectSelector4 selectedItem].title]) {
         NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle:@"OK"];
         [alert setInformativeText:@"Effect already being used."];
@@ -202,9 +222,133 @@ NSArray * effectsList = @[@"Off",
     currEffect4 =  [_effectSelector4 selectedItem].title;
     NSLog(@"Effect 4 selection %@ for %@", currEffect4, self.label);
     if([currEffect4 isEqualToString:effectsList[1]]) {
-        [self drawDelayUI:NSMakePoint(970, 0)];
-        _soundBoard->setDelayOnOff(true);
+        //[self drawDelayUI:NSMakePoint(970, 0)];
+        _soundBoard->turnOnDelay(true);
     }
+}
+
+#pragma mark UI_Utilities
+- (BOOL) isEffectExist:(NSString *) currEffect AtSlot:(int) slot {
+    BOOL retval = NO;
+    
+    switch (slot) {
+        case 1: {
+            
+        }
+            break;
+        case 2: {
+            
+        }
+            break;
+        case 3: {
+            
+        }
+            break;
+        case 4: {
+            
+        }
+            break;
+        //default:
+            
+    }
+    
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setInformativeText:@"Effect already being used."];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    if ([alert runModal] == NSAlertFirstButtonReturn) {
+        return retval;
+    }
+    
+    return retval;
+}
+
+- (void)turnOffSelectedEffect:(NSString *) effect
+{
+    [currentEffectsList removeObject:effect];
+    if([effect isEqualToString:effectsList[0]]) {
+        return;
+    }
+    else if([effect isEqualToString:effectsList[1]]) {
+        _soundBoard->turnOnDelay(false);
+        [self hideEffectUI:delayUI];
+    }
+    else if([effect isEqualToString:effectsList[2]]) {
+        _soundBoard->turnOnReverb(false);
+    }
+    else if([effect isEqualToString:effectsList[3]]) {
+        _soundBoard->turnOnWah(false);
+    }
+    else if([effect isEqualToString:effectsList[4]]) {
+        _soundBoard->turnOnChorus(false);
+    }
+    else if([effect isEqualToString:effectsList[5]]) {
+        _soundBoard->turnOnOverdrive(false);
+    }
+    else if([effect isEqualToString:effectsList[6]]) {
+        _soundBoard->turnOnFuzz(false);
+    }
+    else if([effect isEqualToString:effectsList[7]]) {
+        _soundBoard->turnOnCompressor(false);
+    }
+    else if([effect isEqualToString:effectsList[8]]) {
+        _soundBoard->turnOnEqualizer(false);
+    }
+    else if([effect isEqualToString:effectsList[9]]) {
+        _soundBoard->turnOnPhaser(false);
+    }
+    else if([effect isEqualToString:effectsList[10]]) {
+        _soundBoard->turnOnFlanger(false);
+    }
+}
+
+- (void)turnOnSelectedEffect:(NSString *) effect
+                        with:(NSPoint) coordinate
+{
+    if([effect isEqualToString:effectsList[0]]) {
+        return;
+    }
+    else if([effect isEqualToString:effectsList[1]]) {
+        _soundBoard->turnOnDelay(true);
+        [self drawEffectUI:delayUI with:coordinate];
+    }
+    else if([effect isEqualToString:effectsList[2]]) {
+        _soundBoard->turnOnReverb(true);
+        [self drawEffectUI:reverbUI with:coordinate];
+    }
+    else if([effect isEqualToString:effectsList[3]]) {
+        _soundBoard->turnOnWah(true);
+        //[self drawWahUI];
+    }
+    else if([effect isEqualToString:effectsList[4]]) {
+        _soundBoard->turnOnChorus(true);
+        //[self drawChorusUI];
+    }
+    else if([effect isEqualToString:effectsList[5]]) {
+        _soundBoard->turnOnOverdrive(true);
+        
+    }
+    else if([effect isEqualToString:effectsList[6]]) {
+        _soundBoard->turnOnFuzz(true);
+        
+    }
+    else if([effect isEqualToString:effectsList[7]]) {
+        _soundBoard->turnOnCompressor(true);
+        
+    }
+    else if([effect isEqualToString:effectsList[8]]) {
+        _soundBoard->turnOnEqualizer(true);
+        
+    }
+    else if([effect isEqualToString:effectsList[9]]) {
+        _soundBoard->turnOnPhaser(true);
+    }
+    else if([effect isEqualToString:effectsList[10]]) {
+        _soundBoard->turnOnFlanger(true);
+    }
+    
+    //Add it to the list
+    [currentEffectsList addObject:effect];
 }
 
 #pragma mark UI_Creation
@@ -254,33 +398,9 @@ NSArray * effectsList = @[@"Off",
     [ampUI setHidden:NO];
 }
 
-- (void)drawDelayUI:(NSPoint) newPoint{
-    [delayUI setFrameOrigin:newPoint];
-    [delayUI setHidden:NO];
-}
-
-- (void)drawReverbUI {
-    
-}
-
-- (void)drawWahUI {
-    
-}
-
-- (void)drawChorusUI {
-    
-}
-
-- (void)drawOverdriveUI {
-    
-}
-
-- (void)drawFuzzUI {
-    
-}
-
-- (void)drawCompressorUI {
-    
+- (void)drawEffectUI:(EffectUI *) ui with:(NSPoint) newPoint{
+    [ui setFrameOrigin:newPoint];
+    [ui setHidden:NO];
 }
 
 #pragma mark Hide_UI
@@ -289,31 +409,7 @@ NSArray * effectsList = @[@"Off",
     [ampUI setHidden:YES];
 }
 
-- (void)hideDelayUI{
-    [delayUI setHidden:YES];
-}
-
-- (void)hideReverbUI {
-    
-}
-
-- (void)hideWahUI {
-    
-}
-
-- (void)hideChorusUI {
-    
-}
-
-- (void)hideOverdriveUI {
-    
-}
-
-- (void)hideFuzzUI {
-    
-}
-
-- (void)hideCompressorUI {
-    
+- (void)hideEffectUI:(EffectUI *) ui{
+    [ui setHidden:YES];
 }
 @end

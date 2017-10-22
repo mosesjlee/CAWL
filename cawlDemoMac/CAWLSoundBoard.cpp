@@ -65,8 +65,17 @@ void CAWLSoundBoard::setDelayFeedbackGain(double gain)
     
 }
 
-void CAWLSoundBoard::setDelayOnOff(bool onOff)
+void CAWLSoundBoard::turnOnDelay(bool onOff)
 {
+    if(!onOff)
+    {
+        if(delayEffect != NULL) delete delayEffect;
+        delayEffect = NULL;
+    }
+    else
+    {
+        delayEffect = new CAWLDelayEffect();
+    }
     isDelayOn = onOff;
 }
 

@@ -9,15 +9,15 @@
 #import "DelayUI.h"
 
 @implementation DelayUI {
-    NSSlider * feedbackSlider;
-    NSSlider * wetMixSlider;
-    NSSlider * delayTimeSlider;
-    NSTextField * feedbackLabel;
-    NSTextField * wetMixLabel;
-    NSTextField * delayTimeLabel;
-    NSTextField * feedbackTitle;
-    NSTextField * wetMixTitle;
-    NSTextField * delayTimeTitle;
+    NSSlider    *feedbackSlider;
+    NSSlider    *wetMixSlider;
+    NSSlider    *delayTimeSlider;
+    NSTextField *feedbackLabel;
+    NSTextField *wetMixLabel;
+    NSTextField *delayTimeLabel;
+    NSTextField *feedbackTitle;
+    NSTextField *wetMixTitle;
+    NSTextField *delayTimeTitle;
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect {
@@ -61,7 +61,7 @@
 
 - (void)updateFeedbackGainLevel {
     feedbackLabel.stringValue = [NSString stringWithFormat:@"%f", feedbackSlider.doubleValue];
-    _soundTabRef.soundBoard->setDelayFeedbackGain(feedbackSlider.doubleValue);
+    self.soundTabRef.soundBoard->setDelayFeedbackGain(feedbackSlider.doubleValue);
 }
 
 - (void)setupWetMixUI {
@@ -76,6 +76,7 @@
     wetMixLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(50, 280, 30, 20)];
     [self addSubview:wetMixLabel];
     [wetMixLabel setNeedsDisplay:YES];
+
     
     wetMixSlider = [[NSSlider alloc] initWithFrame:NSMakeRect(50, 320, 30, 30)];
     [wetMixSlider setSliderType:NSSliderTypeCircular];
@@ -88,7 +89,7 @@
 
 - (void)updateWetMixLevel {
     wetMixLabel.stringValue = [NSString stringWithFormat:@"%f", wetMixSlider.doubleValue];
-    _soundTabRef.soundBoard->setDelayWetMixLevel(wetMixSlider.doubleValue);
+    self.soundTabRef.soundBoard->setDelayWetMixLevel(wetMixSlider.doubleValue);
 }
 
 - (void)setupDelayTimeUI {
@@ -115,7 +116,7 @@
 
 - (void)updateDelayTime {
     delayTimeLabel.stringValue = [NSString stringWithFormat:@"%d", delayTimeSlider.intValue];
-    _soundTabRef.soundBoard->setNewDelayTime(delayTimeSlider.intValue);
+    self.soundTabRef.soundBoard->setNewDelayTime(delayTimeSlider.intValue);
 }
 
 @end

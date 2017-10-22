@@ -1,13 +1,13 @@
 //
-//  EqualizerUI.h
+//  ReverbUI.h
 //  cawlDemoMac
 //
 //  Created by Moses Lee on 10/15/17.
 //  Copyright © 2017 Moses Lee. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "EffectUI.h"
 
-@interface EqualizerUI : NSView
-- (instancetype)initWithFrame:(NSRect)frameRect;
+@interface ReverbUI : EffectUI
+
 @end

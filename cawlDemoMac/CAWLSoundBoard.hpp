@@ -37,7 +37,7 @@ public:
     
     //Delay controls
     void setNewDelayTime(float time);
-    void setDelayOnOff(bool onOff);
+    void turnOnDelay(bool onOff);
     void setDelayWetMixLevel(double wetMixLevel);
     void setDelayFeedbackGain(double gain);
     

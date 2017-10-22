@@ -45,13 +45,16 @@
     
     //Set up label
     gainLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(10, 270, 30, 20)];
-    [self addSubview:gainLabel];
     [gainLabel setNeedsDisplay:YES];
+    [gainLabel setStringValue:@"0.0"];
+    
+    [self addSubview:gainLabel];
 }
 
 - (void) updateGain {
     gainLabel.stringValue = [NSString stringWithFormat:@"%f", gainSlider.doubleValue * 10.0];
-    _soundTabRef.soundBoard->setNewAmpGain(gainSlider.doubleValue);
+    self.soundTabRef.soundBoard->setNewAmpGain(gainSlider.doubleValue);
+    
 }
 
 - (void)setupVolumeUI {

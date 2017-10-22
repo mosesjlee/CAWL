@@ -6,8 +6,7 @@
 //  Copyright © 2017 Moses Lee. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
-
-@interface ChorusUI : NSView
+#import "EffectUI.h"
+@interface ChorusUI : EffectUI
 
 @end
