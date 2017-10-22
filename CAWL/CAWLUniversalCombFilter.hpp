@@ -17,5 +17,9 @@ public:
     CAWLUniversalCombFilter();
     ~CAWLUniversalCombFilter();
     void processBuffer(float * buf, const unsigned int numSamples);
+    void setDryMix(double newDryMix);
+    
+private:
+    double dryMix;
 };
 #endif /* CAWLUniversalCombFilter_hpp */

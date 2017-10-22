@@ -11,4 +11,9 @@
 
 #include <stdio.h>
 
+class CAWLReverb
+{
+    
+};
+
 #endif /* CAWLReverb_hpp */

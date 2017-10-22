@@ -10,5 +10,9 @@
 #define CAWLCompressor_hpp
 
 #include <stdio.h>
+class CAWLCompressor
+{
+    
+};
 
 #endif /* CAWLCompressor_hpp */

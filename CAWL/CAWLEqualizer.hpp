@@ -29,6 +29,7 @@ public:
     void setLowMidQFactor(double newQFactor);
     void setHighMidQFactor(double newQFactor);
     void processBuffer(float * buf, const unsigned int numSamples);
+    
 private:
     CAWLLowShelfFilter lowShelf;
     CAWLHighShelfFilter highShelf;

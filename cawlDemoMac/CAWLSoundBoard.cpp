@@ -10,9 +10,7 @@
 
 CAWLSoundBoard::CAWLSoundBoard()
 {
-    iir.setDelay(400);
-    iir.setMixLevel(0.9);
-    iir.setFeedbackGain(0.5);
+
 }
 
 CAWLSoundBoard::~CAWLSoundBoard()
@@ -20,10 +18,11 @@ CAWLSoundBoard::~CAWLSoundBoard()
     
 }
 
+#pragma mark SOUND_PROCESSING
 void CAWLSoundBoard::processBuffer(float * buf, const unsigned int numSamples)
 {
     if(isDelayOn) {
-        iir.processBuffer(buf, numSamples);
+        delayEffect->processBuffer(buf, numSamples);
     }
     if(isAmpOn) {
         ampSim->processBuffer(buf, numSamples);
@@ -53,7 +52,7 @@ void CAWLSoundBoard::setTurnOnAmp(bool onOff)
 #pragma mark DELAY_CONTROLS
 void CAWLSoundBoard::setNewDelayTime(float time)
 {
-    iir.setDelay(time);
+    delayEffect->setDelayTime(time);
 }
 
 void CAWLSoundBoard::setDelayWetMixLevel(double wetMixLevel)
@@ -107,6 +106,22 @@ void CAWLSoundBoard::turnOnCompressor(bool onOff)
     
 }
 
+#pragma mark WAH_WAH_CONTROL
+void CAWLSoundBoard::turnOnWah(bool onOff)
+{
+    
+}
 
+#pragma mark OVERDRIVE_CONTROL
+void CAWLSoundBoard::turnOnOverdrive(bool onOff)
+{
+    
+}
+
+#pragma mark FUZZ_CONTROL
+void CAWLSoundBoard::turnOnFuzz(bool onOff)
+{
+    
+}
 
 

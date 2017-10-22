@@ -64,12 +64,14 @@
     [volumeTitle setNeedsDisplay:YES];
     
     volumeSlider = [[NSSlider alloc] initWithFrame:NSMakeRect(60, 300, 30, 30)];
-    [self addSubview:volumeSlider];
     [volumeSlider setSliderType:NSSliderTypeCircular];
     [volumeSlider setNeedsDisplay:YES];
     [volumeSlider setMaxValue:1.0];
     [volumeSlider setMinValue:0.0];
     [volumeSlider setAction:@selector(updateVolume)];
+    [self addSubview:volumeSlider];
+//    NSImage *volumeImage = [[NSImage alloc] initWithContentsOfFile:@"/Users/moseslee/Desktop/knob.png"];
+//    [volumeSlider setImage:volumeImage];
     
     volumeLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(60, 270, 30, 20)];
     [self addSubview:volumeLabel];

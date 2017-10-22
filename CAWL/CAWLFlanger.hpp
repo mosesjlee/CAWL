@@ -11,4 +11,9 @@
 
 #include <stdio.h>
 
+class CAWLFlanger
+{
+    
+};
+
 #endif /* CAWLFlanger_hpp */

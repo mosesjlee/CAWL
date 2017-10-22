@@ -10,5 +10,8 @@
 #define CAWLChorus_hpp
 
 #include <stdio.h>
-
+class CAWLChorus
+{
+    
+};
 #endif /* CAWLChorus_hpp */

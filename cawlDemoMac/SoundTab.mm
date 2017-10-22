@@ -25,7 +25,9 @@ NSArray * effectsList = @[@"Off",
                           @"Overdrive",
                           @"Fuzz",
                           @"Compressor",
-                          @"Equalizer"];
+                          @"Equalizer",
+                          @"Phaser",
+                          @"Flanger"];
 
 @implementation SoundTab {
     NSString * currAmp;
@@ -101,6 +103,7 @@ NSArray * effectsList = @[@"Off",
         [alert setInformativeText:@"Effect already being used."];
         [alert setAlertStyle:NSWarningAlertStyle];
         if ([alert runModal] == NSAlertFirstButtonReturn) {
+            
             return;
         }
     }

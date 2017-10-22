@@ -9,5 +9,5 @@
 #import <Cocoa/Cocoa.h>
 
 @interface EqualizerUI : NSView
-
+- (instancetype)initWithFrame:(NSRect)frameRect;
 @end

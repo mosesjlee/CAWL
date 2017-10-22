@@ -13,7 +13,15 @@
 
 #include "CAWLAmpSimulator.hpp"
 #include "CAWLEqualizer.hpp"
-#include "CAWLIIRCombFilter.hpp"
+#include "CAWLDelayEffect.hpp"
+#include "CAWLChorus.hpp"
+#include "CAWLFlanger.hpp"
+#include "CAWLReverb.hpp"
+#include "CAWLPhaser.hpp"
+#include "CAWLCompressor.hpp"
+#include "CAWLWahWah.hpp"
+#include "CAWLFuzz.hpp"
+#include "CAWLOverdrive.hpp"
 
 class CAWLSoundBoard
 {
@@ -65,18 +73,43 @@ public:
     void setCompressorKnee();
     void setCompressorRatio();
     
-private:
-    CAWLAmpSimulator * ampSim;
-    CAWLEqualizer * equalizer;
-    CAWLIIRCombFilter iir;
+    //Wah wah controls
+    void turnOnWah(bool onOff);
     
-    bool isDelayOn = false;
-    bool isAmpOn = false;
-    bool isEqOn = false;
-    bool isChorusOn = false;
-    bool isFlangerOn = false;
-    bool isReverbOn = false;
+    //Overdrive controls
+    void turnOnOverdrive(bool onOff);
+    
+    //Fuzz controls
+    void turnOnFuzz(bool onOff);
+    
+private:
+    //Amp sim
+    CAWLAmpSimulator    *ampSim;
+    
+    //Effects sim
+    CAWLEqualizer       *equalizer;
+    CAWLDelayEffect     *delayEffect;
+    CAWLCompressor      *compressor;
+    CAWLReverb          *reverb;
+    CAWLChorus          *chorus;
+    CAWLPhaser          *phaser;
+    CAWLFlanger         *flanger;
+    CAWLWahWah          *wahWah;
+    CAWLOverdrive       *overdrive;
+    CAWLFuzz            *fuzz;
+    
+    //Is on
+    bool isAmpOn        = false;
+    bool isEqOn         = false;
+    bool isChorusOn     = false;
+    bool isFlangerOn    = false;
+    bool isReverbOn     = false;
+    bool isDelayOn      = false;
+    bool isWahOn        = false;
     bool isCompressorOn = false;
+    bool isPhaserOn     = false;
+    bool isOverdriveOn  = false;
+    bool isFuzzOn       = false;
 };
 
 #endif /* CAWLSoundBoard_hpp */

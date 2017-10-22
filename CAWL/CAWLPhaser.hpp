@@ -10,5 +10,9 @@
 #define CAWLPhaser_hpp
 
 #include <stdio.h>
+class CAWLPhaser
+{
+    
+};
 
 #endif /* CAWLPhaser_hpp */
