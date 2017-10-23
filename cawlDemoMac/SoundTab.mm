@@ -18,7 +18,8 @@
 #import "CompressorUI.h"
 #import "PhaserUI.h"
 #import "FlangerUI.h"
-#define MAX_HEIGHT 400
+#define MAX_HEIGHT  400
+#define MAX_WIDTH   230
 NSArray * ampList = @[@"Off",
                       @"Phender BassWoman",
                       @"Box DC30",
@@ -134,7 +135,7 @@ NSArray * effectsList = @[@"Off",
 }
 
 - (void)setupEffectSelector3 {
-    _effectSelector3 = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(750, 350, 175, 50) pullsDown:NO];
+    _effectSelector3 = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(770, 350, 175, 50) pullsDown:NO];
     [_effectSelector3 addItemsWithTitles:effectsList];;
     [self.view addSubview:_effectSelector3];
     [_effectSelector3 setNeedsDisplay:YES];
@@ -143,7 +144,7 @@ NSArray * effectsList = @[@"Off",
 }
 
 - (void)setupEffectSelector4 {
-    _effectSelector4 = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(970, 350, 175, 50) pullsDown:NO];
+    _effectSelector4 = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(1010, 350, 175, 50) pullsDown:NO];
     [_effectSelector4 addItemsWithTitles:effectsList];
     [self.view addSubview:_effectSelector4];
     [_effectSelector4 setNeedsDisplay:YES];
@@ -173,7 +174,7 @@ NSArray * effectsList = @[@"Off",
     NSLog(@"Effect 1 selection %@ for %@", currEffect1, self.label);
     
     //Turn on new effect and draw new UI
-    [self turnOnSelectedEffect:currEffect1 with:NSMakePoint(280, 0)];
+    [self turnOnSelectedEffect:currEffect1 with:NSMakePoint(270, 0)];
 }
 
 - (void) updateEffect2Selection:(id)sender {
@@ -196,7 +197,7 @@ NSArray * effectsList = @[@"Off",
     NSLog(@"Effect 2 selection %@ for %@", currEffect2, self.label);
     
     //Turn on new effect and draw new UI
-    [self turnOnSelectedEffect:currEffect2 with:NSMakePoint(530, 0)];
+    [self turnOnSelectedEffect:currEffect2 with:NSMakePoint(510, 0)];
     NSLog(@"Effect 2 selection %@ for %@", currEffect2, self.label);
 }
 
@@ -244,7 +245,7 @@ NSArray * effectsList = @[@"Off",
     NSLog(@"Effect 4 selection %@ for %@", currEffect4, self.label);
     
     //Turn on new effect and draw new UI
-    [self turnOnSelectedEffect:currEffect4 with:NSMakePoint(970, 0)];
+    [self turnOnSelectedEffect:currEffect4 with:NSMakePoint(990, 0)];
 }
 
 #pragma mark UI_Utilities
@@ -377,7 +378,7 @@ NSArray * effectsList = @[@"Off",
 
 #pragma mark UI_Creation
 - (void) createAmpUI {
-    ampUI = [[AmpUI alloc] initWithFrame:NSMakeRect(0, 0, 300, MAX_HEIGHT)];
+    ampUI = [[AmpUI alloc] initWithFrame:NSMakeRect(0, 0, 280, MAX_HEIGHT)];
     [ampUI setFrameOrigin:NSMakePoint(0, 0)];
     [self.view addSubview:ampUI];
     [ampUI setHidden:YES];
@@ -386,7 +387,7 @@ NSArray * effectsList = @[@"Off",
 }
 
 - (void)createDelayUI {
-    delayUI = [[DelayUI alloc] initWithFrame:NSMakeRect(0, 0, 230, MAX_HEIGHT)];
+    delayUI = [[DelayUI alloc] initWithFrame:NSMakeRect(0, 0, MAX_WIDTH, MAX_HEIGHT)];
     [self.view addSubview:delayUI];
     [delayUI setHidden:YES];
     [delayUI setNeedsLayout:YES];
@@ -394,7 +395,7 @@ NSArray * effectsList = @[@"Off",
 }
 
 - (void)createEqualizerUI {
-    equalizerUI = [[EqualizerUI alloc] initWithFrame:NSMakeRect(0, 0, 300, MAX_HEIGHT)];
+    equalizerUI = [[EqualizerUI alloc] initWithFrame:NSMakeRect(0, 0, MAX_WIDTH, MAX_HEIGHT)];
     [self.view addSubview:equalizerUI];
     [equalizerUI setHidden:YES];
     [equalizerUI setNeedsLayout:YES];
@@ -402,7 +403,7 @@ NSArray * effectsList = @[@"Off",
 }
 
 - (void)createReverbUI {
-    reverbUI = [[ReverbUI alloc] initWithFrame:NSMakeRect(0, 0, 300, MAX_HEIGHT)];
+    reverbUI = [[ReverbUI alloc] initWithFrame:NSMakeRect(0, 0, MAX_WIDTH, MAX_HEIGHT)];
     [self.view addSubview:reverbUI];
     [reverbUI setHidden:YES];
     [reverbUI setNeedsLayout:YES];
@@ -410,7 +411,7 @@ NSArray * effectsList = @[@"Off",
 }
 
 - (void)createWahUI {
-    wahUI = [[WahUI alloc] initWithFrame:NSMakeRect(0, 0, 300, MAX_HEIGHT)];
+    wahUI = [[WahUI alloc] initWithFrame:NSMakeRect(0, 0, MAX_WIDTH, MAX_HEIGHT)];
     [self.view addSubview:wahUI];
     [wahUI setHidden:YES];
     [wahUI setNeedsLayout:YES];

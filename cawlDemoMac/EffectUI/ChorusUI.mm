@@ -11,7 +11,7 @@
 @implementation ChorusUI
 - (instancetype)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
-    [self drawBorder:frameRect];
+    
     return self;
 }
 
@@ -19,6 +19,7 @@
     [super drawRect:dirtyRect];
     
     // Drawing code here.
+    [self drawBorder:dirtyRect];
 }
 
 @end

@@ -90,6 +90,7 @@
     [super drawRect:dirtyRect];
     
     // Drawing code here.
+    [self drawBorder:dirtyRect];
 }
 
 @end

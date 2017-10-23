@@ -15,7 +15,7 @@
 - (instancetype)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
     [self setupReverbTimeUI];
-    [self drawBorder:frameRect];
+    
     return self;
 }
 
@@ -23,6 +23,7 @@
     [super drawRect:dirtyRect];
     
     // Drawing code here.
+    [self drawBorder:dirtyRect];
 }
 
 - (void)setupReverbTimeUI {

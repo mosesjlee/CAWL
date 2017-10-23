@@ -41,7 +41,7 @@
 - (instancetype)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
     [self setupLowShelfUI];
-    [self drawBorder:frameRect];
+    
     return self;
 }
 
@@ -49,6 +49,7 @@
     [super drawRect:dirtyRect];
     
     // Drawing code here.
+    [self drawBorder:dirtyRect];
 }
 
 - (void)setupLowShelfUI {

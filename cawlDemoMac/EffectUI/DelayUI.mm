@@ -25,13 +25,12 @@
     [self setupFeedbackUI];
     [self setupWetMixUI];
     [self setupDelayTimeUI];
-    [self drawBorder:frameRect];
     return self;
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
-    
+    [self drawBorder:dirtyRect];
     // Drawing code here.
 }
 
