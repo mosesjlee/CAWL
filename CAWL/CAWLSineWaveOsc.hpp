@@ -8,16 +8,12 @@
 
 #ifndef CAWLSineWaveOsc_hpp
 #define CAWLSineWaveOsc_hpp
-
-class CAWLSineWaveOsc
+#include "CAWLOscillator.hpp"
+class CAWLSineWaveOsc : public CAWLOscillator
 {
 public:
 	CAWLSineWaveOsc();
 	~CAWLSineWaveOsc();
-	double getNextSample();
-private:
-	double sampleRate;
-	double freq;
 };
 
 #endif /* CAWLSineWaveOsc_hpp */

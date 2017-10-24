@@ -18,15 +18,17 @@
 #include "CAWLHighShelfFilter.hpp"
 #include "CAWLPeakFilter.hpp"
 #include "CAWLAmpSimulator.hpp"
+#include "CAWLSineWaveOsc.hpp"
 
 #include <iostream>
 #include <fstream>
 
 #define SCALE 0.3
-//#define WRITE_TO_FILE
+#define WRITE_TO_FILE
 //#define SHOW_DEBUG_SAMPLES
 #define TEST_BIQUAD 0
 #define TEST_COMB 0
+#define TEST_OSC 1
 
 void getWhiteNoiseStream(float * stream);
 
@@ -95,6 +97,8 @@ int main(int argc, const char * argv[]) {
     CAWLAmpSimulator ampSim(2), ampSim2(1), ampSim3(2);
     CAWLAmpSimulator * ptrToAmp = &ampSim, *ptrToAmp2 = &ampSim2, *ptrToAmp3 = &ampSim3;
     
+    CAWLSineWaveOsc sineWav, * sineWavPtr = &sineWav;// sineWav.setFreq(440);
+    
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
         double j = *fc;
@@ -124,6 +128,8 @@ int main(int argc, const char * argv[]) {
             else {
                 data[i] = 0.0;
             }
+#elif TEST_OSC
+            data[i] = sineWavPtr->getNextSample();
 #endif
         }
         *fc = j;
@@ -132,7 +138,7 @@ int main(int argc, const char * argv[]) {
         //ptrToFir->processBuffer(data, numSamples);
 //        ptrToiir->processBuffer(data, numSamples);
 //        ptrToUcf->processBuffer(data, numSamples);
-		ptrToAmp->processBuffer(data, numSamples);
+//		ptrToAmp->processBuffer(data, numSamples);
 //        lsfPtr->processBuffer(data, numSamples);
 //        hsfPtr->processBuffer(data, numSamples);
 //        pfPtr->processBuffer(data, numSamples);
