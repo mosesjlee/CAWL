@@ -8,9 +8,9 @@
 
 #include "CAWLHighPassFilter.hpp"
 
-CAWLHighPassFilter::CAWLHighPassFilter(double cutOffFreq)
+CAWLHighPassFilter::CAWLHighPassFilter()
 {
-    centerFrequency = cutOffFreq; //Default;
+    centerFrequency = 120;
     calculateCoefficients();
 }
 
@@ -20,10 +20,10 @@ CAWLHighPassFilter::~CAWLHighPassFilter()
 
 void CAWLHighPassFilter::calculateCoefficients()
 {
-    double theta_c         = M_PI * centerFrequency/sampleRate;
-    double omega    = M_PI * centerFrequency;
-    double kappa    = omega/tan(theta_c);
-    double phi      = (kappa * kappa) + (omega * omega) + (2 * (kappa * omega));
+    theta_c  = M_PI * centerFrequency/sampleRate;
+    omega    = M_PI * centerFrequency;
+    kappa    = omega/tan(theta_c);
+    phi      = (kappa * kappa) + (omega * omega) + (2 * (kappa * omega));
     a_0 = kappa * kappa/phi;
     a_1 = -2 * kappa * kappa/phi;
     a_2 = kappa * kappa / phi;

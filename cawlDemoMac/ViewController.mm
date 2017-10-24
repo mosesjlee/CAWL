@@ -33,14 +33,7 @@
 - (void)viewWillAppear
 {
     [super viewWillAppear];
-    
-    //_board = new CAWLSoundBoard();
-//    __block CAWLSoundBoard * weakRef = &board;
-//    ca = ^(float * data,
-//                           const unsigned int numSamples){
-//        weakRef->processBuffer(data, numSamples);
-//    };
-    
+        
 
 }
 

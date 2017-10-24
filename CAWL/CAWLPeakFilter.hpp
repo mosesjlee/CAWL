@@ -9,7 +9,6 @@
 #ifndef CAWLPeakFilter_hpp
 #define CAWLPeakFilter_hpp
 
-#include <stdio.h>
 #include "CAWLBiQuadFilter.hpp"
 
 class CAWLPeakFilter : public CAWLBiQuadFilter

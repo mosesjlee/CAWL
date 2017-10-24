@@ -11,14 +11,17 @@
 #define DEFAULT_SR 44100.0
 #define MILLISECONDS 1000.0
 #include <stdio.h>
+#include <iostream>
 #include <cmath>
 
 class CAWLSoundModule
 {
 public:
+    virtual ~CAWLSoundModule(){};
+    CAWLSoundModule(){};
+
     virtual void processBuffer(float * buf, const unsigned int numOfSamples) = 0;
     virtual void setSampleRate(float newSampleRate) { sampleRate = newSampleRate; }
-    
 protected:
     float sampleRate = DEFAULT_SR;
 };

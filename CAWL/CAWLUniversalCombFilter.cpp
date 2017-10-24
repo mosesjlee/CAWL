@@ -33,8 +33,18 @@ void CAWLUniversalCombFilter::processBuffer(float * buf, const unsigned int numS
         zDelayedSample = delayLine.processNextSample(xHCurrSample);
 		xHCurrSample = xCurrSample + zDelayedSample * mFeedbackGain;
         yCurrSample = zDelayedSample * mFeedForwardGain + xHCurrSample * mMixLevel;
-        buf[i] = yCurrSample;
+        buf[i] = yCurrSample + xCurrSample * dryMix;
     }
 	
     lastSampleOfBlock = xHCurrSample;
 }
+
+void CAWLUniversalCombFilter::setDryMix(double newDryMix)
+{
+    if(newDryMix > 1.0) dryMix = 1.0;
+    else if(newDryMix < 0.0) dryMix = 0.0;
+    else dryMix = newDryMix;
+}
+
+
+

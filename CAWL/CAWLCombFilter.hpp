@@ -8,7 +8,7 @@
 
 #ifndef CAWLFilter_hpp
 #define CAWLFilter_hpp
-#include <stdio.h>
+
 #include "CAWLSoundModule.hpp"
 #include "CAWLDelayLine.hpp"
 

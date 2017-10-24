@@ -6,10 +6,8 @@
 //  Copyright © 2016 Moses Lee. All rights reserved.
 //
 
-#include <iostream>
-#include <fstream>
+
 #include "CAWL.hpp"
-#include "CAWLAmpSimulator.hpp"
 #include "CAWLValveTubeSimulator.hpp"
 #include "CAWLFIRCombFilter.hpp"
 #include "CAWLIIRCombFilter.hpp"
@@ -19,12 +17,18 @@
 #include "CAWLLowShelfFilter.hpp"
 #include "CAWLHighShelfFilter.hpp"
 #include "CAWLPeakFilter.hpp"
+#include "CAWLAmpSimulator.hpp"
+#include "CAWLSineWaveOsc.hpp"
+
+#include <iostream>
+#include <fstream>
 
 #define SCALE 0.3
-//#define WRITE_TO_FILE
+#define WRITE_TO_FILE
 //#define SHOW_DEBUG_SAMPLES
 #define TEST_BIQUAD 0
 #define TEST_COMB 0
+#define TEST_OSC 1
 
 void getWhiteNoiseStream(float * stream);
 
@@ -32,8 +36,8 @@ int main(int argc, const char * argv[]) {
 	// insert code here...
 	std::cout << "Hello, World!\n";
 	
+
 	
-	CAWL * instance = CAWL::Instance();
     float buffer[512], buffer2[512] , buffer3[512], buffer4[512];
     float * ptrToBuf1 = buffer, * ptrToBuf2 = buffer2, * ptrToBuf3 = buffer3, * ptrToBuf4 = buffer4;
 	double frameCount = 0, frameCount2 = 0, * fc, * fc2;
@@ -54,25 +58,30 @@ int main(int argc, const char * argv[]) {
     float whiteNoiseBuffer[44533];
     float * whiteBufferPtr = whiteNoiseBuffer;
     int whiteNoiseCount = 0, * ptrToWhteCout = &whiteNoiseCount;
+
+    CAWL * instance = CAWL::Instance();
     getWhiteNoiseStream(whiteNoiseBuffer);
-    
-    
-    CAWLAmpSimulator ampSim(2), ampSim2(1), ampSim3(2);
-    CAWLAmpSimulator * ptrToAmp = &ampSim, *ptrToAmp2 = &ampSim2, *ptrToAmp3 = &ampSim3;
-	CAWLValveTubeSimulator valveSim, valveSim2, valveSim3;
-	CAWLValveTubeSimulator * ptrToValve = &valveSim, * ptrToValve2 = &valveSim2, *ptrToValve3 = &valveSim3;
+
+#if 0
+
+
+
+    CAWLLowPassFilter lpf; lpf.setCutOffFreq(10000);
+    CAWLHighPassFilter hpf; hpf.setCutOffFreq(500);
+    CAWLLowPassFilter * lpfPtr = &lpf;
+    CAWLHighPassFilter * hpfPtr = &hpf;
+#endif
+//    CAWLUniversalCombFilter ucf; ucf.setDelay(2.2675736961);
+    CAWLUniversalCombFilter ucf; ucf.setDelay(400); ucf.setMixLevel(0.7); ucf.setFeedbackGain(0.7); ucf.setFeedForwardGain(1.0);
+    CAWLUniversalCombFilter * ptrToUcf = &ucf;
     CAWLFIRCombFilter fir;
     CAWLFIRCombFilter *ptrToFir = &fir;
     CAWLIIRCombFilter iir; iir.setDelay(2.2675736961);
     CAWLIIRCombFilter *ptrToiir = &iir;
-//    CAWLUniversalCombFilter ucf; ucf.setDelay(2.2675736961);
-    CAWLUniversalCombFilter ucf; ucf.setDelay(400); ucf.setMixLevel(0.7); ucf.setFeedbackGain(0.7); ucf.setFeedForwardGain(1.0); 
-    CAWLUniversalCombFilter * ptrToUcf = &ucf;
+
+    CAWLLowPassFilter lpf;// lpf.setCutOffFreq(10000);
+    //CAWLLowPassFilter * lpfPtr;
     
-    CAWLLowPassFilter lpf; lpf.setCutOffFreq(1000);
-    CAWLHighPassFilter hpf(1000.0);
-    CAWLLowPassFilter * lpfPtr = &lpf;
-    CAWLHighPassFilter * hpfPtr = &hpf;
     CAWLLowShelfFilter lsf, * lsfPtr = &lsf;
     lsf.setCutOffFreq(200); lsf.setGain(-60.0);
     CAWLHighShelfFilter hsf, * hsfPtr = &hsf;
@@ -83,7 +92,12 @@ int main(int argc, const char * argv[]) {
     pf2.setQFactor(10); pf2.setCutOffFreq(880); pf2.setGain(10.0);
     
 
+    CAWLValveTubeSimulator valveSim, valveSim2, valveSim3;
+    CAWLValveTubeSimulator * ptrToValve = &valveSim, * ptrToValve2 = &valveSim2, *ptrToValve3 = &valveSim3;
+    CAWLAmpSimulator ampSim(2), ampSim2(1), ampSim3(2);
+    CAWLAmpSimulator * ptrToAmp = &ampSim, *ptrToAmp2 = &ampSim2, *ptrToAmp3 = &ampSim3;
     
+    CAWLSineWaveOsc sineWav, * sineWavPtr = &sineWav;// sineWav.setFreq(440);
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
@@ -114,6 +128,8 @@ int main(int argc, const char * argv[]) {
             else {
                 data[i] = 0.0;
             }
+#elif TEST_OSC
+            data[i] = sineWavPtr->getNextSample();
 #endif
         }
         *fc = j;
@@ -121,8 +137,8 @@ int main(int argc, const char * argv[]) {
 
         //ptrToFir->processBuffer(data, numSamples);
 //        ptrToiir->processBuffer(data, numSamples);
-        ptrToUcf->processBuffer(data, numSamples);
-		ptrToAmp->processBuffer(data, numSamples);
+//        ptrToUcf->processBuffer(data, numSamples);
+//		ptrToAmp->processBuffer(data, numSamples);
 //        lsfPtr->processBuffer(data, numSamples);
 //        hsfPtr->processBuffer(data, numSamples);
 //        pfPtr->processBuffer(data, numSamples);
@@ -153,7 +169,7 @@ int main(int argc, const char * argv[]) {
 //
 //            //printf("data %f\n", data[i]);
 //        }
-        ptrToAmp2->processBuffer(data, numSamples);
+//        ptrToAmp2->processBuffer(data, numSamples);
         //ptrToValve2->processBuffer(data, numSamples);
 //		*fc2 = j;
 		//printf("%f ",j);
@@ -175,13 +191,12 @@ int main(int argc, const char * argv[]) {
 //        }
 //
 //        *fc3 = j;
-        ptrToAmp3->processBuffer(data, numSamples);
+//        ptrToAmp3->processBuffer(data, numSamples);
         //ptrToValve3->processBuffer(data, numSamples);
         //printf("%f ",j);
     });
 	
-    cawlBuffers inputChannel4 = (^(float * data,
-                                   const unsigned int numSamples){
+    cawlBuffers inputChannel4 = (^(float * data, const unsigned int numSamples){
         double j = *fc4;
         for(int i = 0; i < numSamples; i++)
         {
@@ -222,12 +237,12 @@ int main(int argc, const char * argv[]) {
         
         if(c == '+'){
 			//ampSim.setPreampGain(0.3);;
-            iir.setDelay(400);
+            ucf.setDelay(300);
             //ampSim.setCutOff(2000.0);
             //std::cout << "new gain level " << ampSim.getGain() << std::endl;
         }
         if(c == '-'){
-            iir.setDelay(600);
+            ucf.setDelay(600);
             //ampSim.setCutOff(10.0);
             //ampSim.setPreampGain(0.1);
             //std::cout << "new gain level " << ampSim.getGain() << std::endl;
@@ -246,6 +261,7 @@ int main(int argc, const char * argv[]) {
     }
 #endif
     return 0;
+    
 }
 
 

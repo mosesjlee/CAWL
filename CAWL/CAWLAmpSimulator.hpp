@@ -18,8 +18,6 @@
 #ifndef CAWLAmpSimulator_hpp
 #define CAWLAmpSimulator_hpp
 
-#include <stdio.h>
-#include "CAWLSoundModule.hpp"
 #include "CAWLValveTubeSimulator.hpp"
 #include "CAWLHighPassFilter.hpp"
 #include "CAWLLowShelfFilter.hpp"
@@ -37,7 +35,7 @@ public:
 private:
     CAWLValveTubeSimulator valveTube;
 //    ToneStack * stack;
-    CAWLHighPassFilter hp1 = CAWLHighPassFilter(150);
+    CAWLHighPassFilter hp1;
     CAWLLowShelfFilter lsf;
 };
 #endif /* CAWLAmpSimulator_hpp */

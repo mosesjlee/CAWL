@@ -8,8 +8,8 @@
 
 #ifndef CAWLDelayLine_hpp
 #define CAWLDelayLine_hpp
+#define MAX_DELAY_IN_SAMPLES 44100.0f * 2
 
-#include <stdio.h>
 #include "CAWLSoundModule.hpp"
 class CAWLDelayLine
 {
@@ -23,7 +23,8 @@ public:
 private:
     inline double linear_interp(float x_1, float y_1, float x_2, float y_2, float frac);
     
-    double * delayLine;
+    //double delayLine[(int) MAX_DELAY_IN_SAMPLES];
+    double *delayLine;
     float currWritePos;
     float currDelayInSamples;
     float maxDelayInSamples;

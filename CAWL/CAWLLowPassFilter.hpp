@@ -9,9 +9,6 @@
 #ifndef CAWLLowPassFilter_hpp
 #define CAWLLowPassFilter_hpp
 
-#include <stdio.h>
-#include <iostream>
-#include <math.h>
 #include "CAWLBiQuadFilter.hpp"
 
 class CAWLLowPassFilter : public CAWLBiQuadFilter
@@ -20,7 +17,6 @@ private:
     void calculateCoefficients();
     
 public:
-    CAWLLowPassFilter(double cutOffFreq);
     CAWLLowPassFilter();
     ~CAWLLowPassFilter();
 };

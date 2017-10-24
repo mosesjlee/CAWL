@@ -9,7 +9,6 @@
 #ifndef CAWLValveTubeSimulator_hpp
 #define CAWLValveTubeSimulator_hpp
 
-#include <stdio.h>
 #include "CAWLSoundModule.hpp"
 
 class CAWLValveTubeSimulator : public CAWLSoundModule

@@ -9,7 +9,6 @@
 #ifndef CAWLBiQuadFilter_hpp
 #define CAWLBiQuadFilter_hpp
 
-#include <stdio.h>
 #include "CAWLDelayLine.hpp"
 #include "CAWLSoundModule.hpp"
 

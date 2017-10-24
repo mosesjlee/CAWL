@@ -1,5 +1,5 @@
 //
-//  AmpUI.h
+//  DelayUI.h
 //  cawlDemoMac
 //
 //  Created by Moses Lee on 10/13/17.
@@ -7,10 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "SoundTab.h"
+#import "EffectUI.h"
 
-
-@interface AmpUI : NSView
+@interface DelayUI : EffectUI
 - (instancetype)initWithFrame:(NSRect)frameRect;
-@property SoundTab * soundTabRef;
 @end

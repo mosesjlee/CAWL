@@ -9,6 +9,11 @@
 #ifndef CAWLChorus_hpp
 #define CAWLChorus_hpp
 
-#include <stdio.h>
-
+class CAWLChorus
+{
+public:
+	CAWLChorus();
+	~CAWLChorus();
+private:
+};
 #endif /* CAWLChorus_hpp */

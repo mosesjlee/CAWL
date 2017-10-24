@@ -22,6 +22,6 @@
 @property (strong) NSPopUpButton * effectSelector3;
 @property (strong) NSPopUpButton * effectSelector4;
 
-@property CAWLSoundBoard soundBoard;
-@property cawlBuffers buffer;
+@property CAWLSoundBoard * soundBoard;
+@property (copy) cawlBuffers buffer;
 @end
