@@ -11,16 +11,19 @@
 #include "CAWLDelayEffect.hpp"
 #include "CAWLSineWaveOsc.hpp"
 
-class CAWLFlanger : public CAWLDelayEffect
+class CAWLFlanger
 {
 public:
 	CAWLFlanger();
 	~CAWLFlanger();
-	void setModulationDepth();
-	void setMixLevel();
-	void setModulationSpeed();
+	void setModulationDepth(double newModDepth);
+	void setMixLevel(double mixLevel);
+	void setModulationSpeed(double newModSpeed);
+    void processBuffer(float * buf, const unsigned int numSamples);
 private:
 	CAWLSineWaveOsc * sine;
+    double modDepth;
+    double modSpeed;
 };
 
 #endif /* CAWLFlanger_hpp */

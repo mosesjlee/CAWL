@@ -18,8 +18,9 @@
 #import "CompressorUI.h"
 #import "PhaserUI.h"
 #import "FlangerUI.h"
-#define MAX_HEIGHT  400
-#define MAX_WIDTH   230
+#define MAX_HEIGHT  360
+#define MAX_WIDTH   225
+
 NSArray * ampList = @[@"Off",
                       @"Phender BassWoman",
                       @"Box DC30",
