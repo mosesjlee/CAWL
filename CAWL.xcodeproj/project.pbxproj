@@ -105,6 +105,8 @@
 		91E9D2821F9D3FB000491E6A /* CompressorUI.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91E9D2811F9D3FB000491E6A /* CompressorUI.mm */; };
 		91E9D2851F9D3FC400491E6A /* PhaserUI.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91E9D2841F9D3FC400491E6A /* PhaserUI.mm */; };
 		91E9D2881F9D3FD700491E6A /* FlangerUI.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91E9D2871F9D3FD700491E6A /* FlangerUI.mm */; };
+		91EDCE101F9ED2E00000D9BA /* CAWLSineWaveOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91EDCE0E1F9ED2E00000D9BA /* CAWLSineWaveOsc.cpp */; };
+		91EDCE111F9ED2E00000D9BA /* CAWLSineWaveOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91EDCE0E1F9ED2E00000D9BA /* CAWLSineWaveOsc.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -225,6 +227,8 @@
 		91E9D2841F9D3FC400491E6A /* PhaserUI.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PhaserUI.mm; sourceTree = "<group>"; };
 		91E9D2861F9D3FD700491E6A /* FlangerUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlangerUI.h; sourceTree = "<group>"; };
 		91E9D2871F9D3FD700491E6A /* FlangerUI.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FlangerUI.mm; sourceTree = "<group>"; };
+		91EDCE0E1F9ED2E00000D9BA /* CAWLSineWaveOsc.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLSineWaveOsc.cpp; sourceTree = "<group>"; };
+		91EDCE0F1F9ED2E00000D9BA /* CAWLSineWaveOsc.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLSineWaveOsc.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +310,8 @@
 				912E05131F8023AE00C13E55 /* CAWLCombFilter.hpp */,
 				911097FC1F6F22F2002A9A92 /* CAWLDelayLine.cpp */,
 				911097FD1F6F22F2002A9A92 /* CAWLDelayLine.hpp */,
+				91EDCE0E1F9ED2E00000D9BA /* CAWLSineWaveOsc.cpp */,
+				91EDCE0F1F9ED2E00000D9BA /* CAWLSineWaveOsc.hpp */,
 				911097F91F6F16B2002A9A92 /* CAWLSoundModule.hpp */,
 			);
 			name = SoundModules;
@@ -603,6 +609,7 @@
 				91DC3E511F871F5B00E3DB09 /* CAWLLowShelfFilter.cpp in Sources */,
 				91E056F51F907340008A5B25 /* CAWLChorus.cpp in Sources */,
 				91E056E11F906749008A5B25 /* CAWLEqualizer.cpp in Sources */,
+				91EDCE111F9ED2E00000D9BA /* CAWLSineWaveOsc.cpp in Sources */,
 				912977AE1DE4F8600093134D /* CARingBuffer.cpp in Sources */,
 				9191B3B21F85F62B004C6F33 /* CAWLBiQuadFilter.cpp in Sources */,
 				91E9D26E1F9C1CF900491E6A /* CAWLWahWah.cpp in Sources */,
@@ -665,6 +672,7 @@
 				91E9D2751F9C1F7D00491E6A /* CAWLFuzz.cpp in Sources */,
 				91E057121F9177BC008A5B25 /* CAWLCombFilter.cpp in Sources */,
 				912977B91DE4F8610093134D /* CAWL.cpp in Sources */,
+				91EDCE101F9ED2E00000D9BA /* CAWLSineWaveOsc.cpp in Sources */,
 				91E9D2791F9D2CF900491E6A /* EffectUI.mm in Sources */,
 				91E056FC1F9146B8008A5B25 /* TapTempoCounter.mm in Sources */,
 				910FB50B1F9482AA000ED66C /* EqualizerUI.mm in Sources */,

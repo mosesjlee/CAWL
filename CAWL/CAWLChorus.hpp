@@ -11,6 +11,9 @@
 
 class CAWLChorus
 {
-    
+public:
+	CAWLChorus();
+	~CAWLChorus();
+private:
 };
 #endif /* CAWLChorus_hpp */

@@ -58,7 +58,7 @@ inline double CAWLDelayLine::linear_interp(float x_1, float y_1, float x_2, floa
     return retval;
 }
 
-double CAWLDelayLine::processNextSample(double currSample)
+inline double CAWLDelayLine::processNextSample(double currSample)
 {
     double yCurrOutput = 0.0;
 
