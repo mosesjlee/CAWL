@@ -11,7 +11,12 @@
 CAWLFlanger::CAWLFlanger()
 {
     sine = new CAWLSineWaveOsc();
-    sine->setFreq(1.0);
+    modSpeed = 1.0;
+    modDepth = 6.0;
+    mMixLevel = .5;
+    mFeedbackGain = .5;
+    mFeedForwardGain = .5;
+    sine->setFreq(modSpeed);
 }
 
 
@@ -27,17 +32,13 @@ void CAWLFlanger::processBuffer(float * buf, const unsigned int numSamples)
 	double yCurrOutput = lastSampleOfBlock;
 	for(int i = 0; i < numSamples; i++)
 	{
-		xCurrSample = buf[i] *mMixLevel;
-		zSample = mFeedbackGain * delayLine.processNextSample(yCurrOutput);
-		yCurrOutput = xCurrSample + zSample;
-		
-		if(yCurrOutput > 1.0)
-			yCurrOutput = 1.0;
-		else if(yCurrOutput < -1.0)
-			yCurrOutput = -1.0;
-		
-		buf[i] = yCurrOutput;
-		delayLine.setDelayTimeInMilliseconds(flangedValue() * modDepth);
+		xCurrSample = buf[i] * mMixLevel;
+        yCurrOutput = buf[i] + mFeedbackGain * zSample;
+        zSample = delayLine.processNextSample(yCurrOutput);
+
+		buf[i] = xCurrSample + yCurrOutput * mFeedForwardGain;
+
+		delayLine.setDelayTimeInMilliseconds(flangedValue());
 	}
 	lastSampleOfBlock = yCurrOutput;
 }
