@@ -379,7 +379,7 @@ NSArray * effectsList = @[@"Off",
 
 #pragma mark UI_Creation
 - (void) createAmpUI {
-    ampUI = [[AmpUI alloc] initWithFrame:NSMakeRect(0, 0, 280, MAX_HEIGHT)];
+    ampUI = [[AmpUI alloc] initWithFrame:NSMakeRect(0, 0, 265, MAX_HEIGHT)];
     [ampUI setFrameOrigin:NSMakePoint(0, 0)];
     [self.view addSubview:ampUI];
     [ampUI setHidden:YES];
