@@ -14,7 +14,7 @@ CAWLFlanger::CAWLFlanger()
     modSpeed = 1.0;
     modDepth = 6.0;
     mMixLevel = .5;
-    mFeedbackGain = .5;
+    mFeedbackGain = 0;
     mFeedForwardGain = .5;
     sine->setFreq(modSpeed);
 }
