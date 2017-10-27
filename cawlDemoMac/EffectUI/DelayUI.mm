@@ -56,11 +56,11 @@
 	feedbackSlider = [self drawCircularSliderWithRect:NSMakeRect(15, 320, 30, 30)
 										   WithMaxVal:1.0
 										AndWithMinVal:0.0];
-    [feedbackSlider setAction:@selector(updateFeedbackGainLevel)];
+	[feedbackSlider setAction:@selector(updateFeedbackGainLevel:)];
     [self addSubview:feedbackSlider];
 }
 
-- (void)updateFeedbackGainLevel {
+- (void)updateFeedbackGainLevel:(id)sender {
     feedbackLabel.stringValue = [NSString stringWithFormat:@"%f", feedbackSlider.doubleValue];
     self.soundTabRef.soundBoard->setDelayFeedbackGain(feedbackSlider.doubleValue);
 }
@@ -76,11 +76,11 @@
 	wetMixSlider = [self drawCircularSliderWithRect:NSMakeRect(60, 320, 30, 30)
 										 WithMaxVal:1.0
 									  AndWithMinVal:0.0];
-    [wetMixSlider setAction:@selector(updateWetMixLevel)];
+	[wetMixSlider setAction:@selector(updateWetMixLevel:)];
     [self addSubview:wetMixSlider];
 }
 
-- (void)updateWetMixLevel {
+- (void)updateWetMixLevel:(id)sender {
     wetMixLabel.stringValue = [NSString stringWithFormat:@"%f", wetMixSlider.doubleValue];
     self.soundTabRef.soundBoard->setDelayWetMixLevel(wetMixSlider.doubleValue);
 }
@@ -96,11 +96,11 @@
     delayTimeSlider = [self drawCircularSliderWithRect:NSMakeRect(100, 320, 30, 30)
                                             WithMaxVal:1500
                                          AndWithMinVal:5];
-    [delayTimeSlider setAction:@selector(updateDelayTime)];
+	[delayTimeSlider setAction:@selector(updateDelayTime:)];
     [self addSubview:delayTimeSlider];
 }
 
-- (void)updateDelayTime {
+- (void)updateDelayTime:(id)sender {
     delayTimeLabel.stringValue = [NSString stringWithFormat:@"%d", delayTimeSlider.intValue];
     self.soundTabRef.soundBoard->setNewDelayTime(delayTimeSlider.intValue);
 }
@@ -118,11 +118,11 @@
 	dryMixSlider = [self drawCircularSliderWithRect:NSMakeRect(165, 320, 30, 30)
 										   WithMaxVal:1.0
 										AndWithMinVal:0.0];
-	[dryMixSlider setAction:@selector(updatDryGainLevel)];
+	[dryMixSlider setAction:@selector(updatDryGainLevel:)];
 	[self addSubview:dryMixSlider];
 }
 
-- (void)updatDryGainLevel {
+- (void)updatDryGainLevel:(id)sender {
 	dryMixLabel.stringValue = [NSString stringWithFormat:@"%f", dryMixSlider.floatValue];
 	self.soundTabRef.soundBoard->setNewDelayTime(dryMixSlider.floatValue);
 }

@@ -51,12 +51,12 @@ public:
     void setHighShelfCenterFreq(double centFreq);
     void setLowMidCenterFreq(double centFreq);
     void setHighMidCenterFreq(double centFreq);
-    void setLowShelfGain(double centFreq);
-    void setHighShelfGain(double centFreq);
-    void setLowMidGain(double centFreq);
-    void setHighMidGain(double centFreq);
-    void setLowQFactor(double centFreq);
-    void setHighQFactor(double centFreq);
+    void setLowShelfGain(double newGain);
+    void setHighShelfGain(double newGain);
+    void setLowMidGain(double newGain);
+    void setHighMidGain(double newGain);
+    void setLowQFactor(double newQFactor);
+    void setHighQFactor(double newQFactor);
     
     //Chorus controls
     void turnOnChorus(bool onOff);

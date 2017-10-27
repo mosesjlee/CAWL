@@ -97,10 +97,69 @@ void CAWLSoundBoard::bypassDelay(bool bypass)
 #pragma mark EQ_CONTROL
 void CAWLSoundBoard::turnOnEqualizer(bool onOff)
 {
-    
+	if(!isEqOn)
+	{
+		if(equalizer != NULL) delete equalizer;
+		equalizer = NULL;
+	}
+	else
+	{
+		equalizer = new CAWLEqualizer();
+	}
+	isEqOn = onOff;
 }
 
 void CAWLSoundBoard::bypassEqualizer(bool bypass)
+{
+	isEqBypassed = bypass;
+}
+
+void CAWLSoundBoard::setLowShelfCenterFreq(double centFreq)
+{
+	equalizer->setLowShelfCenterFreq(centFreq);
+}
+
+void CAWLSoundBoard::setHighShelfCenterFreq(double centFreq)
+{
+	equalizer->setHighShelfCenterFreq(centFreq);
+}
+
+void CAWLSoundBoard::setLowMidCenterFreq(double centFreq)
+{
+	equalizer->setlowMidCenterFreq(centFreq);
+}
+
+void CAWLSoundBoard::setHighMidCenterFreq(double centFreq)
+{
+	equalizer->setHighMidCenterFreq(centFreq);
+}
+
+void CAWLSoundBoard::setLowShelfGain(double newGain)
+{
+	equalizer->setLowShelfGain(newGain);
+}
+
+void CAWLSoundBoard::setHighShelfGain(double newGain)
+{
+	equalizer->setHighShelfGain(newGain);
+}
+
+void CAWLSoundBoard::setLowMidGain(double newGain)
+{
+	equalizer->setlowMidGain(newGain);
+}
+
+void CAWLSoundBoard::setHighMidGain(double newGain)
+{
+	
+}
+
+void CAWLSoundBoard::setLowQFactor(double newGain)
+{
+	
+}
+
+void CAWLSoundBoard::setHighQFactor(double newGain)
 {
 	
 }

@@ -32,10 +32,20 @@
     NSTextField *highShelfGainLabel;
     NSTextField *lowMidGainLabel;
     NSTextField *highMidGainLabel;
-    
+	
+	//Frequency Titles
+	NSTextField *lowShelfFreqTitle;
+	NSTextField *highShelfFreqTitle;
+	NSTextField *lowMidFreqTitle;
+	NSTextField *highMidFreqTitle;
+	
     //Q Factor levels
     NSTextField *lowMidQFactorLabel;
     NSTextField *highMidQFactorLabel;
+	
+	//Q Factor Titles
+	NSTextField *lowMidQFactorTitle;
+	NSTextField *highMidQFactorTitle;
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect {
@@ -52,11 +62,17 @@
     [self drawBorder:dirtyRect];
 }
 
+#pragma mark SETUP_UI
 - (void)setupLowShelfUI {
-    lowShelfFreqSlider = [self drawCircularSliderWithRect:NSMakeRect(90, 320, 30, 30)
+	//Slider
+    lowShelfFreqSlider = [self drawCircularSliderWithRect:NSMakeRect(5, 320, 30, 30)
                                                WithMaxVal:10
-                                            AndWithMinVal:100];
+                                            AndWithMinVal:200];
+	[lowMidFreqSlider setAction:@selector(updateLowShelfGain:)];
     [self addSubview:lowShelfFreqSlider];
+	
+	//Title
+	
 }
 
 - (void)setupHighShelfUI {
@@ -71,6 +87,46 @@
     
 }
 
+#pragma mark IBActions
 
+- (void) updateLowShelfGain:(id)sender {
+	
+}
+
+- (void) updateHighShelfGain:(id)sender {
+	
+}
+
+- (void) updateLowMidGain:(id)sender {
+	
+}
+
+- (void) updateHighMidGain:(id)sender {
+	
+}
+
+- (void) updateLowShelfCenterFreq:(id)sender {
+	
+}
+
+- (void) updateHighShelfCenterFreq:(id)sender {
+	
+}
+
+- (void) updateLowMidCenterFreq:(id)sender {
+	
+}
+
+- (void) updateHighMidCenterFreq:(id)sender {
+	
+}
+
+- (void) updateLowMidQFactor:(id)sender {
+	
+}
+
+- (void) updateHighMidQFactor:(id)sender {
+	
+}
 
 @end
