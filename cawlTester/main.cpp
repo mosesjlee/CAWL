@@ -19,7 +19,7 @@
 #include "CAWLPeakFilter.hpp"
 #include "CAWLAmpSimulator.hpp"
 #include "CAWLSineWaveOsc.hpp"
-
+#include "CAWLFlanger.hpp"
 #include <iostream>
 #include <fstream>
 
@@ -28,7 +28,8 @@
 //#define SHOW_DEBUG_SAMPLES
 #define TEST_BIQUAD 0
 #define TEST_COMB 0
-#define TEST_OSC 1
+#define TEST_OSC 0
+
 
 void getWhiteNoiseStream(float * stream);
 
@@ -98,7 +99,7 @@ int main(int argc, const char * argv[]) {
     CAWLAmpSimulator * ptrToAmp = &ampSim, *ptrToAmp2 = &ampSim2, *ptrToAmp3 = &ampSim3;
     
     CAWLSineWaveOsc sineWav, * sineWavPtr = &sineWav;// sineWav.setFreq(440);
-    
+    CAWLFlanger flanger, * flangerPtr=&flanger; flanger.setModulationSpeed(1);
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
         double j = *fc;
@@ -146,6 +147,7 @@ int main(int argc, const char * argv[]) {
 		//ptrToValve->processBuffer(data,numSamples);
  //       lpfPtr->processBuffer(data, numSamples);
 //        hpfPtr->processBuffer(data, numSamples);
+        flangerPtr->processBuffer(data, numSamples);
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 87) {
             memcpy(debugPtr + (*debugCountPtr) * numSamples, data, (512 *sizeof(float)));
