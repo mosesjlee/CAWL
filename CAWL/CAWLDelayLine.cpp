@@ -39,7 +39,9 @@ void CAWLDelayLine::setDelayTimeInMilliseconds(float delayTime)
 
 void CAWLDelayLine::setDelayTimeInSamples(float delaySamples)
 {
+	//if(delaySamples == 0) currDelayInSamples = 1;
     currDelayInSamples = delaySamples;
+	
     //Enforce that the max delay is 1 sample less than the max delay
     if(currDelayInSamples > MAX_DELAY_IN_SAMPLES)
         currDelayInSamples = MAX_DELAY_IN_SAMPLES - 1;
@@ -63,18 +65,21 @@ double CAWLDelayLine::processNextSample(double currSample)
     double yCurrOutput = 0.0;
 
     delayLine[(int) currWritePos] = currSample;
-    
+	
+	//Update the write position
+	currWritePos = (int) (currWritePos + 1.0) % (int) (MAX_DELAY_IN_SAMPLES+1);
+	
     //Get the current read position
-    float currReadPos = currWritePos - (currDelayInSamples - 1.0);
+	double currReadPos = currWritePos - (currDelayInSamples);// - 1.0);
     if(currReadPos < 0.0)
-        currReadPos = MAX_DELAY_IN_SAMPLES - fabs(currReadPos);
+        currReadPos = currReadPos + (MAX_DELAY_IN_SAMPLES-1);
     
     //Check if there is a fractional delay
-    float fracDelay = currReadPos - (int) currReadPos;
+    double fracDelay = currReadPos - (int) currReadPos;
     
     if(fracDelay > 0.00000000)
     {
-        float lookAheadPos = (currReadPos + 1.0) > maxDelayInSamples ? 0 + fracDelay : currReadPos + 1.0;
+        double lookAheadPos = (currReadPos + 1.0) > maxDelayInSamples ? 0 + fracDelay : currReadPos + 1.0;
         yCurrOutput = linear_interp((int) currReadPos,
                                     delayLine[(int) currReadPos],
                                     lookAheadPos,
@@ -84,8 +89,7 @@ double CAWLDelayLine::processNextSample(double currSample)
     else
         yCurrOutput = delayLine[(int) currReadPos];
     
-    //Update the write position
-    currWritePos = (currWritePos + 1.0) >= maxDelayInSamples ? 0 : (currWritePos + 1.0);
+
     
     //Return the output
     return yCurrOutput;

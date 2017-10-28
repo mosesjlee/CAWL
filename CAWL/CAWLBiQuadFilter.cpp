@@ -36,8 +36,20 @@ void CAWLBiQuadFilter::processBuffer(float * buf, const unsigned int numSamples)
         x_b_1 = yCurrOutput * (b_1 * -1);
         x_b_2 = yCurrOutput * (b_2 * -1);
 
-        delayedSample1 = firstOrderDelayLine.processNextSample(x_a_1 + delayedSample2 + x_b_1);
-        delayedSample2 = secondOrderDelayLine.processNextSample(x_a_2 + x_b_2);
+		delayedSample1 = firstOrderDelayLine.processNextSample(x_a_1 + delayedSample2 + x_b_1);
+		delayedSample2 = secondOrderDelayLine.processNextSample(x_a_2 + x_b_2);
+
+//		delayedSample1 = firstOrderDelayLine.processNextSample(x_a_1 + delayedSample2 + x_b_1);
+//		delayedSample2 = secondOrderDelayLine.processNextSample(x_a_2 + x_b_2);
+//
+//		x_a_0 = xCurrSample * a_0;
+//		yCurrOutput = (x_a_0 + delayedSample1);
+//		x_a_1 = xCurrSample * a_1;
+//		x_a_2 = xCurrSample * a_2;
+//		x_b_1 = yCurrOutput * (b_1 * -1);
+//		x_b_2 = yCurrOutput * (b_2 * -1);
+//
+
 
         buf[i] = yCurrOutput * c_0 + xCurrSample * d_0;
 	}
@@ -45,8 +57,8 @@ void CAWLBiQuadFilter::processBuffer(float * buf, const unsigned int numSamples)
 
 void CAWLBiQuadFilter::setGain(double newGain)
 {
-    if(newGain > 12.0)
-        newGain = 12.0;
+    if(newGain > 24.0)
+        newGain = 24.0;
     if(newGain < -24.0)
         newGain = -24.0;
     

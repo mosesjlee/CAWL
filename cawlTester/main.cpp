@@ -24,14 +24,16 @@
 #include <fstream>
 
 #define SCALE 0.3
-#define WRITE_TO_FILE
+//#define WRITE_TO_FILE
 //#define SHOW_DEBUG_SAMPLES
 #define TEST_BIQUAD 0
 #define TEST_COMB 0
 #define TEST_OSC 0
+#define TEST_MOD_DELAY 1
 
 
 void getWhiteNoiseStream(float * stream);
+void getRawGuitarStream(float * stream);
 
 int main(int argc, const char * argv[]) {
 	// insert code here...
@@ -59,38 +61,38 @@ int main(int argc, const char * argv[]) {
     float whiteNoiseBuffer[44533];
     float * whiteBufferPtr = whiteNoiseBuffer;
     int whiteNoiseCount = 0, * ptrToWhteCout = &whiteNoiseCount;
+	
+	float guitarNoiseBuffer[120000];
+	float *guitarBufferPtr = guitarNoiseBuffer;
+	int guitarBuffCount = 0, * ptrToGuitarCount = &guitarBuffCount;
 
     CAWL * instance = CAWL::Instance();
     getWhiteNoiseStream(whiteNoiseBuffer);
+	getRawGuitarStream(guitarNoiseBuffer);
 
-#if 0
-
-
-
-    CAWLLowPassFilter lpf; lpf.setCutOffFreq(10000);
+    CAWLLowPassFilter lpf; lpf.setCutOffFreq(1000);
     CAWLHighPassFilter hpf; hpf.setCutOffFreq(500);
     CAWLLowPassFilter * lpfPtr = &lpf;
     CAWLHighPassFilter * hpfPtr = &hpf;
-#endif
-//    CAWLUniversalCombFilter ucf; ucf.setDelay(2.2675736961);
-    CAWLUniversalCombFilter ucf; ucf.setDelay(400); ucf.setMixLevel(0.7); ucf.setFeedbackGain(0.7); ucf.setFeedForwardGain(1.0);
+
+	
+	CAWLUniversalCombFilter ucf; ucf.setDelay(2.2675736961); ucf.setFeedbackGain(1.0);
+//    CAWLUniversalCombFilter ucf; ucf.setDelay(400); ucf.setMixLevel(0.7); ucf.setFeedbackGain(0.7); ucf.setFeedForwardGain(1.0);
     CAWLUniversalCombFilter * ptrToUcf = &ucf;
     CAWLFIRCombFilter fir;
     CAWLFIRCombFilter *ptrToFir = &fir;
     CAWLIIRCombFilter iir; iir.setDelay(2.2675736961);
     CAWLIIRCombFilter *ptrToiir = &iir;
 
-    CAWLLowPassFilter lpf;// lpf.setCutOffFreq(10000);
-    //CAWLLowPassFilter * lpfPtr;
-    
+    //EQ stuff
     CAWLLowShelfFilter lsf, * lsfPtr = &lsf;
-    lsf.setCutOffFreq(200); lsf.setGain(-60.0);
+    lsf.setCutOffFreq(100); lsf.setGain(-20.0);
     CAWLHighShelfFilter hsf, * hsfPtr = &hsf;
-    hsf.setCutOffFreq(700); hsf.setGain(0.0);
+    hsf.setCutOffFreq(10000); hsf.setGain(10.0);
     CAWLPeakFilter pf, * pfPtr = &pf;
     pf.setQFactor(10); pf.setCutOffFreq(440); pf.setGain(10.0);
     CAWLPeakFilter pf2, * pf2Ptr = &pf2;
-    pf2.setQFactor(10); pf2.setCutOffFreq(880); pf2.setGain(10.0);
+    pf2.setQFactor(10); pf2.setCutOffFreq(1320); pf2.setGain(10.0);
     
 
     CAWLValveTubeSimulator valveSim, valveSim2, valveSim3;
@@ -100,6 +102,7 @@ int main(int argc, const char * argv[]) {
     
     CAWLSineWaveOsc sineWav, * sineWavPtr = &sineWav;// sineWav.setFreq(440);
     CAWLFlanger flanger, * flangerPtr=&flanger; flanger.setModulationSpeed(1);
+	
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
         double j = *fc;
@@ -109,11 +112,8 @@ int main(int argc, const char * argv[]) {
 #if TEST_BIQUAD
             //Testing BiQuads
             if(*ptrToWhteCout < 44100 ) {
-            data[i] = whiteBufferPtr[*ptrToWhteCout];//(float) sin (2 * M_PI * (j / cycleLength));
-            (*ptrToWhteCout)++;
-                j += 1.0;
-                if (j > cycleLength)
-                    j -= cycleLength;
+				data[i] = whiteBufferPtr[*ptrToWhteCout];
+				(*ptrToWhteCout)++;
             }
             else {
                 data[i] = 0.0;
@@ -131,6 +131,15 @@ int main(int argc, const char * argv[]) {
             }
 #elif TEST_OSC
             data[i] = sineWavPtr->getNextSample();
+#elif TEST_MOD_DELAY
+			//Testing BiQuads
+			if(*ptrToGuitarCount < 120000 ) {
+				data[i] = guitarBufferPtr[*ptrToGuitarCount];
+				(*ptrToGuitarCount)++;
+			}
+			else {
+				data[i] = 0.0;
+			}
 #endif
         }
         *fc = j;
@@ -144,10 +153,10 @@ int main(int argc, const char * argv[]) {
 //        hsfPtr->processBuffer(data, numSamples);
 //        pfPtr->processBuffer(data, numSamples);
 //        pf2Ptr->processBuffer(data, numSamples);
-		//ptrToValve->processBuffer(data,numSamples);
- //       lpfPtr->processBuffer(data, numSamples);
+//		ptrToValve->processBuffer(data,numSamples);
+//        lpfPtr->processBuffer(data, numSamples);
 //        hpfPtr->processBuffer(data, numSamples);
-        flangerPtr->processBuffer(data, numSamples);
+//        flangerPtr->processBuffer(data, numSamples);
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 87) {
             memcpy(debugPtr + (*debugCountPtr) * numSamples, data, (512 *sizeof(float)));
@@ -285,6 +294,24 @@ void getWhiteNoiseStream(float * stream)
     }
 }
 
+void getRawGuitarStream(float * stream)
+{
+	FILE * file;
+	std::string path = "/Users/moseslee/Desktop/CAWL/guitar1.raw";
+	file = fopen(path.c_str(), "r");
+	
+	float temp;
+	
+	if(file != NULL){
+		int i = 0;
+		while(!feof(file)){
+			fread((void *)(&temp), sizeof(temp), 1, file);
+			stream[i] = temp;
+			i++;
+		}
+		printf("%d samples read\n", i);
+	}
+}
 
 
 
