@@ -19,7 +19,7 @@ public:
     void processBuffer(float * buf, const unsigned int numSamples);
     void setDryMix(double newDryMix);
     
-private:
+protected:
     double dryMix;
 };
 #endif /* CAWLUniversalCombFilter_hpp */

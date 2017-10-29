@@ -24,12 +24,12 @@
 #include <fstream>
 
 #define SCALE 0.3
-//#define WRITE_TO_FILE
+#define WRITE_TO_FILE
 //#define SHOW_DEBUG_SAMPLES
-#define TEST_BIQUAD 0
+#define TEST_BIQUAD 1
 #define TEST_COMB 0
 #define TEST_OSC 0
-#define TEST_MOD_DELAY 1
+#define TEST_MOD_DELAY 0
 
 
 void getWhiteNoiseStream(float * stream);
@@ -52,7 +52,7 @@ int main(int argc, const char * argv[]) {
     double * ptr2 = &cycleLength2;
     double cycleLength3 = 44100. / 659.25;
     
-    float debugBuffer[44544];
+    float debugBuffer[117760];
     float *debugPtr = debugBuffer;
     
     int debugBufWriteCount = 0;
@@ -76,8 +76,8 @@ int main(int argc, const char * argv[]) {
     CAWLHighPassFilter * hpfPtr = &hpf;
 
 	
-	CAWLUniversalCombFilter ucf; ucf.setDelay(2.2675736961); ucf.setFeedbackGain(1.0);
-//    CAWLUniversalCombFilter ucf; ucf.setDelay(400); ucf.setMixLevel(0.7); ucf.setFeedbackGain(0.7); ucf.setFeedForwardGain(1.0);
+//	CAWLUniversalCombFilter ucf; ucf.setDelay(2.2675736961); ucf.setFeedbackGain(1.0);
+    CAWLUniversalCombFilter ucf; ucf.setDelay(517); ucf.setMixLevel(0.7); ucf.setFeedbackGain(1); ucf.setFeedForwardGain(1.0);
     CAWLUniversalCombFilter * ptrToUcf = &ucf;
     CAWLFIRCombFilter fir;
     CAWLFIRCombFilter *ptrToFir = &fir;
@@ -154,11 +154,11 @@ int main(int argc, const char * argv[]) {
 //        pfPtr->processBuffer(data, numSamples);
 //        pf2Ptr->processBuffer(data, numSamples);
 //		ptrToValve->processBuffer(data,numSamples);
-//        lpfPtr->processBuffer(data, numSamples);
+        lpfPtr->processBuffer(data, numSamples);
 //        hpfPtr->processBuffer(data, numSamples);
 //        flangerPtr->processBuffer(data, numSamples);
 #ifdef WRITE_TO_FILE
-        if(*debugCountPtr < 87) {
+        if(*debugCountPtr < 230) {
             memcpy(debugPtr + (*debugCountPtr) * numSamples, data, (512 *sizeof(float)));
             (*debugCountPtr)++;
         }
@@ -262,11 +262,11 @@ int main(int argc, const char * argv[]) {
 #ifdef WRITE_TO_FILE
     std::ofstream out;
     out.open("/Users/moseslee/Desktop/delayfloat", std::ios::out | std::ios::binary);
-    out.write(reinterpret_cast <const char*> (debugBuffer) , 44544 * sizeof(float));
+    out.write(reinterpret_cast <const char*> (debugBuffer) , 117760 * sizeof(float));
     out.close();
 #endif
 #ifdef SHOW_DEBUG_SAMPLES
-    for(int i =0; i <44544; i++)
+    for(int i =0; i <117760; i++)
     {
         printf("%f\n", debugBuffer[i]);
     }

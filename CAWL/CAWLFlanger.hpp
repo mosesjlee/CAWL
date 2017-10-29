@@ -8,10 +8,10 @@
 
 #ifndef CAWLFlanger_hpp
 #define CAWLFlanger_hpp
-#include "CAWLIIRCombFilter.hpp"
+#include "CAWLUniversalCombFilter.hpp"
 #include "CAWLSineWaveOsc.hpp"
 
-class CAWLFlanger : public CAWLIIRCombFilter
+class CAWLFlanger : public CAWLUniversalCombFilter
 {
 public:
 	CAWLFlanger();

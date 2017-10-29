@@ -36,11 +36,11 @@ void CAWLBiQuadFilter::processBuffer(float * buf, const unsigned int numSamples)
         x_b_1 = yCurrOutput * (b_1 * -1);
         x_b_2 = yCurrOutput * (b_2 * -1);
 
-		delayedSample1 = firstOrderDelayLine.processNextSample(x_a_1 + delayedSample2 + x_b_1);
-		delayedSample2 = secondOrderDelayLine.processNextSample(x_a_2 + x_b_2);
-
 //		delayedSample1 = firstOrderDelayLine.processNextSample(x_a_1 + delayedSample2 + x_b_1);
 //		delayedSample2 = secondOrderDelayLine.processNextSample(x_a_2 + x_b_2);
+
+		delayedSample1 = x_a_1 + delayedSample2 + x_b_1;
+		delayedSample2 = x_a_2 + x_b_2;
 //
 //		x_a_0 = xCurrSample * a_0;
 //		yCurrOutput = (x_a_0 + delayedSample1);
