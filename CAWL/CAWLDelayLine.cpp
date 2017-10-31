@@ -67,7 +67,7 @@ double CAWLDelayLine::processNextSample(double currSample)
 	//currWritePos = (int) (currWritePos + 1.0) % (int) (MAX_DELAY_IN_SAMPLES+1);
 	
     //Get the current read position
-	double currReadPos = currWritePos - (currDelayInSamples);// - 1.0);
+    double currReadPos = currWritePos - (currDelayInSamples - 1.0);
     if(currReadPos < 0.0)
         currReadPos = currReadPos + (MAX_DELAY_IN_SAMPLES-1);
     
@@ -75,37 +75,35 @@ double CAWLDelayLine::processNextSample(double currSample)
     double fracDelay = currReadPos - (int) currReadPos;
 
 	
-    if(fracDelay > 0.00000000)
-    {
-		double lookAheadPos = (int)(currReadPos + 1.0) % (int) maxDelayInSamples;
-		double x_1 = (int) currReadPos;
-		double y_1 = delayLine[(int) currReadPos];
-		double x_2 = (int) (lookAheadPos);
-		double y_2 = delayLine[(int) lookAheadPos];
-		
-		if(lookAheadPos < currReadPos)
-		{
-			yCurrOutput = linear_interp(0,
-										y_1,
-										x_2,
-										y_2,
-										fracDelay);
-		}
-		else
-		{
-			yCurrOutput = linear_interp(x_1,
-										y_1,
-										x_2,
-										y_2,
-										currReadPos);
-		}
-    }
-    else
-        yCurrOutput = delayLine[(int) currReadPos];
-    
-	currWritePos = (int) (currWritePos + 1.0) % (int) (MAX_DELAY_IN_SAMPLES+1);
+        double lookAheadPos = (int)(currReadPos + 1.0) % (int) maxDelayInSamples;
+        double x_1 = (int) currReadPos;
+        double y_1 = delayLine[(int) currReadPos];
+        double x_2 = (int) (lookAheadPos);
+        double y_2 = delayLine[(int) lookAheadPos];
+
+        if(lookAheadPos < currReadPos)
+        {
+            yCurrOutput = linear_interp(0,
+                                        y_1,
+                                        x_2,
+                                        y_2,
+                                        fracDelay);
+        }
+        else
+        {
+            yCurrOutput = linear_interp(x_1,
+                                        y_1,
+                                        x_2,
+                                        y_2,
+                                        currReadPos);
+        }
+
+
+	currWritePos = (int) (currWritePos + 1.0) % (int) (MAX_DELAY_IN_SAMPLES);
     
     //Return the output
+    if(yCurrOutput > 1.0) yCurrOutput = 1.0;
+    if(yCurrOutput < -1.0) yCurrOutput = -1.0;
     return yCurrOutput;
 }
 

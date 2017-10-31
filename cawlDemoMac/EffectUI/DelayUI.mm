@@ -124,7 +124,7 @@
 
 - (void)updatDryGainLevel:(id)sender {
 	dryMixLabel.stringValue = [NSString stringWithFormat:@"%f", dryMixSlider.floatValue];
-	self.soundTabRef.soundBoard->setNewDelayTime(dryMixSlider.floatValue);
+	self.soundTabRef.soundBoard->setDelayDryMixGain(dryMixSlider.floatValue);
 }
 
 @end

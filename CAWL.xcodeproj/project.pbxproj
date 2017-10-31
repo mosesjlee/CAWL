@@ -61,6 +61,8 @@
 		91BB1F241F9EF3DE000804CE /* CAWLTriangleWaveOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91BB1F211F9EF3DE000804CE /* CAWLTriangleWaveOsc.cpp */; };
 		91BB1F261F9EF75F000804CE /* CAWLOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91BB1F251F9EF75F000804CE /* CAWLOscillator.cpp */; };
 		91BB1F271F9EF75F000804CE /* CAWLOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91BB1F251F9EF75F000804CE /* CAWLOscillator.cpp */; };
+		91BB1F2A1FA841A3000804CE /* DelayLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91BB1F281FA841A2000804CE /* DelayLine.cpp */; };
+		91BB1F2B1FA841A3000804CE /* DelayLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91BB1F281FA841A2000804CE /* DelayLine.cpp */; };
 		91CAEC801DC8584600CEF065 /* CAWL.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 91CAEC7F1DC8584600CEF065 /* CAWL.hpp */; };
 		91CAEC841DC8584600CEF065 /* CAWL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91CAEC831DC8584600CEF065 /* CAWL.cpp */; };
 		91CAEC921DC8587900CEF065 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91CAEC911DC8587900CEF065 /* AppDelegate.mm */; };
@@ -182,6 +184,8 @@
 		91BB1F211F9EF3DE000804CE /* CAWLTriangleWaveOsc.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLTriangleWaveOsc.cpp; sourceTree = "<group>"; };
 		91BB1F221F9EF3DE000804CE /* CAWLTriangleWaveOsc.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLTriangleWaveOsc.hpp; sourceTree = "<group>"; };
 		91BB1F251F9EF75F000804CE /* CAWLOscillator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLOscillator.cpp; sourceTree = "<group>"; };
+		91BB1F281FA841A2000804CE /* DelayLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DelayLine.cpp; sourceTree = "<group>"; };
+		91BB1F291FA841A2000804CE /* delayl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = delayl.h; sourceTree = "<group>"; };
 		91CAEC7C1DC8584600CEF065 /* libCAWL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCAWL.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		91CAEC7F1DC8584600CEF065 /* CAWL.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWL.hpp; sourceTree = "<group>"; };
 		91CAEC831DC8584600CEF065 /* CAWL.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWL.cpp; sourceTree = "<group>"; };
@@ -322,6 +326,8 @@
 				912E05131F8023AE00C13E55 /* CAWLCombFilter.hpp */,
 				911097FC1F6F22F2002A9A92 /* CAWLDelayLine.cpp */,
 				911097FD1F6F22F2002A9A92 /* CAWLDelayLine.hpp */,
+				91BB1F291FA841A2000804CE /* delayl.h */,
+				91BB1F281FA841A2000804CE /* DelayLine.cpp */,
 				91BB1F211F9EF3DE000804CE /* CAWLTriangleWaveOsc.cpp */,
 				91BB1F221F9EF3DE000804CE /* CAWLTriangleWaveOsc.hpp */,
 				91EDCE0E1F9ED2E00000D9BA /* CAWLSineWaveOsc.cpp */,
@@ -635,6 +641,7 @@
 				91E9D26E1F9C1CF900491E6A /* CAWLWahWah.cpp in Sources */,
 				912977AF1DE4F8600093134D /* CAWLRingBuffer.cpp in Sources */,
 				912977B11DE4F8600093134D /* CAWL.cpp in Sources */,
+				91BB1F2B1FA841A3000804CE /* DelayLine.cpp in Sources */,
 				91E9D2721F9C1F7100491E6A /* CAWLOverdrive.cpp in Sources */,
 				91DC3E641F88995900E3DB09 /* CAWLPeakFilter.cpp in Sources */,
 				91BB1F241F9EF3DE000804CE /* CAWLTriangleWaveOsc.cpp in Sources */,
@@ -684,6 +691,7 @@
 				912977B71DE4F8610093134D /* CAWLRingBuffer.cpp in Sources */,
 				91E057081F9177A6008A5B25 /* CAWLValveTubeSimulator.cpp in Sources */,
 				91E057061F9177A1008A5B25 /* CAWLDelayEffect.cpp in Sources */,
+				91BB1F2A1FA841A3000804CE /* DelayLine.cpp in Sources */,
 				91E0570F1F9177BC008A5B25 /* CAWLFIRCombFilter.cpp in Sources */,
 				91E057051F91779E008A5B25 /* CAWLEqualizer.cpp in Sources */,
 				91E9D2821F9D3FB000491E6A /* CompressorUI.mm in Sources */,

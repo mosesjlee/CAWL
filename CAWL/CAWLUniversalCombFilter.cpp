@@ -14,11 +14,13 @@ CAWLUniversalCombFilter::CAWLUniversalCombFilter()
     mFeedbackGain = 1;
     mMixLevel = 1;
     mFeedForwardGain = 0.0;
+    delayHsu = new DelayLine(MAX_DELAY_IN_SAMPLES);
+    delayLine = new CAWLDelayLine();
 }
 
 CAWLUniversalCombFilter::~CAWLUniversalCombFilter()
 {
-    
+    delete delayLine;
 }
 
 void CAWLUniversalCombFilter::processBuffer(float * buf, const unsigned int numSamples)
@@ -30,7 +32,8 @@ void CAWLUniversalCombFilter::processBuffer(float * buf, const unsigned int numS
     for(unsigned i = 0; i < numSamples; i++)
     {
         xCurrSample = buf[i];
-        zDelayedSample = delayLine.processNextSample(xHCurrSample);
+        zDelayedSample = delayHsu->tick(xHCurrSample);;
+        //zDelayedSample = delayLine->processNextSample(xHCurrSample);
 		xHCurrSample = xCurrSample + zDelayedSample * mFeedbackGain;
         yCurrSample = zDelayedSample * mFeedForwardGain + xHCurrSample * mMixLevel;
         buf[i] = yCurrSample + xCurrSample * dryMix;

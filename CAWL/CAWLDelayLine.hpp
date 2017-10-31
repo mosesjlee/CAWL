@@ -8,7 +8,7 @@
 
 #ifndef CAWLDelayLine_hpp
 #define CAWLDelayLine_hpp
-#define MAX_DELAY_IN_SAMPLES 44100.0f * 1
+#define MAX_DELAY_IN_SAMPLES 44544 * 1
 
 #include "CAWLSoundModule.hpp"
 class CAWLDelayLine

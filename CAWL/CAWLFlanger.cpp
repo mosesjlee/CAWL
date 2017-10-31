@@ -14,10 +14,10 @@ CAWLFlanger::CAWLFlanger()
     modSpeed = 1.0;
     modDepth = 7.0;
     mMixLevel = 0.5;
-    mFeedbackGain = 0.5;
+    mFeedbackGain = 0.0;
     mFeedForwardGain = 1.0;
     sine->setFreq(modSpeed);
-	delayLine.setDelayTimeInSamples(0);
+	delayLine->setDelayTimeInSamples(0);
 }
 
 
@@ -35,13 +35,15 @@ void CAWLFlanger::processBuffer(float * buf, const unsigned int numSamples)
 	for(int i = 0; i < numSamples; i++)
 	{
 		xCurrSample = buf[i];
-		zDelayedSample = delayLine.processNextSample(xHCurrSample);
+		//zDelayedSample = delayLine->processNextSample(xHCurrSample);
+        zDelayedSample = delayHsu->tick(xHCurrSample);
 		xHCurrSample = xCurrSample + zDelayedSample * mFeedbackGain;
 		yCurrOutput = zDelayedSample * mFeedForwardGain + xHCurrSample * mMixLevel;
 		buf[i] = yCurrOutput + xCurrSample * dryMix;
 		buf[i] = xCurrSample + yCurrOutput * mFeedForwardGain;
 
-		delayLine.setDelayTimeInMilliseconds(flangedValue());
+		//delayLine->setDelayTimeInMilliseconds(flangedValue());
+        delayHsu->setDelayLineDelay(flangedValue() * 44100.0/1000.0);
 	}
 	lastSampleOfBlock = xHCurrSample;
 }
