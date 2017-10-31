@@ -63,9 +63,6 @@ double CAWLDelayLine::processNextSample(double currSample)
 
     delayLine[(int) currWritePos] = currSample;
 	
-	//Update the write position
-	//currWritePos = (int) (currWritePos + 1.0) % (int) (MAX_DELAY_IN_SAMPLES+1);
-	
     //Get the current read position
 	double currReadPos = currWritePos - (currDelayInSamples);// - 1.0);
     if(currReadPos < 0.0)

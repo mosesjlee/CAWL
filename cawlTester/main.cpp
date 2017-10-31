@@ -27,9 +27,9 @@
 #define WRITE_TO_FILE
 //#define SHOW_DEBUG_SAMPLES
 #define TEST_BIQUAD 0
-#define TEST_COMB 1
+#define TEST_COMB 0
 #define TEST_OSC 0
-#define TEST_MOD_DELAY 0
+#define TEST_MOD_DELAY 1
 
 
 void getWhiteNoiseStream(float * stream);
@@ -147,7 +147,7 @@ int main(int argc, const char * argv[]) {
 
         //ptrToFir->processBuffer(data, numSamples);
 //        ptrToiir->processBuffer(data, numSamples);
-        ptrToUcf->processBuffer(data, numSamples);
+//        ptrToUcf->processBuffer(data, numSamples);
 //		ptrToAmp->processBuffer(data, numSamples);
 //        lsfPtr->processBuffer(data, numSamples);
 //        hsfPtr->processBuffer(data, numSamples);
