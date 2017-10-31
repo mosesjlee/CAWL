@@ -21,5 +21,6 @@ public:
     
 protected:
     double dryMix;
+	int debugCounter = 0;
 };
 #endif /* CAWLUniversalCombFilter_hpp */

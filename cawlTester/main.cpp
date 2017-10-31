@@ -27,7 +27,7 @@
 #define WRITE_TO_FILE
 //#define SHOW_DEBUG_SAMPLES
 #define TEST_BIQUAD 0
-#define TEST_COMB 0
+#define TEST_COMB 1
 #define TEST_OSC 0
 #define TEST_MOD_DELAY 0
 
@@ -76,8 +76,8 @@ int main(int argc, const char * argv[]) {
     CAWLHighPassFilter * hpfPtr = &hpf;
 
 	
-//	CAWLUniversalCombFilter ucf; ucf.setDelay(2.2675736961); ucf.setFeedbackGain(1.0);
-    CAWLUniversalCombFilter ucf; ucf.setDelay(517); ucf.setMixLevel(0.7); ucf.setFeedbackGain(1); ucf.setFeedForwardGain(1.0);
+	CAWLUniversalCombFilter ucf; ucf.setDelay(2.2675736961); ucf.setFeedbackGain(1.0);
+//    CAWLUniversalCombFilter ucf; ucf.setDelay(517); ucf.setMixLevel(0.7); ucf.setFeedbackGain(1); ucf.setFeedForwardGain(1.0);
     CAWLUniversalCombFilter * ptrToUcf = &ucf;
 //    CAWLFIRCombFilter fir;
 //    CAWLFIRCombFilter *ptrToFir = &fir;
@@ -147,7 +147,7 @@ int main(int argc, const char * argv[]) {
 
         //ptrToFir->processBuffer(data, numSamples);
 //        ptrToiir->processBuffer(data, numSamples);
-//        ptrToUcf->processBuffer(data, numSamples);
+        ptrToUcf->processBuffer(data, numSamples);
 //		ptrToAmp->processBuffer(data, numSamples);
 //        lsfPtr->processBuffer(data, numSamples);
 //        hsfPtr->processBuffer(data, numSamples);
@@ -156,7 +156,7 @@ int main(int argc, const char * argv[]) {
 //		ptrToValve->processBuffer(data,numSamples);
 //        lpfPtr->processBuffer(data, numSamples);
 //        hpfPtr->processBuffer(data, numSamples);
-        flangerPtr->processBuffer(data, numSamples);
+//        flangerPtr->processBuffer(data, numSamples);
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 230) {
             memcpy(debugPtr + (*debugCountPtr) * numSamples, data, (512 *sizeof(float)));

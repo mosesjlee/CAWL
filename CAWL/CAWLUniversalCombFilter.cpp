@@ -31,12 +31,15 @@ void CAWLUniversalCombFilter::processBuffer(float * buf, const unsigned int numS
     double zDelayedSample = 0.0;
     for(unsigned i = 0; i < numSamples; i++)
     {
+//		if(debugCounter == 1122)
+//			printf("STOP\n");
         xCurrSample = buf[i];
-        zDelayedSample = delayHsu->tick(xHCurrSample);;
-        //zDelayedSample = delayLine->processNextSample(xHCurrSample);
+        //zDelayedSample = delayHsu->tick(xHCurrSample);;
+        zDelayedSample = delayLine->processNextSample(xHCurrSample);
 		xHCurrSample = xCurrSample + zDelayedSample * mFeedbackGain;
         yCurrSample = zDelayedSample * mFeedForwardGain + xHCurrSample * mMixLevel;
         buf[i] = yCurrSample + xCurrSample * dryMix;
+		debugCounter++;
     }
 	
     lastSampleOfBlock = xHCurrSample;

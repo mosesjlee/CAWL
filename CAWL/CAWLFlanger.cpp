@@ -34,16 +34,19 @@ void CAWLFlanger::processBuffer(float * buf, const unsigned int numSamples)
 	double yCurrOutput = 0.0;
 	for(int i = 0; i < numSamples; i++)
 	{
+		if(debugCounter == 44)
+			printf("STOP\n");
 		xCurrSample = buf[i];
-		//zDelayedSample = delayLine->processNextSample(xHCurrSample);
-        zDelayedSample = delayHsu->tick(xHCurrSample);
+		zDelayedSample = delayLine->processNextSample(xHCurrSample);
+        //zDelayedSample = delayHsu->tick(xHCurrSample);
 		xHCurrSample = xCurrSample + zDelayedSample * mFeedbackGain;
 		yCurrOutput = zDelayedSample * mFeedForwardGain + xHCurrSample * mMixLevel;
 		buf[i] = yCurrOutput + xCurrSample * dryMix;
 		buf[i] = xCurrSample + yCurrOutput * mFeedForwardGain;
 
-		//delayLine->setDelayTimeInMilliseconds(flangedValue());
-        delayHsu->setDelayLineDelay(flangedValue() * 44100.0/1000.0);
+		delayLine->setDelayTimeInMilliseconds(flangedValue());
+        //delayHsu->setDelayLineDelay(flangedValue() * 44100.0/1000.0);
+		debugCounter++;
 	}
 	lastSampleOfBlock = xHCurrSample;
 }
