@@ -11,35 +11,49 @@
 @implementation EffectUI
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
-    
     // Drawing code here.
 }
 
 - (NSSlider *)drawCircularSliderWithRect:(NSRect) rect
                               WithMaxVal:(float) max
                            AndWithMinVal:(float) min
+                            atDefaultVal:(float) val
+                                  toView:(NSView *) theView
+                            withSelector:(SEL) selector
 {
     NSSlider * retval = [[NSSlider alloc] initWithFrame:rect];
     [retval setSliderType:NSSliderTypeCircular];
     [retval setMaxValue:max];
     [retval setMinValue:min];
     [retval setNeedsDisplay:YES];
+    [retval setFloatValue:val];
+    [retval setTarget:theView];
+    [retval setAction:selector];
+    [theView addSubview:retval];
     return retval;
 }
 
 - (NSSlider *)drawRegularSliderWithRect:(NSRect) rect
                              WithMaxVal:(float) max
                           AndWithMinVal:(float) min
+                           atDefaultVal:(float) val
+                                 toView:(NSView *) theView
+                           withSelector:(SEL) selector
 {
     NSSlider * retval = [[NSSlider alloc] initWithFrame:rect];
     [retval setMaxValue:max];
     [retval setMinValue:min];
     [retval setNeedsDisplay:YES];
+    [retval setTarget:theView];
+    [retval setTarget:theView];
+    [retval setAction:selector];
+    [theView addSubview:retval];
     return retval;
 }
 
 - (NSTextField *)drawLabelTextFieldWithRect:(NSRect) rect
                                   WithTitle:(NSString *)title
+                                     toView:(NSView *)theView
 {
     NSTextField * retval = [[NSTextField alloc] initWithFrame:rect];
     retval.stringValue = title;
@@ -47,12 +61,16 @@
     [retval setBordered:NO];
     [retval setDrawsBackground:NO];
     [retval setNeedsDisplay:YES];
+    [theView addSubview:retval];
     return retval;
 }
 
-- (NSTextField *)drawValueTextFieldWithRect:(NSRect) rect {
+- (NSTextField *)drawValueTextFieldWithRect:(NSRect) rect
+                                     toView:(NSView *)theView
+{
     NSTextField * retval = [[NSTextField alloc] initWithFrame:rect];
     [retval setNeedsDisplay:YES];
+    [theView addSubview:retval];
     return retval;
 }
 

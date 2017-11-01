@@ -715,6 +715,14 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <slider horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dTu-IF-j9w">
+                                <rect key="frame" x="201" y="23" width="28" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <sliderCell key="cell" alignment="left" maxValue="100" allowsTickMarkValuesOnly="YES" sliderType="circular" id="uXI-dV-m5x"/>
+                                <connections>
+                                    <action selector="testSlider:" target="XfG-lQ-9wD" id="nXg-AX-jqS"/>
+                                </connections>
+                            </slider>
                         </subviews>
                     </view>
                     <connections>

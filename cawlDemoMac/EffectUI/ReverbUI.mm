@@ -29,7 +29,13 @@
 - (void)setupReverbTimeUI {
     reverbTimeSlider = [self drawCircularSliderWithRect:NSMakeRect(90, 320, 30, 30)
                                              WithMaxVal:10
-                                          AndWithMinVal:100];
-    [self addSubview:reverbTimeSlider];
+                                          AndWithMinVal:100
+                                           atDefaultVal:10
+                                                 toView:self
+                                           withSelector:@selector(updateReverbTime:)];
+}
+
+- (IBAction)updateReverbTime:(NSSlider *) sender {
+    
 }
 @end

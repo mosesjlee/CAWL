@@ -67,8 +67,10 @@
 	//Slider
     lowShelfFreqSlider = [self drawCircularSliderWithRect:NSMakeRect(5, 320, 30, 30)
                                                WithMaxVal:10
-                                            AndWithMinVal:200];
-	[lowMidFreqSlider setAction:@selector(updateLowShelfGain:)];
+                                            AndWithMinVal:200
+                                             atDefaultVal:80
+                                                   toView:self
+                                             withSelector:@selector(updateLowShelfGain:)];
     [self addSubview:lowShelfFreqSlider];
 	
 	//Title

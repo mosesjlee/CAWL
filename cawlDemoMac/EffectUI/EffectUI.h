@@ -13,13 +13,24 @@
 @property SoundTab *soundTabRef;
 - (NSSlider *)drawCircularSliderWithRect:(NSRect) rect
                               WithMaxVal:(float) max
-                           AndWithMinVal:(float) min;
+                           AndWithMinVal:(float) min
+                            atDefaultVal:(float) val
+                                  toView:(NSView *) theView
+                            withSelector:(SEL) selector;
+
 - (NSSlider *)drawRegularSliderWithRect:(NSRect) rect
                              WithMaxVal:(float) max
-                          AndWithMinVal:(float) min;;
+                          AndWithMinVal:(float) min
+                           atDefaultVal:(float) val
+                                 toView:(NSView *) theView
+                           withSelector:(SEL) selector;
+
 - (NSTextField *)drawLabelTextFieldWithRect:(NSRect) rect
-                                  WithTitle:(NSString *)title;
-- (NSTextField *)drawValueTextFieldWithRect:(NSRect) rect;
+                                  WithTitle:(NSString *)title
+                                     toView:(NSView *) theView;
+
+- (NSTextField *)drawValueTextFieldWithRect:(NSRect) rect
+                                     toView:(NSView *) theView;
 
 -(void)drawBorder:(NSRect)rect;
 @end

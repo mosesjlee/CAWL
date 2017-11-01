@@ -34,38 +34,44 @@
 
 - (void)setupModDepthUI {
     modDepthTitle = [self drawLabelTextFieldWithRect:NSMakeRect(15, 320, 70, 30)
-                                           WithTitle:@"Mod Depth"];
-    [self addSubview:modDepthTitle];
+                                           WithTitle:@"Mod Depth"
+                                              toView:self];
     
     modDepthSlider = [self drawCircularSliderWithRect:NSMakeRect(15, 220, 30, 30)
-                                           WithMaxVal:0
-                                        AndWithMinVal:10];
-    [self addSubview:modDepthSlider];
+                                           WithMaxVal:10
+                                        AndWithMinVal:0
+                                         atDefaultVal:5
+                                               toView:self
+                                         withSelector:@selector(updateModDepth:)];
     
-    modDepthLabel = [self drawValueTextFieldWithRect:NSMakeRect(15, 260, 30, 20)];
-    [self addSubview:modDepthLabel];
+    modDepthLabel = [self drawValueTextFieldWithRect:NSMakeRect(15, 260, 30, 20)
+                                              toView:self];
 }
 
 - (void)setupModSpeedUI {
     modSpeedTitle = [self drawLabelTextFieldWithRect:NSMakeRect(100, 320, 70, 30)
-                                           WithTitle:@"Mod Speed"];
-    [self addSubview:modSpeedTitle];
+                                           WithTitle:@"Mod Speed"
+                                              toView:self];
     
     modSpeedSlider = [self drawCircularSliderWithRect:NSMakeRect(100, 220, 30, 30)
-                                           WithMaxVal:0
-                                        AndWithMinVal:10];
-    [self addSubview:modSpeedSlider];
+                                           WithMaxVal:10
+                                        AndWithMinVal:0
+                                         atDefaultVal:5
+                                               toView:self
+                                         withSelector:@selector(updateModSpeed:)];
     
-    modSpeedLabel = [self drawValueTextFieldWithRect:NSMakeRect(100, 260, 30, 20)];
-    [self addSubview:modSpeedLabel];
+    modSpeedLabel = [self drawValueTextFieldWithRect:NSMakeRect(100, 260, 30, 20)
+                                              toView:self];
 }
 
-- (void) updateModSpeed:(id) sender {
-    
+- (IBAction) updateModSpeed:(NSSlider*) sender {
+    modSpeedLabel.stringValue = [NSString stringWithFormat:@"%f", modSpeedSlider.floatValue];
+    //self.soundTabRef.soundBoard->setFlanger(modSpeedSlider.floatValue);
 }
 
-- (void) updateModDepth:(id) sender {
-    
+- (IBAction) updateModDepth:(NSSlider*) sender {
+    modDepthLabel.stringValue = [NSString stringWithFormat:@"%f", modDepthSlider.floatValue];
+    //self.soundTabRef.soundBoard->setFlanger(modSpeedSlider.floatValue);
 }
 
 
