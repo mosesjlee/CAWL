@@ -8,7 +8,16 @@
 
 #import "OverdriveUI.h"
 
-@implementation OverdriveUI
+@implementation OverdriveUI {
+	NSSlider 	*driveSlider;
+	NSSlider 	*volumeSlider;
+	NSSlider 	*toneKnob;
+	
+	NSTextField *driveTitle;
+	NSTextField *volumeTitle;
+	NSTextField *toneTitle;
+}
+
 - (instancetype)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
     
@@ -21,4 +30,34 @@
     [self drawBorder:dirtyRect];
 }
 
+#pragma mark SETUP_UI
+
+-(void) setupDriveUI {
+	
+}
+
+-(void) setupVolumeUI {
+	
+}
+
+-(void) setupToneUI {
+	
+}
+
+#pragma mark IBACTION_OVERDRIVE
+
+-(IBAction) updateDriveLevel:(id)sender {
+	
+}
+
+-(IBAction) updateVolumeLevel:(id)sender {
+	
+}
+
+-(IBAction) updateToneLevel:(id)sender {
+	
+}
 @end
+
+
+
