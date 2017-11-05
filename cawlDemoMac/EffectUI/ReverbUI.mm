@@ -9,7 +9,14 @@
 #import "ReverbUI.h"
 
 @implementation ReverbUI {
-    NSSlider * reverbTimeSlider;
+    NSSlider *reverbTimeSlider;
+	NSSlider *mixLevelSlider;
+	NSSlider *toneLevelSlider; //Treble boost probably a shelving filter or something
+	
+	
+	NSTextField *reverbTimeTitle;
+	NSTextField *mixLevelTitle;
+	NSTextField *toneLevelTitle;
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect {
@@ -26,10 +33,42 @@
     [self drawBorder:dirtyRect];
 }
 
-- (void)setupReverbTimeUI {
+#pragma mark SETUP_UI
+- (void) setupReverbTimeUI {
     reverbTimeSlider = [self drawCircularSliderWithRect:NSMakeRect(90, 320, 30, 30)
                                              WithMaxVal:10
-                                          AndWithMinVal:100];
-    [self addSubview:reverbTimeSlider];
+                                          AndWithMinVal:100
+                                           atDefaultVal:10
+                                                 toView:self
+                                           withSelector:@selector(updateReverbTime:)];
 }
+
+-(void) setupMixLevelUI {
+	
+}
+
+-(void) setupToneLevelUI {
+	
+}
+
+#pragma mark IBACTION_REVERB
+- (IBAction)updateReverbTime:(NSSlider *) sender {
+    
+}
+
+- (IBAction) updateMixLevel:(id)sender {
+	
+}
+
+- (IBAction) updateToneLevel:(id)sender {
+	
+}
+
 @end
+
+
+
+
+
+
+

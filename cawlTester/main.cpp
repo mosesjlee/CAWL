@@ -20,16 +20,17 @@
 #include "CAWLAmpSimulator.hpp"
 #include "CAWLSineWaveOsc.hpp"
 #include "CAWLFlanger.hpp"
+#include "CAWLChorus.hpp"
 #include <iostream>
 #include <fstream>
 
 #define SCALE 0.3
 #define WRITE_TO_FILE
 //#define SHOW_DEBUG_SAMPLES
-#define TEST_BIQUAD 1
+#define TEST_BIQUAD 0
 #define TEST_COMB 0
 #define TEST_OSC 0
-#define TEST_MOD_DELAY 0
+#define TEST_MOD_DELAY 1
 
 
 void getWhiteNoiseStream(float * stream);
@@ -76,13 +77,13 @@ int main(int argc, const char * argv[]) {
     CAWLHighPassFilter * hpfPtr = &hpf;
 
 	
-//	CAWLUniversalCombFilter ucf; ucf.setDelay(2.2675736961); ucf.setFeedbackGain(1.0);
-    CAWLUniversalCombFilter ucf; ucf.setDelay(517); ucf.setMixLevel(0.7); ucf.setFeedbackGain(1); ucf.setFeedForwardGain(1.0);
+	CAWLUniversalCombFilter ucf; ucf.setDelay(2.2675736961); ucf.setFeedbackGain(1.0);
+//    CAWLUniversalCombFilter ucf; ucf.setDelay(517); ucf.setMixLevel(0.7); ucf.setFeedbackGain(1); ucf.setFeedForwardGain(1.0);
     CAWLUniversalCombFilter * ptrToUcf = &ucf;
-    CAWLFIRCombFilter fir;
-    CAWLFIRCombFilter *ptrToFir = &fir;
-    CAWLIIRCombFilter iir; iir.setDelay(2.2675736961);
-    CAWLIIRCombFilter *ptrToiir = &iir;
+//    CAWLFIRCombFilter fir;
+//    CAWLFIRCombFilter *ptrToFir = &fir;
+//    CAWLIIRCombFilter iir; iir.setDelay(2.2675736961);
+//    CAWLIIRCombFilter *ptrToiir = &iir;
 
     //EQ stuff
     CAWLLowShelfFilter lsf, * lsfPtr = &lsf;
@@ -101,8 +102,10 @@ int main(int argc, const char * argv[]) {
     CAWLAmpSimulator * ptrToAmp = &ampSim, *ptrToAmp2 = &ampSim2, *ptrToAmp3 = &ampSim3;
     
     CAWLSineWaveOsc sineWav, * sineWavPtr = &sineWav;// sineWav.setFreq(440);
-    CAWLFlanger flanger, * flangerPtr=&flanger; flanger.setModulationSpeed(1);
-	
+    CAWLFlanger flanger, * flangerPtr=&flanger; flanger.setModulationSpeed(1.0);
+    CAWLChorus chorus,* chorusPtr=&chorus; chorus.setModulationSpeed(0.25);
+    
+    
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
         double j = *fc;
@@ -154,9 +157,10 @@ int main(int argc, const char * argv[]) {
 //        pfPtr->processBuffer(data, numSamples);
 //        pf2Ptr->processBuffer(data, numSamples);
 //		ptrToValve->processBuffer(data,numSamples);
-        lpfPtr->processBuffer(data, numSamples);
+//        lpfPtr->processBuffer(data, numSamples);
 //        hpfPtr->processBuffer(data, numSamples);
-//        flangerPtr->processBuffer(data, numSamples);
+        flangerPtr->processBuffer(data, numSamples);
+//        chorusPtr->processBuffer(data,numSamples);
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 230) {
             memcpy(debugPtr + (*debugCountPtr) * numSamples, data, (512 *sizeof(float)));

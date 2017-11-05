@@ -13,12 +13,13 @@ CAWLIIRCombFilter::CAWLIIRCombFilter()
     mFeedbackGain = 0.0;
     mMixLevel = 1;
     lastSampleOfBlock = 0.0;
-    delayLine.setDelayTimeInMilliseconds(0);
+    delayLine = new CAWLDelayLine();
+    delayLine->setDelayTimeInMilliseconds(0);
 }
 
 CAWLIIRCombFilter::~CAWLIIRCombFilter()
 {
-    
+    delete delayLine;
 }
 
 void CAWLIIRCombFilter::processBuffer(float *buf, const unsigned int numSamples)
@@ -29,7 +30,7 @@ void CAWLIIRCombFilter::processBuffer(float *buf, const unsigned int numSamples)
     for(unsigned i = 0; i < numSamples; i++)
     {
         xCurrSample = buf[i] *mMixLevel;
-        zSample = mFeedbackGain * delayLine.processNextSample(yCurrOutput);
+        zSample = mFeedbackGain * delayLine->processNextSample(yCurrOutput);
         yCurrOutput = xCurrSample + zSample;
 
         if(yCurrOutput > 1.0)

@@ -26,29 +26,21 @@
 
 - (void)setupGainUI {
     //Adding title
-    gainTitle = [[NSTextField alloc] initWithFrame:NSMakeRect(10, 240, 40, 20)];
-    [self addSubview:gainTitle];
-    [gainTitle setEditable:NO];
-    [gainTitle setBordered:NO];
-    [gainTitle setDrawsBackground:NO];
-    gainTitle.stringValue = @"Gain";
-    [gainLabel setNeedsDisplay:YES];
+    gainTitle = [self drawLabelTextFieldWithRect:NSMakeRect(10, 240, 40, 20)
+                                       WithTitle:@"Gain"
+                                          toView:self];
     
     //The slider
-    gainSlider = [[NSSlider alloc] initWithFrame:NSMakeRect(10, 300, 30, 30)];
-    [self addSubview:gainSlider];
-    [gainSlider setSliderType:NSSliderTypeCircular];
-    [gainSlider setNeedsDisplay:YES];
-    [gainSlider setMaxValue:1.0];
-    [gainSlider setMinValue:0.0];
-    [gainSlider setAction:@selector(updateGain)];
+    gainSlider = [self drawCircularSliderWithRect:NSMakeRect(10, 300, 30, 30)
+                                       WithMaxVal:1.0
+                                    AndWithMinVal:0.0
+                                     atDefaultVal:0.5
+                                           toView:self
+                                     withSelector:@selector(updateGain)];
     
     //Set up label
-    gainLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(10, 270, 30, 20)];
-    [gainLabel setNeedsDisplay:YES];
-    [gainLabel setStringValue:@"0.0"];
-    
-    [self addSubview:gainLabel];
+    gainLabel = [self drawValueTextFieldWithRect:NSMakeRect(10, 270, 30, 20)
+                                          toView:self];
 }
 
 - (void) updateGain {
@@ -58,27 +50,19 @@
 }
 
 - (void)setupVolumeUI {
-    volumeTitle = [[NSTextField alloc] initWithFrame:NSMakeRect(55, 240, 50, 20)];
-    [self addSubview:volumeTitle];
-    [volumeTitle setEditable:NO];
-    [volumeTitle setBordered:NO];
-    [volumeTitle setDrawsBackground:NO];
-    volumeTitle.stringValue = @"Volume";
-    [volumeTitle setNeedsDisplay:YES];
+    volumeTitle = [self drawLabelTextFieldWithRect:NSMakeRect(55, 240, 50, 20)
+                                         WithTitle:@"Volume"
+                                            toView:self];
     
-    volumeSlider = [[NSSlider alloc] initWithFrame:NSMakeRect(60, 300, 30, 30)];
-    [volumeSlider setSliderType:NSSliderTypeCircular];
-    [volumeSlider setNeedsDisplay:YES];
-    [volumeSlider setMaxValue:1.0];
-    [volumeSlider setMinValue:0.0];
-    [volumeSlider setAction:@selector(updateVolume)];
-    [self addSubview:volumeSlider];
-//    NSImage *volumeImage = [[NSImage alloc] initWithContentsOfFile:@"/Users/moseslee/Desktop/knob.png"];
-//    [volumeSlider setImage:volumeImage];
+    volumeSlider = [self drawCircularSliderWithRect:NSMakeRect(60, 300, 30, 30)
+                                         WithMaxVal:1.0
+                                      AndWithMinVal:0.0
+                                       atDefaultVal:0.5
+                                             toView:self
+                                       withSelector:@selector(updateVolume)];
     
-    volumeLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(60, 270, 30, 20)];
-    [self addSubview:volumeLabel];
-    [volumeLabel setNeedsDisplay:YES];
+    volumeLabel = [self drawValueTextFieldWithRect:NSMakeRect(60, 270, 30, 20)
+                                            toView:self];
 }
 
 - (void) updateVolume {

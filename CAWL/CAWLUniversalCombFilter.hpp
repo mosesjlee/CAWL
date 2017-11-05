@@ -16,10 +16,11 @@ class CAWLUniversalCombFilter : public CAWLCombFilter
 public:
     CAWLUniversalCombFilter();
     ~CAWLUniversalCombFilter();
-    void processBuffer(float * buf, const unsigned int numSamples);
+    virtual void processBuffer(float * buf, const unsigned int numSamples);
     void setDryMix(double newDryMix);
     
 protected:
     double dryMix;
+	int debugCounter = 0;
 };
 #endif /* CAWLUniversalCombFilter_hpp */

@@ -36,6 +36,9 @@
         
 
 }
+- (IBAction)testSlider:(NSSlider *)sender {
+    NSLog(@"TEST LOG");
+}
 
 - (void)setupChannelActivationButtons {
     for(unsigned i = 0; i < _numChannels; i++) {

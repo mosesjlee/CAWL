@@ -8,7 +8,16 @@
 
 #import "PhaserUI.h"
 
-@implementation PhaserUI
+@implementation PhaserUI {
+	NSSlider *speedSlider;
+	NSSlider *rateSlider;
+	NSSlider *mixLevelSlider;
+	
+	NSTextField *speedTitle;
+	NSTextField *rateTitle;
+	NSTextField *mixLevelTitle;
+}
+
 - (instancetype)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
     
@@ -21,4 +30,32 @@
     [self drawBorder:dirtyRect];
 }
 
+#pragma mark SETUP_UI
+- (void)setupSpeedUI {
+	
+}
+
+- (void)setupRateUI {
+	
+}
+
+
+- (void)setupMixLevelUI {
+	
+}
+
+#pragma mark PHASER_IBACTION
+- (IBAction)updateSpeed:(id) sender {
+	
+}
+
+- (IBAction)updateRate:(id)sender {
+	
+}
+
+- (IBAction)updateMixLevel:(id)sender {
+	
+}
 @end
+
+

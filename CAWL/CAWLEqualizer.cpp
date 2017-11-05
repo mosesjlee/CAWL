@@ -7,6 +7,16 @@
 //
 
 #include "CAWLEqualizer.hpp"
+#define MAX_LOW_SHELF_FREQ 200
+#define MAX_LOW_MID_FREQ
+#define MAX_HIGH_MID_FREQ
+#define MAX_HIGH_SHELF_FREQ 20000
+
+#define MIN_LOW_SHELF_FREQ 0
+#define MIN_LOW_MID_FREQ
+#define MIN_HIGH_MID_FREQ
+#define MIN_HIGH_SHELF_FREQ 13000
+
 
 CAWLEqualizer::CAWLEqualizer()
 {
@@ -39,50 +49,50 @@ void CAWLEqualizer::processBuffer(float * buf, const unsigned int numSamples)
 
 void CAWLEqualizer::setLowShelfCenterFreq(double centerFreq)
 {
-    
+    lowShelf.setCutOffFreq(centerFreq);
 }
 
 void CAWLEqualizer::setHighShelfCenterFreq(double centerFreq)
 {
-    
+    highShelf.setCutOffFreq(centerFreq);
 }
 
 void CAWLEqualizer::setlowMidCenterFreq(double centerFreq)
 {
-    
+    lowMid.setCutOffFreq(centerFreq);
 }
 void CAWLEqualizer::setHighMidCenterFreq(double centerFreq)
 {
-    
+    highMid.setCutOffFreq(centerFreq);
 }
 
 void CAWLEqualizer::setLowShelfGain(double newGain)
 {
-    
+    lowShelf.setGain(newGain);
 }
 
 void CAWLEqualizer::setHighShelfGain(double newGain)
 {
-    
+    highShelf.setGain(newGain);
 }
 
 void CAWLEqualizer::setlowMidGain(double newGain)
 {
-    
+    lowMid.setGain(newGain);
 }
 
 void CAWLEqualizer::setHighMidGain(double newGain)
 {
-    
+    highMid.setGain(newGain);
 }
 
 void CAWLEqualizer::setLowMidQFactor(double newQFactor)
 {
-    
+    lowMid.setQFactor(newQFactor);
 }
 
 void CAWLEqualizer::setHighMidQFactor(double newQFactor)
 {
-    
+    highMid.setQFactor(newQFactor);
 }
 

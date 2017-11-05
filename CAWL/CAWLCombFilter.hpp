@@ -11,7 +11,7 @@
 
 #include "CAWLSoundModule.hpp"
 #include "CAWLDelayLine.hpp"
-
+#include "delayl.h"
 class CAWLCombFilter : public CAWLSoundModule
 {
 public:
@@ -21,7 +21,8 @@ public:
     virtual void setMixLevel(float newMixLevel);
     
 protected:
-    CAWLDelayLine delayLine;
+    CAWLDelayLine * delayLine;
+    DelayLine * delayHsu;
     unsigned int delay;
     double lastSampleOfBlock;
     double mFeedbackGain;

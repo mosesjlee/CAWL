@@ -8,8 +8,8 @@
 
 #ifndef CAWLSoundModule_hpp
 #define CAWLSoundModule_hpp
-#define DEFAULT_SR 44100.0
-#define MILLISECONDS 1000.0
+#define DEFAULT_SR 44100.0f
+#define MILLISECONDS 1000.0f
 #include <stdio.h>
 #include <iostream>
 #include <cmath>

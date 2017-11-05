@@ -8,7 +8,14 @@
 
 #import "WahUI.h"
 
-@implementation WahUI
+@implementation WahUI {
+	NSSlider *gainSlider;
+	NSSlider *qFactorSlider;
+	
+	NSTextField *gainTitle;
+	NSTextField *qFactorTitle;
+}
+
 - (instancetype)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
     return self;
@@ -19,5 +26,28 @@
     // Drawing code here.
     [self drawBorder:dirtyRect];
 }
+#pragma mark SETUP_UI
+-(void) setupGainUI {
+	
+}
+
+-(void) setupQFactorUI {
+	
+}
+
+#pragma mark IBACTION_WAH
+
+-(IBAction) updateGainLevel:(id)sender {
+	
+}
+
+-(IBAction) updateQLevel:(id)sender {
+	
+}
+
 
 @end
+
+
+
+

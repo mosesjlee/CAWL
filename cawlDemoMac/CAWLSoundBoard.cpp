@@ -62,7 +62,7 @@ void CAWLSoundBoard::setNewDelayTime(float time)
 
 void CAWLSoundBoard::setDelayWetMixLevel(double wetMixLevel)
 {
-    delayEffect->setDryMix(wetMixLevel);
+    delayEffect->setWetMixLevel(wetMixLevel);
 }
 
 void CAWLSoundBoard::setDelayFeedbackGain(double gain)
@@ -77,15 +77,15 @@ void CAWLSoundBoard::setDelayDryMixGain(double newDryGain)
 
 void CAWLSoundBoard::turnOnDelay(bool onOff)
 {
-    if(!onOff)
-    {
-        if(delayEffect != NULL) delete delayEffect;
-        delayEffect = NULL;
-    }
-    else
-    {
+//    if(!onOff)
+//    {
+//        if(delayEffect != NULL) delete delayEffect;
+//        delayEffect = NULL;
+//    }
+//    else
+//    {
         delayEffect = new CAWLDelayEffect();
-    }
+//    }
     isDelayOn = onOff;
 }
 
@@ -178,7 +178,13 @@ void CAWLSoundBoard::bypassChorus(bool bypass)
 #pragma mark FLANGER_CONTROL
 void CAWLSoundBoard::turnOnFlanger(bool onOff)
 {
-    
+    if(onOff) {
+        if(flanger == NULL) flanger = new CAWLFlanger();
+    } else {
+        if(flanger) delete flanger;
+        flanger = NULL;
+    }
+    isFlangerOn = onOff;
 }
 
 void CAWLSoundBoard::bypassFlanger(bool bypass)

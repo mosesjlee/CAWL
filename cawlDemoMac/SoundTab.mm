@@ -73,6 +73,7 @@ NSArray * effectsList = @[@"Off",
     [self createReverbUI];
     [self createChorusUI];
     [self createWahUI];
+    [self createFlangerUI];
     
     //Create soundboard object
     _soundBoard = new CAWLSoundBoard();
@@ -301,18 +302,23 @@ NSArray * effectsList = @[@"Off",
     }
     else if([effect isEqualToString:effectsList[3]]) {
         _soundBoard->turnOnWah(false);
+        [self hideEffectUI:wahUI];
     }
     else if([effect isEqualToString:effectsList[4]]) {
         _soundBoard->turnOnChorus(false);
+        [self hideEffectUI:chorusUI];
     }
     else if([effect isEqualToString:effectsList[5]]) {
         _soundBoard->turnOnOverdrive(false);
+        [self hideEffectUI:overdriveUI];
     }
     else if([effect isEqualToString:effectsList[6]]) {
         _soundBoard->turnOnFuzz(false);
+        [self hideEffectUI:fuzzUI];
     }
     else if([effect isEqualToString:effectsList[7]]) {
         _soundBoard->turnOnCompressor(false);
+        [self hideEffectUI:compressorUI];
     }
     else if([effect isEqualToString:effectsList[8]]) {
         _soundBoard->turnOnEqualizer(false);
@@ -320,9 +326,11 @@ NSArray * effectsList = @[@"Off",
     }
     else if([effect isEqualToString:effectsList[9]]) {
         _soundBoard->turnOnPhaser(false);
+        [self hideEffectUI:phaserUI];
     }
     else if([effect isEqualToString:effectsList[10]]) {
         _soundBoard->turnOnFlanger(false);
+        [self hideEffectUI:flangerUI];
     }
 }
 
@@ -339,19 +347,18 @@ NSArray * effectsList = @[@"Off",
     else if([effect isEqualToString:effectsList[2]]) {
         _soundBoard->turnOnReverb(true);
         [self drawEffectUI:reverbUI with:coordinate];
-        [self drawEffectUI:reverbUI with:coordinate];
     }
     else if([effect isEqualToString:effectsList[3]]) {
         _soundBoard->turnOnWah(true);
-        //[self drawWahUI];
+        [self drawEffectUI:wahUI with:coordinate];
     }
     else if([effect isEqualToString:effectsList[4]]) {
         _soundBoard->turnOnChorus(true);
-        //[self drawChorusUI];
+        [self drawEffectUI:chorusUI with:coordinate];
     }
     else if([effect isEqualToString:effectsList[5]]) {
         _soundBoard->turnOnOverdrive(true);
-        
+        [self drawEffectUI:overdriveUI with:coordinate];
     }
     else if([effect isEqualToString:effectsList[6]]) {
         _soundBoard->turnOnFuzz(true);
@@ -371,6 +378,7 @@ NSArray * effectsList = @[@"Off",
     }
     else if([effect isEqualToString:effectsList[10]]) {
         _soundBoard->turnOnFlanger(true);
+        [self drawEffectUI:flangerUI with:coordinate];
     }
     
     //Add it to the list
@@ -420,11 +428,19 @@ NSArray * effectsList = @[@"Off",
 }
 
 - (void)createChorusUI {
-    
+    chorusUI = [[ChorusUI alloc] initWithFrame:NSMakeRect(0, 0, MAX_WIDTH, MAX_HEIGHT)];
+    [self.view addSubview:chorusUI];
+    [chorusUI setHidden:YES];
+    [chorusUI setNeedsLayout:YES];
+    chorusUI.soundTabRef = self;
 }
 
 - (void)createOverdriveUI {
-    
+    overdriveUI = [[OverdriveUI alloc] initWithFrame:NSMakeRect(0, 0, MAX_WIDTH, MAX_HEIGHT)];
+    [self.view addSubview:overdriveUI];
+    [overdriveUI setHidden:YES];
+    [overdriveUI setNeedsLayout:YES];
+    overdriveUI.soundTabRef = self;
 }
 
 - (void)createFuzzUI {
@@ -433,6 +449,14 @@ NSArray * effectsList = @[@"Off",
 
 - (void)createCompressorUI {
     
+}
+
+- (void)createFlangerUI {
+    flangerUI = [[FlangerUI alloc] initWithFrame:NSMakeRect(0, 0, MAX_WIDTH, MAX_HEIGHT)];
+    [self.view addSubview:flangerUI];
+    [flangerUI setHidden:YES];
+    [flangerUI setNeedsLayout:YES];
+    flangerUI.soundTabRef = self;
 }
 
 #pragma mark UI_drawing

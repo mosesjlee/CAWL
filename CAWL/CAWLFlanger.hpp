@@ -8,24 +8,16 @@
 
 #ifndef CAWLFlanger_hpp
 #define CAWLFlanger_hpp
-#include "CAWLUniversalCombFilter.hpp"
-#include "CAWLSineWaveOsc.hpp"
 
-class CAWLFlanger : public CAWLUniversalCombFilter
+#include "CAWLModDelayEffect.hpp"
+
+
+class CAWLFlanger : public CAWLModDelayEffect
 {
 public:
 	CAWLFlanger();
 	~CAWLFlanger();
-	void setModulationDepth(double newModDepth);
-	void setMixLevel(double mixLevel);
-	void setModulationSpeed(double newModSpeed);
-    void processBuffer(float * buf, const unsigned int numSamples);
-	double flangedValue();
-private:
-	CAWLSineWaveOsc * sine;
-    double modDepth;
-    double modSpeed;
-	double mixLevel;
+    double modulatedTime();
 };
 
 #endif /* CAWLFlanger_hpp */

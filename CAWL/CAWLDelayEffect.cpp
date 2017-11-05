@@ -8,11 +8,16 @@
 
 #include "CAWLDelayEffect.hpp"
 CAWLDelayEffect::CAWLDelayEffect():
-feedbackMix(0),
-wetMix(0),
+feedbackMix(0.5),
+wetMix(0.5),
 dryMix(1.0)
 {
     ucf = new CAWLUniversalCombFilter();
+    ucf->setDryMix(dryMix);
+    ucf->setFeedForwardGain(wetMix);
+    ucf->setFeedbackGain(feedbackMix);
+    ucf->setMixLevel(0);
+    
 }
 
 CAWLDelayEffect::~CAWLDelayEffect()

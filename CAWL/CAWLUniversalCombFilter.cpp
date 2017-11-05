@@ -11,32 +11,38 @@
 CAWLUniversalCombFilter::CAWLUniversalCombFilter()
 {
     lastSampleOfBlock = 0.0;
-    mFeedbackGain = 1;
-    mMixLevel = 1;
+    mFeedbackGain = 1.0;
+    mMixLevel = 1.0;
     mFeedForwardGain = 0.0;
+    delayHsu = new DelayLine(MAX_DELAY_IN_SAMPLES);
+    delayLine = new CAWLDelayLine();
 }
 
 CAWLUniversalCombFilter::~CAWLUniversalCombFilter()
 {
-    
+    delete delayLine;
 }
 
 void CAWLUniversalCombFilter::processBuffer(float * buf, const unsigned int numSamples)
 {
     double yCurrSample = 0.0;
     double xCurrSample = 0.0;
-    double xHCurrSample = lastSampleOfBlock;
-    double zDelayedSample = 0.0;
+    double xHCurrSample = 0.0;
+    double zDelayedSample = lastSampleOfBlock;
     for(unsigned i = 0; i < numSamples; i++)
     {
+//        if(debugCounter == 100)
+//            printf("STOP\n");
         xCurrSample = buf[i];
-        zDelayedSample = delayLine.processNextSample(xHCurrSample);
+        //zDelayedSample = delayHsu->tick(xHCurrSample);
 		xHCurrSample = xCurrSample + zDelayedSample * mFeedbackGain;
+        zDelayedSample = delayLine->processNextSample(xHCurrSample);
         yCurrSample = zDelayedSample * mFeedForwardGain + xHCurrSample * mMixLevel;
         buf[i] = yCurrSample + xCurrSample * dryMix;
+		debugCounter++;
     }
 	
-    lastSampleOfBlock = xHCurrSample;
+    lastSampleOfBlock = zDelayedSample;
 }
 
 void CAWLUniversalCombFilter::setDryMix(double newDryMix)

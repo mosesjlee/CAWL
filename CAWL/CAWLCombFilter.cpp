@@ -10,7 +10,8 @@
 
 void CAWLCombFilter::setDelay(float delay)
 {
-    delayLine.setDelayTimeInMilliseconds(delay);
+    delayLine->setDelayTimeInMilliseconds(delay);
+    //delayHsu->setDelayLineDelay(delay * 44100.0/1000.0);
 }
 
 void CAWLCombFilter::setFeedForwardGain(float newGain)

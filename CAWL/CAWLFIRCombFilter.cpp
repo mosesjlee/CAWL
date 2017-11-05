@@ -11,7 +11,8 @@ CAWLFIRCombFilter::CAWLFIRCombFilter()
 {
     mFeedForwardGain = 1.0;
     lastSampleOfBlock = 0.0;
-    delayLine.setDelayTimeInMilliseconds(0);
+    delayLine = new CAWLDelayLine();
+    delayLine->setDelayTimeInMilliseconds(0);
 }
 
 CAWLFIRCombFilter::~CAWLFIRCombFilter()
@@ -25,7 +26,7 @@ void CAWLFIRCombFilter::processBuffer(float * buf, const unsigned int numSamples
     for(unsigned int i = 0; i < numSamples; i++)
     {
         float xCurrSample = buf[i];
-        float zCurrSample = delayLine.processNextSample(xCurrSample);
+        float zCurrSample = delayLine->processNextSample(xCurrSample);
         yCurrSample = zCurrSample * mFeedForwardGain + xCurrSample;
         buf[i] = yCurrSample;
     }
