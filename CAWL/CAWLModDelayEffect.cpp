@@ -16,7 +16,7 @@ void CAWLModDelayEffect::processBuffer(float * buf, const unsigned int numSample
     double yCurrOutput = 0.0;
     for(int i = 0; i < numSamples; i++)
     {
-//        if(debugCounter == 44)
+//        if(debugCounter == 44  )
 //            printf("STOP\n");
         xCurrSample = buf[i];
         zDelayedSample = delayLine->processNextSample(xHCurrSample);
