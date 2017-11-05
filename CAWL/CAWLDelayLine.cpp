@@ -46,7 +46,7 @@ void CAWLDelayLine::setDelayTimeInSamples(float delaySamples)
 	
     //Enforce that the max delay is 1 sample less than the max delay
     if(currDelayInSamples > MAX_DELAY_IN_SAMPLES)
-        currDelayInSamples = MAX_DELAY_IN_SAMPLES - 2;
+        currDelayInSamples = MAX_DELAY_IN_SAMPLES - 1;
 }
 
 inline double CAWLDelayLine::linear_interp(float x_1, float y_1, float x_2, float y_2, float frac)

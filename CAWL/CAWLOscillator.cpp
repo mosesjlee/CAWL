@@ -7,7 +7,7 @@
 //
 
 #include "CAWLOscillator.hpp"
-
+#include <stdio.h>
 double CAWLOscillator::getNextSample()
 {
     double retval = table[(int) counter];
@@ -26,6 +26,7 @@ void CAWLOscillator::setFreq(double newFreq)
 {
     freq = newFreq;
     cycleLength = MAX_TABLE_SIZE * freq/sampleRate;
+    printf("set new freq of %f\n", newFreq);
 }
 
 void CAWLOscillator::setSampleRate(double newSampleRate)

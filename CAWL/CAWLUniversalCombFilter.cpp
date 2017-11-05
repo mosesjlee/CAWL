@@ -31,8 +31,8 @@ void CAWLUniversalCombFilter::processBuffer(float * buf, const unsigned int numS
     double zDelayedSample = lastSampleOfBlock;
     for(unsigned i = 0; i < numSamples; i++)
     {
-		if(debugCounter == 100)
-			printf("STOP\n");
+//        if(debugCounter == 100)
+//            printf("STOP\n");
         xCurrSample = buf[i];
         //zDelayedSample = delayHsu->tick(xHCurrSample);
 		xHCurrSample = xCurrSample + zDelayedSample * mFeedbackGain;

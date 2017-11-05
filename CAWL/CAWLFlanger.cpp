@@ -7,17 +7,20 @@
 //
 
 #include "CAWLFlanger.hpp"
-
+#define MIN_DELAY 0
+#define MAX_DELAY 10
+#define MAX_MOD_DEPTH (MAX_DELAY - MIN_DELAY)
 CAWLFlanger::CAWLFlanger()
 {
     sine = new CAWLSineWaveOsc();
     modSpeed = 1.0;
-    modDepth = 7.0;
-    mMixLevel = 0.5;
+    modDepth = 10.0;
+    mMixLevel = 1.0;
+    dryMix = 0.2;
     mFeedbackGain = 0.0;
-    mFeedForwardGain = 1.0;
+    mFeedForwardGain = 0.7;
     sine->setFreq(modSpeed);
-	delayLine->setDelayTimeInSamples(0);
+	delayLine->setDelayTimeInSamples(modDepth/2);
 }
 
 
@@ -26,50 +29,10 @@ CAWLFlanger::~CAWLFlanger()
     delete sine;
 }
 
-void CAWLFlanger::processBuffer(float * buf, const unsigned int numSamples)
+double CAWLFlanger::modulatedTime()
 {
-	double xCurrSample = 0.0;
-	double zDelayedSample = 0.0;
-	double xHCurrSample = lastSampleOfBlock;
-	double yCurrOutput = 0.0;
-	for(int i = 0; i < numSamples; i++)
-	{
-		if(debugCounter == 44)
-			printf("STOP\n");
-		xCurrSample = buf[i];
-		zDelayedSample = delayLine->processNextSample(xHCurrSample);
-        //zDelayedSample = delayHsu->tick(xHCurrSample);
-		xHCurrSample = xCurrSample + zDelayedSample * mFeedbackGain;
-		yCurrOutput = zDelayedSample * mFeedForwardGain + xHCurrSample * mMixLevel;
-		buf[i] = yCurrOutput + xCurrSample * dryMix;
-		buf[i] = xCurrSample + yCurrOutput * mFeedForwardGain;
-
-		delayLine->setDelayTimeInMilliseconds(flangedValue());
-        //delayHsu->setDelayLineDelay(flangedValue() * 44100.0/1000.0);
-		debugCounter++;
-	}
-	lastSampleOfBlock = xHCurrSample;
-}
-
-double CAWLFlanger::flangedValue()
-{
-	return modDepth * fabs(sine->getNextSample());
-}
-
-void CAWLFlanger::setModulationDepth(double newModDepth)
-{
-    modDepth = newModDepth;
-}
-
-void CAWLFlanger::setMixLevel(double mixLevel)
-{
-	mMixLevel = mixLevel;
-}
-
-void CAWLFlanger::setModulationSpeed(double newModSpeed)
-{
-    modSpeed = newModSpeed;
-	sine->setFreq(modSpeed);
+    //printf("new delay %f\n",modDepth/2 + (modDepth/2 * sine->getNextSample()));
+    return modDepth/2 + (modDepth/2 * sine->getNextSample());
 }
 
 

@@ -14,12 +14,12 @@
 class CAWLModDelayEffect : public CAWLUniversalCombFilter
 {
 public:
-    void setModulationDepth(double newModDepth);
-    void setMixLevel(double mixLevel);
-    void setModulationSpeed(double newModSpeed);
-    void processBuffer(float * buf, const unsigned int numSamples);
-    double flangedValue();
-private:
+    virtual void setMixLevel(double mixLevel);
+    virtual void setModulationSpeed(double newModSpeed);
+    virtual double modulatedTime() = 0;
+    virtual void setModulationDepth(double newModDepth);
+    virtual void processBuffer(float * buf, const unsigned int numSamples);
+protected:
     CAWLSineWaveOsc * sine;
     double modDepth;
     double modSpeed;

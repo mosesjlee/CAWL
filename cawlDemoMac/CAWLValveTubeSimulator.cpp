@@ -65,6 +65,5 @@ void CAWLValveTubeSimulator::processBuffer(float * buf, const unsigned int numOf
 void CAWLValveTubeSimulator::setGain(float newGain)
 {
     mGain = newGain;
-    printf("New gain: %f\n", mGain);
 }
 

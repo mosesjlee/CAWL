@@ -8,12 +8,13 @@
 
 #ifndef CAWLChorus_hpp
 #define CAWLChorus_hpp
+#include "CAWLModDelayEffect.hpp"
 
-class CAWLChorus
+class CAWLChorus : public CAWLModDelayEffect
 {
 public:
 	CAWLChorus();
 	~CAWLChorus();
-private:
+    double modulatedTime();
 };
 #endif /* CAWLChorus_hpp */

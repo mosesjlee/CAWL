@@ -16,24 +16,37 @@ void CAWLModDelayEffect::processBuffer(float * buf, const unsigned int numSample
     double yCurrOutput = 0.0;
     for(int i = 0; i < numSamples; i++)
     {
-        if(debugCounter == 44)
-            printf("STOP\n");
+//        if(debugCounter == 44)
+//            printf("STOP\n");
         xCurrSample = buf[i];
         zDelayedSample = delayLine->processNextSample(xHCurrSample);
         //zDelayedSample = delayHsu->tick(xHCurrSample);
         xHCurrSample = xCurrSample + zDelayedSample * mFeedbackGain;
-        yCurrOutput = zDelayedSample * mFeedForwardGain + xHCurrSample * mMixLevel;
+        yCurrOutput = zDelayedSample * mFeedForwardGain;
         buf[i] = yCurrOutput + xCurrSample * dryMix;
-        buf[i] = xCurrSample + yCurrOutput * mFeedForwardGain;
         
-        delayLine->setDelayTimeInMilliseconds(flangedValue());
+        delayLine->setDelayTimeInMilliseconds(modulatedTime());
         //delayHsu->setDelayLineDelay(flangedValue() * 44100.0/1000.0);
         debugCounter++;
     }
     lastSampleOfBlock = xHCurrSample;
 }
 
-double CAWLModDelayEffect::flangedValue()
+void CAWLModDelayEffect::setModulationDepth(double newModDepth)
 {
-    return modDepth * fabs(sine->getNextSample());
+    modDepth = newModDepth;
+    delayLine->setDelayTimeInMilliseconds(modDepth/2);
 }
+
+void CAWLModDelayEffect::setMixLevel(double mixLevel)
+{
+    dryMix = mixLevel;
+}
+
+void CAWLModDelayEffect::setModulationSpeed(double newModSpeed)
+{
+    modSpeed = newModSpeed;
+    sine->setFreq(modSpeed);
+}
+
+
