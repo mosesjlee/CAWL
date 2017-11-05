@@ -8,7 +8,16 @@
 
 #import "ChorusUI.h"
 
-@implementation ChorusUI
+@implementation ChorusUI {
+	NSSlider *chorusRateSlider;
+	NSSlider *chorusDepthSlider;
+	NSSlider *chorusMixLevel;
+	
+	NSTextField *chorusRateTitle;
+	NSTextField *chorusDepthTitle;
+	NSTextField *chorusMixTitle;
+}
+
 - (instancetype)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
     
@@ -22,4 +31,40 @@
     [self drawBorder:dirtyRect];
 }
 
+#pragma mark SETUP_UI
+
+-(void) setupChorusRateUI {
+	
+}
+
+-(void) setupChorusDepthUI {
+	
+}
+
+-(void) setupMixLevelUI {
+	
+}
+
+#pragma mark IBACTION_CHORUS
+
+-(IBAction) updateChorusRate:(id)sender {
+	
+}
+
+-(IBAction) updateChorusDepthLevel:(id)sender {
+	
+}
+
+-(IBAction) updateMixLevel:(id)sender {
+	
+}
+
 @end
+
+
+
+
+
+
+
+
