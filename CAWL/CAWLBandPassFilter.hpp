@@ -16,6 +16,7 @@ class CAWLBandPassFilter : public CAWLBiQuadFilter
 public:
     CAWLBandPassFilter();
     ~CAWLBandPassFilter();
+    
 private:
     void calculateCoefficients();
 };

@@ -16,6 +16,7 @@ public:
     CAWLPhaser();
     ~CAWLPhaser();
     void processBuffer(float * buf, const unsigned int numSamples);
+    
 private:
     CAWLTriangleWaveOsc * triangleWave;
     CAWLNotchFilter * notchFilter;

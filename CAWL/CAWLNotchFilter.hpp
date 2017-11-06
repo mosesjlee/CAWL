@@ -16,6 +16,7 @@ class CAWLNotchFilter : public CAWLBiQuadFilter
 public:
     CAWLNotchFilter();
     ~CAWLNotchFilter();
+    
 private:
     void calculateCoefficients();
 };

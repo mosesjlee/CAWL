@@ -15,6 +15,8 @@ public:
     CAWLReverb();
     ~CAWLReverb();
     void processBuffer(float * buf, const unsigned int numSamples);
+    
+private:
 };
 
 #endif /* CAWLReverb_hpp */
