@@ -13,16 +13,16 @@
 
 class CAWLHighPassFilter : public CAWLBiQuadFilter
 {
+public:
+    CAWLHighPassFilter();
+    ~CAWLHighPassFilter();
+    
 private:
     void calculateCoefficients();
     double theta_c;
     double omega;
     double kappa;
     double phi;
-    
-public:
-    CAWLHighPassFilter();
-    ~CAWLHighPassFilter();
 };
 
 #endif /* simpleEq_hpp */

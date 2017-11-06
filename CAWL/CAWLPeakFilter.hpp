@@ -13,6 +13,12 @@
 
 class CAWLPeakFilter : public CAWLBiQuadFilter
 {
+public:
+    CAWLPeakFilter();
+    ~CAWLPeakFilter();
+    void setQFactor(double newQFactor);
+    
+private:
     double theta;
     double mu;
     double zeta;
@@ -21,9 +27,5 @@ class CAWLPeakFilter : public CAWLBiQuadFilter
     double qFactor;
     
     void calculateCoefficients();
-public:
-    CAWLPeakFilter();
-    ~CAWLPeakFilter();
-    void setQFactor(double newQFactor);
 };
 #endif /* CAWLPeakFilter_hpp */

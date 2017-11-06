@@ -13,17 +13,18 @@
 
 class CAWLLowShelfFilter : public CAWLBiQuadFilter
 {
-	double theta;
-	double mu;
+public:
+    CAWLLowShelfFilter();
+    ~CAWLLowShelfFilter();
+    
+private:
+    double theta;
+    double mu;
     double beta;
     double delta;
     double gamma;
     
     void calculateCoefficients();
-    
-public:
-    CAWLLowShelfFilter();
-    ~CAWLLowShelfFilter();
 };
 
 #endif /* CAWLLowShelfFilter_hpp */

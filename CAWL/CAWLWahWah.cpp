@@ -7,3 +7,30 @@
 //
 
 #include "CAWLWahWah.hpp"
+
+CAWLWahWah::CAWLWahWah()
+{
+    bandPass = new CAWLBandPassFilter();
+    triangeWave = new CAWLTriangleWaveOsc();
+}
+
+CAWLWahWah::~CAWLWahWah()
+{
+    delete bandPass;
+    delete triangeWave;
+}
+
+void CAWLWahWah::processBuffer(float * buf, const unsigned int numSamples)
+{
+    for(int i = 0; i < numSamples; i++)
+    {
+        
+    }
+}
+
+
+
+
+
+
+

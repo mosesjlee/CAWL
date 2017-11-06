@@ -21,6 +21,7 @@
 #include "CAWLSineWaveOsc.hpp"
 #include "CAWLFlanger.hpp"
 #include "CAWLChorus.hpp"
+#include "CAWLTriangleWaveOsc.hpp"
 #include <iostream>
 #include <fstream>
 
@@ -29,8 +30,8 @@
 //#define SHOW_DEBUG_SAMPLES
 #define TEST_BIQUAD 0
 #define TEST_COMB 0
-#define TEST_OSC 0
-#define TEST_MOD_DELAY 1
+#define TEST_OSC 1
+#define TEST_MOD_DELAY 0
 
 
 void getWhiteNoiseStream(float * stream);
@@ -102,6 +103,7 @@ int main(int argc, const char * argv[]) {
     CAWLAmpSimulator * ptrToAmp = &ampSim, *ptrToAmp2 = &ampSim2, *ptrToAmp3 = &ampSim3;
     
     CAWLSineWaveOsc sineWav, * sineWavPtr = &sineWav;// sineWav.setFreq(440);
+    CAWLTriangleWaveOsc triWav, * triWavPtr = &triWav; triWav.setFreq(440);
     CAWLFlanger flanger, * flangerPtr=&flanger; flanger.setModulationSpeed(1.0);
     CAWLChorus chorus,* chorusPtr=&chorus; chorus.setModulationSpeed(0.25);
     
@@ -133,7 +135,8 @@ int main(int argc, const char * argv[]) {
                 data[i] = 0.0;
             }
 #elif TEST_OSC
-            data[i] = sineWavPtr->getNextSample();
+            //data[i] = sineWavPtr->getNextSample();
+            data[i] = triWavPtr->getNextSample();
 #elif TEST_MOD_DELAY
 			//Testing BiQuads
 			if(*ptrToGuitarCount < 120000 ) {
@@ -159,7 +162,7 @@ int main(int argc, const char * argv[]) {
 //		ptrToValve->processBuffer(data,numSamples);
 //        lpfPtr->processBuffer(data, numSamples);
 //        hpfPtr->processBuffer(data, numSamples);
-        flangerPtr->processBuffer(data, numSamples);
+//        flangerPtr->processBuffer(data, numSamples);
 //        chorusPtr->processBuffer(data,numSamples);
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 230) {

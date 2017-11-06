@@ -11,6 +11,9 @@
 
 class CAWLFuzz
 {
-    
+public:
+    CAWLFuzz();
+    ~CAWLFuzz();
+    void processBuffer(float * buf, const unsigned int numSamples);
 };
 #endif /* CAWLFuzz_hpp */

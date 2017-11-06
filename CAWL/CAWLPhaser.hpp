@@ -8,10 +8,17 @@
 
 #ifndef CAWLPhaser_hpp
 #define CAWLPhaser_hpp
-
+#include "CAWLTriangleWaveOsc.hpp"
+#include "CAWLNotchFilter.hpp"
 class CAWLPhaser
 {
-    
+public:
+    CAWLPhaser();
+    ~CAWLPhaser();
+    void processBuffer(float * buf, const unsigned int numSamples);
+private:
+    CAWLTriangleWaveOsc * triangleWave;
+    CAWLNotchFilter * notchFilter;
 };
 
 #endif /* CAWLPhaser_hpp */

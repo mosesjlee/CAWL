@@ -11,6 +11,9 @@
 
 class CAWLOverdrive
 {
-    
+public:
+    CAWLOverdrive();
+    ~CAWLOverdrive();
+    void processBuffer(float * buf, const unsigned int numSamples);
 };
 #endif /* CAWLOverdrive_hpp */

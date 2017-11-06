@@ -11,7 +11,10 @@
 
 class CAWLCompressor
 {
-    
+public:
+    CAWLCompressor();
+    ~CAWLCompressor();
+    void processBuffer(float * buf, const unsigned int numSamples);
 };
 
 #endif /* CAWLCompressor_hpp */

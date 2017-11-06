@@ -7,3 +7,18 @@
 //
 
 #include "CAWLPhaser.hpp"
+
+CAWLPhaser::CAWLPhaser()
+{
+    
+}
+
+CAWLPhaser::~CAWLPhaser()
+{
+    
+}
+
+void CAWLPhaser::processBuffer(float * buf, const unsigned int numSamples)
+{
+    
+}

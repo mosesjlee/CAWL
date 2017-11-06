@@ -13,16 +13,17 @@
 
 class CAWLHighShelfFilter : public CAWLBiQuadFilter
 {
+public:
+    CAWLHighShelfFilter();
+    ~CAWLHighShelfFilter();
+    
+private:
     double theta;
     double mu;
     double beta;
     double delta;
     double gamma;
-
+    
     void calculateCoefficients();
-
-public:
-    CAWLHighShelfFilter();
-    ~CAWLHighShelfFilter();
 };
 #endif /* CAWLHighShelfFilter_hpp */

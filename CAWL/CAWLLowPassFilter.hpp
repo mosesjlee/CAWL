@@ -13,12 +13,12 @@
 
 class CAWLLowPassFilter : public CAWLBiQuadFilter
 {
-private:
-    void calculateCoefficients();
-    
 public:
     CAWLLowPassFilter();
     ~CAWLLowPassFilter();
+    
+private:
+    void calculateCoefficients();
 };
 
 #endif /* simpleEq_hpp */
