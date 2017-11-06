@@ -41,7 +41,7 @@ CAWLTriangleWaveOsc::CAWLTriangleWaveOsc()
 			table[i] = mtf2 * (i-4096) + btf2;
         else
             table[i] = mt2 * (i-12288) + bt2;
-        printf("Triangle table[%d] == %f\n", i, table[i]);
+        //printf("Triangle table[%d] == %f\n", i, table[i]);
     }
 }
 
