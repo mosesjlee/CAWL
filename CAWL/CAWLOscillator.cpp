@@ -26,7 +26,7 @@ void CAWLOscillator::setFreq(double newFreq)
 {
     freq = newFreq;
     cycleLength = MAX_TABLE_SIZE * freq/sampleRate;
-    printf("set new freq of %f\n", newFreq);
+    printf("set new freq of %f\n with cycle length %f\n", newFreq, cycleLength);
 }
 
 void CAWLOscillator::setSampleRate(double newSampleRate)

@@ -15,7 +15,6 @@ class CAWLTriangleWaveOsc : public CAWLOscillator
 public:
     CAWLTriangleWaveOsc();
     ~CAWLTriangleWaveOsc();
-    
 };
 
 #endif /* CAWLTriangleWaveOsc_hpp */

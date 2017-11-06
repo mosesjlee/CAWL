@@ -18,31 +18,29 @@ CAWLTriangleWaveOsc::CAWLTriangleWaveOsc()
     
     //Create the table
     table = new double[(int)MAX_TABLE_SIZE];
-    
+	
+	//From will pirkle's book
     //rising edge
-    double mt1 = 1.0/MAX_TABLE_SIZE;
+    double mt1 = 4.0/MAX_TABLE_SIZE;
     double bt1 = 0.0;
     
     //rising edge 2
-    double mt2 = 1.0/MAX_TABLE_SIZE;
+    double mt2 = 4.0/MAX_TABLE_SIZE;
     double bt2 = -1.0;
     
     //falling edge
-    double mtf2 = -2.0/MAX_TABLE_SIZE;
+    double mtf2 = -4.0/MAX_TABLE_SIZE;
     double btf2 = +1.0;
-    
-    int count = 0;
+	
     //Fill the table with samples
     for(int i = 0; i < MAX_TABLE_SIZE; i++)
     {
         if(i < 4096)
             table[i] = mt1 * i + bt1;
-        else if (count >= 4096 && i < 8192)
-            table[i] = mtf2 * (i-4096) + btf2;
+        else if (i >= 4096 && i <12288)
+			table[i] = mtf2 * (i-4096) + btf2;
         else
             table[i] = mt2 * (i-12288) + bt2;
-        
-        //count = (count + 1) %1024;
         printf("Triangle table[%d] == %f\n", i, table[i]);
     }
 }
