@@ -9,10 +9,10 @@
 #ifndef CAWLWahWah_hpp
 #define CAWLWahWah_hpp
 
-#include "CAWLTriangleWaveOsc.hpp"
+#include "CAWLTimeVariableFilter.hpp"
 #include "CAWLBandPassFilter.hpp"
 
-class CAWLWahWah
+class CAWLWahWah : public CAWLTimeVariableFilter
 {
 public:
     CAWLWahWah();
@@ -20,9 +20,6 @@ public:
     void processBuffer(float * buf, const unsigned int numSamples);
     
 private:
-    CAWLTriangleWaveOsc * triangeWave;
     CAWLBandPassFilter * bandPass;
-    double centerFreq;
-    double qFactor;
 };
 #endif /* CAWLWahWah_hpp */

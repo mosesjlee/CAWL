@@ -103,7 +103,7 @@ int main(int argc, const char * argv[]) {
     CAWLAmpSimulator * ptrToAmp = &ampSim, *ptrToAmp2 = &ampSim2, *ptrToAmp3 = &ampSim3;
     
     CAWLSineWaveOsc sineWav, * sineWavPtr = &sineWav;// sineWav.setFreq(440);
-    CAWLTriangleWaveOsc triWav, * triWavPtr = &triWav; triWav.setFreq(440);
+    CAWLTriangleWaveOsc triWav, * triWavPtr = &triWav; triWav.setFreq(220);
     CAWLFlanger flanger, * flangerPtr=&flanger; flanger.setModulationSpeed(1.0);
     CAWLChorus chorus,* chorusPtr=&chorus; chorus.setModulationSpeed(0.25);
     

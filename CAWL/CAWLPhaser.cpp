@@ -10,7 +10,7 @@
 
 CAWLPhaser::CAWLPhaser()
 {
-    
+	triangeWave = new CAWLTriangleWaveOsc();
 }
 
 CAWLPhaser::~CAWLPhaser()
