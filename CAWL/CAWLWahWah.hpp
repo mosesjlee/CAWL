@@ -11,13 +11,13 @@
 
 #include "CAWLTimeVariableFilter.hpp"
 #include "CAWLBandPassFilter.hpp"
-
+#include <pthread.h>
 class CAWLWahWah : public CAWLTimeVariableFilter
 {
 public:
     CAWLWahWah();
     ~CAWLWahWah();
-    void processBuffer(float * buf, const unsigned int numSamples);
+
     
 private:
     CAWLBandPassFilter * bandPass;

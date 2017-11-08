@@ -10,23 +10,27 @@
 
 CAWLWahWah::CAWLWahWah()
 {
-    bandPass = new CAWLBandPassFilter();
+    //bandPass = new CAWLBandPassFilter();
+    filter = new CAWLBandPassFilter();
     triangeWave = new CAWLTriangleWaveOsc();
+    triangeWave->setFreq(1);
+    filter->setCutOffFreq(3000);
 }
 
 CAWLWahWah::~CAWLWahWah()
 {
-    delete bandPass;
+    //delete bandPass;
     delete triangeWave;
+    delete filter;
 }
 
-void CAWLWahWah::processBuffer(float * buf, const unsigned int numSamples)
-{
-    for(int i = 0; i < numSamples; i++)
-    {
-        
-    }
-}
+//void CAWLWahWah::processBuffer(float * buf, const unsigned int numSamples)
+//{
+//    for(int i = 0; i < numSamples; i++)
+//    {
+//        
+//    }
+//}
 
 
 

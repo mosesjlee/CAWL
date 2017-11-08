@@ -10,16 +10,18 @@
 #define CAWLTimeVariableFilter_hpp
 
 #include "CAWLTriangleWaveOsc.hpp"
+#include "CAWLBiQuadFilter.hpp"
 
 class CAWLTimeVariableFilter
 {
 public:
 	void setTimeRate(double newRate);
 	void setMixLevel(double newMixLevel);
-	void processBuffer(float * buf, const unsigned int numSamples);
+	virtual void processBuffer(float * buf, const unsigned int numSamples);
 	
 protected:
 	CAWLTriangleWaveOsc * triangeWave;
+    CAWLBiQuadFilter * filter;
 	double centerFreq;
 	double qFactor;
 	double rate;

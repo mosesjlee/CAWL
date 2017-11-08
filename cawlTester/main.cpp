@@ -22,6 +22,8 @@
 #include "CAWLFlanger.hpp"
 #include "CAWLChorus.hpp"
 #include "CAWLTriangleWaveOsc.hpp"
+#include "CAWLBandPassFilter.hpp"
+#include "CAWLWahWah.hpp"
 #include <iostream>
 #include <fstream>
 
@@ -30,8 +32,8 @@
 //#define SHOW_DEBUG_SAMPLES
 #define TEST_BIQUAD 0
 #define TEST_COMB 0
-#define TEST_OSC 1
-#define TEST_MOD_DELAY 0
+#define TEST_OSC 0
+#define TEST_MOD_DELAY 1
 
 
 void getWhiteNoiseStream(float * stream);
@@ -95,7 +97,7 @@ int main(int argc, const char * argv[]) {
     pf.setQFactor(10); pf.setCutOffFreq(440); pf.setGain(10.0);
     CAWLPeakFilter pf2, * pf2Ptr = &pf2;
     pf2.setQFactor(10); pf2.setCutOffFreq(1320); pf2.setGain(10.0);
-    
+    CAWLBandPassFilter bp, * bpPtr = &bp; bp.setCutOffFreq(500); bp.setQFactor(10);
 
     CAWLValveTubeSimulator valveSim, valveSim2, valveSim3;
     CAWLValveTubeSimulator * ptrToValve = &valveSim, * ptrToValve2 = &valveSim2, *ptrToValve3 = &valveSim3;
@@ -106,7 +108,7 @@ int main(int argc, const char * argv[]) {
     CAWLTriangleWaveOsc triWav, * triWavPtr = &triWav; triWav.setFreq(220);
     CAWLFlanger flanger, * flangerPtr=&flanger; flanger.setModulationSpeed(1.0);
     CAWLChorus chorus,* chorusPtr=&chorus; chorus.setModulationSpeed(0.25);
-    
+    CAWLWahWah wah, *wahPtr=&wah;
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
@@ -164,6 +166,9 @@ int main(int argc, const char * argv[]) {
 //        hpfPtr->processBuffer(data, numSamples);
 //        flangerPtr->processBuffer(data, numSamples);
 //        chorusPtr->processBuffer(data,numSamples);
+//        bpPtr->processBuffer(data, numSamples);
+        wahPtr->processBuffer(data, numSamples);
+        
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 230) {
             memcpy(debugPtr + (*debugCountPtr) * numSamples, data, (512 *sizeof(float)));

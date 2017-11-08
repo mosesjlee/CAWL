@@ -16,9 +16,10 @@ class CAWLBandPassFilter : public CAWLBiQuadFilter
 public:
     CAWLBandPassFilter();
     ~CAWLBandPassFilter();
-    
+    void setQFactor(double newQFactor);
 private:
     void calculateCoefficients();
+    double qFactor;
 };
 
 #endif /* CAWLBandPassFilter_hpp */
