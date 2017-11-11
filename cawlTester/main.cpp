@@ -96,8 +96,9 @@ int main(int argc, const char * argv[]) {
     CAWLPeakFilter pf, * pfPtr = &pf;
     pf.setQFactor(10); pf.setCutOffFreq(440); pf.setGain(10.0);
     CAWLPeakFilter pf2, * pf2Ptr = &pf2;
-    pf2.setQFactor(10); pf2.setCutOffFreq(1320); pf2.setGain(10.0);
-    CAWLBandPassFilter bp, * bpPtr = &bp; bp.setCutOffFreq(500); bp.setQFactor(10);
+	pf2.setQFactor(10); pf2.setCutOffFreq(1320); pf2.setGain(10.0);
+	
+    CAWLBandPassFilter bp, * bpPtr = &bp; bp.setCutOffFreq(5000); bp.setQFactor(10);
 
     CAWLValveTubeSimulator valveSim, valveSim2, valveSim3;
     CAWLValveTubeSimulator * ptrToValve = &valveSim, * ptrToValve2 = &valveSim2, *ptrToValve3 = &valveSim3;
@@ -146,6 +147,7 @@ int main(int argc, const char * argv[]) {
 				(*ptrToGuitarCount)++;
 			}
 			else {
+				*ptrToGuitarCount = 0;
 				data[i] = 0.0;
 			}
 #endif
