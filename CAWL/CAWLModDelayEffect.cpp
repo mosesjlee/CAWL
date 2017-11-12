@@ -16,17 +16,13 @@ void CAWLModDelayEffect::processBuffer(float * buf, const unsigned int numSample
     double yCurrOutput = 0.0;
     for(int i = 0; i < numSamples; i++)
     {
-//        if(debugCounter == 44  )
-//            printf("STOP\n");
         xCurrSample = buf[i];
         zDelayedSample = delayLine->processNextSample(xHCurrSample);
-        //zDelayedSample = delayHsu->tick(xHCurrSample);
         xHCurrSample = xCurrSample + zDelayedSample * mFeedbackGain;
         yCurrOutput = zDelayedSample * mFeedForwardGain;
         buf[i] = yCurrOutput + xCurrSample * dryMix;
         
         delayLine->setDelayTimeInMilliseconds(modulatedTime());
-        //delayHsu->setDelayLineDelay(flangedValue() * 44100.0/1000.0);
         debugCounter++;
     }
     lastSampleOfBlock = xHCurrSample;

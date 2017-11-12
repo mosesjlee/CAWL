@@ -7,3 +7,17 @@
 //
 
 #include "CAWLReverb.hpp"
+CAWLReverb::CAWLReverb()
+{
+    
+}
+
+CAWLReverb::~CAWLReverb()
+{
+    
+}
+
+void CAWLReverb::processBuffer(float * buf, const unsigned int numSamples)
+{
+    
+}

@@ -7,3 +7,18 @@
 //
 
 #include "CAWLCompressor.hpp"
+
+CAWLCompressor::CAWLCompressor()
+{
+    
+}
+
+CAWLCompressor::~CAWLCompressor()
+{
+    
+}
+
+void CAWLCompressor::processBuffer(float * buf, const unsigned int numSamples)
+{
+    
+}
