@@ -33,7 +33,7 @@
 #define TEST_BIQUAD 0
 #define TEST_COMB 0
 #define TEST_OSC 0
-#define TEST_MOD_DELAY 1
+#define TEST_MOD_DELAY 0
 
 
 void getWhiteNoiseStream(float * stream);
@@ -138,8 +138,8 @@ int main(int argc, const char * argv[]) {
                 data[i] = 0.0;
             }
 #elif TEST_OSC
-            //data[i] = sineWavPtr->getNextSample();
-            data[i] = triWavPtr->getNextSample();
+            data[i] = sineWavPtr->getNextSample();
+            //data[i] = triWavPtr->getNextSample();
 #elif TEST_MOD_DELAY
 			//Testing BiQuads
 			if(*ptrToGuitarCount < 120000 ) {
@@ -163,13 +163,14 @@ int main(int argc, const char * argv[]) {
 //        hsfPtr->processBuffer(data, numSamples);
 //        pfPtr->processBuffer(data, numSamples);
 //        pf2Ptr->processBuffer(data, numSamples);
-//		ptrToValve->processBuffer(data,numSamples);
+		
 //        lpfPtr->processBuffer(data, numSamples);
 //        hpfPtr->processBuffer(data, numSamples);
 //        flangerPtr->processBuffer(data, numSamples);
 //        chorusPtr->processBuffer(data,numSamples);
 //        bpPtr->processBuffer(data, numSamples);
         wahPtr->processBuffer(data, numSamples);
+        ptrToValve->processBuffer(data,numSamples);
         
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 230) {

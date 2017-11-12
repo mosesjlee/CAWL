@@ -26,11 +26,19 @@ protected:
 	double rate;
 	double mixLevel;
 	
+    //Digital State Variable Filter
+    double y_h;
+    double y_b;
+    double y_l;
+    double y_b_n1;
+    double y_l_n1;
+    double max_y_b;
+    
 	//copied
 	float freq;
 	float startphase;
-	float  depth;
-	float  freqofs;
+	float depth;
+	float freqofs;
 	float res;
 	
 	float b0;

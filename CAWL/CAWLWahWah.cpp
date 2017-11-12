@@ -11,7 +11,7 @@
 CAWLWahWah::CAWLWahWah()
 {
     triangeWave = new CAWLTriangleWaveOsc();
-    triangeWave->setFreq(1.5);
+    triangeWave->setFreq(1);
 	centerFrequency = 3000;
 	
 	freq = float(1.5);
@@ -23,6 +23,13 @@ CAWLWahWah::CAWLWahWah()
 	lfoskip = freq * 2 * M_PI / mCurRate;
 	phase = 0;
 	
+    //State Variable
+    y_h = 0;
+    y_b = 0;
+    y_l = 0;
+    y_b_n1 = 0;
+    y_l_n1 = 0;
+    max_y_b = 0.1;
 }
 
 CAWLWahWah::~CAWLWahWah()
