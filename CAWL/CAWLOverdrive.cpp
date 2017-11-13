@@ -27,13 +27,21 @@ void CAWLOverdrive::processBuffer(float * buf, const unsigned int numSamples)
     
     for(int i = 0; i < numSamples; i++)
     {
-        xCurrSample = buf[i];
-        absSample = fabs(absSample);
+        xCurrSample = buf[i] * 1.5;
+        absSample = fabs(xCurrSample);
         if(absSample >= 0.0 && absSample <= (1.0/3.0))
+        {
             yCurrOutput = 2.0 * xCurrSample;
-        if(absSample >= (1.0/3.0) && absSample <= (2.0/3.0))
+        }
+        else if(absSample >= (1.0/3.0) && absSample <= (2.0/3.0))
+        {
             yCurrOutput = (3.0-(2.0 - 3.0 * xCurrSample) * (2.0 - 3.0 * xCurrSample))/3.0;
-        if(absSample >= (2.0/3.0) && absSample <= 1.0)
+        }
+        else if(absSample >= (2.0/3.0) && absSample <= 1.0)
+        {
             yCurrOutput = xCurrSample < 0.0 ? -1.0 : 1.0;
+        }
+        
+        buf[i] = yCurrOutput;
     }
 }

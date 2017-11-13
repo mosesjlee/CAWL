@@ -24,6 +24,7 @@
 #include "CAWLTriangleWaveOsc.hpp"
 #include "CAWLBandPassFilter.hpp"
 #include "CAWLWahWah.hpp"
+#include "CAWLOverdrive.hpp"
 #include <iostream>
 #include <fstream>
 
@@ -33,7 +34,7 @@
 #define TEST_BIQUAD 0
 #define TEST_COMB 0
 #define TEST_OSC 0
-#define TEST_MOD_DELAY 0
+#define TEST_MOD_DELAY 1
 
 
 void getWhiteNoiseStream(float * stream);
@@ -110,6 +111,7 @@ int main(int argc, const char * argv[]) {
     CAWLFlanger flanger, * flangerPtr=&flanger; flanger.setModulationSpeed(1.0);
     CAWLChorus chorus,* chorusPtr=&chorus; chorus.setModulationSpeed(0.25);
     CAWLWahWah wah, *wahPtr=&wah;
+    CAWLOverdrive overdrive, * odPtr=&overdrive;
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
@@ -169,8 +171,9 @@ int main(int argc, const char * argv[]) {
 //        flangerPtr->processBuffer(data, numSamples);
 //        chorusPtr->processBuffer(data,numSamples);
 //        bpPtr->processBuffer(data, numSamples);
-        wahPtr->processBuffer(data, numSamples);
-        ptrToValve->processBuffer(data,numSamples);
+//        wahPtr->processBuffer(data, numSamples);
+//        ptrToValve->processBuffer(data,numSamples);
+        odPtr->processBuffer(data, numSamples);
         
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 230) {
