@@ -171,9 +171,9 @@ int main(int argc, const char * argv[]) {
 //        flangerPtr->processBuffer(data, numSamples);
 //        chorusPtr->processBuffer(data,numSamples);
 //        bpPtr->processBuffer(data, numSamples);
-//        wahPtr->processBuffer(data, numSamples);
+        wahPtr->processBuffer(data, numSamples);
 //        ptrToValve->processBuffer(data,numSamples);
-        odPtr->processBuffer(data, numSamples);
+//        odPtr->processBuffer(data, numSamples);
         
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 230) {

@@ -8,6 +8,7 @@
 
 #ifndef CAWLReverb_hpp
 #define CAWLReverb_hpp
+#include "CAWLDelayLine.hpp"
 
 class CAWLReverb
 {
@@ -17,6 +18,7 @@ public:
     void processBuffer(float * buf, const unsigned int numSamples);
     
 private:
+    CAWLDelayLine ** delayLineArray;
 };
 
 #endif /* CAWLReverb_hpp */

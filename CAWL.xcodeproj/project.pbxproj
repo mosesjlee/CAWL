@@ -61,8 +61,6 @@
 		9188507B1FAFC94500A6AAAF /* CAWLBandPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 918850781FAFC94500A6AAAF /* CAWLBandPassFilter.cpp */; };
 		9191B3A11F804543004C6F33 /* CAWLIIRCombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 911098041F6F2393002A9A92 /* CAWLIIRCombFilter.cpp */; };
 		9191B3B21F85F62B004C6F33 /* CAWLBiQuadFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9191B3AF1F85F62B004C6F33 /* CAWLBiQuadFilter.cpp */; };
-		919EC9C01FB0CE83003B4467 /* CAWLTimeVariableFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 919EC9BE1FB0CE83003B4467 /* CAWLTimeVariableFilter.cpp */; };
-		919EC9C11FB0CE83003B4467 /* CAWLTimeVariableFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 919EC9BE1FB0CE83003B4467 /* CAWLTimeVariableFilter.cpp */; };
 		91BB1F231F9EF3DE000804CE /* CAWLTriangleWaveOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91BB1F211F9EF3DE000804CE /* CAWLTriangleWaveOsc.cpp */; };
 		91BB1F241F9EF3DE000804CE /* CAWLTriangleWaveOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91BB1F211F9EF3DE000804CE /* CAWLTriangleWaveOsc.cpp */; };
 		91BB1F261F9EF75F000804CE /* CAWLOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91BB1F251F9EF75F000804CE /* CAWLOscillator.cpp */; };
@@ -190,8 +188,6 @@
 		918850791FAFC94500A6AAAF /* CAWLBandPassFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLBandPassFilter.hpp; sourceTree = "<group>"; };
 		9191B3AF1F85F62B004C6F33 /* CAWLBiQuadFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLBiQuadFilter.cpp; sourceTree = "<group>"; };
 		9191B3B01F85F62B004C6F33 /* CAWLBiQuadFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLBiQuadFilter.hpp; sourceTree = "<group>"; };
-		919EC9BE1FB0CE83003B4467 /* CAWLTimeVariableFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLTimeVariableFilter.cpp; sourceTree = "<group>"; };
-		919EC9BF1FB0CE83003B4467 /* CAWLTimeVariableFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLTimeVariableFilter.hpp; sourceTree = "<group>"; };
 		91BB1F1E1F9EF14F000804CE /* CAWLOscillator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLOscillator.hpp; sourceTree = "<group>"; };
 		91BB1F211F9EF3DE000804CE /* CAWLTriangleWaveOsc.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLTriangleWaveOsc.cpp; sourceTree = "<group>"; };
 		91BB1F221F9EF3DE000804CE /* CAWLTriangleWaveOsc.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLTriangleWaveOsc.hpp; sourceTree = "<group>"; };
@@ -449,8 +445,6 @@
 				910FB51C1F948CD0000ED66C /* CAWLPhaser.hpp */,
 				91E9D26B1F9C1CF900491E6A /* CAWLWahWah.cpp */,
 				91E9D26C1F9C1CF900491E6A /* CAWLWahWah.hpp */,
-				919EC9BE1FB0CE83003B4467 /* CAWLTimeVariableFilter.cpp */,
-				919EC9BF1FB0CE83003B4467 /* CAWLTimeVariableFilter.hpp */,
 				910FB5211F948D7A000ED66C /* CAWLReverb.cpp */,
 				910FB5221F948D7A000ED66C /* CAWLReverb.hpp */,
 				910FB5271F948D9E000ED66C /* CAWLCompressor.cpp */,
@@ -633,7 +627,6 @@
 				9188507B1FAFC94500A6AAAF /* CAWLBandPassFilter.cpp in Sources */,
 				91E056F01F907334008A5B25 /* CAWLDelayEffect.cpp in Sources */,
 				91E056EC1F907044008A5B25 /* CAWLValveTubeSimulator.cpp in Sources */,
-				919EC9C11FB0CE83003B4467 /* CAWLTimeVariableFilter.cpp in Sources */,
 				912977AA1DE4F0E70093134D /* main.cpp in Sources */,
 				910FB52C1F948DA8000ED66C /* CAWLCompressor.cpp in Sources */,
 				910A953D1F6B760A009DA4A1 /* CAWLUtilities.cpp in Sources */,
@@ -706,7 +699,6 @@
 				91CAEC951DC8587900CEF065 /* main.m in Sources */,
 				91E057161F92BF8D008A5B25 /* CAWLAmpSimulator.cpp in Sources */,
 				91E057071F9177A3008A5B25 /* CAWLChorus.cpp in Sources */,
-				919EC9C01FB0CE83003B4467 /* CAWLTimeVariableFilter.cpp in Sources */,
 				911097F61F6DFA82002A9A92 /* CAWLAudioUnit.cpp in Sources */,
 				91E9D27F1F9D3F9E00491E6A /* FuzzUI.mm in Sources */,
 				91BB1F261F9EF75F000804CE /* CAWLOscillator.cpp in Sources */,
