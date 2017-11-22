@@ -10,6 +10,8 @@
 
 #define MAX_PHASER_MOD_RATE 2
 #define MIN_PHASER_MOD_RATE 0.25
+#define MAX_PHASER_MOD_DEPTH 2000
+#define MIN_PHASER_MOD_DEPTH 1000
 #define NUM_OF_FILTERS 4
 
 CAWLPhaser::CAWLPhaser()
@@ -42,34 +44,34 @@ void CAWLPhaser::processBuffer(float * buf, const unsigned int numSamples)
     double yCurrOutput = 0.0;
     for(unsigned int i = 0; i < numSamples; i++)
     {
-        xCurrSample = buf[i] + (0.9 * lastFeedbackOutput);
+        xCurrSample = buf[i] + lastFeedbackOutput;
         yCurrOutput = xCurrSample;
         for(int j = 0; j < NUM_OF_FILTERS; j++)
         {
             yCurrOutput = allPassFilters[j]->processNextSample(yCurrOutput);
             allPassFilters[j]->setCutOffFreq(triangleWave->getNextSample() * modDepth + centerFrequency);
         }
-        buf[i] = yCurrOutput * 0.9 + xCurrSample * 0.1;
-        lastFeedbackOutput = yCurrOutput;
+        buf[i] = yCurrOutput * 0.5 + xCurrSample * 0.5;
+        lastFeedbackOutput = yCurrOutput * .8;
     }
 }
 
 void CAWLPhaser::setModDepth(double newModDepth)
 {
-    if(newModDepth > 1.0)
-        modDepth = 1.0;
-    else if(newModDepth < 0.0)
-        modDepth = 0.0;
+    if(newModDepth > MAX_PHASER_MOD_DEPTH)
+        modDepth = MAX_PHASER_MOD_DEPTH;
+    else if(newModDepth < MIN_PHASER_MOD_DEPTH)
+        modDepth = MIN_PHASER_MOD_DEPTH;
     else
         modDepth = newModDepth;
 }
 
 void CAWLPhaser::setModRate(double newModRate)
 {
-    if(newModRate > 1.0)
-        modRate = 1.0;
-    else if(newModRate < 0.0)
-        modRate = 0.0;
+    if(newModRate > MAX_PHASER_MOD_RATE)
+        modRate = MAX_PHASER_MOD_RATE;
+    else if(newModRate < MIN_PHASER_MOD_RATE)
+        modRate = MIN_PHASER_MOD_RATE;
     else
         modRate = newModRate;
 }

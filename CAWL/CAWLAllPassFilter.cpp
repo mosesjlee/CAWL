@@ -30,8 +30,8 @@ double CAWLAllPassFilter::processNextSample(double inputSample)
     outputSample = (x_a_0 + delayedSample1);
     x_a_1 = inputSample * a_1;
     x_a_2 = inputSample * a_2;
-    x_b_1 = inputSample * (b_1 * -1);
-    x_b_2 = inputSample * (b_2 * -1);
+    x_b_1 = inputSample * -b_1;
+    x_b_2 = inputSample * -b_2;
 
     delayedSample1 = x_a_1 + delayedSample2 + x_b_1;
     delayedSample2 = x_a_2 + x_b_2;
@@ -41,7 +41,7 @@ double CAWLAllPassFilter::processNextSample(double inputSample)
 void CAWLAllPassFilter::calculateCoefficients()
 {
     double K = tan(M_PI * centerFrequency/sampleRate);
-    double Q = .707;
+    double Q = 2;
     a_0 = ((K * K * Q) - K+Q)/((K * K * Q) + K + Q);
     a_1 = (2 * Q * (K * K - 1.0))/((K * K * Q) + K + Q);
     a_2 = 1.0;
