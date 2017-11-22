@@ -43,6 +43,8 @@
     // Drawing code here.
 }
 
+
+#pragma mark DELAY_UI_SETUP
 - (void)setupFeedbackUI {
     //The title
     feedbackTitle = [self drawLabelTextFieldWithRect:NSMakeRect(15, 250, 50, 30)
@@ -62,10 +64,7 @@
                                          withSelector:@selector(updateFeedbackGainLevel:)];
 }
 
-- (void)updateFeedbackGainLevel:(id)sender {
-    feedbackLabel.stringValue = [NSString stringWithFormat:@"%f", feedbackSlider.doubleValue];
-    self.soundTabRef.soundBoard->setDelayFeedbackGain(feedbackSlider.doubleValue);
-}
+
 
 - (void)setupWetMixUI {
     wetMixTitle = [self drawLabelTextFieldWithRect:NSMakeRect(60, 250, 30, 30)
@@ -105,10 +104,7 @@
                                           withSelector:@selector(updateDelayTime:)];
 }
 
-- (void)updateDelayTime:(id)sender {
-    delayTimeLabel.stringValue = [NSString stringWithFormat:@"%d", delayTimeSlider.intValue];
-    self.soundTabRef.soundBoard->setNewDelayTime(delayTimeSlider.intValue);
-}
+
 
 - (void)setupDryGainUI {
 	//The title
@@ -127,6 +123,17 @@
                                        atDefaultVal:0.5
                                              toView:self
                                        withSelector:@selector(updatDryGainLevel:)];
+}
+
+#pragma mark DELAY_ACTIONS
+- (IBAction)updateFeedbackGainLevel:(id)sender {
+    feedbackLabel.stringValue = [NSString stringWithFormat:@"%f", feedbackSlider.doubleValue];
+    self.soundTabRef.soundBoard->setDelayFeedbackGain(feedbackSlider.doubleValue);
+}
+
+- (IBAction)updateDelayTime:(id)sender {
+    delayTimeLabel.stringValue = [NSString stringWithFormat:@"%d", delayTimeSlider.intValue];
+    self.soundTabRef.soundBoard->setNewDelayTime(delayTimeSlider.intValue);
 }
 
 - (IBAction)updatDryGainLevel:(NSSlider *)sender {

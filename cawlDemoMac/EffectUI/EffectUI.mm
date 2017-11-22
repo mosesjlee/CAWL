@@ -45,8 +45,8 @@
     [retval setMinValue:min];
     [retval setNeedsDisplay:YES];
     [retval setTarget:theView];
-    [retval setTarget:theView];
     [retval setAction:selector];
+    retval.frameRotation = 90.0;
     [theView addSubview:retval];
     return retval;
 }
@@ -61,6 +61,7 @@
     [retval setBordered:NO];
     [retval setDrawsBackground:NO];
     [retval setNeedsDisplay:YES];
+    retval.alignment = NSTextAlignmentCenter;
     [theView addSubview:retval];
     return retval;
 }
@@ -70,6 +71,7 @@
 {
     NSTextField * retval = [[NSTextField alloc] initWithFrame:rect];
     [retval setNeedsDisplay:YES];
+    [retval setTarget:theView];
     [theView addSubview:retval];
     return retval;
 }

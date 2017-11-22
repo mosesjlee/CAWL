@@ -164,6 +164,3 @@ void CAWLWahWah::setModulationRate(double newModLevel)
 
 
 
-
-
-

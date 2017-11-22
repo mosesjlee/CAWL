@@ -25,7 +25,6 @@ public:
 private:
     void calculateCoefficients();
     CAWLTriangleWaveOsc * triangeWave;
-    double qFactor;
     double rate;
     double mixLevel;
     double modDepth;
