@@ -59,6 +59,8 @@
 		918850771FAFC80B00A6AAAF /* CAWLNotchFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 918850741FAFC80B00A6AAAF /* CAWLNotchFilter.cpp */; };
 		9188507A1FAFC94500A6AAAF /* CAWLBandPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 918850781FAFC94500A6AAAF /* CAWLBandPassFilter.cpp */; };
 		9188507B1FAFC94500A6AAAF /* CAWLBandPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 918850781FAFC94500A6AAAF /* CAWLBandPassFilter.cpp */; };
+		918AE3311FC4FCF500538FCC /* CAWLAllPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 918AE32F1FC4FCF500538FCC /* CAWLAllPassFilter.cpp */; };
+		918AE3321FC4FCF500538FCC /* CAWLAllPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 918AE32F1FC4FCF500538FCC /* CAWLAllPassFilter.cpp */; };
 		9191B3A11F804543004C6F33 /* CAWLIIRCombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 911098041F6F2393002A9A92 /* CAWLIIRCombFilter.cpp */; };
 		9191B3B21F85F62B004C6F33 /* CAWLBiQuadFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9191B3AF1F85F62B004C6F33 /* CAWLBiQuadFilter.cpp */; };
 		91BB1F231F9EF3DE000804CE /* CAWLTriangleWaveOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91BB1F211F9EF3DE000804CE /* CAWLTriangleWaveOsc.cpp */; };
@@ -186,6 +188,8 @@
 		918850751FAFC80B00A6AAAF /* CAWLNotchFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLNotchFilter.hpp; sourceTree = "<group>"; };
 		918850781FAFC94500A6AAAF /* CAWLBandPassFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLBandPassFilter.cpp; sourceTree = "<group>"; };
 		918850791FAFC94500A6AAAF /* CAWLBandPassFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLBandPassFilter.hpp; sourceTree = "<group>"; };
+		918AE32F1FC4FCF500538FCC /* CAWLAllPassFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLAllPassFilter.cpp; sourceTree = "<group>"; };
+		918AE3301FC4FCF500538FCC /* CAWLAllPassFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLAllPassFilter.hpp; sourceTree = "<group>"; };
 		9191B3AF1F85F62B004C6F33 /* CAWLBiQuadFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLBiQuadFilter.cpp; sourceTree = "<group>"; };
 		9191B3B01F85F62B004C6F33 /* CAWLBiQuadFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLBiQuadFilter.hpp; sourceTree = "<group>"; };
 		91BB1F1E1F9EF14F000804CE /* CAWLOscillator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLOscillator.hpp; sourceTree = "<group>"; };
@@ -326,6 +330,8 @@
 				910FB4F91F941842000ED66C /* CAWLLowPassFilter.hpp */,
 				918850741FAFC80B00A6AAAF /* CAWLNotchFilter.cpp */,
 				918850751FAFC80B00A6AAAF /* CAWLNotchFilter.hpp */,
+				918AE32F1FC4FCF500538FCC /* CAWLAllPassFilter.cpp */,
+				918AE3301FC4FCF500538FCC /* CAWLAllPassFilter.hpp */,
 				918850781FAFC94500A6AAAF /* CAWLBandPassFilter.cpp */,
 				918850791FAFC94500A6AAAF /* CAWLBandPassFilter.hpp */,
 				911098001F6F2387002A9A92 /* CAWLFIRCombFilter.cpp */,
@@ -627,6 +633,7 @@
 				9188507B1FAFC94500A6AAAF /* CAWLBandPassFilter.cpp in Sources */,
 				91E056F01F907334008A5B25 /* CAWLDelayEffect.cpp in Sources */,
 				91E056EC1F907044008A5B25 /* CAWLValveTubeSimulator.cpp in Sources */,
+				918AE3321FC4FCF500538FCC /* CAWLAllPassFilter.cpp in Sources */,
 				912977AA1DE4F0E70093134D /* main.cpp in Sources */,
 				910FB52C1F948DA8000ED66C /* CAWLCompressor.cpp in Sources */,
 				910A953D1F6B760A009DA4A1 /* CAWLUtilities.cpp in Sources */,
@@ -687,6 +694,7 @@
 				91E0570B1F9177BC008A5B25 /* CAWLHighShelfFilter.cpp in Sources */,
 				91E0570A1F9177BC008A5B25 /* CAWLLowShelfFilter.cpp in Sources */,
 				91E057101F9177BC008A5B25 /* CAWLIIRCombFilter.cpp in Sources */,
+				918AE3311FC4FCF500538FCC /* CAWLAllPassFilter.cpp in Sources */,
 				91E057031F9168A5008A5B25 /* CAWLSoundBoard.cpp in Sources */,
 				91E0570D1F9177BC008A5B25 /* CAWLHighPassFilter.cpp in Sources */,
 				910FB5141F9489C1000ED66C /* ReverbUI.mm in Sources */,

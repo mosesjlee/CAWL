@@ -9,6 +9,7 @@
 #ifndef CAWLPhaser_hpp
 #define CAWLPhaser_hpp
 #include "CAWLTriangleWaveOsc.hpp"
+#include "CAWLAllPassFilter.hpp"
 #include "CAWLSoundModule.hpp"
 class CAWLPhaser
 {
@@ -22,10 +23,12 @@ public:
     
 private:
     CAWLTriangleWaveOsc * triangleWave;
+    CAWLAllPassFilter **allPassFilters;
     double centerFrequency;
     double modDepth;
     double modRate;
     double mixLevel;
+    double lastFeedbackOutput;
 };
 
 #endif /* CAWLPhaser_hpp */

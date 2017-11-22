@@ -25,6 +25,7 @@
 #include "CAWLBandPassFilter.hpp"
 #include "CAWLWahWah.hpp"
 #include "CAWLOverdrive.hpp"
+#include "CAWLPhaser.hpp"
 #include <iostream>
 #include <fstream>
 
@@ -112,6 +113,7 @@ int main(int argc, const char * argv[]) {
     CAWLChorus chorus,* chorusPtr=&chorus; chorus.setModulationSpeed(0.25);
     CAWLWahWah wah, *wahPtr=&wah;
     CAWLOverdrive overdrive, * odPtr=&overdrive;
+    CAWLPhaser phaser, * phaserPtr=&phaser;
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
@@ -160,7 +162,7 @@ int main(int argc, const char * argv[]) {
         //ptrToFir->processBuffer(data, numSamples);
 //        ptrToiir->processBuffer(data, numSamples);
 //        ptrToUcf->processBuffer(data, numSamples);
-//		ptrToAmp->processBuffer(data, numSamples);
+		ptrToAmp->processBuffer(data, numSamples);
 //        lsfPtr->processBuffer(data, numSamples);
 //        hsfPtr->processBuffer(data, numSamples);
 //        pfPtr->processBuffer(data, numSamples);
@@ -171,9 +173,10 @@ int main(int argc, const char * argv[]) {
 //        flangerPtr->processBuffer(data, numSamples);
 //        chorusPtr->processBuffer(data,numSamples);
 //        bpPtr->processBuffer(data, numSamples);
-        wahPtr->processBuffer(data, numSamples);
+//        wahPtr->processBuffer(data, numSamples);
 //        ptrToValve->processBuffer(data,numSamples);
 //        odPtr->processBuffer(data, numSamples);
+        phaserPtr->processBuffer(data, numSamples);
         
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 230) {
