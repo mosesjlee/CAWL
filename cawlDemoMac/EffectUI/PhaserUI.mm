@@ -16,6 +16,10 @@
 	NSTextField *speedTitle;
 	NSTextField *rateTitle;
 	NSTextField *mixLevelTitle;
+    
+    NSTextField *speedValueLabel;
+    NSTextField *rateValueLabel;
+    NSTextField *mixLevelValueLabel;
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect {
@@ -32,16 +36,31 @@
 
 #pragma mark SETUP_UI
 - (void)setupSpeedUI {
-	
+    speedTitle = [self drawLabelTextFieldWithRect:NSMakeRect(15, 320, 70, 30)
+                                        WithTitle:@"Speed"
+                                           toView:self];
+    
+    speedSlider = [self drawCircularSliderWithRect:NSMakeRect(20, 290, 30, 30)
+                                        WithMaxVal:1.0
+                                     AndWithMinVal:0.0
+                                      atDefaultVal:0.5
+                                            toView:self
+                                      withSelector:@selector(updateSpeed:)];
+    
+    speedValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 30, 30)
+                                                toView:self];
 }
 
 - (void)setupRateUI {
-	
+    rateTitle;
+    rateSlider;
+    rateValueLabel;
 }
 
-
 - (void)setupMixLevelUI {
-	
+    mixLevelTitle;
+    mixLevelSlider;
+    mixLevelValueLabel;
 }
 
 #pragma mark PHASER_IBACTION
