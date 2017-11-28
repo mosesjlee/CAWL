@@ -17,6 +17,11 @@ public:
     void processBuffer(float * buf, const unsigned int numSamples);
     
 private:
+    double attackTime;
+    double releaseTime;
+    double compressorThreshold;
+    double compressorRatio;
+    double compressorSlope;
     
 };
 

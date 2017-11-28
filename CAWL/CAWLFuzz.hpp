@@ -15,7 +15,10 @@ public:
     CAWLFuzz();
     ~CAWLFuzz();
     void processBuffer(float * buf, const unsigned int numSamples);
-    
+    void setGain(double newGain);
+    void setMix(double newMix);
 private:
+    double mGain;
+    double mMixLevel;
 };
 #endif /* CAWLFuzz_hpp */

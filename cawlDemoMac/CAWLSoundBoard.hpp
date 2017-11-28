@@ -77,14 +77,18 @@ public:
     //Compressor Controls
     void turnOnCompressor(bool onOff);
 	void bypassCompressor(bool bypass);
-    void setThreshold();
-    void setCompressorGain();
-    void setCompressorKnee();
-    void setCompressorRatio();
+    void setThreshold(double newThreshold);
+    void setCompressorGain(double newGain);
+    void setCompressorKnee(double newKnee);
+    void setCompressorRatio(double newRatio);
     
     //Wah wah controls
     void turnOnWah(bool onOff);
 	void bypassWah(bool bypass);
+    void setWahCenterFreq(double newCenterFreq);
+    void setWahModulationDepth(double newModDepth);
+    void setWahModulationRate(double newModRate);
+    void setWahMixLevel(double newMixLevel);
     
     //Overdrive controls
     void turnOnOverdrive(bool onOff);
