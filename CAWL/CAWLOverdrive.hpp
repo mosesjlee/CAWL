@@ -8,14 +8,16 @@
 
 #ifndef CAWLOverdrive_hpp
 #define CAWLOverdrive_hpp
-
+#include "CAWLHighShelfFilter.hpp"
 class CAWLOverdrive
 {
 public:
     CAWLOverdrive();
     ~CAWLOverdrive();
     void processBuffer(float * buf, const unsigned int numSamples);
-    
+	void adjustOverdriveTone(double newToneLevel);
 private:
+	double mGain;
+	CAWLHighShelfFilter toneControl;
 };
 #endif /* CAWLOverdrive_hpp */

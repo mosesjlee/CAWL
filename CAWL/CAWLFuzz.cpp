@@ -10,7 +10,8 @@
 
 CAWLFuzz::CAWLFuzz()
 {
-    
+	toneControl.setGain(0);
+	toneControl.setCutOffFreq(12000);
 }
 
 CAWLFuzz::~CAWLFuzz()
@@ -24,4 +25,9 @@ void CAWLFuzz::processBuffer(float * buf, const unsigned int numSamples)
     {
         
     }
+}
+
+void CAWLFuzz::adjustFuzzTone(double newToneLevel)
+{
+	
 }

@@ -34,8 +34,8 @@
 //#define SHOW_DEBUG_SAMPLES
 #define TEST_BIQUAD 0
 #define TEST_COMB 0
-#define TEST_OSC 1
-#define TEST_MOD_DELAY 0
+#define TEST_OSC 0
+#define TEST_MOD_DELAY 1
 
 
 void getWhiteNoiseStream(float * stream);

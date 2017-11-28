@@ -33,7 +33,7 @@ void CAWLValveTubeSimulator::processBuffer(float * buf, const unsigned int numOf
     double correctCoeff = -6.153;
     double peakSample = fabs(buf[0]);
     
-    for(unsigned i = 0; i < numOfSamples; i++)
+    for(unsigned i = 1; i < numOfSamples; i++)
     {
         peakSample = fabs(buf[i]) > peakSample ? fabs(buf[i]) : peakSample;
     }

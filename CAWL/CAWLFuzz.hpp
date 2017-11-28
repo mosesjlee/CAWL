@@ -8,7 +8,7 @@
 
 #ifndef CAWLFuzz_hpp
 #define CAWLFuzz_hpp
-
+#include "CAWLHighShelfFilter.hpp"
 class CAWLFuzz
 {
 public:
@@ -17,8 +17,10 @@ public:
     void processBuffer(float * buf, const unsigned int numSamples);
     void setGain(double newGain);
     void setMix(double newMix);
+	void adjustFuzzTone(double newToneLevel);
 private:
     double mGain;
     double mMixLevel;
+	CAWLHighShelfFilter toneControl;
 };
 #endif /* CAWLFuzz_hpp */

@@ -8,9 +8,13 @@
 
 #include "CAWLOverdrive.hpp"
 #include <math.h>
+
+#define MAX_TONE_GAIN 12.0
+#define MIN_TONE_GAIN 12.0
 CAWLOverdrive::CAWLOverdrive()
 {
-    
+	toneControl.setGain(0);
+	toneControl.setCutOffFreq(12000);
 }
 
 CAWLOverdrive::~CAWLOverdrive()
@@ -27,7 +31,7 @@ void CAWLOverdrive::processBuffer(float * buf, const unsigned int numSamples)
     double th = 1.0/3.0;
     for(int i = 0; i < numSamples; i++)
     {
-        xCurrSample = buf[i] * 1.5;
+		xCurrSample = buf[i];
         absSample = fabs(xCurrSample);
         if(absSample >= 0.0 && absSample <= th)
         {
@@ -44,4 +48,17 @@ void CAWLOverdrive::processBuffer(float * buf, const unsigned int numSamples)
         
         buf[i] = yCurrOutput;
     }
+	
+	toneControl.processBuffer(buf, numSamples);
 }
+
+void CAWLOverdrive::adjustOverdriveTone(double newToneLevel)
+{
+	if(newToneLevel > MAX_TONE_GAIN)
+		toneControl.setGain(MAX_TONE_GAIN);
+	else if (newToneLevel < MIN_TONE_GAIN)
+		toneControl.setGain(MIN_TONE_GAIN);
+	else
+		toneControl.setGain(newToneLevel);
+}
+
