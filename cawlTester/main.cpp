@@ -26,6 +26,7 @@
 #include "CAWLWahWah.hpp"
 #include "CAWLOverdrive.hpp"
 #include "CAWLPhaser.hpp"
+#include "CAWLFuzz.hpp"
 #include <iostream>
 #include <fstream>
 
@@ -114,6 +115,7 @@ int main(int argc, const char * argv[]) {
     CAWLWahWah wah, *wahPtr=&wah;
     CAWLOverdrive overdrive, * odPtr=&overdrive;
     CAWLPhaser phaser, * phaserPtr=&phaser;
+	CAWLFuzz fuzz, *fuzzPtr=&fuzz;
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
@@ -175,8 +177,9 @@ int main(int argc, const char * argv[]) {
 //        bpPtr->processBuffer(data, numSamples);
 //        wahPtr->processBuffer(data, numSamples);
 //        ptrToValve->processBuffer(data,numSamples);
-        odPtr->processBuffer(data, numSamples);
+//        odPtr->processBuffer(data, numSamples);
 //        phaserPtr->processBuffer(data, numSamples);
+		fuzzPtr->processBuffer(data, numSamples);
         
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 230) {
