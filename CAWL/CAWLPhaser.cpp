@@ -49,7 +49,8 @@ void CAWLPhaser::processBuffer(float * buf, const unsigned int numSamples)
         for(int j = 0; j < NUM_OF_FILTERS; j++)
         {
             yCurrOutput = allPassFilters[j]->processNextSample(yCurrOutput);
-            allPassFilters[j]->setCutOffFreq(triangleWave->getNextSample() * modDepth + centerFrequency);
+            double nextValue = triangleWave->getNextSample();
+            allPassFilters[j]->setCutOffFreq(nextValue * modDepth + centerFrequency);
         }
         buf[i] = yCurrOutput * 0.5 + xCurrSample * 0.5;
         lastFeedbackOutput = yCurrOutput * .8;

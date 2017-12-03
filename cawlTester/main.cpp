@@ -27,6 +27,7 @@
 #include "CAWLOverdrive.hpp"
 #include "CAWLPhaser.hpp"
 #include "CAWLFuzz.hpp"
+#include "CAWLCompressor.hpp"
 #include <iostream>
 #include <fstream>
 
@@ -59,7 +60,7 @@ int main(int argc, const char * argv[]) {
     double * ptr2 = &cycleLength2;
     double cycleLength3 = 44100. / 659.25;
     
-    float debugBuffer[117760];
+    float debugBuffer[153600];
     float *debugPtr = debugBuffer;
     
     int debugBufWriteCount = 0;
@@ -76,7 +77,8 @@ int main(int argc, const char * argv[]) {
     CAWL * instance = CAWL::Instance();
     getWhiteNoiseStream(whiteNoiseBuffer);
 	getRawGuitarStream(guitarNoiseBuffer);
-
+    
+#if 0
     CAWLLowPassFilter lpf; lpf.setCutOffFreq(1000);
     CAWLHighPassFilter hpf; hpf.setCutOffFreq(500);
     CAWLLowPassFilter * lpfPtr = &lpf;
@@ -116,6 +118,10 @@ int main(int argc, const char * argv[]) {
     CAWLOverdrive overdrive, * odPtr=&overdrive;
     CAWLPhaser phaser, * phaserPtr=&phaser;
 	CAWLFuzz fuzz, *fuzzPtr=&fuzz;
+#endif
+    CAWLCompressor compressor, *compPtr=&compressor;
+    compressor.setAttackTime(25); compressor.setReleaseTime(200);
+    compressor.setCompressorThreshold(-30); compressor.setCompressorRatio(3);
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
@@ -148,13 +154,13 @@ int main(int argc, const char * argv[]) {
             //data[i] = triWavPtr->getNextSample();
 #elif TEST_MOD_DELAY
 			//Testing BiQuads
-			if(*ptrToGuitarCount < 120000 ) {
+			if(*ptrToGuitarCount < 109363 ) {
 				data[i] = guitarBufferPtr[*ptrToGuitarCount];
 				(*ptrToGuitarCount)++;
 			}
 			else {
 				*ptrToGuitarCount = 0;
-				data[i] = 0.0;
+				data[i] = guitarBufferPtr[*ptrToGuitarCount];
 			}
 #endif
         }
@@ -179,10 +185,11 @@ int main(int argc, const char * argv[]) {
 //        ptrToValve->processBuffer(data,numSamples);
 //        odPtr->processBuffer(data, numSamples);
 //        phaserPtr->processBuffer(data, numSamples);
-		fuzzPtr->processBuffer(data, numSamples);
+//        fuzzPtr->processBuffer(data, numSamples);
+        compPtr->processBuffer(data, numSamples);
         
 #ifdef WRITE_TO_FILE
-        if(*debugCountPtr < 230) {
+        if(*debugCountPtr < 300) {
             memcpy(debugPtr + (*debugCountPtr) * numSamples, data, (512 *sizeof(float)));
             (*debugCountPtr)++;
         }
@@ -272,12 +279,11 @@ int main(int argc, const char * argv[]) {
         
         if(c == '+'){
 			//ampSim.setPreampGain(0.3);;
-            ucf.setDelay(300);
+            
             //ampSim.setCutOff(2000.0);
             //std::cout << "new gain level " << ampSim.getGain() << std::endl;
         }
         if(c == '-'){
-            ucf.setDelay(600);
             //ampSim.setCutOff(10.0);
             //ampSim.setPreampGain(0.1);
             //std::cout << "new gain level " << ampSim.getGain() << std::endl;
@@ -286,11 +292,11 @@ int main(int argc, const char * argv[]) {
 #ifdef WRITE_TO_FILE
     std::ofstream out;
     out.open("/Users/moseslee/Desktop/delayfloat", std::ios::out | std::ios::binary);
-    out.write(reinterpret_cast <const char*> (debugBuffer) , 117760 * sizeof(float));
+    out.write(reinterpret_cast <const char*> (debugBuffer) , 153600 * sizeof(float));
     out.close();
 #endif
 #ifdef SHOW_DEBUG_SAMPLES
-    for(int i =0; i <117760; i++)
+    for(int i =0; i <153600; i++)
     {
         printf("%f\n", debugBuffer[i]);
     }
@@ -321,7 +327,8 @@ void getWhiteNoiseStream(float * stream)
 void getRawGuitarStream(float * stream)
 {
 	FILE * file;
-	std::string path = "/Users/moseslee/Desktop/CAWL/guitar1.raw";
+	//std::string path = "/Users/moseslee/Desktop/CAWL/guitar1.raw";
+    std::string path = "/Users/moseslee/Desktop/loud_guitar.raw";
 	file = fopen(path.c_str(), "r");
 	
 	float temp;
