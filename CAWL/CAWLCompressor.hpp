@@ -20,9 +20,11 @@ public:
     void setReleaseTime(double newReleaseTime);
     void setCompressorThreshold(double newThreshold);
     void setCompressorRatio(double newRatio);
-    
+    void setKneeLevel(double newKneeLevel);
+    void setMakeUpGain(double newMakeupGain);
 private:
     double min(double x, double y);
+    double calculateKneeGain(double sample);
     double attackTime;
     double releaseTime;
     double attackCoeff;

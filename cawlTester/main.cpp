@@ -121,7 +121,7 @@ int main(int argc, const char * argv[]) {
 #endif
     CAWLCompressor compressor, *compPtr=&compressor;
     compressor.setAttackTime(25); compressor.setReleaseTime(200);
-    compressor.setCompressorThreshold(-30); compressor.setCompressorRatio(3);
+    compressor.setCompressorThreshold(-10); compressor.setCompressorRatio(3); compressor.setKneeLevel(10);
     
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){

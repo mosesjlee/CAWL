@@ -43,13 +43,16 @@ void CAWLCompressor::processBuffer(float * buf, const unsigned int numSamples)
     double xCurrSample = 0.0;
     double yCurrOut = 0.0;
     double coeff = 0.0;
-
+    double currCompressorSlope = compressorSlope;
     for(int i = 0; i < numSamples; i++)
     {
         xCurrSample = buf[i];
         xrms = (1.0 - averageTime) * xrms + averageTime * xCurrSample * xCurrSample;
         double X = 10 * log10(xrms);
-        double G = min(0, (compressorSlope * (compressorThreshold - X)));
+        if(kneeLevel > 0 && X > (compressorThreshold - kneeLevel/2.0) &&
+           X < (compressorThreshold < compressorThreshold + kneeLevel/2.0))
+            currCompressorSlope = calculateKneeGain(X);
+        double G = min(0, (currCompressorSlope * (compressorThreshold - X)));
         double f = pow(10, G/20);
         if (f < gain)
             coeff = attackCoeff;
@@ -57,7 +60,7 @@ void CAWLCompressor::processBuffer(float * buf, const unsigned int numSamples)
             coeff = releaseCoeff;
         gain = (1.0 - coeff) * gain + coeff * f;
         yCurrOut = gain * delayLine.processNextSample(xCurrSample);
-        buf[i] = yCurrOut;
+        buf[i] = yCurrOut * makeupGain;
     }
 }
 
@@ -94,4 +97,49 @@ void CAWLCompressor::setCompressorRatio(double newRatio)
     compressorSlope = 1.0 - (1.0/compressorRatio);
 }
 
+void CAWLCompressor::setKneeLevel(double newKneeLevel)
+{
+    kneeLevel = newKneeLevel;
+}
+
+void CAWLCompressor::setMakeUpGain(double newMakeupGain)
+{
+    if(newMakeupGain < 0) makeupGain = 1;
+    else makeupGain = newMakeupGain;
+}
+
+//From Will Pirkle's plugin constants. This is his implementation of
+//lagrange interpolation
+inline double lagrpol(double* x, double* y, int n, double xbar)
+{
+    int i,j;
+    double fx=0.0;
+    double l=1.0;
+    for (i=0; i<n; i++)
+    {
+        l=1.0;
+        for (j=0; j<n; j++)
+        {
+            if (j != i)
+                l *= (xbar-x[j])/(x[i]-x[j]);
+        }
+        fx += l*y[i];
+    }
+    return (fx);
+}
+
+//Algorithm from Will Pirkle's Designing Audio Effect Plugins pg. 460
+double CAWLCompressor::calculateKneeGain(double sample)
+{
+    double x[2] = {0.0, 0.0};
+    double y[2] = {0.0, 0.0};
+    x[0] = compressorThreshold - kneeLevel/2.0;
+    x[1] = compressorThreshold + kneeLevel/2.0;
+    x[1] = min(0, x[1]);
+    y[0] = 0;
+    y[1] = compressorSlope;
+    
+    //Perform lagrange
+    return lagrpol(x, y, 2, sample);
+}
 

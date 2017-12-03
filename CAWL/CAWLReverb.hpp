@@ -10,6 +10,7 @@
 #define CAWLReverb_hpp
 #include "CAWLDelayLine.hpp"
 #include "CAWLHighShelfFilter.hpp"
+
 class CAWLReverb
 {
 public:

@@ -47,8 +47,8 @@
                                                toView:self];
     
     thresholdSlider = [self drawCircularSliderWithRect:NSMakeRect(15, 290, 30, 30)
-                                            WithMaxVal:80
-                                         AndWithMinVal:0
+                                            WithMaxVal:0
+                                         AndWithMinVal:-60
                                           atDefaultVal:40
                                                 toView:self
                                           withSelector:@selector(updateThresholdLevel:)];
@@ -63,7 +63,7 @@
                                           toView:self];
     
     kneeSlider = [self drawCircularSliderWithRect:NSMakeRect(70, 290, 40, 30)
-                                       WithMaxVal:1
+                                       WithMaxVal:20
                                     AndWithMinVal:0
                                      atDefaultVal:0.5
                                            toView:self
