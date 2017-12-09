@@ -61,23 +61,31 @@ public:
     //Chorus controls
     void turnOnChorus(bool onOff);
 	void bypassChorus(bool bypass);
+	void setChorusModulationSpeed(double newModSpeed);
+	void setChorusModulationDepth(double newDepth);
     
     //Flanger Controls
     void turnOnFlanger(bool onOff);
 	void bypassFlanger(bool bypass);
+	void setFlangerModulationSpeed(double newModSpeed);
+	void setFlangerModulationDepth(double newDepth);
     
     //Phaser Controls
     void turnOnPhaser(bool onOff);
 	void bypassPhaser(bool bypass);
+	void setPhaserDepth(double depthLevel);
+	void setPhaserRate(double phaserRate);
     
     //Reverb Controls
     void turnOnReverb(bool onOff);
 	void bypassReverb(bool bypass);
+	void setReverbTime(double reverbTime);
+	void setReverbTone(double toneLevel);
     
     //Compressor Controls
     void turnOnCompressor(bool onOff);
 	void bypassCompressor(bool bypass);
-    void setThreshold(double newThreshold);
+    void setCompressorThreshold(double newThreshold);
     void setCompressorGain(double newGain);
     void setCompressorKnee(double newKnee);
     void setCompressorRatio(double newRatio);
@@ -93,10 +101,14 @@ public:
     //Overdrive controls
     void turnOnOverdrive(bool onOff);
 	void bypassOverdrive(bool bypass);
-    
+	void setOverdriveGain(double newGain);
+	void setOverdriveToneLevel(double newToneLevel);
+	
     //Fuzz controls
     void turnOnFuzz(bool onOff);
 	void bypassFuzz(bool bypass);
+	void setFuzzGain(double newGain);
+	void setFuzzToneLevel(double newToneLevel);
     
 private:
     //Amp sim

@@ -84,6 +84,7 @@ void CAWLSoundBoard::turnOnDelay(bool onOff)
 //    }
 //    else
 //    {
+	if(delayEffect == NULL)
         delayEffect = new CAWLDelayEffect();
 //    }
     isDelayOn = onOff;
@@ -175,6 +176,16 @@ void CAWLSoundBoard::bypassChorus(bool bypass)
 	
 }
 
+void CAWLSoundBoard::setChorusModulationSpeed(double newModSpeed)
+{
+	
+}
+
+void CAWLSoundBoard::setChorusModulationDepth(double newDepth)
+{
+	
+}
+
 #pragma mark FLANGER_CONTROL
 void CAWLSoundBoard::turnOnFlanger(bool onOff)
 {
@@ -192,6 +203,16 @@ void CAWLSoundBoard::bypassFlanger(bool bypass)
 	
 }
 
+void CAWLSoundBoard::setFlangerModulationSpeed(double newModSpeed)
+{
+	flanger->setModulationSpeed(newModSpeed);
+}
+
+void CAWLSoundBoard::setFlangerModulationDepth(double newDepth)
+{
+	flanger->setModulationDepth(newDepth);
+}
+
 #pragma mark PHASER_CONTROL
 void CAWLSoundBoard::turnOnPhaser(bool onOff)
 {
@@ -203,6 +224,17 @@ void CAWLSoundBoard::bypassPhaser(bool bypass)
 	
 }
 
+void CAWLSoundBoard::setPhaserDepth(double depthLevel)
+{
+	
+}
+
+void CAWLSoundBoard::setPhaserRate(double phaserRate)
+{
+	
+}
+
+
 #pragma mark REVERB_CONTROL
 void CAWLSoundBoard::turnOnReverb(bool onOff)
 {
@@ -210,6 +242,16 @@ void CAWLSoundBoard::turnOnReverb(bool onOff)
 }
 
 void CAWLSoundBoard::bypassReverb(bool bypass)
+{
+	
+}
+
+void CAWLSoundBoard::setReverbTime(double reverbTime)
+{
+	
+}
+
+void CAWLSoundBoard::setReverbTone(double toneLevel)
 {
 	
 }
@@ -225,6 +267,26 @@ void CAWLSoundBoard::bypassCompressor(bool bypass)
 	
 }
 
+void CAWLSoundBoard::setCompressorThreshold(double newThreshold)
+{
+	compressor->setCompressorThreshold(newThreshold);
+}
+
+void CAWLSoundBoard::setCompressorGain(double newGain)
+{
+	compressor->setMakeUpGain(newGain);
+}
+
+void CAWLSoundBoard::setCompressorKnee(double newKnee)
+{
+	compressor->setKneeLevel(newKnee);
+}
+
+void CAWLSoundBoard::setCompressorRatio(double newRatio)
+{
+	compressor->setCompressorRatio(newRatio);
+}
+
 #pragma mark WAH_WAH_CONTROL
 void CAWLSoundBoard::turnOnWah(bool onOff)
 {
@@ -234,6 +296,26 @@ void CAWLSoundBoard::turnOnWah(bool onOff)
 void CAWLSoundBoard::bypassWah(bool bypass)
 {
 	
+}
+
+void CAWLSoundBoard::setWahCenterFreq(double newCenterFreq)
+{
+	wahWah->setCenterFreq(newCenterFreq);
+}
+
+void CAWLSoundBoard::setWahModulationDepth(double newModDepth)
+{
+	wahWah->setModulationDepth(newModDepth);
+}
+
+void CAWLSoundBoard::setWahModulationRate(double newModRate)
+{
+	wahWah->setModulationRate(newModRate);
+}
+
+void CAWLSoundBoard::setWahMixLevel(double newMixLevel)
+{
+	wahWah->setMixLevel(newMixLevel);
 }
 
 #pragma mark OVERDRIVE_CONTROL
@@ -247,6 +329,15 @@ void CAWLSoundBoard::bypassOverdrive(bool bypass)
 	
 }
 
+void CAWLSoundBoard::setOverdriveGain(double newGain)
+{
+	
+}
+
+void CAWLSoundBoard::setOverdriveToneLevel(double newToneLevel)
+{
+	
+}
 #pragma mark FUZZ_CONTROL
 void CAWLSoundBoard::turnOnFuzz(bool onOff)
 {
@@ -257,6 +348,17 @@ void CAWLSoundBoard::bypassFuzz(bool bypass)
 {
 	
 }
+
+void CAWLSoundBoard::setFuzzGain(double newGain)
+{
+	
+}
+
+void CAWLSoundBoard::setFuzzToneLevel(double newToneLevel)
+{
+	
+}
+
 
 
 
