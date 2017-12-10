@@ -28,6 +28,7 @@
 #include "CAWLPhaser.hpp"
 #include "CAWLFuzz.hpp"
 #include "CAWLCompressor.hpp"
+#include "CAWLReverb.hpp"
 #include <iostream>
 #include <fstream>
 
@@ -122,7 +123,7 @@ int main(int argc, const char * argv[]) {
     CAWLCompressor compressor, *compPtr=&compressor;
     compressor.setAttackTime(25); compressor.setReleaseTime(200);
     compressor.setCompressorThreshold(-10); compressor.setCompressorRatio(3); compressor.setKneeLevel(10);
-    
+    CAWLReverb reverb, *rvrbPtr=&reverb;
 	cawlBuffers inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
         double j = *fc;
@@ -186,7 +187,8 @@ int main(int argc, const char * argv[]) {
 //        odPtr->processBuffer(data, numSamples);
 //        phaserPtr->processBuffer(data, numSamples);
 //        fuzzPtr->processBuffer(data, numSamples);
-        compPtr->processBuffer(data, numSamples);
+//        compPtr->processBuffer(data, numSamples);
+        rvrbPtr->processBuffer(data, numSamples);
         
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 300) {
@@ -327,8 +329,8 @@ void getWhiteNoiseStream(float * stream)
 void getRawGuitarStream(float * stream)
 {
 	FILE * file;
-	//std::string path = "/Users/moseslee/Desktop/CAWL/guitar1.raw";
-    std::string path = "/Users/moseslee/Desktop/loud_guitar.raw";
+	std::string path = "/Users/moseslee/Desktop/CAWL/guitar1.raw";
+    //std::string path = "/Users/moseslee/Desktop/loud_guitar.raw";
 	file = fopen(path.c_str(), "r");
 	
 	float temp;
