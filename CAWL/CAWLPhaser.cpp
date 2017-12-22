@@ -17,14 +17,14 @@
 CAWLPhaser::CAWLPhaser()
 {
 	triangleWave = new CAWLTriangleWaveOsc();
-    triangleWave->setFreq(MIN_PHASER_MOD_RATE);
+    triangleWave->setWaveTableFreq(MIN_PHASER_MOD_RATE);
     centerFrequency = 2200;
     modDepth = 2000;
     allPassFilters = (CAWLAllPassFilter **) malloc(sizeof(CAWLAllPassFilter *) * NUM_OF_FILTERS);
     for(int i = 0; i < NUM_OF_FILTERS; i++)
     {
         allPassFilters[i] = new CAWLAllPassFilter();
-        allPassFilters[i]->setCutOffFreq(centerFrequency);
+        allPassFilters[i]->setCenterFreq(centerFrequency);
     }
 }
 
@@ -50,7 +50,7 @@ void CAWLPhaser::processBuffer(float * buf, const unsigned int numSamples)
         {
             yCurrOutput = allPassFilters[j]->processNextSample(yCurrOutput);
             double nextValue = triangleWave->getNextSample();
-            allPassFilters[j]->setCutOffFreq(nextValue * modDepth + centerFrequency);
+            allPassFilters[j]->setCenterFreq(nextValue * modDepth + centerFrequency);
         }
         buf[i] = yCurrOutput * 0.5 + xCurrSample * 0.5;
         lastFeedbackOutput = yCurrOutput * .8;

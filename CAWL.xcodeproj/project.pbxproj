@@ -55,8 +55,6 @@
 		916FF5B41FA52BCF00DEF09A /* CAWLModDelayEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 916FF5B11FA52BCF00DEF09A /* CAWLModDelayEffect.cpp */; };
 		9177E63E1F7CCEFA00D36C46 /* CAWLHighPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9177E63D1F7CCE4600D36C46 /* CAWLHighPassFilter.cpp */; };
 		917A9AD91F6C366000422478 /* CAWLAudioUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912CE43F1F6B3BB8009F41AA /* CAWLAudioUnit.cpp */; };
-		918850761FAFC80B00A6AAAF /* CAWLNotchFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 918850741FAFC80B00A6AAAF /* CAWLNotchFilter.cpp */; };
-		918850771FAFC80B00A6AAAF /* CAWLNotchFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 918850741FAFC80B00A6AAAF /* CAWLNotchFilter.cpp */; };
 		9188507A1FAFC94500A6AAAF /* CAWLBandPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 918850781FAFC94500A6AAAF /* CAWLBandPassFilter.cpp */; };
 		9188507B1FAFC94500A6AAAF /* CAWLBandPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 918850781FAFC94500A6AAAF /* CAWLBandPassFilter.cpp */; };
 		918AE3311FC4FCF500538FCC /* CAWLAllPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 918AE32F1FC4FCF500538FCC /* CAWLAllPassFilter.cpp */; };
@@ -182,8 +180,6 @@
 		916FF5B21FA52BCF00DEF09A /* CAWLModDelayEffect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLModDelayEffect.hpp; sourceTree = "<group>"; };
 		9177E63C1F7CCE4500D36C46 /* CAWLHighPassFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLHighPassFilter.hpp; sourceTree = "<group>"; };
 		9177E63D1F7CCE4600D36C46 /* CAWLHighPassFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLHighPassFilter.cpp; sourceTree = "<group>"; };
-		918850741FAFC80B00A6AAAF /* CAWLNotchFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLNotchFilter.cpp; sourceTree = "<group>"; };
-		918850751FAFC80B00A6AAAF /* CAWLNotchFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLNotchFilter.hpp; sourceTree = "<group>"; };
 		918850781FAFC94500A6AAAF /* CAWLBandPassFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLBandPassFilter.cpp; sourceTree = "<group>"; };
 		918850791FAFC94500A6AAAF /* CAWLBandPassFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLBandPassFilter.hpp; sourceTree = "<group>"; };
 		918AE32F1FC4FCF500538FCC /* CAWLAllPassFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLAllPassFilter.cpp; sourceTree = "<group>"; };
@@ -324,8 +320,6 @@
 				9177E63C1F7CCE4500D36C46 /* CAWLHighPassFilter.hpp */,
 				910FB4FA1F941842000ED66C /* CAWLLowPassFilter.cpp */,
 				910FB4F91F941842000ED66C /* CAWLLowPassFilter.hpp */,
-				918850741FAFC80B00A6AAAF /* CAWLNotchFilter.cpp */,
-				918850751FAFC80B00A6AAAF /* CAWLNotchFilter.hpp */,
 				918AE32F1FC4FCF500538FCC /* CAWLAllPassFilter.cpp */,
 				918AE3301FC4FCF500538FCC /* CAWLAllPassFilter.hpp */,
 				918850781FAFC94500A6AAAF /* CAWLBandPassFilter.cpp */,
@@ -631,7 +625,6 @@
 				912977AA1DE4F0E70093134D /* main.cpp in Sources */,
 				910FB52C1F948DA8000ED66C /* CAWLCompressor.cpp in Sources */,
 				910A953D1F6B760A009DA4A1 /* CAWLUtilities.cpp in Sources */,
-				918850771FAFC80B00A6AAAF /* CAWLNotchFilter.cpp in Sources */,
 				9177E63E1F7CCEFA00D36C46 /* CAWLHighPassFilter.cpp in Sources */,
 				91BB1F271F9EF75F000804CE /* CAWLOscillator.cpp in Sources */,
 				912E051A1F8023BF00C13E55 /* CAWLUniversalCombFilter.cpp in Sources */,
@@ -681,7 +674,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				910FB5111F9489B1000ED66C /* WahUI.mm in Sources */,
-				918850761FAFC80B00A6AAAF /* CAWLNotchFilter.cpp in Sources */,
 				910FB4FC1F94186B000ED66C /* CAWLLowPassFilter.cpp in Sources */,
 				910FB51F1F948CD4000ED66C /* CAWLPhaser.cpp in Sources */,
 				91E0570B1F9177BC008A5B25 /* CAWLHighShelfFilter.cpp in Sources */,

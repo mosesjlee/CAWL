@@ -242,9 +242,9 @@ CAWLAmpSimulator::CAWLAmpSimulator(int model)
         stack = ToneStack(princeton);
         std::cout << "princeton" << std::endl;
     }
-    stack.init(sampleRate);
-    lsf.setCutOffFreq(720);
-    hp1.setCutOffFreq(120);
+    stack.init(cSampleRate);
+    lsf.setCenterFreq(720);
+    hp1.setCenterFreq(120);
 }
 
 CAWLAmpSimulator::~CAWLAmpSimulator()

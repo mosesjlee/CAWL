@@ -1,10 +1,15 @@
-//
-//  CAWLLowShelfFilter.hpp
-//  CAWL
-//
-//  Created by Moses Lee on 10/5/17.
-//  Copyright © 2017 Moses Lee. All rights reserved.
-//
+/*
+ CAWLLowShelfFilter.hpp
+ CAWL
+
+ Created by Moses Lee on 10/5/17.
+ Copyright © 2017 Moses Lee. All rights reserved.
+ 
+ CAWLLowShelfFilter. My implementation of low shelving
+ filter based on Will Pirkle's equations for biquad
+ filter coefficients from Designing Audio Effect Plug-ins in C++
+ pg. 190
+*/
 
 #ifndef CAWLLowShelfFilter_hpp
 #define CAWLLowShelfFilter_hpp
@@ -18,12 +23,6 @@ public:
     ~CAWLLowShelfFilter();
     
 private:
-    double theta;
-    double mu;
-    double beta;
-    double delta;
-    double gamma;
-    
     void calculateCoefficients();
 };
 

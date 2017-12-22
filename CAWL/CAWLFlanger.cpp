@@ -15,12 +15,12 @@ CAWLFlanger::CAWLFlanger()
     sine = new CAWLSineWaveOsc();
     modSpeed = 1.0;
     modDepth = 10.0;
-    mMixLevel = 1.0;
-    dryMix = 0.2;
-    mFeedbackGain = 0.0;
-    mFeedForwardGain = 0.7;
-    sine->setFreq(modSpeed);
-	delayLine->setDelayTimeInSamples(modDepth/2);
+    cMixLevel = 1.0;
+    cDryMix = 0.2;
+    cFeedbackGain = 0.0;
+    cFeedForwardGain = 0.7;
+    sine->setWaveTableFreq(modSpeed);
+	cDelayLine->setDelayTimeInSamples(modDepth/2);
 }
 
 

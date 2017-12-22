@@ -20,18 +20,18 @@
 
 CAWLEqualizer::CAWLEqualizer()
 {
-    lowShelfCenterFreq = 100.0;
-    lowMidCenterFreq   = 1000.0;
-    highMidCenterFreq  = 8000.0;
-    highShelfCenterFreq = 15000.0;
-    lowShelf.setCutOffFreq(lowShelfCenterFreq);
-    lowMid.setCutOffFreq(lowMidCenterFreq);
-    highMid.setCutOffFreq(highMidCenterFreq);
-    highShelf.setCutOffFreq(highShelfCenterFreq);
-    lowShelf.setGain(0.0);
-    lowMid.setGain(0.0);
-    highMid.setGain(0.0);
-    highShelf.setGain(0.0);
+    cLowShelfCenterFreq = 100.0;
+    cLowMidCenterFreq   = 1000.0;
+    cHighMidCenterFreq  = 8000.0;
+    cHighShelfCenterFreq = 15000.0;
+    cLowShelf.setCenterFreq(cLowShelfCenterFreq);
+    cLowMid.setCenterFreq(cLowMidCenterFreq);
+    cHighMid.setCenterFreq(cHighMidCenterFreq);
+    cHighShelf.setCenterFreq(cHighShelfCenterFreq);
+    cLowShelf.setGain(0.0);
+    cLowMid.setGain(0.0);
+    cHighMid.setGain(0.0);
+    cHighShelf.setGain(0.0);
 }
 
 CAWLEqualizer::~CAWLEqualizer()
@@ -41,58 +41,58 @@ CAWLEqualizer::~CAWLEqualizer()
 
 void CAWLEqualizer::processBuffer(float * buf, const unsigned int numSamples)
 {
-    lowShelf.processBuffer(buf, numSamples);
-    lowMid.processBuffer(buf, numSamples);
-    highMid.processBuffer(buf, numSamples);
-    highShelf.processBuffer(buf, numSamples);
+    cLowShelf.processBuffer(buf, numSamples);
+    cLowMid.processBuffer(buf, numSamples);
+    cHighMid.processBuffer(buf, numSamples);
+    cHighShelf.processBuffer(buf, numSamples);
 }
 
 void CAWLEqualizer::setLowShelfCenterFreq(double centerFreq)
 {
-    lowShelf.setCutOffFreq(centerFreq);
+    cLowShelf.setCenterFreq(centerFreq);
 }
 
 void CAWLEqualizer::setHighShelfCenterFreq(double centerFreq)
 {
-    highShelf.setCutOffFreq(centerFreq);
+    cHighShelf.setCenterFreq(centerFreq);
 }
 
 void CAWLEqualizer::setlowMidCenterFreq(double centerFreq)
 {
-    lowMid.setCutOffFreq(centerFreq);
+    cLowMid.setCenterFreq(centerFreq);
 }
 void CAWLEqualizer::setHighMidCenterFreq(double centerFreq)
 {
-    highMid.setCutOffFreq(centerFreq);
+    cHighMid.setCenterFreq(centerFreq);
 }
 
 void CAWLEqualizer::setLowShelfGain(double newGain)
 {
-    lowShelf.setGain(newGain);
+    cLowShelf.setGain(newGain);
 }
 
 void CAWLEqualizer::setHighShelfGain(double newGain)
 {
-    highShelf.setGain(newGain);
+    cHighShelf.setGain(newGain);
 }
 
 void CAWLEqualizer::setlowMidGain(double newGain)
 {
-    lowMid.setGain(newGain);
+    cLowMid.setGain(newGain);
 }
 
 void CAWLEqualizer::setHighMidGain(double newGain)
 {
-    highMid.setGain(newGain);
+    cHighMid.setGain(newGain);
 }
 
 void CAWLEqualizer::setLowMidQFactor(double newQFactor)
 {
-    lowMid.setQFactor(newQFactor);
+    cLowMid.setQFactor(newQFactor);
 }
 
 void CAWLEqualizer::setHighMidQFactor(double newQFactor)
 {
-    highMid.setQFactor(newQFactor);
+    cHighMid.setQFactor(newQFactor);
 }
 

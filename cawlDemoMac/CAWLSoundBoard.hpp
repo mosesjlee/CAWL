@@ -28,7 +28,7 @@ class CAWLSoundBoard
 public:
     CAWLSoundBoard();
     ~CAWLSoundBoard();
-    void processBuffer(float * buf, const unsigned int numSamples);
+    void processBuffer(float * audioStreaBuf, const unsigned int numSamples);
     
     //Amp Controls
     void setNewAmpGain(float gain);

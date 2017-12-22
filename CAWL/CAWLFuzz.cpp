@@ -13,7 +13,7 @@
 CAWLFuzz::CAWLFuzz()
 {
 	toneControl.setGain(0);
-	toneControl.setCutOffFreq(12000);
+	toneControl.setCenterFreq(12000);
 	mGain = 11;
 }
 

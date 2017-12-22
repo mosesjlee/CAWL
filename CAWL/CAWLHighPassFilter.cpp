@@ -8,27 +8,39 @@
 
 #include "CAWLHighPassFilter.hpp"
 
+/*
+ Default constructor. Set a default center frequency
+ */
 CAWLHighPassFilter::CAWLHighPassFilter()
 {
-    centerFrequency = 120;
+    cGain = 0.0;                //Start at 0
+    cCenterFrequency = 0.0;
     calculateCoefficients();
 }
 
+/*
+ Default destructor
+ */
 CAWLHighPassFilter::~CAWLHighPassFilter()
 {
 }
 
+/*
+ Calculate the coeffiencts. Based on Second Order Linkwitz-Rile High Pass
+ Filter found in Will Pirkle's equations for biquad filter coefficients
+ from Designing Audio Effect Plug-ins in C++ pg. 186
+ */
 void CAWLHighPassFilter::calculateCoefficients()
 {
-    theta_c  = M_PI * centerFrequency/sampleRate;
-    omega    = M_PI * centerFrequency;
-    kappa    = omega/tan(theta_c);
-    phi      = (kappa * kappa) + (omega * omega) + (2 * (kappa * omega));
-    a_0 = kappa * kappa/phi;
-    a_1 = -2 * kappa * kappa/phi;
-    a_2 = kappa * kappa / phi;
-    b_1 = ((-2 * kappa * kappa) + (2 * omega * omega))/phi;
-    b_2 = ((-2 * kappa * omega) + (kappa*kappa) + (omega * omega))/phi;
-    c_0 = 1.0;
-    d_0 = 0.0;
+    double thetaC = M_PI * cCenterFrequency/cSampleRate;
+    double omega  = M_PI * cCenterFrequency;
+    double kappa  = omega/tan(thetaC);
+    double phi    = (kappa * kappa) + (omega * omega) + (2 * (kappa * omega));
+    a0            = kappa * kappa/phi;
+    a1            = -2 * kappa * kappa/phi;
+    a2            = kappa * kappa / phi;
+    b1            = ((-2 * kappa * kappa) + (2 * omega * omega))/phi;
+    b2            = ((-2 * kappa * omega) + (kappa*kappa) + (omega * omega))/phi;
+    c0            = 1.0;
+    d0            = 0.0;
 }

@@ -16,12 +16,12 @@ CAWLChorus::CAWLChorus()
     sine = new CAWLSineWaveOsc();
     modSpeed = 1.0;
     modDepth = 30;
-    mMixLevel = 1.0;
-    dryMix = 0.3;
-    mFeedbackGain = 0.0;
-    mFeedForwardGain = 0.7;
-    sine->setFreq(modSpeed);
-    delayLine->setDelayTimeInSamples(modDepth/2 + MIN_DELAY);
+    cMixLevel = 1.0;
+    cDryMix = 0.3;
+    cFeedbackGain = 0.0;
+    cFeedForwardGain = 0.7;
+    sine->setWaveTableFreq(modSpeed);
+    cDelayLine->setDelayTimeInSamples(modDepth/2 + MIN_DELAY);
 }
 
 CAWLChorus::~CAWLChorus()
