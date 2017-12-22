@@ -8,19 +8,27 @@
 
 #include "CAWLBiQuadFilter.hpp"
 
+/*
+ Default constructor
+ */
 CAWLBiQuadFilter::CAWLBiQuadFilter()
 {
-    a_0 = a_1 = a_2 = b_1 = b_2 = c_0 = d_0 = 0.0f;
-    firstOrderDelayLine.setDelayTimeInSamples(1.0);
-    secondOrderDelayLine.setDelayTimeInSamples(1.0);
 }
 
+/*
+ Default destructor
+ */
 CAWLBiQuadFilter::~CAWLBiQuadFilter()
 {
 	
 }
 
-void CAWLBiQuadFilter::processBuffer(float * buf, const unsigned int numSamples)
+/*
+ Main processing block
+ @param audioStreambuf the buffer of audio stream in 32 bit float
+ @param numSamples the number of samples in the buffer block
+ */
+void CAWLBiQuadFilter::processBuffer(float * audioStreamBuf, const unsigned int numSamples)
 {
 	float xCurrSample = 0.0;
 	float yCurrOutput = 0.0;
@@ -28,45 +36,42 @@ void CAWLBiQuadFilter::processBuffer(float * buf, const unsigned int numSamples)
 	
 	for(unsigned int i = 0; i < numSamples; i++)
 	{
-        xCurrSample = buf[i];
-        x_a_0 = xCurrSample * a_0;
-        yCurrOutput = (x_a_0 + delayedSample1);
-        x_a_1 = xCurrSample * a_1;
-        x_a_2 = xCurrSample * a_2;
-        x_b_1 = yCurrOutput * (b_1 * -1);
-        x_b_2 = yCurrOutput * (b_2 * -1);
+        xCurrSample = audioStreamBuf[i];
+        x_a_0 = xCurrSample * a0;
+        yCurrOutput = (x_a_0 + cDelayedSample1);
+        x_a_1 = xCurrSample * a1;
+        x_a_2 = xCurrSample * a2;
+        x_b_1 = yCurrOutput * (b1 * -1);
+        x_b_2 = yCurrOutput * (b2 * -1);
 
-//		delayedSample1 = firstOrderDelayLine.processNextSample(x_a_1 + delayedSample2 + x_b_1);
-//		delayedSample2 = secondOrderDelayLine.processNextSample(x_a_2 + x_b_2);
+		cDelayedSample1 = x_a_1 + cDelayedSample2 + x_b_1;
+		cDelayedSample2 = x_a_2 + x_b_2;
 
-		delayedSample1 = x_a_1 + delayedSample2 + x_b_1;
-		delayedSample2 = x_a_2 + x_b_2;
-//
-//		x_a_0 = xCurrSample * a_0;
-//		yCurrOutput = (x_a_0 + delayedSample1);
-//		x_a_1 = xCurrSample * a_1;
-//		x_a_2 = xCurrSample * a_2;
-//		x_b_1 = yCurrOutput * (b_1 * -1);
-//		x_b_2 = yCurrOutput * (b_2 * -1);
-//
-
-
-        buf[i] = yCurrOutput * c_0 + xCurrSample * d_0;
+        audioStreamBuf[i] = yCurrOutput * c0 + xCurrSample * d0;
 	}
 }
 
+/*
+ Sets the gain for the filter
+ @param newGain -> the new gain for the filter
+ */
 void CAWLBiQuadFilter::setGain(double newGain)
 {
     if(newGain > 24.0)
         newGain = 24.0;
-    if(newGain < -24.0)
+    else if(newGain < -24.0)
         newGain = -24.0;
-    
-    mGain = newGain;
+    else
+        cGain = newGain;
     calculateCoefficients();
 }
-void CAWLBiQuadFilter::setCutOffFreq(double newFreq)
+
+/*
+ Sets the center frequency for the filter
+ @param newFreq -> new frequency of the filter
+ */
+void CAWLBiQuadFilter::setCenterFreq(double newFreq)
 {
-    centerFrequency = newFreq;
+    cCenterFrequency = newFreq;
     calculateCoefficients();
 }

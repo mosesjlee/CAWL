@@ -34,7 +34,7 @@
 
 #define SCALE 0.3
 #define WRITE_TO_FILE
-//#define SHOW_DEBUG_SAMPLES
+#define SHOW_DEBUG_SAMPLES
 #define TEST_BIQUAD 0
 #define TEST_COMB 0
 #define TEST_OSC 0

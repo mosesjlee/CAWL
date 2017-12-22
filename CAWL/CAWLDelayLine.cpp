@@ -10,93 +10,107 @@
 
 #include <math.h>
 
-
-
-CAWLDelayLine::CAWLDelayLine():
-maxDelayInSamples(MAX_DELAY_IN_SAMPLES),
-currWritePos(0),
-currDelayInSamples(0)
+/*
+    Constructor. Set it to all default values
+ */
+CAWLDelayLine::CAWLDelayLine()
 {
+    //Set Default values
+    cMaxDelayInSamples = MAX_DELAY_IN_SAMPLES;
+    cCurrWritePos = 0;
+    cCurrDelayInSamples = 0;
+    
     //Allocate buffer
-    delayLine = new double[(int) maxDelayInSamples];
+    cDelayLine = new double[(int) cMaxDelayInSamples];
     
     //0 out the buffer
-    for(int i = 0; i < maxDelayInSamples; i++)
-        delayLine[i] = 0.0;
+    for(int i = 0; i < cMaxDelayInSamples; i++)
+        cDelayLine[i] = 0.0;
 }
 
-
+/*
+ Destructor
+ */
 CAWLDelayLine::~CAWLDelayLine()
 {
-    delete [] delayLine;
+    delete [] cDelayLine;
 }
 
+/*
+ Sets the delay time by taking in time in milliseconds and converting it to
+ samples.
+ @param delayTime -> delay time in milliseconds
+ */
 void CAWLDelayLine::setDelayTimeInMilliseconds(float delayTime)
 {
     //Input is in milliseconds so convert that to samples
     setDelayTimeInSamples(delayTime * DEFAULT_SR/MILLISECONDS);
-	
-	//printf("delay time: %f\n", delayTime);
 }
 
+/*
+ Sets the delay time in samples
+ @param delaySamples -> delay time in number of samples
+ */
 void CAWLDelayLine::setDelayTimeInSamples(float delaySamples)
 {
-	//if(delaySamples < 1) currDelayInSamples = 1;
-    currDelayInSamples = delaySamples;
+    cCurrDelayInSamples = delaySamples;
 	
     //Enforce that the max delay is 1 sample less than the max delay
-    if(currDelayInSamples > MAX_DELAY_IN_SAMPLES)
-        currDelayInSamples = MAX_DELAY_IN_SAMPLES - 1;
+    if(cCurrDelayInSamples > MAX_DELAY_IN_SAMPLES)
+        cCurrDelayInSamples = MAX_DELAY_IN_SAMPLES - 1;
 }
-
-inline double CAWLDelayLine::linear_interp(float x_1, float y_1, float x_2, float y_2, float frac)
+/*
+ Linear inerpolation
+ @param x1   -> First x coordinate in this case time
+ @param y1   -> First y coordinate in this came amplitude
+ @param x2   -> Second x coordinate in this case time
+ @param y2   -> Second y coordinate in this case amplitude
+ @param frac -> The fractional time in between the first and second time stamp
+ */
+inline double CAWLDelayLine::linearInterp(float x1, float y1, float x2, float y2, float frac)
 {
-    double retval = 0.0;
-    double numerator = y_1 * (x_2 - frac) + y_2 * (frac - x_1);
-	
-    return numerator;
+    return y1 * (x2 - frac) + y2 * (frac - x1);
 }
 
+/*
+ Takes in the current sample that will be stored and returns the
+ next sample from the delay line to be outputted
+ @param  currSample -> the sample to be stored
+ @return the delayed sample at delay cCurrDelayInSamples
+ */
 double CAWLDelayLine::processNextSample(double currSample)
 {
     double yCurrOutput = 0.0;
 
-    delayLine[(int) currWritePos] = currSample;
+    cDelayLine[(int) cCurrWritePos] = currSample;
 	
     //Get the current read position
-	double currReadPos = currWritePos - (currDelayInSamples);// - 1.0);
+	double currReadPos = cCurrWritePos - (cCurrDelayInSamples);
     if(currReadPos < 0.0)
         currReadPos = currReadPos + (double) (MAX_DELAY_IN_SAMPLES);
     
     //Check if there is a fractional delay
     double fracDelay = currReadPos - (int) currReadPos;
+    
+    //Get the next sample and the next sample for linear interpolation
+    double lookAheadPos = (int)(currReadPos + 1.0) % (int) (cMaxDelayInSamples+1);
+    double x1 = (int) currReadPos;
+    double y1 = cDelayLine[(int) currReadPos];
+    double x2 = (int) (lookAheadPos);
+	double y2 = lookAheadPos >= cMaxDelayInSamples ? cDelayLine[0] : cDelayLine[(int) lookAheadPos];
 
-	
-        double lookAheadPos = (int)(currReadPos + 1.0) % (int) (maxDelayInSamples+1);
-        double x_1 = (int) currReadPos;
-        double y_1 = delayLine[(int) currReadPos];
-        double x_2 = (int) (lookAheadPos);
-		double y_2 = lookAheadPos >= maxDelayInSamples ? delayLine[0] : delayLine[(int) lookAheadPos];
+    //Linear interpolate
+    if(lookAheadPos < currReadPos)
+    {
+        yCurrOutput = linearInterp(0, y1, x2, y2, fracDelay);
+    }
+    else
+    {
+        yCurrOutput = linearInterp(x1, y1, x2, y2, currReadPos);
+    }
 
-        if(lookAheadPos < currReadPos)
-        {
-            yCurrOutput = linear_interp(0,
-                                        y_1,
-                                        x_2,
-                                        y_2,
-                                        fracDelay);
-        }
-        else
-        {
-            yCurrOutput = linear_interp(x_1,
-                                        y_1,
-                                        x_2,
-                                        y_2,
-                                        currReadPos);
-        }
-
-
-	currWritePos = (int) (currWritePos + 1.0) % (int) (MAX_DELAY_IN_SAMPLES);
+    //Update write index
+	cCurrWritePos = (int) (cCurrWritePos + 1.0) % (int) (MAX_DELAY_IN_SAMPLES);
     
     //Return the output
     if(yCurrOutput > 1.0) yCurrOutput = 1.0;

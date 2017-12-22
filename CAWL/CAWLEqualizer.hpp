@@ -31,12 +31,17 @@ public:
     void processBuffer(float * buf, const unsigned int numSamples);
     
 private:
-    CAWLLowShelfFilter lowShelf;
-    CAWLHighShelfFilter highShelf;
-    CAWLPeakFilter lowMid;
-    CAWLPeakFilter highMid;
-    double lowShelfCenterFreq, highShelfCenterFreq, lowMidCenterFreq, highMidCenterFreq;
-    double lowMidQFactor, highMidQFactor;
+    CAWLLowShelfFilter cLowShelf;       //For low end shelving
+    CAWLHighShelfFilter cHighShelf;     //For high end shelving
+    CAWLPeakFilter cLowMid;             //Peak for low mid
+    CAWLPeakFilter cHighMid;            //Peak for high mid
+    
+    double cLowShelfCenterFreq;         //Low shelf center frequency
+    double cHighShelfCenterFreq;        //High shelf center frequency
+    double cLowMidCenterFreq;           //Low mid center frequency
+    double cHighMidCenterFreq;          //High mid center frequency
+    double cLowMidQFactor;              //Low mid Peak filter Q value
+    double cHighMidQFactor;             //High mid Peak filter Q value
 };
 
 #endif /* CAWLEqualizer_hpp */

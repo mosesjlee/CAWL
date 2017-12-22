@@ -26,10 +26,6 @@ private:
     CAWLDelayLine *combDelayLineArray;
     CAWLDelayLine apDelayLine;
 	CAWLHighShelfFilter toneControl;
-    CAWLIIRCombFilter combFilter[NUM_MOORERS_DELAYLINE];
-    CAWLLowPassFilter lowPassFilters[NUM_MOORERS_DELAYLINE];
-    double reverbTime;
-    double reverbMix;
     double delayLineOut[NUM_MOORERS_DELAYLINE];
     double delayLineZ_1[NUM_MOORERS_DELAYLINE];
     double lpfZ_1Samples[NUM_MOORERS_DELAYLINE];
@@ -37,6 +33,8 @@ private:
     double combGain[NUM_MOORERS_DELAYLINE];
     double apGain;
     double apOut;
+    double reverbTime;
+    double reverbMix;
 };
 
 #endif /* CAWLReverb_hpp */

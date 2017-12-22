@@ -8,16 +8,22 @@
 
 #include "CAWLTriangleWaveOsc.hpp"
 #include "CAWLSoundModule.hpp"
-
+/*
+ Constructor of the triangle wave table oscialltor
+ */
 CAWLTriangleWaveOsc::CAWLTriangleWaveOsc()
 {
-    sampleRate  = DEFAULT_SR;
-    freq        = 440;
-    cycleLength = freq * MAX_TABLE_SIZE/sampleRate;
-    counter     = 0.0;
+    /*
+     The main algorithm is borrowed from Will Pirkle's
+     Designing Audio Effect Plug-ins in C++ pg. 314 to 317
+     */
+    cSampleRate  = DEFAULT_SR;
+    cFreq        = 440;
+    cCycleLength = cFreq * MAX_TABLE_SIZE/cSampleRate;
+    cCounter     = 0.0;
     
     //Create the table
-    table = new double[(int)MAX_TABLE_SIZE];
+    cWaveTable = new double[(int)MAX_TABLE_SIZE];
 	
 	//From will pirkle's book
     //rising edge
@@ -36,16 +42,18 @@ CAWLTriangleWaveOsc::CAWLTriangleWaveOsc()
     for(int i = 0; i < MAX_TABLE_SIZE; i++)
     {
         if(i < 4096)
-            table[i] = mt1 * i + bt1;
+            cWaveTable[i] = mt1 * i + bt1;
         else if (i >= 4096 && i <12288)
-			table[i] = mtf2 * (i-4096) + btf2;
+			cWaveTable[i] = mtf2 * (i-4096) + btf2;
         else
-            table[i] = mt2 * (i-12288) + bt2;
-        //printf("Triangle table[%d] == %f\n", i, table[i]);
+            cWaveTable[i] = mt2 * (i-12288) + bt2;
     }
 }
 
+/*
+ Destructor
+ */
 CAWLTriangleWaveOsc::~CAWLTriangleWaveOsc()
 {
-    delete [] table;
+    delete [] cWaveTable;
 }

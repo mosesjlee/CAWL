@@ -1,10 +1,12 @@
-//
-//  CAWLDelayLine.hpp
-//  CAWL
-//
-//  Created by Moses Lee on 9/17/17.
-//  Copyright © 2017 Moses Lee. All rights reserved.
-//
+/*
+ CAWLDelayLine.hpp
+ CAWL
+
+ Created by Moses Lee on 9/17/17.
+ Copyright © 2017 Moses Lee. All rights reserved.
+ 
+ CAWLDelayLine class. A delay line buffer to delay samples.
+*/
 
 #ifndef CAWLDelayLine_hpp
 #define CAWLDelayLine_hpp
@@ -21,12 +23,11 @@ public:
     double processNextSample(double currSample);
     
 private:
-    inline double linear_interp(float x_1, float y_1, float x_2, float y_2, float frac);
-    
-    //double delayLine[(int) MAX_DELAY_IN_SAMPLES];
-    double *delayLine;
-    float currWritePos;
-    double currDelayInSamples;
-    unsigned int maxDelayInSamples;
+    inline double linearInterp(float x1, float y1, float x2, float y2, float frac);
+
+    double          *cDelayLine;
+    float           cCurrWritePos;
+    double          cCurrDelayInSamples;
+    unsigned int    cMaxDelayInSamples;
 };
 #endif /* CAWLDelayLine_hpp */

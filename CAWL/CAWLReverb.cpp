@@ -18,30 +18,22 @@ CAWLReverb::CAWLReverb()
     combDelayLineArray[4].setDelayTimeInMilliseconds(72);
     combDelayLineArray[5].setDelayTimeInMilliseconds(78);
     
-    combFilter[0].setDelay(50);
-    combFilter[1].setDelay(56);
-    combFilter[2].setDelay(61);
-    combFilter[3].setDelay(68);
-    combFilter[4].setDelay(72);
-    combFilter[5].setDelay(78);
-    
-    
     for(int i = 0; i < NUM_MOORERS_DELAYLINE; i++) 
         delayLineZ_1[i] = delayLineOut[i] = lpfZ_1Samples[i] = 0.0;
     
-    lpfGain[0] = 0.4482;
-    lpfGain[1] = 0.4399;
-    lpfGain[2] = 0.4350;
-    lpfGain[3] = 0.4316;
-    lpfGain[4] = 0.4233;
-    lpfGain[5] = 0.3735;
+    lpfGain[0] = 0.1482;
+    lpfGain[1] = 0.1399;
+    lpfGain[2] = 0.1350;
+    lpfGain[3] = 0.1316;
+    lpfGain[4] = 0.1233;
+    lpfGain[5] = 0.0735;
     
-    combGain[0] = 0.46;
-    combGain[1] = 0.47;
-    combGain[2] = 0.475;
-    combGain[3] = 0.48;
-    combGain[4] = 0.49;
-    combGain[5] = 0.50;
+    combGain[0] = 0.14;
+    combGain[1] = 0.15;
+    combGain[2] = 0.155;
+    combGain[3] = 0.16;
+    combGain[4] = 0.17;
+    combGain[5] = 0.18;
     
     apDelayLine.setDelayTimeInMilliseconds(6);
     apGain = 0.7;
@@ -50,14 +42,13 @@ CAWLReverb::CAWLReverb()
 
 CAWLReverb::~CAWLReverb()
 {
-    
+    delete [] combDelayLineArray;
 }
 
 void CAWLReverb::processBuffer(float * buf, const unsigned int numSamples)
 {
     double xCurrSample = 0.0;
     double yOutputSample = 0.0;
-    double lastApout = apOut;
     for(unsigned i = 0; i < numSamples; i++)
     {
         if(debug_int ==2200)

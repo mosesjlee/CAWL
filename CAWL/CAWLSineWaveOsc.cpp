@@ -9,27 +9,32 @@
 #include "CAWLSineWaveOsc.hpp"
 #include "CAWLSoundModule.hpp"
 
+/*
+ Constructor of the sine wave table oscialltor
+ */
 CAWLSineWaveOsc::CAWLSineWaveOsc()
 {
-    sampleRate  = DEFAULT_SR;
-    freq        = 440;
-    cycleLength = MAX_TABLE_SIZE * freq/sampleRate;
-    counter     = 0.0;
+    cSampleRate  = DEFAULT_SR;
+    cFreq        = 440;
+    cCycleLength = MAX_TABLE_SIZE * cFreq/cSampleRate;
+    cCounter     = 0.0;
     
     //Create the table
-    table = new double[(int)MAX_TABLE_SIZE];
+    cWaveTable = new double[(int)MAX_TABLE_SIZE];
     
     //Fill the table with samples
     for(int i = 0; i < MAX_TABLE_SIZE; i++)
     {
-        table[i] = sin(2 * M_PI * (double) i/MAX_TABLE_SIZE);
-        //(void) printf("%f\n", table[i]);
+        cWaveTable[i] = sin(2 * M_PI * (double) i/MAX_TABLE_SIZE);
     }
 }
 
+/*
+ Destructor
+ */
 CAWLSineWaveOsc::~CAWLSineWaveOsc()
 {
-    delete [] table;
+    delete [] cWaveTable;
 }
 
 

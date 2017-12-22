@@ -7,37 +7,57 @@
 //
 
 #include "CAWLCombFilter.hpp"
-
+/*
+ Sets the delay for the comb filter.
+ Can be overridden
+ @param delay -> the new delay time in milliseconds
+ */
 void CAWLCombFilter::setDelay(float delay)
 {
-    delayLine->setDelayTimeInMilliseconds(delay);
-    //delayHsu->setDelayLineDelay(delay * 44100.0/1000.0);
+    cDelayLine->setDelayTimeInMilliseconds(delay);
 }
 
+/*
+ Sets the gain for any filters that use the
+ feed forward gain
+ @param newGain -> the new feed forward gain
+ */
 void CAWLCombFilter::setFeedForwardGain(float newGain)
 {
     if(newGain > 1.0)
         newGain = 1.0;
-    if(newGain < 0.0)
+    else if(newGain < 0.0)
         newGain = 0.0;
-    
-    mFeedForwardGain = newGain;
+    else
+        cFeedForwardGain = newGain;
 }
 
+/*
+ Sets the gain for any filters that use the
+ feed back gain
+ @param newGain -> the new feed back gain
+ */
 void CAWLCombFilter::setFeedbackGain(float newGain)
 {
     if(newGain > 1.0)
         newGain = 1.0;
-    if(newGain < 0.0)
+    else if(newGain < 0.0)
         newGain = 0.0;
-    mFeedbackGain = newGain;
+    else
+        cFeedbackGain = newGain;
 }
 
+/*
+ Sets the mix level for any filters between the
+ original signal and the signal from the filter
+ @param newMixLevel -> the new mix level
+ */
 void CAWLCombFilter::setMixLevel(float newMixLevel)
 {
     if(newMixLevel > 1.0)
         newMixLevel = 1.0;
-    if(newMixLevel < 0.0)
+    else if(newMixLevel < 0.0)
         newMixLevel = 0.0;
-    mMixLevel = newMixLevel;
+    else
+        cMixLevel = newMixLevel;
 }

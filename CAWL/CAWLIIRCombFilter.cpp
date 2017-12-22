@@ -8,29 +8,41 @@
 
 #include "CAWLIIRCombFilter.hpp"
 
+/*
+ Constructor. Set everything to default
+ Initialize delay line
+ */
 CAWLIIRCombFilter::CAWLIIRCombFilter()
 {
-    mFeedbackGain = 0.0;
-    mMixLevel = 1;
-    lastSampleOfBlock = 0.0;
-    delayLine = new CAWLDelayLine();
-    delayLine->setDelayTimeInMilliseconds(0);
+    cFeedbackGain = 0.0;
+    cMixLevel = 1;
+    cLastSampleOfBlock = 0.0;
+    cDelayLine = new CAWLDelayLine();
+    cDelayLine->setDelayTimeInMilliseconds(0);
 }
 
+/*
+ Destructor
+ */
 CAWLIIRCombFilter::~CAWLIIRCombFilter()
 {
-    delete delayLine;
+    delete cDelayLine;
 }
 
-void CAWLIIRCombFilter::processBuffer(float *buf, const unsigned int numSamples)
+/*
+ Main processing block
+ @param audioStreambuf the buffer of audio stream in 32 bit float
+ @param numSamples the number of samples in the buffer block
+ */
+void CAWLIIRCombFilter::processBuffer(float *audioStreambuf, const unsigned int numSamples)
 {
-    double yCurrOutput = lastSampleOfBlock;
+    double yCurrOutput = cLastSampleOfBlock;
     double xCurrSample = 0.0;
     double zSample = 0.0;
     for(unsigned i = 0; i < numSamples; i++)
     {
-        xCurrSample = buf[i] *mMixLevel;
-        zSample = mFeedbackGain * delayLine->processNextSample(yCurrOutput);
+        xCurrSample = audioStreambuf[i] *cMixLevel;
+        zSample = cFeedbackGain * cDelayLine->processNextSample(yCurrOutput);
         yCurrOutput = xCurrSample + zSample;
 
         if(yCurrOutput > 1.0)
@@ -38,7 +50,7 @@ void CAWLIIRCombFilter::processBuffer(float *buf, const unsigned int numSamples)
         else if(yCurrOutput < -1.0)
             yCurrOutput = -1.0;
         
-        buf[i] = yCurrOutput;
+        audioStreambuf[i] = yCurrOutput;
     }
-    lastSampleOfBlock = yCurrOutput;
+    cLastSampleOfBlock = yCurrOutput;
 }

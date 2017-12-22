@@ -1,17 +1,18 @@
-//
-//  CAWLFilter.hpp
-//  CAWL
-//
-//  Created by Moses Lee on 9/30/17.
-//  Copyright © 2017 Moses Lee. All rights reserved.
-//
+/*
+ CAWLFilter.hpp
+ CAWL
+
+ Created by Moses Lee on 9/30/17.
+ Copyright © 2017 Moses Lee. All rights reserved.
+ 
+ CAWLCombFilter. Base class for all comb filters
+*/
 
 #ifndef CAWLFilter_hpp
 #define CAWLFilter_hpp
 
 #include "CAWLSoundModule.hpp"
 #include "CAWLDelayLine.hpp"
-#include "delayl.h"
 class CAWLCombFilter : public CAWLSoundModule
 {
 public:
@@ -21,12 +22,11 @@ public:
     virtual void setMixLevel(float newMixLevel);
     
 protected:
-    CAWLDelayLine * delayLine;
-    DelayLine * delayHsu;
-    unsigned int delay;
-    double lastSampleOfBlock;
-    double mFeedbackGain;
-    double mFeedForwardGain;
-    double mMixLevel;
+    CAWLDelayLine   *cDelayLine;
+    unsigned int    cDelay;
+    double          cLastSampleOfBlock;
+    double          cFeedbackGain;
+    double          cFeedForwardGain;
+    double          cMixLevel;
 };
 #endif /* CAWLFilter_hpp */
