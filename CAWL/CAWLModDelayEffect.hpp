@@ -20,13 +20,13 @@ public:
     virtual void setMixLevel(double mixLevel);
     virtual void setModulationSpeed(double newModSpeed);
     virtual void setModulationDepth(double newModDepth);
+    virtual void processBuffer(float * audioStreamBuf, const unsigned int numSamples);
     
-    
-    virtual void processBuffer(float * buf, const unsigned int numSamples);
-    
-    virtual double modulatedTime() = 0;
 protected:
-    CAWLSineWaveOsc * sine;
+    virtual double modulatedTime() = 0;
+    
+protected:
+    CAWLSineWaveOsc * cSine;
     double cModDepth;
     double cModSpeed;
     double cMixLevel;

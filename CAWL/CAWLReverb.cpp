@@ -10,66 +10,62 @@
 unsigned debug_int = 0;
 CAWLReverb::CAWLReverb()
 {
-    combDelayLineArray = new CAWLDelayLine[NUM_MOORERS_DELAYLINE];
-    combDelayLineArray[0].setDelayTimeInMilliseconds(50);
-    combDelayLineArray[1].setDelayTimeInMilliseconds(56);
-    combDelayLineArray[2].setDelayTimeInMilliseconds(61);
-    combDelayLineArray[3].setDelayTimeInMilliseconds(68);
-    combDelayLineArray[4].setDelayTimeInMilliseconds(72);
-    combDelayLineArray[5].setDelayTimeInMilliseconds(78);
+    cCombDelayLineArray = new CAWLDelayLine[NUM_MOORERS_DELAYLINE];
+    cCombDelayLineArray[0].setDelayTimeInMilliseconds(50);
+    cCombDelayLineArray[1].setDelayTimeInMilliseconds(56);
+    cCombDelayLineArray[2].setDelayTimeInMilliseconds(61);
+    cCombDelayLineArray[3].setDelayTimeInMilliseconds(68);
+    cCombDelayLineArray[4].setDelayTimeInMilliseconds(72);
+    cCombDelayLineArray[5].setDelayTimeInMilliseconds(78);
     
     for(int i = 0; i < NUM_MOORERS_DELAYLINE; i++) 
-        delayLineZ_1[i] = delayLineOut[i] = lpfZ_1Samples[i] = 0.0;
+        cDelayLineZ_1[i] = cDelayLineOut[i] = cLpfZ_1Samples[i] = 0.0;
     
-    lpfGain[0] = 0.1482;
-    lpfGain[1] = 0.1399;
-    lpfGain[2] = 0.1350;
-    lpfGain[3] = 0.1316;
-    lpfGain[4] = 0.1233;
-    lpfGain[5] = 0.0735;
+    cLpfGain[0] = 0.4482;
+    cLpfGain[1] = 0.4399;
+    cLpfGain[2] = 0.4350;
+    cLpfGain[3] = 0.4316;
+    cLpfGain[4] = 0.4233;
+    cLpfGain[5] = 0.3735;
     
-    combGain[0] = 0.14;
-    combGain[1] = 0.15;
-    combGain[2] = 0.155;
-    combGain[3] = 0.16;
-    combGain[4] = 0.17;
-    combGain[5] = 0.18;
+    cCombGain[0] = 0.46;
+    cCombGain[1] = 0.47;
+    cCombGain[2] = 0.475;
+    cCombGain[3] = 0.48;
+    cCombGain[4] = 0.49;
+    cCombGain[5] = 0.50;
     
-    apDelayLine.setDelayTimeInMilliseconds(6);
-    apGain = 0.7;
-    apOut = 0.0;
+    cApDelayLine.setDelayTimeInMilliseconds(6);
+    cApGain = 0.7;
+    cApOut = 0.0;
 }
 
 CAWLReverb::~CAWLReverb()
 {
-    delete [] combDelayLineArray;
+    delete [] cCombDelayLineArray;
 }
 
-void CAWLReverb::processBuffer(float * buf, const unsigned int numSamples)
+void CAWLReverb::processBuffer(float * audioStreamBuf, const unsigned int numSamples)
 {
     double xCurrSample = 0.0;
     double yOutputSample = 0.0;
     for(unsigned i = 0; i < numSamples; i++)
     {
-        if(debug_int ==2200)
-            printf("BREAL\n");
-        xCurrSample = buf[i];
+        xCurrSample = audioStreamBuf[i];
         for(int j = 0; j < NUM_MOORERS_DELAYLINE; j++)
         {
-            delayLineOut[j] = combDelayLineArray[j].processNextSample(xCurrSample + combGain[j] * lpfZ_1Samples[j]);
-            lpfZ_1Samples[j] = delayLineOut[j] + lpfZ_1Samples[j] * lpfGain[j];
-            delayLineZ_1[j] = delayLineOut[j];
+            cDelayLineOut[j] = cCombDelayLineArray[j].processNextSample(xCurrSample + cCombGain[j] * cLpfZ_1Samples[j]);
+            cLpfZ_1Samples[j] = cDelayLineOut[j] + cLpfZ_1Samples[j] * cLpfGain[j];
+            cDelayLineZ_1[j] = cDelayLineOut[j];
         }
         
         double summation = 0.0;
         for (int k = 0; k < NUM_MOORERS_DELAYLINE; k++)
-            summation += delayLineOut[0];
+            summation += cDelayLineOut[k];
 
-        apOut = apDelayLine.processNextSample(summation + apOut * apGain);
-        yOutputSample = (summation * -apGain + apOut);
-        buf[i] = yOutputSample;
-        debug_int++;
-        
+        cApOut = cApDelayLine.processNextSample(summation + cApOut * cApGain);
+        yOutputSample = (summation * -cApGain + cApOut);
+        audioStreamBuf[i] = yOutputSample;
     }
 }
 

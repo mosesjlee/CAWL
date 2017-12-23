@@ -20,23 +20,24 @@ class CAWLReverb
 public:
     CAWLReverb();
     ~CAWLReverb();
-    void processBuffer(float * buf, const unsigned int numSamples);
+    void processBuffer(float * AudioStreamBuf, const unsigned int numSamples);
     void setReverbTime(double newTime);
     void setReverbMix(double newMix);
 	void adjustReverbTone(double newToneLevel);
+    
 private:
-    CAWLDelayLine *combDelayLineArray;
-    CAWLDelayLine apDelayLine;
-	CAWLHighShelfFilter toneControl;
-    double delayLineOut[NUM_MOORERS_DELAYLINE];
-    double delayLineZ_1[NUM_MOORERS_DELAYLINE];
-    double lpfZ_1Samples[NUM_MOORERS_DELAYLINE];
-    double lpfGain[NUM_MOORERS_DELAYLINE];
-    double combGain[NUM_MOORERS_DELAYLINE];
-    double apGain;
-    double apOut;
-    double reverbTime;
-    double reverbMix;
+    CAWLDelayLine *cCombDelayLineArray;
+    CAWLDelayLine cApDelayLine;
+	CAWLHighShelfFilter cToneControl;
+    double cDelayLineOut[NUM_MOORERS_DELAYLINE];
+    double cDelayLineZ_1[NUM_MOORERS_DELAYLINE];
+    double cLpfZ_1Samples[NUM_MOORERS_DELAYLINE];
+    double cLpfGain[NUM_MOORERS_DELAYLINE];
+    double cCombGain[NUM_MOORERS_DELAYLINE];
+    double cApGain;
+    double cApOut;
+    double cReverbTime;
+    double cReverbMix;
 };
 
 #endif /* CAWLReverb_hpp */

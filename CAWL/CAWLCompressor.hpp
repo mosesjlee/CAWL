@@ -1,9 +1,10 @@
 /*
-  CAWLCompressor.hpp
-  CAWL
+ CAWLCompressor.hpp
+ CAWL
 
-  Created by Moses Lee on 10/15/17.
-  Copyright © 2017 Moses Lee. All rights reserved.
+ Created by Moses Lee on 10/15/17.
+ Copyright © 2017 Moses Lee. All rights reserved.
+ CAWLCompressor
 */
 
 #ifndef CAWLCompressor_hpp
@@ -15,7 +16,7 @@ class CAWLCompressor
 public:
     CAWLCompressor();
     ~CAWLCompressor();
-    void processBuffer(float * buf, const unsigned int numSamples);
+    void processBuffer(float * audioStreamBuf, const unsigned int numSamples);
     void setAttackTime(double newAttackTime);
     void setReleaseTime(double newReleaseTime);
     void setCompressorThreshold(double newThreshold);

@@ -32,21 +32,33 @@ void CAWLModDelayEffect::processBuffer(float * audioStreambuf, const unsigned in
     cLastSampleOfBlock = xHCurrSample;
 }
 
+/*
+ Sets the modulation depth of the effect
+ @param newModDepth -> the new modulation depth
+ */
 void CAWLModDelayEffect::setModulationDepth(double newModDepth)
 {
     cModDepth = newModDepth;
     cDelayLine->setDelayTimeInMilliseconds(cModDepth/2);
 }
 
+/*
+ Sets the mix level of the effect
+ @param mixLevel -> the new mix level
+ */
 void CAWLModDelayEffect::setMixLevel(double mixLevel)
 {
     cDryMix = mixLevel;
 }
 
+/*
+ Sets the modulation speed of the effect
+ @param newModSpeed -> the new moduation speed
+ */
 void CAWLModDelayEffect::setModulationSpeed(double newModSpeed)
 {
     cModSpeed = newModSpeed;
-    sine->setWaveTableFreq(cModSpeed);
+    cSine->setWaveTableFreq(cModSpeed);
 }
 
 

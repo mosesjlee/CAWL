@@ -79,9 +79,9 @@ int main(int argc, const char * argv[]) {
     getWhiteNoiseStream(whiteNoiseBuffer);
 	getRawGuitarStream(guitarNoiseBuffer);
     
-#if 0
-    CAWLLowPassFilter lpf; lpf.setCutOffFreq(1000);
-    CAWLHighPassFilter hpf; hpf.setCutOffFreq(500);
+#if 1
+    CAWLLowPassFilter lpf; lpf.setCenterFreq(1000);
+    CAWLHighPassFilter hpf; hpf.setCenterFreq(500);
     CAWLLowPassFilter * lpfPtr = &lpf;
     CAWLHighPassFilter * hpfPtr = &hpf;
 
@@ -96,15 +96,15 @@ int main(int argc, const char * argv[]) {
 
     //EQ stuff
     CAWLLowShelfFilter lsf, * lsfPtr = &lsf;
-    lsf.setCutOffFreq(100); lsf.setGain(-20.0);
+    lsf.setCenterFreq(100); lsf.setGain(-20.0);
     CAWLHighShelfFilter hsf, * hsfPtr = &hsf;
-    hsf.setCutOffFreq(10000); hsf.setGain(10.0);
+    hsf.setCenterFreq(10000); hsf.setGain(10.0);
     CAWLPeakFilter pf, * pfPtr = &pf;
-    pf.setQFactor(10); pf.setCutOffFreq(440); pf.setGain(10.0);
+    pf.setQFactor(10); pf.setCenterFreq(440); pf.setGain(10.0);
     CAWLPeakFilter pf2, * pf2Ptr = &pf2;
-	pf2.setQFactor(10); pf2.setCutOffFreq(1320); pf2.setGain(10.0);
+	pf2.setQFactor(10); pf2.setCenterFreq(1320); pf2.setGain(10.0);
 	
-    CAWLBandPassFilter bp, * bpPtr = &bp; bp.setCutOffFreq(5000); bp.setQFactor(10);
+    CAWLBandPassFilter bp, * bpPtr = &bp; bp.setCenterFreq(5000); bp.setQFactor(10);
 
     CAWLValveTubeSimulator valveSim, valveSim2, valveSim3;
     CAWLValveTubeSimulator * ptrToValve = &valveSim, * ptrToValve2 = &valveSim2, *ptrToValve3 = &valveSim3;
@@ -112,7 +112,7 @@ int main(int argc, const char * argv[]) {
     CAWLAmpSimulator * ptrToAmp = &ampSim, *ptrToAmp2 = &ampSim2, *ptrToAmp3 = &ampSim3;
     
     CAWLSineWaveOsc sineWav, * sineWavPtr = &sineWav;// sineWav.setFreq(440);
-    CAWLTriangleWaveOsc triWav, * triWavPtr = &triWav; triWav.setFreq(220);
+    CAWLTriangleWaveOsc triWav, * triWavPtr = &triWav; triWav.setWaveTableFreq(220);
     CAWLFlanger flanger, * flangerPtr=&flanger; flanger.setModulationSpeed(1.0);
     CAWLChorus chorus,* chorusPtr=&chorus; chorus.setModulationSpeed(0.25);
     CAWLWahWah wah, *wahPtr=&wah;

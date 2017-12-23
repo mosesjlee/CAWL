@@ -17,26 +17,32 @@
  */
 CAWLFlanger::CAWLFlanger()
 {
-    sine = new CAWLSineWaveOsc();
+    cSine = new CAWLSineWaveOsc();
     cModSpeed = 1.0;
     cModDepth = 10.0;
     cMixLevel = 1.0;
     cDryMix = 0.2;
     cFeedbackGain = 0.0;
     cFeedForwardGain = 0.7;
-    sine->setWaveTableFreq(cModSpeed);
+    cSine->setWaveTableFreq(cModSpeed);
 	cDelayLine->setDelayTimeInSamples(cModDepth/2);
 }
 
-
+/*
+ Default destructor
+ */
 CAWLFlanger::~CAWLFlanger()
 {
-    delete sine;
+    delete cSine;
 }
 
+/*
+ Returns the updated delay time for the flanger
+ @return the new delay time for flanger
+ */
 double CAWLFlanger::modulatedTime()
 {
-    return cModDepth/2 + (cModDepth/2 * sine->getNextSample());
+    return cModDepth/2 + (cModDepth/2 * cSine->getNextSample());
 }
 
 

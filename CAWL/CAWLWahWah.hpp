@@ -4,6 +4,7 @@
 
   Created by Moses Lee on 10/21/17.
   Copyright © 2017 Moses Lee. All rights reserved.
+ CAWLWahWah class that simulates a wah wah effect
 */
 
 #ifndef CAWLWahWah_hpp
@@ -16,7 +17,7 @@ class CAWLWahWah : public CAWLSoundModule
 public:
     CAWLWahWah();
     ~CAWLWahWah();
-    virtual void processBuffer(float * buf, const unsigned int numSamples);
+    virtual void processBuffer(float * audioStreamBuf, const unsigned int numSamples);
     void setCenterFreq(double newCenterFreq);
     void setModulationDepth(double newModDepth);
     void setModulationRate(double newModRate);
@@ -29,7 +30,7 @@ private:
     double mixLevel;
     double modDepth;
     
-    //Digital State Variable Filter
+    //Digital State Variable Filter based on udo zolzer page 50
     double y_h;
     double y_b;
     double y_l;
@@ -38,27 +39,5 @@ private:
     double max_y_b;
     double centerFrequency;
     double anchorFrequency;
-    
-    //copied
-    float freq;
-    float startphase;
-    float depth;
-    float freqofs;
-    float res;
-    
-    float b0;
-    float b1;
-    float b2;
-    float a0;
-    float a1;
-    float a2;
-    float mCurRate;
-    float lfoskip;
-    int skipcount = 0;
-    float phase;
-    float xn1;
-    float xn2;
-    float yn1;
-    float yn2;
 };
 #endif /* CAWLWahWah_hpp */

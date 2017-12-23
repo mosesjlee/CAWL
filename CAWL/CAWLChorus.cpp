@@ -17,26 +17,32 @@
  */
 CAWLChorus::CAWLChorus()
 {
-    sine = new CAWLSineWaveOsc();
+    cSine = new CAWLSineWaveOsc();
     cModSpeed = 1.0;
     cModDepth = 30;
     cMixLevel = 1.0;
     cDryMix = 0.3;
     cFeedbackGain = 0.0;
     cFeedForwardGain = 0.7;
-    sine->setWaveTableFreq(cModSpeed);
+    cSine->setWaveTableFreq(cModSpeed);
     cDelayLine->setDelayTimeInSamples(cModDepth/2 + MIN_DELAY);
 }
 
+/*
+ Default destructor
+ */
 CAWLChorus::~CAWLChorus()
 {
-    delete sine;
+    delete cSine;
 }
 
-
+/*
+ Returns the modulated time for chorus.
+ @return -> the new modulated time
+ */
 double CAWLChorus::modulatedTime()
 {
-    return (cModDepth/2 + (cModDepth/2 * sine->getNextSample())) + MIN_DELAY;
+    return (cModDepth/2 + (cModDepth/2 * cSine->getNextSample())) + MIN_DELAY;
 }
 
 

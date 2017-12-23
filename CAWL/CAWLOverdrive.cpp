@@ -11,18 +11,22 @@
 
 #define MAX_TONE_GAIN 12.0
 #define MIN_TONE_GAIN 12.0
+
+/**/
 CAWLOverdrive::CAWLOverdrive()
 {
-	toneControl.setGain(0);
-	toneControl.setCenterFreq(12000);
+	cToneControl.setGain(0);
+	cToneControl.setCenterFreq(12000);
 }
 
+/**/
 CAWLOverdrive::~CAWLOverdrive()
 {
     
 }
 
 //From Udo Zölzer's book DAFX page 125
+/**/
 void CAWLOverdrive::processBuffer(float * buf, const unsigned int numSamples)
 {
     double xCurrSample = 0.0;
@@ -49,16 +53,17 @@ void CAWLOverdrive::processBuffer(float * buf, const unsigned int numSamples)
         buf[i] = yCurrOutput;
     }
 	
-	toneControl.processBuffer(buf, numSamples);
+	cToneControl.processBuffer(buf, numSamples);
 }
 
+/**/
 void CAWLOverdrive::adjustOverdriveTone(double newToneLevel)
 {
 	if(newToneLevel > MAX_TONE_GAIN)
-		toneControl.setGain(MAX_TONE_GAIN);
+		cToneControl.setGain(MAX_TONE_GAIN);
 	else if (newToneLevel < MIN_TONE_GAIN)
-		toneControl.setGain(MIN_TONE_GAIN);
+		cToneControl.setGain(MIN_TONE_GAIN);
 	else
-		toneControl.setGain(newToneLevel);
+		cToneControl.setGain(newToneLevel);
 }
 

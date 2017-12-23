@@ -8,6 +8,12 @@
 
 #include "CAWLCompressor.hpp"
 #include "CAWLSoundModule.hpp"
+#define MIN_COMP_THRESHOLD
+#define MAX_COMP_THRESHOLD
+
+/*
+ Default Constructor
+ */
 CAWLCompressor::CAWLCompressor()
 {
     averageTime         = 0.015;
@@ -27,18 +33,28 @@ CAWLCompressor::CAWLCompressor()
     delayLine.setDelayTimeInSamples(150);
 }
 
+/*Default destructor*/
 CAWLCompressor::~CAWLCompressor()
 {
-    
 }
 
+/*
+ Returns the min of the 2 double values
+ @param x -> the first value
+ @param y -> the second value
+ @return -> the bigger value
+ */
 inline double CAWLCompressor::min(double x, double y)
 {
     return x < y ? x : y;
 }
 
-//From Udo Zölzer's DAFX page 112
-void CAWLCompressor::processBuffer(float * buf, const unsigned int numSamples)
+/*
+ From Udo Zölzer's DAFX page 112. This is the main processing block
+ @param audioStreambuf the buffer of audio stream in 32 bit float
+ @param numSamples the number of samples in the buffer block
+ */
+void CAWLCompressor::processBuffer(float * audioStreamBuf, const unsigned int numSamples)
 {
     double xCurrSample = 0.0;
     double yCurrOut = 0.0;
@@ -46,7 +62,7 @@ void CAWLCompressor::processBuffer(float * buf, const unsigned int numSamples)
     double currCompressorSlope = compressorSlope;
     for(int i = 0; i < numSamples; i++)
     {
-        xCurrSample = buf[i];
+        xCurrSample = audioStreamBuf[i];
         xrms = (1.0 - averageTime) * xrms + averageTime * xCurrSample * xCurrSample;
         double X = 10 * log10(xrms);
         if(kneeLevel > 0 && X > (compressorThreshold - kneeLevel/2.0) &&
@@ -60,10 +76,14 @@ void CAWLCompressor::processBuffer(float * buf, const unsigned int numSamples)
             coeff = releaseCoeff;
         gain = (1.0 - coeff) * gain + coeff * f;
         yCurrOut = gain * delayLine.processNextSample(xCurrSample);
-        buf[i] = yCurrOut * makeupGain;
+        audioStreamBuf[i] = yCurrOut * makeupGain;
     }
 }
 
+/*
+ Sets the new attack time of the compressor
+ @param newAttackTime -> the new attack time of the compressor
+ */
 void CAWLCompressor::setAttackTime(double newAttackTime)
 {
     if (newAttackTime < 0)
@@ -74,6 +94,10 @@ void CAWLCompressor::setAttackTime(double newAttackTime)
 //    attackCoeff = exp(log(0.01)/(attackTime * DEFAULT_SR * .001));
 }
 
+/*
+ Sets the new release time of the compressor
+ @param newReleaseTime -> the new release time
+ */
 void CAWLCompressor::setReleaseTime(double newReleaseTime)
 {
     if(newReleaseTime < 0)
@@ -85,31 +109,56 @@ void CAWLCompressor::setReleaseTime(double newReleaseTime)
 //    attackCoeff = exp(log(0.01)/(releaseTime * DEFAULT_SR * .001));
 }
 
+/*
+ Sets the compressor threshold
+ @param newThreshold -> the new compressor threshold
+ */
 void CAWLCompressor::setCompressorThreshold(double newThreshold)
 {
     
     compressorThreshold = newThreshold;
 }
 
+/*
+ Set compressor ratio
+ @param newRatio -> the new compressor ratio
+ */
 void CAWLCompressor::setCompressorRatio(double newRatio)
 {
     compressorRatio = newRatio;
     compressorSlope = 1.0 - (1.0/compressorRatio);
 }
 
+/*
+ Set the knee level of the compressor
+ @param newKneeLevel -> the new knee level
+ */
 void CAWLCompressor::setKneeLevel(double newKneeLevel)
 {
     kneeLevel = newKneeLevel;
 }
 
+/*
+ Set the make up gain
+ @param newMakeupGain -> the new make up gain
+ */
 void CAWLCompressor::setMakeUpGain(double newMakeupGain)
 {
     if(newMakeupGain < 0) makeupGain = 1;
     else makeupGain = newMakeupGain;
 }
 
-//From Will Pirkle's plugin constants. This is his implementation of
-//lagrange interpolation
+
+/*
+ From Will Pirkle's plugin constants. This is his implementation of
+ lagrange interpolation to calculate the points around the compressor
+ knee
+ @param x    -> the buffer that holds the x coordinates
+ @param y    -> the buffer that holds the y coordinates
+ @param n    -> size of the buffer
+ @param xbar -> the sample in between
+ @return -> the value in between the
+ */
 inline double lagrpol(double* x, double* y, int n, double xbar)
 {
     int i,j;
@@ -128,7 +177,12 @@ inline double lagrpol(double* x, double* y, int n, double xbar)
     return (fx);
 }
 
-//Algorithm from Will Pirkle's Designing Audio Effect Plugins pg. 460
+/*
+ Algorithm from Will Pirkle's Designing Audio Effect Plugins pg. 460
+ to calculate the knee sample around the knee.
+ @param sample -> the current input sample
+ @return the interpolated value
+ */
 double CAWLCompressor::calculateKneeGain(double sample)
 {
     double x[2] = {0.0, 0.0};

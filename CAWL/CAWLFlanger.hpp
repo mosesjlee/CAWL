@@ -1,9 +1,10 @@
 /*
-  CAWLFlanger.hpp
-  CAWL
+ CAWLFlanger.hpp
+ CAWL
 
-  Created by Moses Lee on 10/15/17.
-  Copyright © 2017 Moses Lee. All rights reserved.
+ Created by Moses Lee on 10/15/17.
+ Copyright © 2017 Moses Lee. All rights reserved.
+ CAWLFlanger inherits from CAWLModDelayEffect class
 */
 
 #ifndef CAWLFlanger_hpp

@@ -9,29 +9,24 @@
 #include "CAWLWahWah.hpp"
 #include <math.h>
 
-#define lfoskipsamples 30
-
-#define MAX_WAH_CENTER_FREQ 2000
+#define MAX_WAH_CENTER_FREQ 1400
 #define MIN_WAH_CENTER_FREQ 800
 #define MAX_WAH_DEPTH_FREQ 500
 #define MAX_WAH_MOD_RATE 2
 #define MIN_WAH_MOD_RATE 0.75
 
 #define epsilon 0.00000000001
+
+/*
+ Default constructor
+ */
 CAWLWahWah::CAWLWahWah()
 {
+    //Initialize the Triangle Wave Oscillator
     triangeWave = new CAWLTriangleWaveOsc();
     triangeWave->setWaveTableFreq(0.75);
 	centerFrequency = 800;
     anchorFrequency = centerFrequency;
-	freq = float(1.5);
-	startphase = 0;
-	depth = (float)0.7;
-	freqofs = (float)0.3;
-	res = float(2.5);
-	mCurRate = 44100.0;
-	lfoskip = freq * 2 * M_PI / mCurRate;
-	phase = 0;
 	
     //State Variable
     y_h = 0;
@@ -46,13 +41,21 @@ CAWLWahWah::CAWLWahWah()
     modDepth = 400;
 }
 
+/*
+ Default destructor
+ */
 CAWLWahWah::~CAWLWahWah()
 {
     delete triangeWave;
 }
 
-//https://searchcode.com/codesearch/view/20121801/ look at that
-void CAWLWahWah::processBuffer(float * buf, const unsigned int numSamples)
+/*
+ Main processing block. The State variable filter is adapted from
+ Udo Zölzer's DAFX pg. 50
+ @param audioStreambuf the buffer of audio stream in 32 bit float
+ @param numSamples the number of samples in the buffer block
+ */
+void CAWLWahWah::processBuffer(float * audioStreamBuf, const unsigned int numSamples)
 {
     double xCurrSample = 0.0;
     double damp = 0.05;
@@ -64,7 +67,7 @@ void CAWLWahWah::processBuffer(float * buf, const unsigned int numSamples)
         //y_h = x(n) - y_l(n-1) - Q_1 * y_b(n-1)
         //y_b = F_1 * y_h(n) + y_b(n-1)
         //y_l = F_1 * y_b(n) + y_l(n-1)
-        xCurrSample = buf[i];
+        xCurrSample = audioStreamBuf[i];
         double Q_1 = 2 * damp;
         double F_1 = 2 * sin(M_PI * (anchorFrequency)/cSampleRate);
         
@@ -76,12 +79,16 @@ void CAWLWahWah::processBuffer(float * buf, const unsigned int numSamples)
         if(max_y_b < fabs(y_b)) max_y_b = fabs(y_b);
         if(fabs(max_y_b) < epsilon) max_y_b = 1.0;
         
-        buf[i] = (y_b/max_y_b * mixLevel) + (xCurrSample * (1.0f-mixLevel));
+        audioStreamBuf[i] = (y_b/max_y_b * mixLevel) + (xCurrSample * (1.0f-mixLevel));
         anchorFrequency = (triangeWave->getNextSample() * modDepth) + centerFrequency;
     }
     
 }
 
+/*
+ Set the center frequency of the Wah
+ @param newCenterFreq -> the new center frequency
+ */
 void CAWLWahWah::setCenterFreq(double newCenterFreq)
 {
     if(newCenterFreq > MAX_WAH_CENTER_FREQ)
@@ -92,6 +99,10 @@ void CAWLWahWah::setCenterFreq(double newCenterFreq)
         centerFrequency = newCenterFreq;
 }
 
+/*
+ Set the new modulation depth
+ @param newModDepth -> the new modulation depth
+ */
 void CAWLWahWah::setModulationDepth(double newModDepth)
 {
     if(newModDepth > MAX_WAH_DEPTH_FREQ)
@@ -100,6 +111,10 @@ void CAWLWahWah::setModulationDepth(double newModDepth)
         modDepth = newModDepth;
 }
 
+/*
+ Set the new mix level
+ @param newMixLevel -> the new mix level
+ */
 void CAWLWahWah::setMixLevel(double newMixLevel)
 {
     if(newMixLevel > 1.0)
@@ -110,6 +125,10 @@ void CAWLWahWah::setMixLevel(double newMixLevel)
         mixLevel = newMixLevel;
 }
 
+/*
+ Set modulation rate
+ @param newModLevel -> the new modulation level
+ */
 void CAWLWahWah::setModulationRate(double newModLevel)
 {
     if(newModLevel > MAX_WAH_MOD_RATE)

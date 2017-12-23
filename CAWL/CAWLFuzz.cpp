@@ -10,19 +10,22 @@
 #define MAX_TONE_GAIN 12.0
 #define MIN_TONE_GAIN 12.0
 
+/**/
 CAWLFuzz::CAWLFuzz()
 {
-	toneControl.setGain(0);
-	toneControl.setCenterFreq(12000);
-	mGain = 11;
+	cToneControl.setGain(0);
+	cToneControl.setCenterFreq(12000);
+	cGain = 11;
 }
 
+/**/
 CAWLFuzz::~CAWLFuzz()
 {
-    
 }
 
-void CAWLFuzz::processBuffer(float * buf, const unsigned int numSamples)
+/*
+ */
+void CAWLFuzz::processBuffer(float * AudioStreamBuf, const unsigned int numSamples)
 {
 	double xCurrSample = 0.0;
 	double absValue = 0.0;
@@ -30,30 +33,36 @@ void CAWLFuzz::processBuffer(float * buf, const unsigned int numSamples)
 	
     for(int i = 0; i < numSamples; i++)
     {
-		xCurrSample = buf[i];
+		xCurrSample = AudioStreamBuf[i];
 		absValue = abs(xCurrSample);
-		yCurrOutput = xCurrSample/absValue * (1 - exp((mGain * xCurrSample * xCurrSample)/absValue));
-		buf[i] = yCurrOutput;
+		yCurrOutput = xCurrSample/absValue * (1 - exp((cGain * xCurrSample * xCurrSample)/absValue));
+		AudioStreamBuf[i] = yCurrOutput;
     }
 	
 	//toneControl.processBuffer(buf, numSamples);
 }
 
+/*
+ */
 void CAWLFuzz::adjustFuzzTone(double newToneLevel)
 {
 	if(newToneLevel > MAX_TONE_GAIN)
-		toneControl.setGain(MAX_TONE_GAIN);
+		cToneControl.setGain(MAX_TONE_GAIN);
 	else if (newToneLevel < MIN_TONE_GAIN)
-		toneControl.setGain(MIN_TONE_GAIN);
+		cToneControl.setGain(MIN_TONE_GAIN);
 	else
-		toneControl.setGain(newToneLevel);
+		cToneControl.setGain(newToneLevel);
 }
 
+/*
+ */
 void CAWLFuzz::setGain(double newGain)
 {
-	mGain = newGain;
+	cGain = newGain;
 }
 
+/*
+ */
 void CAWLFuzz::setMix(double newMix)
 {
 	
