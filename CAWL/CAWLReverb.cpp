@@ -108,7 +108,14 @@ void CAWLReverb::setReverbMix(double newMix)
         cReverbMix = newMix;
 }
 
-
+/*
+ Set reverb tone
+ @param newToneLevel -> the new tone level
+ */
+void CAWLReverb::adjustReverbTone(double newToneLevel)
+{
+    cToneControl.setGain(newToneLevel);
+}
 
 
 

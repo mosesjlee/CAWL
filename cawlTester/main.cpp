@@ -34,7 +34,7 @@
 
 #define SCALE 0.3
 #define WRITE_TO_FILE
-#define SHOW_DEBUG_SAMPLES
+//#define SHOW_DEBUG_SAMPLES
 #define TEST_BIQUAD 0
 #define TEST_COMB 0
 #define TEST_OSC 0
@@ -185,10 +185,10 @@ int main(int argc, const char * argv[]) {
 //        wahPtr->processBuffer(data, numSamples);
 //        ptrToValve->processBuffer(data,numSamples);
 //        odPtr->processBuffer(data, numSamples);
-//        phaserPtr->processBuffer(data, numSamples);
+        phaserPtr->processBuffer(data, numSamples);
 //        fuzzPtr->processBuffer(data, numSamples);
 //        compPtr->processBuffer(data, numSamples);
-        rvrbPtr->processBuffer(data, numSamples);
+//        rvrbPtr->processBuffer(data, numSamples);
         
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 300) {
