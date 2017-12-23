@@ -9,17 +9,25 @@
 #include "CAWLAudioUnit.hpp"
 #include "CAWLUtilities.hpp"
 
+/*
+ Default constructor
+ */
 CAWLAudioUnit::CAWLAudioUnit()
 {
     setupAudioUnitIO();
     setDefaultInputAudioUnit();
 }
 
+/*
+ Default destructor
+ */
 CAWLAudioUnit::~CAWLAudioUnit()
 {
-	
 }
 
+/*
+ @return the OSStatus result
+ */
 OSStatus CAWLAudioUnit::setDefaultInputAudioUnit()
 {
     OSStatus theStatus = noErr;
@@ -88,7 +96,9 @@ OSStatus CAWLAudioUnit::setDefaultInputAudioUnit()
 	return theStatus;
 }
 
-
+/*
+ @return the OSStatus result
+ */
 OSStatus CAWLAudioUnit::setupAudioUnitIO()
 {
 	OSStatus theStatus = noErr;

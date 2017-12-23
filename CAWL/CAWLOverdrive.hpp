@@ -18,6 +18,7 @@ public:
     ~CAWLOverdrive();
     void processBuffer(float * audioStreamBuf, const unsigned int numSamples);
 	void adjustOverdriveTone(double newToneLevel);
+    void adjustOverdriveGain(double newGainLevel);
 private:
 	double cGain;
 	CAWLHighShelfFilter cToneControl;

@@ -13,6 +13,9 @@
 //The static instance
 CAWL * CAWL::cawlInstance;
 
+/*
+ Default constructor
+ */
 CAWL::CAWL()
 {
     aggregateAudioUnit = new CAWLAudioUnit();
@@ -24,10 +27,11 @@ CAWL::CAWL()
     firstOutputSampleTime = -1;
 }
 
+/*
+ Default Destructor
+ */
 CAWL::~CAWL()
 {
-	
-    
 	//AUGraph clean up
 	cleanUp();
     
@@ -39,6 +43,10 @@ CAWL::~CAWL()
 	delete cawlInstance;
 }
 
+/*
+ Get the instance of CAWL
+ @return a singleton instance of CAWL
+ */
 CAWL * CAWL::Instance()
 {
 	//static CAWL * instance;
@@ -50,6 +58,7 @@ CAWL * CAWL::Instance()
 /**
  Parts of this function is copied from the book Learning CoreAudio
  Authors: Chris Adamson, Kevin Avila
+ Sets up the buffers from the input streams
  **/
 void CAWL::setupBuffers()
 {
@@ -112,6 +121,12 @@ void CAWL::setupBuffers()
 	printf("Finished setting up input unit\n");
 }
 
+/**
+ Parts of this function is copied from the book Learning CoreAudio
+ Authors: Chris Adamson, Kevin Avila
+ Sets up AudioUnit graph that connect the nodes that interface
+ between AudioHAL and CoreAudio elements
+**/
 void CAWL::setupGraph()
 {
 	//Initialize the new graph
@@ -189,7 +204,18 @@ void CAWL::cleanUp()
 
 
 
-//Callbacks
+/**
+ Parts of this function is copied from the book Learning CoreAudio
+ Authors: Chris Adamson, Kevin Avila
+ This is the callback function for AudioHAL to store samples into
+ the buffer
+ @param inRefCon -> User data parameters.
+ @param ioActionFlags ->
+ @param inTimeStamp -> The time stamp to calculate where in the buffer to copy
+ @param inBusNumber ->
+ @param inNumberFrames ->
+ @param ioData -> array of AudioBuffers. This stores the samples read from AudioHAL
+ **/
 OSStatus CAWL::InputRenderCallBack(void *inRefCon,
 							 AudioUnitRenderActionFlags * ioActionFlags,
 							 const AudioTimeStamp *inTimeStamp,
@@ -232,6 +258,18 @@ OSStatus CAWL::InputRenderCallBack(void *inRefCon,
 	return error;
 }
 
+/**
+ Parts of this function is copied from the book Learning CoreAudio
+ Authors: Chris Adamson, Kevin Avila
+ This is the callback function for AudioHAL to output the stored
+ samples to the output stream buffer
+ @param inRefCon -> User data parameters.
+ @param ioActionFlags ->
+ @param inTimeStamp -> The time stamp to calculate where in the buffer to copy
+ @param inBusNumber ->
+ @param inNumberFrames ->
+ @param ioData -> array of AudioBuffers. This stores the samples read from AudioHAL
+ **/
 OSStatus CAWL::OutputRenderCallBack(void *inRefCon,
 									 AudioUnitRenderActionFlags * ioActionFlags,
 									 const AudioTimeStamp *inTimeStamp,
@@ -296,6 +334,8 @@ OSStatus CAWL::OutputRenderCallBack(void *inRefCon,
 	return error;
 }
 
+/*
+ */
 cawlBuffers CAWL::getInputBufferAtChannel(const unsigned int channel)
 {
 	if(channel > numInputChannels)
@@ -314,6 +354,11 @@ bool CAWL::registerInputBlockAtInputChannel(cawlBuffers buffer, const unsigned i
 	return true;
 }
 
+/*
+ Starts the audio unit graph therefore
+ starting the streaming of samples from
+ input to output
+ */
 void CAWL::startPlaying()
 {
     AudioUnit au = aggregateAudioUnit->getInputUnit();
@@ -323,6 +368,11 @@ void CAWL::startPlaying()
 			   "AUGraphStart failed");
 }
 
+/*
+ Stops the audio unit graph therefore
+ stopping the streaming of samples from
+ input to output
+ */
 void CAWL::stopPlaying()
 {
     AudioUnit au = aggregateAudioUnit->getInputUnit();

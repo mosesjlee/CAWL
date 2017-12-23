@@ -225,11 +225,18 @@ ToneStack stack;
  to the ToneStack modeling process.
  */
 
+/*
+ Default constructor
+ */
 CAWLAmpSimulator::CAWLAmpSimulator()
 {
     CAWLAmpSimulator(0);
 }
 
+/*
+ Constructor that allows user to choose amp model
+ @param model -> 0 for Fender, 1 for Vox, and 2 for princeton
+ */
 CAWLAmpSimulator::CAWLAmpSimulator(int model)
 {
     if(model == 0) {
@@ -247,20 +254,26 @@ CAWLAmpSimulator::CAWLAmpSimulator(int model)
     hp1.setCenterFreq(120);
 }
 
+/*
+ Default destructor
+ */
 CAWLAmpSimulator::~CAWLAmpSimulator()
 {
 //	delete stack;
 }
 
-
-void
-CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
+/*
+ Main processing block.
+ @param audioStreambuf the buffer of audio stream in 32 bit float
+ @param numSamples the number of samples in the buffer block
+ */
+void CAWLAmpSimulator::processBuffer(float *AudioStreamBuf, const unsigned int numOfSamples)
 {
 
     
 	//1st send it to be processed by the valve simulator
-	valveTube.processBuffer(buf, numOfSamples);
-    hp1.processBuffer(buf, numOfSamples);
+	valveTube.processBuffer(AudioStreamBuf, numOfSamples);
+    hp1.processBuffer(AudioStreamBuf, numOfSamples);
 //    lsf.processBuffer(buf, numOfSamples);
     
 //    for(int i = 0; i < numOfSamples; i++)
@@ -279,9 +292,13 @@ CAWLAmpSimulator::processBuffer(float *buf, const unsigned int numOfSamples)
 
 	//3rd send it to be processed by the tone stack
     stack.updatecoefs(0.2, 0.2, 1);
-	stack.process(buf, numOfSamples);
+	stack.process(AudioStreamBuf, numOfSamples);
 }
 
+/*
+ Sets the gain for the tube simulator
+ @param gain -> the gain of the valve tube
+ */
 void CAWLAmpSimulator::setGain(float gain)
 {
     valveTube.setGain(gain);

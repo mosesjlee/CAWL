@@ -8,6 +8,10 @@
 
 #include "CAWLReverb.hpp"
 unsigned debug_int = 0;
+
+/*
+ Default constructor
+ */
 CAWLReverb::CAWLReverb()
 {
     cCombDelayLineArray = new CAWLDelayLine[NUM_MOORERS_DELAYLINE];
@@ -38,13 +42,25 @@ CAWLReverb::CAWLReverb()
     cApDelayLine.setDelayTimeInMilliseconds(6);
     cApGain = 0.7;
     cApOut = 0.0;
+    
+    cReverbMix = 1.0;
 }
 
+/*
+ Default destructor
+ */
 CAWLReverb::~CAWLReverb()
 {
     delete [] cCombDelayLineArray;
 }
 
+/*
+ Main processing block. The Moorer's implementation is based off the
+ diagram in Will Pirkle's Designing Audio Effect Plugins in C++
+ pg. 376
+ @param audioStreambuf the buffer of audio stream in 32 bit float
+ @param numSamples the number of samples in the buffer block
+ */
 void CAWLReverb::processBuffer(float * audioStreamBuf, const unsigned int numSamples)
 {
     double xCurrSample = 0.0;
@@ -65,18 +81,31 @@ void CAWLReverb::processBuffer(float * audioStreamBuf, const unsigned int numSam
 
         cApOut = cApDelayLine.processNextSample(summation + cApOut * cApGain);
         yOutputSample = (summation * -cApGain + cApOut);
-        audioStreamBuf[i] = yOutputSample;
+        audioStreamBuf[i] = yOutputSample * cReverbMix + (1 - cReverbMix) * xCurrSample;
     }
 }
 
+/*
+ Set reverb time
+ @param newTime -> the new reverb time
+ */
 void CAWLReverb::setReverbTime(double newTime)
 {
     
 }
 
+/*
+ Set reverb mix
+ @param newMix -> the new mix level
+ */
 void CAWLReverb::setReverbMix(double newMix)
 {
-    
+    if (newMix > 1.0)
+        cReverbMix = 1.0;
+    else if(newMix < 0.0)
+        cReverbMix = 0.0;
+    else
+        cReverbMix = newMix;
 }
 
 

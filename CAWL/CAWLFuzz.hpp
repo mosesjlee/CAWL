@@ -5,7 +5,8 @@
  Created by Moses Lee on 10/21/17.
  Copyright © 2017 Moses Lee. All rights reserved.
  
- CAWLFuzz class emulates
+ CAWLFuzz class emulates a harder distortion sound
+ that sounds like a Fuzz effect pedal
 */
 
 #ifndef CAWLFuzz_hpp
