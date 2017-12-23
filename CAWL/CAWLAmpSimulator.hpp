@@ -1,10 +1,10 @@
-//
-//  CAWLAmpSimulator.hpp
-//  cawlTester
-//
-//  Created by Moses Lee on 9/24/17.
-//  Copyright © 2017 Moses Lee. All rights reserved.
-//
+/*
+ CAWLAmpSimulator.hpp
+ cawlTester
+
+ Created by Moses Lee on 9/24/17.
+ Copyright © 2017 Moses Lee. All rights reserved.
+*/
 
 /*
  The signal processing algorithms and constants in this class is taken directly from

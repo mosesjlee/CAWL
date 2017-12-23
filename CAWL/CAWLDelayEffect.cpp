@@ -7,47 +7,131 @@
 //
 
 #include "CAWLDelayEffect.hpp"
-CAWLDelayEffect::CAWLDelayEffect():
-feedbackMix(0.5),
-wetMix(0.5),
-dryMix(1.0)
+/*
+ Default constructor
+ */
+CAWLDelayEffect::CAWLDelayEffect()
 {
-    ucf = new CAWLUniversalCombFilter();
-    ucf->setDryMix(dryMix);
-    ucf->setFeedForwardGain(wetMix);
-    ucf->setFeedbackGain(feedbackMix);
-    ucf->setMixLevel(0);
+    cFeedbackMix = 0.5;
+    cWetMix = 0.5;
+    cDryMix = 1.0;
+    cUcf = new CAWLUniversalCombFilter();
+    cUcf->setDryMix(cDryMix);
+    cUcf->setFeedForwardGain(cWetMix);
+    cUcf->setFeedbackGain(cFeedbackMix);
+    cUcf->setMixLevel(0);
     
 }
 
+/*
+ Default destructor
+ */
 CAWLDelayEffect::~CAWLDelayEffect()
 {
-    delete ucf;
+    delete cUcf;
 }
 
-void CAWLDelayEffect::processBuffer(float * buf, const unsigned int numSamples)
+/*
+ Main processing block
+ @param audioStreambuf the buffer of audio stream in 32 bit float
+ @param numSamples the number of samples in the buffer block
+ */
+void CAWLDelayEffect::processBuffer(float * audioStreamBuf, const unsigned int numSamples)
 {
-    ucf->processBuffer(buf, numSamples);
+    cUcf->processBuffer(audioStreamBuf, numSamples);
 }
 
+#pragma mark DELAY_SETTERS
+/*
+ Sets the wet mix level of the delay
+ @param newWetMix -> the new wet mix level
+ */
 void CAWLDelayEffect::setWetMixLevel(double newWetMix)
 {
-    ucf->setFeedForwardGain(wetMix);
+    if(newWetMix > 1.0)
+        cWetMix = 1.0;
+    else if(newWetMix < 0.0)
+        cWetMix = 0.0;
+    else
+        cWetMix = newWetMix;
+    
+    cUcf->setFeedForwardGain(cWetMix);
 }
 
+/*
+ Sets the feedback level of the delay
+ @param newFeedbackMix -> the new feedback level
+ */
 void CAWLDelayEffect::setFeedbackLevel(double newFeedbackMix)
 {
-    ucf->setFeedbackGain(feedbackMix);
+    if(newFeedbackMix > 1.0)
+        cFeedbackMix = 1.0;
+    else if(newFeedbackMix < 0.0)
+        cFeedbackMix = 0.0;
+    else
+        cFeedbackMix = newFeedbackMix;
+    cUcf->setFeedbackGain(cFeedbackMix);
 }
 
-void CAWLDelayEffect::setDryMix(double dryMix)
+/*
+ Sets the dry mix level of the delay
+ @param newDryMix -> the dry wet mix level
+ */
+void CAWLDelayEffect::setDryMix(double newDryMix)
 {
-    ucf->setDryMix(dryMix);
+    if(newDryMix > 1.0)
+        cDryMix = 1.0;
+    else if(newDryMix < 0.0)
+        cDryMix = 0.0;
+    else
+        cDryMix = newDryMix;
+    
+    cUcf->setDryMix(cDryMix);
 }
 
+/*
+ Sets the delay time of the delay
+ @param newDelayTime -> the new delay time
+ */
 void CAWLDelayEffect::setDelayTime(double newDelayTime)
 {
-    delayTime = newDelayTime;
-    ucf->setDelay(delayTime);
+    cDelayTime = newDelayTime;
+    cUcf->setDelay(cDelayTime);
 }
 
+#pragma mark DELAY_GETTERS
+/*
+ Gets the wet mix level of the delay
+ @return wet mix level
+ */
+double CAWLDelayEffect::getWetMixLevel()
+{
+    return cWetMix;
+}
+
+/*
+ Gets the feedback mix level of the delay
+ @return feedback mix level
+ */
+double CAWLDelayEffect::getFeedbackLevel()
+{
+    return cFeedbackMix;
+}
+
+/*
+ Gets the dry mix level of the delay
+ @return dry mix level
+ */
+double CAWLDelayEffect::getDryMix()
+{
+    return cDryMix;
+}
+
+/*
+ Gets the delay time of the delay
+ @return delay time
+ */
+double CAWLDelayEffect::getDelayTime()
+{
+    return cDelayTime;
+}

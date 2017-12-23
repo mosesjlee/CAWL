@@ -1,10 +1,14 @@
-//
-//  CAWLSoundBoard.hpp
-//  CAWL
-//
-//  Created by Moses Lee on 9/16/17.
-//  Copyright © 2017 Moses Lee. All rights reserved.
-//
+/*
+ CAWLSoundBoard.hpp
+ CAWL
+
+ Created by Moses Lee on 9/16/17.
+ Copyright © 2017 Moses Lee. All rights reserved.
+ 
+ CAWLSoundBoard is the main class that aggregates
+ all the effects to be controlled by an external
+ class
+*/
 
 #ifndef CAWLSoundBoard_hpp
 #define CAWLSoundBoard_hpp

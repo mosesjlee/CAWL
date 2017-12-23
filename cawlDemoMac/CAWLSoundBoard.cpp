@@ -77,16 +77,8 @@ void CAWLSoundBoard::setDelayDryMixGain(double newDryGain)
 
 void CAWLSoundBoard::turnOnDelay(bool onOff)
 {
-//    if(!onOff)
-//    {
-//        if(delayEffect != NULL) delete delayEffect;
-//        delayEffect = NULL;
-//    }
-//    else
-//    {
 	if(delayEffect == NULL)
         delayEffect = new CAWLDelayEffect();
-//    }
     isDelayOn = onOff;
 }
 

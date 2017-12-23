@@ -8,11 +8,13 @@
 
 #ifndef CAWLReverb_hpp
 #define CAWLReverb_hpp
+
+#define NUM_MOORERS_DELAYLINE 6
+
 #include "CAWLDelayLine.hpp"
 #include "CAWLLowPassFilter.hpp"
 #include "CAWLHighShelfFilter.hpp"
-#include "CAWLIIRCombFilter.hpp"
-#define NUM_MOORERS_DELAYLINE 6
+
 class CAWLReverb
 {
 public:

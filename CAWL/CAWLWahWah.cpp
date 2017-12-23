@@ -55,46 +55,10 @@ CAWLWahWah::~CAWLWahWah()
 void CAWLWahWah::processBuffer(float * buf, const unsigned int numSamples)
 {
     double xCurrSample = 0.0;
-    double yCurrOutput = 0.0;
     double damp = 0.05;
-    float frequency, omega, sn, cs, alpha;
-    float in, out;
     
     for(int i = 0; i < numSamples; i++)
     {
-#if 0
-        in = buf[i];
-        
-        if ((skipcount++) % lfoskipsamples == 0) {
-            frequency = (1 + cos(skipcount * lfoskip + phase)) / 2;
-            frequency = frequency * depth * (1 - freqofs) + freqofs;
-            frequency = exp((frequency - 1) * 6);
-            omega = M_PI * frequency;
-            sn = sin(omega);
-            cs = cos(omega);
-            alpha = sn / (2 * res);
-            b0 = (1 - cs) / 2;
-            b1 = 1 - cs;
-            b2 = (1 - cs) / 2;
-            a0 = 1 + alpha;
-            a1 = -2 * cs;
-            a2 = 1 - alpha;
-        };
-        
-        out = (b0 * in + b1 * xn1 + b2 * xn2 - a1 * yn1 - a2 * yn2) / a0;
-        xn2 = xn1;
-        xn1 = in;
-        yn2 = yn1;
-        yn1 = out;
-        
-        // Prevents clipping
-        if (out < -1.0)
-            out = float(-1.0);
-        else if (out > 1.0)
-            out = float(1.0);
-        
-        buf[i] = (float) out;
-#else
         //F_1 = 2 * sin(M_PI * f_c/f_s)
         //Q_1 = 1/Q
         //y_h = x(n) - y_l(n-1) - Q_1 * y_b(n-1)
@@ -114,7 +78,6 @@ void CAWLWahWah::processBuffer(float * buf, const unsigned int numSamples)
         
         buf[i] = (y_b/max_y_b * mixLevel) + (xCurrSample * (1.0f-mixLevel));
         anchorFrequency = (triangeWave->getNextSample() * modDepth) + centerFrequency;
-#endif
     }
     
 }

@@ -293,19 +293,6 @@ OSStatus CAWL::OutputRenderCallBack(void *inRefCon,
         }
 	}
     
-    
-
-	
-//    Float32 * data = (Float32 *) ioData->mBuffers[0].mData;
-//    Float32 * data2 = (Float32 *) ioData->mBuffers[1].mData;
-//    Float32 * data3 = (Float32 *) ioData->mBuffers[2].mData;
-//    Float32 * data4 = (Float32 *) ioData->mBuffers[3].mData;
-//    for(UInt32 frame = 0; frame < inNumberFrames; frame++)
-//    {
-//        Float32 sample =  data[frame] + data2[frame] + data3[frame] + data4[frame];;
-//        data[frame] = data2[frame] = data3[frame] = data4[frame] = sample;
-//    }
-    
 	return error;
 }
 

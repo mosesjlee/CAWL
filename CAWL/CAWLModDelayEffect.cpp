@@ -8,7 +8,12 @@
 
 #include "CAWLModDelayEffect.hpp"
 
-void CAWLModDelayEffect::processBuffer(float * buf, const unsigned int numSamples)
+/*
+ Main processing block
+ @param audioStreambuf the buffer of audio stream in 32 bit float
+ @param numSamples the number of samples in the buffer block
+ */
+void CAWLModDelayEffect::processBuffer(float * audioStreambuf, const unsigned int numSamples)
 {
     double xCurrSample = 0.0;
     double zDelayedSample = 0.0;
@@ -16,11 +21,11 @@ void CAWLModDelayEffect::processBuffer(float * buf, const unsigned int numSample
     double yCurrOutput = 0.0;
     for(int i = 0; i < numSamples; i++)
     {
-        xCurrSample = buf[i];
+        xCurrSample = audioStreambuf[i];
         zDelayedSample = cDelayLine->processNextSample(xHCurrSample);
         xHCurrSample = xCurrSample + zDelayedSample * cFeedbackGain;
         yCurrOutput = zDelayedSample * cFeedForwardGain;
-        buf[i] = yCurrOutput + xCurrSample * cDryMix;
+        audioStreambuf[i] = yCurrOutput + xCurrSample * cDryMix;
         
         cDelayLine->setDelayTimeInMilliseconds(modulatedTime());
     }
@@ -29,8 +34,8 @@ void CAWLModDelayEffect::processBuffer(float * buf, const unsigned int numSample
 
 void CAWLModDelayEffect::setModulationDepth(double newModDepth)
 {
-    modDepth = newModDepth;
-    cDelayLine->setDelayTimeInMilliseconds(modDepth/2);
+    cModDepth = newModDepth;
+    cDelayLine->setDelayTimeInMilliseconds(cModDepth/2);
 }
 
 void CAWLModDelayEffect::setMixLevel(double mixLevel)
@@ -40,8 +45,8 @@ void CAWLModDelayEffect::setMixLevel(double mixLevel)
 
 void CAWLModDelayEffect::setModulationSpeed(double newModSpeed)
 {
-    modSpeed = newModSpeed;
-    sine->setWaveTableFreq(modSpeed);
+    cModSpeed = newModSpeed;
+    sine->setWaveTableFreq(cModSpeed);
 }
 
 

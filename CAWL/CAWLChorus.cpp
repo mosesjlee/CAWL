@@ -11,17 +11,21 @@
 #define MAX_DELAY 40
 #define MAX_MOD_DEPTH (MAX_DELAY - MIN_DELAY)
 
+/*
+ Default constructor initialized with default
+ values for chorus
+ */
 CAWLChorus::CAWLChorus()
 {
     sine = new CAWLSineWaveOsc();
-    modSpeed = 1.0;
-    modDepth = 30;
+    cModSpeed = 1.0;
+    cModDepth = 30;
     cMixLevel = 1.0;
     cDryMix = 0.3;
     cFeedbackGain = 0.0;
     cFeedForwardGain = 0.7;
-    sine->setWaveTableFreq(modSpeed);
-    cDelayLine->setDelayTimeInSamples(modDepth/2 + MIN_DELAY);
+    sine->setWaveTableFreq(cModSpeed);
+    cDelayLine->setDelayTimeInSamples(cModDepth/2 + MIN_DELAY);
 }
 
 CAWLChorus::~CAWLChorus()
@@ -32,7 +36,7 @@ CAWLChorus::~CAWLChorus()
 
 double CAWLChorus::modulatedTime()
 {
-    return (modDepth/2 + (modDepth/2 * sine->getNextSample())) + MIN_DELAY;
+    return (cModDepth/2 + (cModDepth/2 * sine->getNextSample())) + MIN_DELAY;
 }
 
 

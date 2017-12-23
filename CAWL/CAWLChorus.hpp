@@ -1,10 +1,12 @@
-//
-//  CAWLChorus.hpp
-//  CAWL
-//
-//  Created by Moses Lee on 10/12/17.
-//  Copyright © 2017 Moses Lee. All rights reserved.
-//
+/*
+ CAWLChorus.hpp
+ CAWL
+
+ Created by Moses Lee on 10/12/17.
+ Copyright © 2017 Moses Lee. All rights reserved.
+ CAWLChorus inherits from CAWLModDelayEffect class.
+ 
+*/
 
 #ifndef CAWLChorus_hpp
 #define CAWLChorus_hpp
