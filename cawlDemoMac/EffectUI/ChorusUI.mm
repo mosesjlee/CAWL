@@ -91,14 +91,17 @@
 
 -(IBAction) updateChorusRate:(id)sender {
     chorusRateValue.stringValue = [NSString stringWithFormat:@"%f", chorusRateSlider.floatValue];
+    self.soundTabRef.soundBoard->setChorusModulationSpeed(chorusRateSlider.floatValue);
 }
 
 -(IBAction) updateChorusDepthLevel:(id)sender {
     chorusDepthValue.stringValue = [NSString stringWithFormat:@"%f", chorusDepthSlider.floatValue];
+    self.soundTabRef.soundBoard->setChorusModulationDepth(chorusDepthSlider.floatValue);
 }
 
 -(IBAction) updateMixLevel:(id)sender {
     chorusMixValue.stringValue = [NSString stringWithFormat:@"%f", chorusMixLevel.floatValue];
+    self.soundTabRef.soundBoard->setChorusMixLevel(chorusMixLevel.floatValue);
 }
 
 @end

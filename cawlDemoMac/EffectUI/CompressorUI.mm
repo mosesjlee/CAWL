@@ -109,18 +109,22 @@
 
 -(IBAction) updateThresholdLevel:(id)sender {
     thresholdLabel.stringValue = [NSString stringWithFormat:@"%02d dB", thresholdSlider.intValue];
+    self.soundTabRef.soundBoard->setCompressorThreshold(thresholdSlider.intValue);
 }
 
 -(IBAction) updateKneeLevel:(id)sender {
     kneeLabel.stringValue = [NSString stringWithFormat:@"%.02f", kneeSlider.floatValue];
+    self.soundTabRef.soundBoard->setCompressorKnee(kneeSlider.intValue);
 }
 
 -(IBAction) updateRatio:(id)sender {
     ratioLabel.stringValue = [NSString stringWithFormat:@"%.01f : 1", ratioSlider.floatValue];
+    self.soundTabRef.soundBoard->setCompressorRatio(ratioSlider.intValue);
 }
 
 -(IBAction) gainLevel:(id)sender {
     gainLabel.stringValue = [NSString stringWithFormat:@"%.01f", gainSlider.floatValue];
+    self.soundTabRef.soundBoard->setCompressorGain(gainSlider.intValue);
 }
 
 @end

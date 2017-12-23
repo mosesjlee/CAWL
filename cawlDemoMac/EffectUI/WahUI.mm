@@ -111,18 +111,22 @@
 
 -(IBAction) updateMixLevel:(id)sender {
     mixLevelValueField.stringValue = [NSString stringWithFormat:@"%f", mixLevelSlider.floatValue];
+    self.soundTabRef.soundBoard->setWahMixLevel(mixLevelSlider.floatValue);
 }
 
 -(IBAction) updateWahDepth:(id)sender {
 	wahDepthValueField.stringValue = [NSString stringWithFormat:@"%f", wahDepthSlider.floatValue];
+    self.soundTabRef.soundBoard->setWahModulationDepth(wahDepthLabel.floatValue);
 }
 
 -(IBAction) updateWahRate:(id)sender {
     wahRateValueField.stringValue = [NSString stringWithFormat:@"%f", wahRateSlider.floatValue];
+    self.soundTabRef.soundBoard->setWahModulationRate(wahRateSlider.floatValue);
 }
 
 -(IBAction) updateWahCenterFreq:(id)sender {
     centerFreqValueField.stringValue = [NSString stringWithFormat:@"%f", centerFreqSlider.floatValue];
+    self.soundTabRef.soundBoard->setWahCenterFreq(centerFreqSlider.floatValue);
 }
 
 @end

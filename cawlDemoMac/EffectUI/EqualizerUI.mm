@@ -269,42 +269,52 @@
 
 - (void) updateLowShelfGain:(id)sender {
 	lowShelfGainLabel.stringValue = [NSString stringWithFormat:@"%.01f", lowShelfGainSlider.floatValue];
+    self.soundTabRef.soundBoard->setEqLowShelfGain(lowShelfGainSlider.floatValue);
 }
 
 - (void) updateHighShelfGain:(id)sender {
     highShelfGainLabel.stringValue = [NSString stringWithFormat:@"%.01f", highShelfGainSlider.floatValue];
+    self.soundTabRef.soundBoard->setEqHighShelfGain(highShelfGainSlider.floatValue);
 }
 
 - (void) updateLowMidGain:(id)sender {
     lowMidGainLabel.stringValue = [NSString stringWithFormat:@"%.01f", lowMidGainSlider.floatValue];
+    self.soundTabRef.soundBoard->setEqLowMidGain(lowMidGainSlider.floatValue);
 }
 
 - (void) updateHighMidGain:(id)sender {
 	highMidGainLabel.stringValue = [NSString stringWithFormat:@"%.01f", highMidGainSlider.floatValue];
+    self.soundTabRef.soundBoard->setEqHighMidGain(highMidGainSlider.floatValue);
 }
 
 - (void) updateLowShelfCenterFreq:(id)sender {
     lowShelfFreqLabel.stringValue = [NSString stringWithFormat:@"%d", lowShelfFreqSlider.intValue];
+    self.soundTabRef.soundBoard->setEqLowShelfCenterFreq(lowShelfFreqSlider.intValue);
 }
 
 - (void) updateHighShelfCenterFreq:(id)sender {
     highShelfFreqLabel.stringValue = [NSString stringWithFormat:@"%d",highShelfFreqSlider.intValue];
+    self.soundTabRef.soundBoard->setEqHighShelfCenterFreq(highShelfFreqSlider.intValue);
 }
 
 - (void) updateLowMidCenterFreq:(id)sender {
 	lowMidFreqLabel.stringValue = [NSString stringWithFormat:@"%d", lowMidFreqSlider.intValue];
+    self.soundTabRef.soundBoard->setEqLowMidCenterFreq(lowMidFreqSlider.intValue);
 }
 
 - (void) updateHighMidCenterFreq:(id)sender {
 	highMidFreqLabel.stringValue = [NSString stringWithFormat:@"%d", highMidFreqSlider.intValue];
+    self.soundTabRef.soundBoard->setEqHighMidCenterFreq(highMidFreqSlider.intValue);
 }
 
 - (void) updateLowMidQFactor:(id)sender {
     lowMidQFactorLabel.stringValue = [NSString stringWithFormat:@"%.02f", lowMidQFactorSlider.floatValue];
+    self.soundTabRef.soundBoard->setEqLowQFactor(owMidQFactorSlider.floatValue);
 }
 
 - (void) updateHighMidQFactor:(id)sender {
     highMidQFactorLabel.stringValue = [NSString stringWithFormat:@"%.02f", highMidQFactorSlider.floatValue];
+    self.soundTabRef.soundBoard->setEqHighQFactor(highMidQFactorSlider.floatValue);
 }
 
 @end

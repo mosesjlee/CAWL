@@ -66,12 +66,12 @@
 
 - (IBAction) updateModSpeed:(NSSlider*) sender {
     modSpeedLabel.stringValue = [NSString stringWithFormat:@"%f", modSpeedSlider.floatValue];
-    //self.soundTabRef.soundBoard->setFlanger(modSpeedSlider.floatValue);
+    self.soundTabRef.soundBoard->setFlangerModulationSpeed(modSpeedSlider.floatValue);
 }
 
 - (IBAction) updateModDepth:(NSSlider*) sender {
     modDepthLabel.stringValue = [NSString stringWithFormat:@"%f", modDepthSlider.floatValue];
-    //self.soundTabRef.soundBoard->setFlanger(modSpeedSlider.floatValue);
+    self.soundTabRef.soundBoard->setFlangerModulationDepth(modSpeedSlider.floatValue);
 }
 
 
