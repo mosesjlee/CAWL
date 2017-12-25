@@ -24,7 +24,9 @@
 
 - (instancetype)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
-    
+    [self setupSpeedUI];
+    [self setupRateUI];
+    [self setupMixLevelUI];
     return self;
 }
 - (void)drawRect:(NSRect)dirtyRect {
@@ -52,15 +54,19 @@
 }
 
 - (void)setupRateUI {
-    rateTitle;
-    rateSlider;
-    rateValueLabel;
+    rateTitle = [self drawLabelTextFieldWithRect:NSMakeRect(100, 320, 70, 30)
+                                       WithTitle:@"Rate"
+                                          toView:self];
+//    rateSlider;
+//    rateValueLabel;
 }
 
 - (void)setupMixLevelUI {
-    mixLevelTitle;
-    mixLevelSlider;
-    mixLevelValueLabel;
+    mixLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(150, 320, 70, 30)
+                                           WithTitle:@"Mix Level"
+                                              toView:self];
+//    mixLevelSlider;
+//    mixLevelValueLabel;
 }
 
 #pragma mark PHASER_IBACTION

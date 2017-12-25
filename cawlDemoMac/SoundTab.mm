@@ -77,6 +77,7 @@ NSArray * effectsList = @[@"Off",
     [self createOverdriveUI];
     [self createFuzzUI];
     [self createCompressorUI];
+    [self createPhaserUI];
     
     //Create soundboard object
     _soundBoard = new CAWLSoundBoard();
@@ -380,6 +381,7 @@ NSArray * effectsList = @[@"Off",
     }
     else if([effect isEqualToString:effectsList[9]]) {
         _soundBoard->turnOnPhaser(true);
+        [self drawEffectUI:phaserUI with:coordinate];
     }
     else if([effect isEqualToString:effectsList[10]]) {
         _soundBoard->turnOnFlanger(true);
@@ -473,7 +475,11 @@ NSArray * effectsList = @[@"Off",
 }
 
 - (void)createPhaserUI {
-    
+    phaserUI = [[PhaserUI alloc] initWithFrame:NSMakeRect(0, 0, MAX_WIDTH, MAX_HEIGHT)];
+    [self.view addSubview:phaserUI];
+    [phaserUI setHidden:YES];
+    [phaserUI setNeedsLayout:YES];
+    phaserUI.soundTabRef = self;
 }
 
 - (void)createUI:(EffectUI *) ui{

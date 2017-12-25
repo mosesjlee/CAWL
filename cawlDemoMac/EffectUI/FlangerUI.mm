@@ -11,18 +11,22 @@
 @implementation FlangerUI {
     NSSlider *modDepthSlider;
     NSSlider *modSpeedSlider;
+    NSSlider *mixLevelSlider;
     
-    NSTextField *modDepthLabel;
-    NSTextField *modSpeedLabel;
+    NSTextField *modDepthValue;
+    NSTextField *modSpeedValue;
+    NSTextField *mixLevelValue;
     
     NSTextField *modDepthTitle;
     NSTextField *modSpeedTitle;
+    NSTextField *mixLevelTitle;
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
     [self setupModDepthUI];
     [self setupModSpeedUI];
+    [self setupMixLevelUI];
     return self;
 }
 - (void)drawRect:(NSRect)dirtyRect {
@@ -32,48 +36,70 @@
     [self drawBorder:dirtyRect];
 }
 
+#pragma mark FLANGER_UI_SETUP
 - (void)setupModDepthUI {
-    modDepthTitle = [self drawLabelTextFieldWithRect:NSMakeRect(15, 320, 70, 30)
+    modDepthTitle = [self drawLabelTextFieldWithRect:NSMakeRect(5, 320, 80, 25)
                                            WithTitle:@"Mod Depth"
                                               toView:self];
     
-    modDepthSlider = [self drawCircularSliderWithRect:NSMakeRect(15, 220, 30, 30)
+    modDepthSlider = [self drawCircularSliderWithRect:NSMakeRect(30, 290, 30, 30)
                                            WithMaxVal:10
                                         AndWithMinVal:0
                                          atDefaultVal:5
                                                toView:self
                                          withSelector:@selector(updateModDepth:)];
     
-    modDepthLabel = [self drawValueTextFieldWithRect:NSMakeRect(15, 260, 30, 20)
+    modDepthValue = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 55, 25)
                                               toView:self];
 }
 
 - (void)setupModSpeedUI {
-    modSpeedTitle = [self drawLabelTextFieldWithRect:NSMakeRect(100, 320, 70, 30)
+    modSpeedTitle = [self drawLabelTextFieldWithRect:NSMakeRect(75, 320, 80, 25)
                                            WithTitle:@"Mod Speed"
                                               toView:self];
     
-    modSpeedSlider = [self drawCircularSliderWithRect:NSMakeRect(100, 220, 30, 30)
+    modSpeedSlider = [self drawCircularSliderWithRect:NSMakeRect(100, 290, 30, 30)
                                            WithMaxVal:10
                                         AndWithMinVal:0
                                          atDefaultVal:5
                                                toView:self
                                          withSelector:@selector(updateModSpeed:)];
     
-    modSpeedLabel = [self drawValueTextFieldWithRect:NSMakeRect(100, 260, 30, 20)
+    modSpeedValue = [self drawValueTextFieldWithRect:NSMakeRect(85, 260, 55, 25)
                                               toView:self];
 }
 
+- (void) setupMixLevelUI {
+    mixLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(145, 320, 70, 25)
+                                           WithTitle:@"Mix Level"
+                                              toView:self];
+    
+    mixLevelSlider = [self drawCircularSliderWithRect:NSMakeRect(120, 290, 70, 30)
+                                           WithMaxVal:1.0
+                                        AndWithMinVal:0.0
+                                         atDefaultVal:0.5
+                                               toView:self
+                                         withSelector:@selector(updateMixLevel:)];
+    
+    mixLevelValue = [self drawValueTextFieldWithRect:NSMakeRect(150, 260, 55, 25)
+                                              toView:self];
+}
+
+#pragma mark FLANGER_ACTIONS
 - (IBAction) updateModSpeed:(NSSlider*) sender {
-    modSpeedLabel.stringValue = [NSString stringWithFormat:@"%f", modSpeedSlider.floatValue];
+    modSpeedValue.stringValue = [NSString stringWithFormat:@"%f", modSpeedSlider.floatValue];
     self.soundTabRef.soundBoard->setFlangerModulationSpeed(modSpeedSlider.floatValue);
 }
 
 - (IBAction) updateModDepth:(NSSlider*) sender {
-    modDepthLabel.stringValue = [NSString stringWithFormat:@"%f", modDepthSlider.floatValue];
+    modDepthValue.stringValue = [NSString stringWithFormat:@"%f", modDepthSlider.floatValue];
     self.soundTabRef.soundBoard->setFlangerModulationDepth(modSpeedSlider.floatValue);
 }
 
+- (IBAction)updateMixLevel:(id)sender {
+    mixLevelValue.stringValue = [NSString stringWithFormat:@"%.02f %%", mixLevelSlider.floatValue * 100];
+    self.soundTabRef.soundBoard->setFlangerMixLevel(mixLevelSlider.floatValue);
+}
 
 @end
 

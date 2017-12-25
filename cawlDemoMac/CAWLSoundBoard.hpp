@@ -69,6 +69,7 @@ public:
     void turnOnFlanger(bool onOff);
 	void setFlangerModulationSpeed(double newModSpeed);
 	void setFlangerModulationDepth(double newDepth);
+    void setFlangerMixLevel(double newMixLevel);
     
     //Phaser Controls
     void turnOnPhaser(bool onOff);
@@ -80,6 +81,7 @@ public:
     void turnOnReverb(bool onOff);
 	void setReverbTime(double reverbTime);
 	void setReverbTone(double toneLevel);
+    void setReverbMixLevel(double mixLevel);
     
     //Compressor Controls
     void turnOnCompressor(bool onOff);

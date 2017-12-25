@@ -63,6 +63,7 @@
     [retval setNeedsDisplay:YES];
     retval.alignment = NSTextAlignmentCenter;
     [theView addSubview:retval];
+    [retval setTarget:theView];
     return retval;
 }
 

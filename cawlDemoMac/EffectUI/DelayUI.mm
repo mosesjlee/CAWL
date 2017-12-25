@@ -47,16 +47,16 @@
 #pragma mark DELAY_UI_SETUP
 - (void)setupFeedbackUI {
     //The title
-    feedbackTitle = [self drawLabelTextFieldWithRect:NSMakeRect(15, 250, 50, 30)
-                                           WithTitle:@"FB Gain"
+    feedbackTitle = [self drawLabelTextFieldWithRect:NSMakeRect(2, 250, 80, 25)
+                                           WithTitle:@"Feedback"
                                               toView:self];
     
     //The value label
-	feedbackLabel = [self drawValueTextFieldWithRect:NSMakeRect(15, 280, 30, 20)
+	feedbackLabel = [self drawValueTextFieldWithRect:NSMakeRect(15, 280, 55, 25)
                                               toView:self];
 
     //The slider
-	feedbackSlider = [self drawCircularSliderWithRect:NSMakeRect(15, 320, 30, 30)
+	feedbackSlider = [self drawCircularSliderWithRect:NSMakeRect(25, 310, 30, 30)
 										   WithMaxVal:1.0
 										AndWithMinVal:0.0
                                          atDefaultVal:0.5
@@ -67,15 +67,15 @@
 
 
 - (void)setupWetMixUI {
-    wetMixTitle = [self drawLabelTextFieldWithRect:NSMakeRect(60, 250, 30, 30)
+    wetMixTitle = [self drawLabelTextFieldWithRect:NSMakeRect(85, 250, 60, 25)
                                          WithTitle:@"Wet Mix"
                                             toView:self];
 	
     
-    wetMixLabel = [self drawValueTextFieldWithRect:NSMakeRect(60, 280, 30, 20)
+    wetMixLabel = [self drawValueTextFieldWithRect:NSMakeRect(85, 280, 55, 25)
                                             toView:self];
     
-	wetMixSlider = [self drawCircularSliderWithRect:NSMakeRect(60, 320, 30, 30)
+	wetMixSlider = [self drawCircularSliderWithRect:NSMakeRect(95, 310, 30, 30)
 										 WithMaxVal:1.0
 									  AndWithMinVal:0.0
                                        atDefaultVal:0.5
@@ -83,20 +83,34 @@
                                        withSelector:@selector(updateWetMixLevel:)];
 }
 
-- (void)updateWetMixLevel:(id)sender {
-    wetMixLabel.stringValue = [NSString stringWithFormat:@"%f", wetMixSlider.doubleValue];
-    self.soundTabRef.soundBoard->setDelayWetMixLevel(wetMixSlider.doubleValue);
+- (void)setupDryGainUI {
+	//The title
+	dryMixTitle = [self drawLabelTextFieldWithRect:NSMakeRect(155, 250, 60, 25)
+                                         WithTitle:@"Dry Mix"
+                                            toView:self];
+	
+	//The value label
+	dryMixLabel = [self drawValueTextFieldWithRect:NSMakeRect(155, 280, 55, 25)
+                                            toView:self];
+	
+	//The slider
+	dryMixSlider = [self drawCircularSliderWithRect:NSMakeRect(165, 310, 30, 30)
+										   WithMaxVal:1.0
+										AndWithMinVal:0.0
+                                       atDefaultVal:0.5
+                                             toView:self
+                                       withSelector:@selector(updatDryGainLevel:)];
 }
 
 - (void)setupDelayTimeUI {
-    delayTimeTitle = [self drawLabelTextFieldWithRect:NSMakeRect(100, 250, 70, 30)
+    delayTimeTitle = [self drawLabelTextFieldWithRect:NSMakeRect(65, 160, 90, 30)
                                             WithTitle:@"Delay Time"
                                                toView:self];
     
-    delayTimeLabel = [self drawValueTextFieldWithRect:NSMakeRect(100, 280, 50, 20)
+    delayTimeLabel = [self drawValueTextFieldWithRect:NSMakeRect(80, 190, 60, 20)
                                                toView:self];
     
-    delayTimeSlider = [self drawCircularSliderWithRect:NSMakeRect(100, 320, 30, 30)
+    delayTimeSlider = [self drawCircularSliderWithRect:NSMakeRect(95, 210, 30, 30)
                                             WithMaxVal:1500
                                          AndWithMinVal:400
                                           atDefaultVal:300
@@ -105,40 +119,25 @@
 }
 
 
-
-- (void)setupDryGainUI {
-	//The title
-	dryMixTitle = [self drawLabelTextFieldWithRect:NSMakeRect(165, 250, 50, 30)
-                                         WithTitle:@"Dry Mix"
-                                            toView:self];
-	
-	//The value label
-	dryMixLabel = [self drawValueTextFieldWithRect:NSMakeRect(165, 280, 30, 20)
-                                            toView:self];
-	
-	//The slider
-	dryMixSlider = [self drawCircularSliderWithRect:NSMakeRect(165, 320, 30, 30)
-										   WithMaxVal:1.0
-										AndWithMinVal:0.0
-                                       atDefaultVal:0.5
-                                             toView:self
-                                       withSelector:@selector(updatDryGainLevel:)];
-}
-
 #pragma mark DELAY_ACTIONS
 - (IBAction)updateFeedbackGainLevel:(id)sender {
-    feedbackLabel.stringValue = [NSString stringWithFormat:@"%f", feedbackSlider.doubleValue];
+    feedbackLabel.stringValue = [NSString stringWithFormat:@"%.02f %%", feedbackSlider.doubleValue * 100];
     self.soundTabRef.soundBoard->setDelayFeedbackGain(feedbackSlider.doubleValue);
 }
 
 - (IBAction)updateDelayTime:(id)sender {
-    delayTimeLabel.stringValue = [NSString stringWithFormat:@"%d", delayTimeSlider.intValue];
+    delayTimeLabel.stringValue = [NSString stringWithFormat:@"%d ms", delayTimeSlider.intValue];
     self.soundTabRef.soundBoard->setNewDelayTime(delayTimeSlider.intValue);
 }
 
 - (IBAction)updatDryGainLevel:(NSSlider *)sender {
-	dryMixLabel.stringValue = [NSString stringWithFormat:@"%f", dryMixSlider.floatValue];
+	dryMixLabel.stringValue = [NSString stringWithFormat:@"%.02f %%", dryMixSlider.floatValue * 100];
 	self.soundTabRef.soundBoard->setDelayDryMixGain(dryMixSlider.floatValue);
+}
+
+- (IBAction)updateWetMixLevel:(id)sender {
+    wetMixLabel.stringValue = [NSString stringWithFormat:@"%.02f %%", wetMixSlider.doubleValue * 100];
+    self.soundTabRef.soundBoard->setDelayWetMixLevel(wetMixSlider.doubleValue);
 }
 
 @end

@@ -214,6 +214,11 @@ void CAWLSoundBoard::setFlangerModulationDepth(double newDepth)
 	flanger->setModulationDepth(newDepth);
 }
 
+void CAWLSoundBoard::setFlangerMixLevel(double newMixLevel)
+{
+    flanger->setMixLevel(newMixLevel);
+}
+
 #pragma mark PHASER_CONTROL
 void CAWLSoundBoard::turnOnPhaser(bool onOff)
 {
@@ -255,6 +260,11 @@ void CAWLSoundBoard::setReverbTime(double reverbTime)
 void CAWLSoundBoard::setReverbTone(double toneLevel)
 {
     reverb->adjustReverbTone(toneLevel);
+}
+
+void CAWLSoundBoard::setReverbMixLevel(double mixLevel)
+{
+    reverb->setReverbMix(mixLevel);
 }
 
 #pragma mark COMPRESSOR_CONTROL

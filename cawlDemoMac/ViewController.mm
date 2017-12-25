@@ -33,11 +33,6 @@
 - (void)viewWillAppear
 {
     [super viewWillAppear];
-        
-
-}
-- (IBAction)testSlider:(NSSlider *)sender {
-    NSLog(@"TEST LOG");
 }
 
 - (void)setupChannelActivationButtons {

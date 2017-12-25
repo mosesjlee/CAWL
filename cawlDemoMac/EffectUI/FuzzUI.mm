@@ -16,6 +16,10 @@
 	NSTextField *gainTitle;
 	NSTextField *volumeTitle;
 	NSTextField *toneTitle;
+    
+    NSTextField *gainValue;
+    NSTextField *volumeValue;
+    NSTextField *toneValue;
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect {
@@ -45,6 +49,8 @@
                                      atDefaultVal:0.5
                                            toView:self
                                      withSelector:@selector(updateGainLevel:)];
+    gainValue = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 40, 25)
+                                           toView:self];
 }
 
 -(void) setupVolumeUI {
@@ -58,6 +64,8 @@
                                        atDefaultVal:0.5
                                              toView:self
                                        withSelector:@selector(updateVolumeLevel:)];
+    volumeValue = [self drawValueTextFieldWithRect:NSMakeRect(90, 260, 40, 25)
+                                            toView:self];
 }
 
 -(void) setupToneUI {
@@ -71,20 +79,30 @@
                                      atDefaultVal:0.5
                                            toView:self
                                      withSelector:@selector(updateToneLevel:)];
+    toneValue = [self drawValueTextFieldWithRect:NSMakeRect(150, 260, 55, 25)
+                                          toView:self];
 }
 
 #pragma mark IBACTION_FUZZ
 
 -(IBAction) updateGainLevel:(id)sender {
-	
+    gainValue.stringValue = [NSString stringWithFormat:@"%.02f", gainSlider.floatValue * 10];
+    self.soundTabRef.soundBoard->setFuzzGain(gainSlider.floatValue);
 }
 
 -(IBAction) updateVolumeLevel:(id)sender {
-	
+    volumeValue.stringValue = [NSString stringWithFormat:@"%.02f", volumeSlider.floatValue * 10];
+    //self.soundTabRef.soundBoard->setOverdriveGain(driveSlider.intValue);
 }
 
 -(IBAction) updateToneLevel:(id)sender {
-	
+    toneValue.stringValue = [NSString stringWithFormat:@"%.02f %%", (toneSlider.floatValue * 100)];
+    if(toneSlider.floatValue >= .5) {
+        self.soundTabRef.soundBoard->setOverdriveToneLevel((toneSlider.floatValue-.5)/.5 * 12.0);
+    }
+    else {
+        self.soundTabRef.soundBoard->setOverdriveToneLevel(toneSlider.floatValue/.5 * -12.0);
+    }
 }
 
 @end

@@ -51,7 +51,7 @@
                                                  toView:self
                                            withSelector:@selector(updateChorusRate:)];
     
-    chorusRateValue = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 30, 25)
+    chorusRateValue = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 50, 25)
                                                 toView:self];
 }
 
@@ -67,7 +67,7 @@
                                                   toView:self
                                             withSelector:@selector(updateChorusDepthLevel:)];
     
-    chorusDepthValue = [self drawValueTextFieldWithRect:NSMakeRect(90, 260, 30, 25)
+    chorusDepthValue = [self drawValueTextFieldWithRect:NSMakeRect(90, 260, 50, 25)
                                                  toView:self];
 }
 
@@ -83,7 +83,7 @@
                                                toView:self
                                          withSelector:@selector(updateMixLevel:)];
     
-    chorusMixValue = [self drawValueTextFieldWithRect:NSMakeRect(160, 260, 30, 25)
+    chorusMixValue = [self drawValueTextFieldWithRect:NSMakeRect(160, 260, 55, 25)
                                                toView:self];
 }
 
@@ -100,7 +100,7 @@
 }
 
 -(IBAction) updateMixLevel:(id)sender {
-    chorusMixValue.stringValue = [NSString stringWithFormat:@"%f", chorusMixLevel.floatValue];
+    chorusMixValue.stringValue = [NSString stringWithFormat:@"%.02f %%", chorusMixLevel.floatValue * 100];
     self.soundTabRef.soundBoard->setChorusMixLevel(chorusMixLevel.floatValue);
 }
 

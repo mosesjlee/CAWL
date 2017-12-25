@@ -309,7 +309,7 @@
 
 - (void) updateLowMidQFactor:(id)sender {
     lowMidQFactorLabel.stringValue = [NSString stringWithFormat:@"%.02f", lowMidQFactorSlider.floatValue];
-    self.soundTabRef.soundBoard->setEqLowQFactor(owMidQFactorSlider.floatValue);
+    self.soundTabRef.soundBoard->setEqLowQFactor(lowMidQFactorSlider.floatValue);
 }
 
 - (void) updateHighMidQFactor:(id)sender {

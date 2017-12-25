@@ -40,64 +40,74 @@
 
 #pragma mark SETUP_UI
 - (void) setupReverbTimeUI {
-    reverbTimeTitle = [self drawLabelTextFieldWithRect:NSMakeRect(10, 320, 35, 30)
+    reverbTimeTitle = [self drawLabelTextFieldWithRect:NSMakeRect(25, 310, 40, 30)
                                              WithTitle:@"Time"
                                                 toView:self];
     
-    reverbTimeSlider = [self drawCircularSliderWithRect:NSMakeRect(10, 290, 30, 30)
-                                             WithMaxVal:10
-                                          AndWithMinVal:100
+    reverbTimeSlider = [self drawCircularSliderWithRect:NSMakeRect(30, 290, 30, 30)
+                                             WithMaxVal:100
+                                          AndWithMinVal:10
                                            atDefaultVal:10
                                                  toView:self
                                            withSelector:@selector(updateReverbTime:)];
     
-    reverbTimeValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(10, 260, 30, 30)
+    reverbTimeValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 50, 25)
                                                      toView:self];
 }
 
 -(void) setupMixLevelUI {
-    mixLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(60, 320, 30, 30)
+    mixLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(85, 310, 40, 30)
                                            WithTitle:@"Mix"
                                               toView:self];
     
-    mixLevelSlider = [self drawCircularSliderWithRect:NSMakeRect(60, 290, 30, 30)
+    mixLevelSlider = [self drawCircularSliderWithRect:NSMakeRect(90, 290, 30, 30)
                                            WithMaxVal:1.0
                                         AndWithMinVal:0.0
                                          atDefaultVal:0.5
                                                toView:self
                                          withSelector:@selector(updateMixLevel:)];
     
-    mixLevelValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(60, 260, 30, 30)
+    mixLevelValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(80, 260, 55, 25)
                                                    toView:self];
 }
 
 -(void) setupToneLevelUI {
-	toneLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(110, 320, 30, 30)
+	toneLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(155, 310, 40, 30)
                                             WithTitle:@"Tone"
                                                toView:self];
     
-    toneLevelSlider = [self drawCircularSliderWithRect:NSMakeRect(110, 290, 30, 30)
+    toneLevelSlider = [self drawCircularSliderWithRect:NSMakeRect(160, 290, 30, 30)
                                             WithMaxVal:1.0
                                          AndWithMinVal:0.0
                                           atDefaultVal:0.0
                                                 toView:self
                                           withSelector:@selector(updateToneLevel:)];
     
-    toneLevelValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(110, 260, 30, 30)
+    toneLevelValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(150, 260, 55, 25)
                                                     toView:self];
 }
 
 #pragma mark IBACTION_REVERB
-- (IBAction)updateReverbTime:(NSSlider *) sender {
-    
+- (IBAction)updateReverbTime:(id *) sender {
+    reverbTimeValueLabel.stringValue = [NSString stringWithFormat:@"%d ms", reverbTimeSlider.intValue];
+    self.soundTabRef.soundBoard->setReverbTime(reverbTimeSlider.intValue);
 }
 
 - (IBAction) updateMixLevel:(id)sender {
-	
+	mixLevelValueLabel.stringValue = [NSString stringWithFormat:@"%.02f %%", (mixLevelSlider.floatValue * 100)];
+    self.soundTabRef.soundBoard->setReverbMixLevel(mixLevelSlider.floatValue);
 }
 
 - (IBAction) updateToneLevel:(id)sender {
-	
+    toneLevelValueLabel.stringValue = [NSString stringWithFormat:@"%.02f %%", (toneLevelSlider.floatValue * 100)];
+    if(toneLevelSlider.floatValue >= .5) {
+        self.soundTabRef.soundBoard->setReverbTone((toneLevelSlider.floatValue-.5)/.5 * 12.0);
+        NSLog(@"REVERB TONE %f", (toneLevelSlider.floatValue-.5)/.5 * 12.0);
+    }
+    else {
+        self.soundTabRef.soundBoard->setReverbTone(toneLevelSlider.floatValue/.5 * -12.0);
+        NSLog(@"REVERB TONE %f", (.5-toneLevelSlider.floatValue)/.5 * -12.0);
+    }
 }
 
 @end

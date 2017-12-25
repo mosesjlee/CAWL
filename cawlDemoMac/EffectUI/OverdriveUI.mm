@@ -43,12 +43,14 @@
                                         WithTitle:@"Drive"
                                            toView:self];
     
-    driveSlider = [self drawCircularSliderWithRect:NSMakeRect(20, 290, 30, 30)
+    driveSlider = [self drawCircularSliderWithRect:NSMakeRect(25, 290, 30, 30)
                                         WithMaxVal:1.0
                                      AndWithMinVal:0.0
                                       atDefaultVal:0.5
                                             toView:self
                                       withSelector:@selector(updateDriveLevel:)];
+    driveValue = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 40, 25)
+                                           toView:self];
 }
 
 -(void) setupVolumeUI {
@@ -62,10 +64,13 @@
                                        atDefaultVal:0.5
                                              toView:self
                                        withSelector:@selector(updateVolumeLevel:)];
+    
+    volumeValue = [self drawValueTextFieldWithRect:NSMakeRect(90, 260, 40, 25)
+                                            toView:self];
 }
 
 -(void) setupToneUI {
-    toneTitle = [self drawLabelTextFieldWithRect:NSMakeRect(160, 320, 40, 25)
+    toneTitle = [self drawLabelTextFieldWithRect:NSMakeRect(155, 320, 40, 25)
                                        WithTitle:@"Tone"
                                           toView:self];
     
@@ -75,20 +80,31 @@
                                    atDefaultVal:0.5
                                          toView:self
                                    withSelector:@selector(updateToneLevel:)];
+    
+    toneValue = [self drawValueTextFieldWithRect:NSMakeRect(150, 260, 55, 25)
+                                          toView:self];
 }
 
 #pragma mark IBACTION_OVERDRIVE
 
 -(IBAction) updateDriveLevel:(id)sender {
-	
+    driveValue.stringValue = [NSString stringWithFormat:@"%.02f", driveSlider.floatValue * 10];
+    self.soundTabRef.soundBoard->setOverdriveGain(driveSlider.floatValue);
 }
 
 -(IBAction) updateVolumeLevel:(id)sender {
-	
+    volumeValue.stringValue = [NSString stringWithFormat:@"%.02f", volumeSlider.floatValue * 10];
+    //self.soundTabRef.soundBoard->setOverdriveGain(driveSlider.intValue);
 }
 
 -(IBAction) updateToneLevel:(id)sender {
-	
+    toneValue.stringValue = [NSString stringWithFormat:@"%.02f %%", (toneKnob.floatValue * 100)];
+    if(toneKnob.floatValue >= .5) {
+        self.soundTabRef.soundBoard->setOverdriveToneLevel((toneKnob.floatValue-.5)/.5 * 12.0);
+    }
+    else {
+        self.soundTabRef.soundBoard->setOverdriveToneLevel(toneKnob.floatValue/.5 * -12.0);
+    }
 }
 @end
 
