@@ -51,6 +51,7 @@
 		912E051C1F80254800C13E55 /* CAWLFIRCombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 911098001F6F2387002A9A92 /* CAWLFIRCombFilter.cpp */; };
 		915F833E1F5F174B00D4F422 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91062DBA1DE396A700BCBDA0 /* AudioToolbox.framework */; };
 		915F83401F5F174B00D4F422 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 915F833F1F5F174B00D4F422 /* AudioUnit.framework */; };
+		916BF55A1FF0D3100031F350 /* DebugUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 916BF5581FF0D3100031F350 /* DebugUtilities.cpp */; };
 		916FF5B31FA52BCF00DEF09A /* CAWLModDelayEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 916FF5B11FA52BCF00DEF09A /* CAWLModDelayEffect.cpp */; };
 		916FF5B41FA52BCF00DEF09A /* CAWLModDelayEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 916FF5B11FA52BCF00DEF09A /* CAWLModDelayEffect.cpp */; };
 		9177E63E1F7CCEFA00D36C46 /* CAWLHighPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9177E63D1F7CCE4600D36C46 /* CAWLHighPassFilter.cpp */; };
@@ -176,6 +177,8 @@
 		912E05171F8023BF00C13E55 /* CAWLUniversalCombFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLUniversalCombFilter.cpp; sourceTree = "<group>"; };
 		912E05181F8023BF00C13E55 /* CAWLUniversalCombFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLUniversalCombFilter.hpp; sourceTree = "<group>"; };
 		915F833F1F5F174B00D4F422 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		916BF5581FF0D3100031F350 /* DebugUtilities.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DebugUtilities.cpp; sourceTree = "<group>"; };
+		916BF5591FF0D3100031F350 /* DebugUtilities.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DebugUtilities.hpp; sourceTree = "<group>"; };
 		916FF5B11FA52BCF00DEF09A /* CAWLModDelayEffect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAWLModDelayEffect.cpp; sourceTree = "<group>"; };
 		916FF5B21FA52BCF00DEF09A /* CAWLModDelayEffect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLModDelayEffect.hpp; sourceTree = "<group>"; };
 		9177E63C1F7CCE4500D36C46 /* CAWLHighPassFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAWLHighPassFilter.hpp; sourceTree = "<group>"; };
@@ -394,6 +397,8 @@
 				91E056F81F909910008A5B25 /* SoundTab.mm */,
 				91E056FA1F9146B8008A5B25 /* TapTempoCounter.h */,
 				91E056FB1F9146B8008A5B25 /* TapTempoCounter.mm */,
+				916BF5581FF0D3100031F350 /* DebugUtilities.cpp */,
+				916BF5591FF0D3100031F350 /* DebugUtilities.hpp */,
 				91CAEC991DC8587900CEF065 /* Assets.xcassets */,
 				91CAEC9B1DC8587900CEF065 /* Main.storyboard */,
 				91CAEC9E1DC8587900CEF065 /* Info.plist */,
@@ -722,6 +727,7 @@
 				910FB5261F948D7F000ED66C /* CAWLReverb.cpp in Sources */,
 				91E057111F9177BC008A5B25 /* CAWLUniversalCombFilter.cpp in Sources */,
 				91E9D2881F9D3FD700491E6A /* FlangerUI.mm in Sources */,
+				916BF55A1FF0D3100031F350 /* DebugUtilities.cpp in Sources */,
 				91BB1F231F9EF3DE000804CE /* CAWLTriangleWaveOsc.cpp in Sources */,
 				91E057131F9177BC008A5B25 /* CAWLDelayLine.cpp in Sources */,
 				91E056FF1F914A8E008A5B25 /* DelayUI.mm in Sources */,

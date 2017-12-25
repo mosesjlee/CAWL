@@ -6,6 +6,10 @@
 //  Copyright © 2017 Moses Lee. All rights reserved.
 //
 
+#ifdef DEBUG
+#include "DebugUtilities.hpp"
+#endif
+
 #import "SoundTab.h"
 #import "AmpUI.h"
 #import "DelayUI.h"
@@ -82,9 +86,12 @@ NSArray * effectsList = @[@"Off",
     //Create soundboard object
     _soundBoard = new CAWLSoundBoard();
     
+    fillGuitarStream();
+    
     //Register the block
     __block CAWLSoundBoard * weak = _soundBoard;
     _buffer = ^(float * buf, const unsigned int numSamples) {
+        testBuffer(buf, numSamples);
         weak->processBuffer(buf, numSamples);
     };
     return self;
