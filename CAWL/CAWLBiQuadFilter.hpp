@@ -43,7 +43,7 @@ protected:
     double d0 = 0.0;
     
     //Filter gain and center frequencies
-    double cGain;
+    double cGain = 0.0;
     double cCenterFrequency;
     
     //Intermediary buffer

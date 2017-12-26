@@ -9,22 +9,22 @@
 #import "PhaserUI.h"
 
 @implementation PhaserUI {
-	NSSlider *speedSlider;
+	NSSlider *depthSlider;
 	NSSlider *rateSlider;
 	NSSlider *mixLevelSlider;
 	
-	NSTextField *speedTitle;
+	NSTextField *depthTitle;
 	NSTextField *rateTitle;
 	NSTextField *mixLevelTitle;
     
-    NSTextField *speedValueLabel;
+    NSTextField *depthValueLabel;
     NSTextField *rateValueLabel;
     NSTextField *mixLevelValueLabel;
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
-    [self setupSpeedUI];
+    [self setupDepthUI];
     [self setupRateUI];
     [self setupMixLevelUI];
     return self;
@@ -37,49 +37,68 @@
 }
 
 #pragma mark SETUP_UI
-- (void)setupSpeedUI {
-    speedTitle = [self drawLabelTextFieldWithRect:NSMakeRect(15, 320, 70, 30)
-                                        WithTitle:@"Speed"
+- (void)setupDepthUI {
+    depthTitle = [self drawLabelTextFieldWithRect:NSMakeRect(15, 320, 70, MAX_TEXTFIELD_HEIGHT)
+                                        WithTitle:@"Depth"
                                            toView:self];
     
-    speedSlider = [self drawCircularSliderWithRect:NSMakeRect(20, 290, 30, 30)
+    depthSlider = [self drawCircularSliderWithRect:NSMakeRect(20, 290, 30, 30)
                                         WithMaxVal:1.0
                                      AndWithMinVal:0.0
                                       atDefaultVal:0.5
                                             toView:self
-                                      withSelector:@selector(updateSpeed:)];
+                                      withSelector:@selector(updateDepth:)];
     
-    speedValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 30, 30)
+    depthValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 30, MAX_TEXTFIELD_HEIGHT)
                                                 toView:self];
 }
 
 - (void)setupRateUI {
-    rateTitle = [self drawLabelTextFieldWithRect:NSMakeRect(100, 320, 70, 30)
+    rateTitle = [self drawLabelTextFieldWithRect:NSMakeRect(100, 320, 70, MAX_TEXTFIELD_HEIGHT)
                                        WithTitle:@"Rate"
                                           toView:self];
-//    rateSlider;
-//    rateValueLabel;
+    
+    rateSlider = [self drawCircularSliderWithRect:NSMakeRect(100, 290, 30, 30)
+                                       WithMaxVal:1.0
+                                    AndWithMinVal:0.0
+                                     atDefaultVal:0.5
+                                           toView:self
+                                     withSelector:@selector(updateRate:)];
+    
+    rateValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(100, 260, 30, MAX_TEXTFIELD_HEIGHT)
+                                             toView:self];
 }
 
 - (void)setupMixLevelUI {
-    mixLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(150, 320, 70, 30)
+    mixLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(150, 320, 70, MAX_TEXTFIELD_HEIGHT)
                                            WithTitle:@"Mix Level"
                                               toView:self];
-//    mixLevelSlider;
-//    mixLevelValueLabel;
+    
+    mixLevelSlider = [self drawCircularSliderWithRect:NSMakeRect(150, 290, 30, 30)
+                                           WithMaxVal:1.0
+                                        AndWithMinVal:0.0
+                                         atDefaultVal:0.5
+                                               toView:self
+                                         withSelector:@selector(updateMixLevel:)];
+    
+    mixLevelValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(150, 260, 30, MAX_TEXTFIELD_HEIGHT)
+                                                   toView:self];
 }
 
 #pragma mark PHASER_IBACTION
-- (IBAction)updateSpeed:(id) sender {
-	
+- (IBAction)updateDepth:(id) sender {
+    depthValueLabel.stringValue = [NSString stringWithFormat:@"%f", depthSlider.floatValue];
+    self.soundTabRef.soundBoard->setPhaserDepth(depthSlider.floatValue);
 }
 
 - (IBAction)updateRate:(id)sender {
-	
+	rateValueLabel.stringValue = [NSString stringWithFormat:@"%f", rateSlider.floatValue];
+    self.soundTabRef.soundBoard->setPhaserRate(rateSlider.floatValue);
 }
 
 - (IBAction)updateMixLevel:(id)sender {
-	
+	mixLevelValueLabel.stringValue = [NSString stringWithFormat:@"%.02f %%", mixLevelSlider.floatValue];
+    self.soundTabRef.soundBoard->setPhaserMixLevel(mixLevelSlider.floatValue);
 }
 @end
 

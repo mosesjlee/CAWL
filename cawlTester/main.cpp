@@ -173,7 +173,7 @@ int main(int argc, const char * argv[]) {
 //        ptrToUcf->processBuffer(data, numSamples);
 //        ptrToAmp->processBuffer(data, numSamples);
 //        lsfPtr->processBuffer(data, numSamples);
-//        hsfPtr->processBuffer(data, numSamples);
+        hsfPtr->processBuffer(data, numSamples);
 //        pfPtr->processBuffer(data, numSamples);
 //        pf2Ptr->processBuffer(data, numSamples);
 		
@@ -185,8 +185,8 @@ int main(int argc, const char * argv[]) {
 //        wahPtr->processBuffer(data, numSamples);
 //        ptrToValve->processBuffer(data,numSamples);
 //        odPtr->processBuffer(data, numSamples);
-        phaserPtr->processBuffer(data, numSamples);
-//        fuzzPtr->processBuffer(data, numSamples);
+//        phaserPtr->processBuffer(data, numSamples);
+        fuzzPtr->processBuffer(data, numSamples);
 //        compPtr->processBuffer(data, numSamples);
 //        rvrbPtr->processBuffer(data, numSamples);
         

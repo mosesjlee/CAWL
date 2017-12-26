@@ -20,7 +20,6 @@ CAWLBiQuadFilter::CAWLBiQuadFilter()
  */
 CAWLBiQuadFilter::~CAWLBiQuadFilter()
 {
-	
 }
 
 /*

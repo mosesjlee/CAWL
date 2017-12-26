@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "SoundTab.h"
+#define MAX_TEXTFIELD_HEIGHT 25
+
 
 @interface EffectUI : NSView
 @property SoundTab *soundTabRef;

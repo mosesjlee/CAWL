@@ -686,11 +686,11 @@
             <objects>
                 <viewController title="Sound Board" id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="1242" height="523"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1341" height="523"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tabView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B4d-jO-eDd">
-                                <rect key="frame" x="-8" y="66" width="1258" height="450"/>
+                                <rect key="frame" x="-8" y="66" width="1357" height="450"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems/>
@@ -732,7 +732,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="456" y="781.5"/>
+            <point key="canvasLocation" x="505.5" y="781.5"/>
         </scene>
     </scenes>
 </document>

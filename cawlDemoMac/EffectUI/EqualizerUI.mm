@@ -78,7 +78,7 @@
 - (void)setupLowShelfUI {
     //Frequency Choice
     //Title
-    lowShelfFreqLabel = [self drawLabelTextFieldWithRect:NSMakeRect(15, 320, 35, 30)
+    lowShelfFreqLabel = [self drawLabelTextFieldWithRect:NSMakeRect(15, 320, 35, MAX_TEXTFIELD_HEIGHT)
                                                WithTitle:@"Low"
                                                   toView:self];
     
@@ -91,12 +91,12 @@
                                              withSelector:@selector(updateLowShelfCenterFreq:)];
     
     //Value
-    lowShelfFreqLabel = [self drawValueTextFieldWithRect:NSMakeRect(15, 260, 30, 25)
+    lowShelfFreqLabel = [self drawValueTextFieldWithRect:NSMakeRect(5, 260, 55, MAX_TEXTFIELD_HEIGHT)
                                                   toView:self];
     
     //Gain Level
     //Title
-    lowShelfGainTitle = [self drawLabelTextFieldWithRect:NSMakeRect(15, 230, 35, 30)
+    lowShelfGainTitle = [self drawLabelTextFieldWithRect:NSMakeRect(15, 230, 35, MAX_TEXTFIELD_HEIGHT)
                                                WithTitle:@"Gain"
                                                   toView:self];
     
@@ -109,16 +109,16 @@
                                             withSelector:@selector(updateLowShelfGain:)];
     
     //Value
-    lowShelfGainLabel = [self drawValueTextFieldWithRect:NSMakeRect(15, 140, 40, 25)
+    lowShelfGainLabel = [self drawValueTextFieldWithRect:NSMakeRect(15, 140, 40, MAX_TEXTFIELD_HEIGHT)
                                                   toView:self];
 }
 
 - (void)setupHighShelfUI {
     //Frequency Choice
     //Title
-    highShelfFreqLabel = [self drawLabelTextFieldWithRect:NSMakeRect(165, 320, 35, 30)
-                                               WithTitle:@"High"
-                                                  toView:self];
+    highMidGainTitle = [self drawLabelTextFieldWithRect:NSMakeRect(170, 320, 35, MAX_TEXTFIELD_HEIGHT)
+                                              WithTitle:@"High"
+                                                 toView:self];
     
     //Slider
     highShelfFreqSlider = [self drawCircularSliderWithRect:NSMakeRect(165, 290, 30, 30)
@@ -129,12 +129,12 @@
                                              withSelector:@selector(updateHighShelfCenterFreq:)];
     
     //Value
-    highShelfFreqLabel = [self drawValueTextFieldWithRect:NSMakeRect(165, 260, 45, 25)
+    highShelfFreqLabel = [self drawValueTextFieldWithRect:NSMakeRect(170, 260, 60, MAX_TEXTFIELD_HEIGHT)
                                                   toView:self];
     
     //Gain Level
     //Title
-    highShelfGainTitle = [self drawLabelTextFieldWithRect:NSMakeRect(165, 230, 35, 30)
+    highShelfGainTitle = [self drawLabelTextFieldWithRect:NSMakeRect(165, 230, 35, MAX_TEXTFIELD_HEIGHT)
                                                WithTitle:@"Gain"
                                                   toView:self];
     
@@ -147,16 +147,16 @@
                                             withSelector:@selector(updateHighShelfGain:)];
     
     //Value
-    highShelfGainLabel = [self drawValueTextFieldWithRect:NSMakeRect(165, 140, 40, 25)
+    highShelfGainLabel = [self drawValueTextFieldWithRect:NSMakeRect(165, 140, 40, MAX_TEXTFIELD_HEIGHT)
                                                   toView:self];
 }
 
 - (void)setupLowMidUI {
     //Frequency Choice
     //Title
-    lowMidFreqLabel = [self drawLabelTextFieldWithRect:NSMakeRect(65, 320, 35, 30)
-                                               WithTitle:@"Low Mid"
-                                                  toView:self];
+    lowMidFreqTitle = [self drawLabelTextFieldWithRect:NSMakeRect(50, 320, 60, MAX_TEXTFIELD_HEIGHT)
+                                             WithTitle:@"Low Mid"
+                                                toView:self];
     
     //Slider
     lowMidFreqSlider = [self drawCircularSliderWithRect:NSMakeRect(65, 290, 30, 30)
@@ -167,12 +167,12 @@
                                              withSelector:@selector(updateLowMidCenterFreq:)];
     
     //Value
-    lowMidFreqLabel = [self drawValueTextFieldWithRect:NSMakeRect(65, 260, 40, 25)
+    lowMidFreqLabel = [self drawValueTextFieldWithRect:NSMakeRect(60, 260, 55, MAX_TEXTFIELD_HEIGHT)
                                                   toView:self];
     
     //Gain Level
     //Title
-    lowMidGainTitle = [self drawLabelTextFieldWithRect:NSMakeRect(65, 230, 35, 30)
+    lowMidGainTitle = [self drawLabelTextFieldWithRect:NSMakeRect(65, 230, 35, MAX_TEXTFIELD_HEIGHT)
                                                WithTitle:@"Gain"
                                                   toView:self];
     
@@ -185,12 +185,12 @@
                                             withSelector:@selector(updateLowMidGain:)];
     
     //Value
-    lowMidGainLabel = [self drawValueTextFieldWithRect:NSMakeRect(65, 140, 40, 25)
-                                                  toView:self];
+    lowMidGainLabel = [self drawValueTextFieldWithRect:NSMakeRect(65, 140, 40, MAX_TEXTFIELD_HEIGHT)
+                                                toView:self];
     
     //Q Factor
     //Title
-    lowMidQFactorTitle = [self drawLabelTextFieldWithRect:NSMakeRect(50, 110, 65, 25)
+    lowMidQFactorTitle = [self drawLabelTextFieldWithRect:NSMakeRect(50, 110, 65, MAX_TEXTFIELD_HEIGHT)
                                                 WithTitle:@"Q Factor"
                                                    toView:self];
     
@@ -204,19 +204,19 @@
                                               withSelector:@selector(updateLowMidQFactor:)];
     
     //Value
-    lowMidQFactorLabel = [self drawValueTextFieldWithRect:NSMakeRect(65, 50, 30, 25)
+    lowMidQFactorLabel = [self drawValueTextFieldWithRect:NSMakeRect(65, 50, 30, MAX_TEXTFIELD_HEIGHT)
                                                    toView:self];
 }
 
 - (void)setupHighMidUI {
     //Frequency Choice
     //Title
-    highMidFreqLabel = [self drawLabelTextFieldWithRect:NSMakeRect(110, 320, 35, 30)
-                                               WithTitle:@"High Mid"
-                                                  toView:self];
+    highMidFreqTitle = [self drawLabelTextFieldWithRect:NSMakeRect(110, 320, 60, MAX_TEXTFIELD_HEIGHT)
+                                              WithTitle:@"High Mid"
+                                                 toView:self];
     
     //Slider
-    highMidFreqSlider = [self drawCircularSliderWithRect:NSMakeRect(110, 290, 30, 30)
+    highMidFreqSlider = [self drawCircularSliderWithRect:NSMakeRect(115, 290, 30, 30)
                                                WithMaxVal:12000
                                             AndWithMinVal:5000
                                              atDefaultVal:8000
@@ -224,12 +224,12 @@
                                              withSelector:@selector(updateHighMidCenterFreq:)];
     
     //Value
-    highMidFreqLabel = [self drawValueTextFieldWithRect:NSMakeRect(110, 260, 45, 25)
+    highMidFreqLabel = [self drawValueTextFieldWithRect:NSMakeRect(115, 260, 55, MAX_TEXTFIELD_HEIGHT)
                                                   toView:self];
     
     //Gain Level
     //Title
-    highMidGainTitle = [self drawLabelTextFieldWithRect:NSMakeRect(110, 230, 35, 30)
+    highMidGainTitle = [self drawLabelTextFieldWithRect:NSMakeRect(110, 230, 35, MAX_TEXTFIELD_HEIGHT)
                                                WithTitle:@"Gain"
                                                   toView:self];
     
@@ -242,17 +242,17 @@
                                             withSelector:@selector(updateHighMidGain:)];
     
     //Value
-    highMidGainLabel = [self drawValueTextFieldWithRect:NSMakeRect(110, 140, 40, 25)
+    highMidGainLabel = [self drawValueTextFieldWithRect:NSMakeRect(110, 140, 40, MAX_TEXTFIELD_HEIGHT)
                                                   toView:self];
     
     //Q Factor
     //Title
-    highMidQFactorTitle = [self drawLabelTextFieldWithRect:NSMakeRect(100, 110, 65, 25)
+    highMidQFactorTitle = [self drawLabelTextFieldWithRect:NSMakeRect(100, 110, 65, MAX_TEXTFIELD_HEIGHT)
                                                  WithTitle:@"Q Factor"
                                                     toView:self];
     
     //Slider
-    //lowMidQFactorSlider
+    //highMidQFactorSlider
     highMidQFactorSlider = [self drawCircularSliderWithRect:NSMakeRect(110, 80, 30, 30)
                                                 WithMaxVal:10
                                              AndWithMinVal:0.1
@@ -261,7 +261,7 @@
                                               withSelector:@selector(updateHighMidQFactor:)];
     
     //Value
-    highMidQFactorLabel = [self drawValueTextFieldWithRect:NSMakeRect(110, 50, 30, 25)
+    highMidQFactorLabel = [self drawValueTextFieldWithRect:NSMakeRect(110, 50, 30, MAX_TEXTFIELD_HEIGHT)
                                                     toView:self];
 }
 
@@ -288,22 +288,22 @@
 }
 
 - (void) updateLowShelfCenterFreq:(id)sender {
-    lowShelfFreqLabel.stringValue = [NSString stringWithFormat:@"%d", lowShelfFreqSlider.intValue];
+    lowShelfFreqLabel.stringValue = [NSString stringWithFormat:@"%d Hz", lowShelfFreqSlider.intValue];
     self.soundTabRef.soundBoard->setEqLowShelfCenterFreq(lowShelfFreqSlider.intValue);
 }
 
 - (void) updateHighShelfCenterFreq:(id)sender {
-    highShelfFreqLabel.stringValue = [NSString stringWithFormat:@"%d",highShelfFreqSlider.intValue];
+    highShelfFreqLabel.stringValue = [NSString stringWithFormat:@"%.01f KHz",highShelfFreqSlider.floatValue/1000];
     self.soundTabRef.soundBoard->setEqHighShelfCenterFreq(highShelfFreqSlider.intValue);
 }
 
 - (void) updateLowMidCenterFreq:(id)sender {
-	lowMidFreqLabel.stringValue = [NSString stringWithFormat:@"%d", lowMidFreqSlider.intValue];
+	lowMidFreqLabel.stringValue = [NSString stringWithFormat:@"%d Hz", lowMidFreqSlider.intValue];
     self.soundTabRef.soundBoard->setEqLowMidCenterFreq(lowMidFreqSlider.intValue);
 }
 
 - (void) updateHighMidCenterFreq:(id)sender {
-	highMidFreqLabel.stringValue = [NSString stringWithFormat:@"%d", highMidFreqSlider.intValue];
+	highMidFreqLabel.stringValue = [NSString stringWithFormat:@"%.01f KHz", highMidFreqSlider.floatValue/1000];
     self.soundTabRef.soundBoard->setEqHighMidCenterFreq(highMidFreqSlider.intValue);
 }
 

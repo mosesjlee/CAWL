@@ -42,7 +42,7 @@
 
 #pragma mark SETUP_UI
 -(void) setupThresholdUI {
-    thresholdTitle = [self drawLabelTextFieldWithRect:NSMakeRect(5, 320, 65, 30)
+    thresholdTitle = [self drawLabelTextFieldWithRect:NSMakeRect(5, 320, 65, MAX_TEXTFIELD_HEIGHT)
                                             WithTitle:@"Threshold"
                                                toView:self];
     
@@ -53,12 +53,12 @@
                                                 toView:self
                                           withSelector:@selector(updateThresholdLevel:)];
     
-    thresholdLabel = [self drawValueTextFieldWithRect:NSMakeRect(15, 260, 45, 25)
+    thresholdLabel = [self drawValueTextFieldWithRect:NSMakeRect(15, 260, 45, MAX_TEXTFIELD_HEIGHT)
                                                toView:self];
 }
 
 -(void) setupKneeUI {
-    kneeTitle = [self drawLabelTextFieldWithRect:NSMakeRect(70, 320, 40, 30)
+    kneeTitle = [self drawLabelTextFieldWithRect:NSMakeRect(70, 320, 40, MAX_TEXTFIELD_HEIGHT)
                                        WithTitle:@"Knee"
                                           toView:self];
     
@@ -69,12 +69,12 @@
                                            toView:self
                                      withSelector:@selector(updateKneeLevel:)];
     
-    kneeLabel = [self drawValueTextFieldWithRect:NSMakeRect(70, 260, 40, 25)
+    kneeLabel = [self drawValueTextFieldWithRect:NSMakeRect(70, 260, 40, MAX_TEXTFIELD_HEIGHT)
                                           toView:self];
 }
 
 -(void) setupRatioUI {
-    ratioTitle = [self drawLabelTextFieldWithRect:NSMakeRect(120, 320, 40, 30)
+    ratioTitle = [self drawLabelTextFieldWithRect:NSMakeRect(120, 320, 40, MAX_TEXTFIELD_HEIGHT)
                                         WithTitle:@"Ratio"
                                            toView:self];
     
@@ -85,12 +85,12 @@
                                             toView:self
                                       withSelector:@selector(updateRatio:)];
     
-    ratioLabel = [self drawValueTextFieldWithRect:NSMakeRect(120, 260, 45, 25)
+    ratioLabel = [self drawValueTextFieldWithRect:NSMakeRect(120, 260, 45, MAX_TEXTFIELD_HEIGHT)
                                            toView:self];
 }
 
 -(void) setupGainUI {
-    gainTitle = [self drawLabelTextFieldWithRect:NSMakeRect(170, 320, 35, 30)
+    gainTitle = [self drawLabelTextFieldWithRect:NSMakeRect(170, 320, 35, MAX_TEXTFIELD_HEIGHT)
                                        WithTitle:@"Gain"
                                           toView:self];
     
@@ -101,7 +101,7 @@
                                            toView:self
                                      withSelector:@selector(gainLevel:)];
     
-    gainLabel = [self drawValueTextFieldWithRect:NSMakeRect(170, 260, 35, 25)
+    gainLabel = [self drawValueTextFieldWithRect:NSMakeRect(170, 260, 35, MAX_TEXTFIELD_HEIGHT)
                                           toView:self];
 }
 

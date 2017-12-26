@@ -10,7 +10,7 @@
 #include <math.h>
 
 #define MAX_TONE_GAIN 12.0
-#define MIN_TONE_GAIN 12.0
+#define MIN_TONE_GAIN -12.0
 #define MAX_OVERDRIVE_GAIN 10.0
 
 /*

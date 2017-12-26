@@ -84,10 +84,10 @@
     
     if(rect.size.height < frameRect.size.height)
         return;
-    NSRect newRect = NSMakeRect(rect.origin.x+2, rect.origin.y+2, rect.size.width-3, rect.size.height-3);
+    NSRect newRect = NSMakeRect(rect.origin.x+2, rect.origin.y+2, rect.size.width-2, rect.size.height-2);
     
     NSBezierPath *textViewSurround = [NSBezierPath bezierPathWithRoundedRect:newRect xRadius:10 yRadius:10];
-    [textViewSurround setLineWidth:10];
+    [textViewSurround setLineWidth:3];
     //[pBorderColor set];
     [textViewSurround stroke];
     [self setWantsLayer: YES];

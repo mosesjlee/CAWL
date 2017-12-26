@@ -40,7 +40,7 @@
 #pragma mark SETUP_UI
 
 -(void) setupChorusRateUI {
-    chorusRateTitle = [self drawLabelTextFieldWithRect:NSMakeRect(20, 320, 40, 25)
+    chorusRateTitle = [self drawLabelTextFieldWithRect:NSMakeRect(20, 320, 40, MAX_TEXTFIELD_HEIGHT)
                                              WithTitle:@"Rate"
                                                 toView:self];
     
@@ -51,12 +51,12 @@
                                                  toView:self
                                            withSelector:@selector(updateChorusRate:)];
     
-    chorusRateValue = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 50, 25)
+    chorusRateValue = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 50, MAX_TEXTFIELD_HEIGHT)
                                                 toView:self];
 }
 
 -(void) setupChorusDepthUI {
-	chorusDepthTitle = [self drawLabelTextFieldWithRect:NSMakeRect(85, 320, 45, 25)
+	chorusDepthTitle = [self drawLabelTextFieldWithRect:NSMakeRect(85, 320, 45, MAX_TEXTFIELD_HEIGHT)
                                               WithTitle:@"Depth"
                                                  toView:self];
     
@@ -67,12 +67,12 @@
                                                   toView:self
                                             withSelector:@selector(updateChorusDepthLevel:)];
     
-    chorusDepthValue = [self drawValueTextFieldWithRect:NSMakeRect(90, 260, 50, 25)
+    chorusDepthValue = [self drawValueTextFieldWithRect:NSMakeRect(90, 260, 50, MAX_TEXTFIELD_HEIGHT)
                                                  toView:self];
 }
 
 -(void) setupMixLevelUI {
-	chorusMixTitle = [self drawLabelTextFieldWithRect:NSMakeRect(160, 320, 30, 25)
+	chorusMixTitle = [self drawLabelTextFieldWithRect:NSMakeRect(160, 320, 30, MAX_TEXTFIELD_HEIGHT)
                                             WithTitle:@"Mix"
                                                toView:self];
     
@@ -83,7 +83,7 @@
                                                toView:self
                                          withSelector:@selector(updateMixLevel:)];
     
-    chorusMixValue = [self drawValueTextFieldWithRect:NSMakeRect(160, 260, 55, 25)
+    chorusMixValue = [self drawValueTextFieldWithRect:NSMakeRect(160, 260, 55, MAX_TEXTFIELD_HEIGHT)
                                                toView:self];
 }
 

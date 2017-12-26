@@ -39,7 +39,7 @@
 #pragma mark SETUP_UI
 
 -(void) setupDriveUI {
-	driveTitle = [self drawLabelTextFieldWithRect:NSMakeRect(20, 320, 40, 25)
+	driveTitle = [self drawLabelTextFieldWithRect:NSMakeRect(20, 320, 40, MAX_TEXTFIELD_HEIGHT)
                                         WithTitle:@"Drive"
                                            toView:self];
     
@@ -49,12 +49,12 @@
                                       atDefaultVal:0.5
                                             toView:self
                                       withSelector:@selector(updateDriveLevel:)];
-    driveValue = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 40, 25)
+    driveValue = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 40, MAX_TEXTFIELD_HEIGHT)
                                            toView:self];
 }
 
 -(void) setupVolumeUI {
-    volumeTitle = [self drawLabelTextFieldWithRect:NSMakeRect(85, 320, 50, 25)
+    volumeTitle = [self drawLabelTextFieldWithRect:NSMakeRect(85, 320, 50, MAX_TEXTFIELD_HEIGHT)
                                          WithTitle:@"Volume"
                                             toView:self];
     
@@ -65,12 +65,12 @@
                                              toView:self
                                        withSelector:@selector(updateVolumeLevel:)];
     
-    volumeValue = [self drawValueTextFieldWithRect:NSMakeRect(90, 260, 40, 25)
+    volumeValue = [self drawValueTextFieldWithRect:NSMakeRect(90, 260, 40, MAX_TEXTFIELD_HEIGHT)
                                             toView:self];
 }
 
 -(void) setupToneUI {
-    toneTitle = [self drawLabelTextFieldWithRect:NSMakeRect(155, 320, 40, 25)
+    toneTitle = [self drawLabelTextFieldWithRect:NSMakeRect(155, 320, 40, MAX_TEXTFIELD_HEIGHT)
                                        WithTitle:@"Tone"
                                           toView:self];
     
@@ -81,7 +81,7 @@
                                          toView:self
                                    withSelector:@selector(updateToneLevel:)];
     
-    toneValue = [self drawValueTextFieldWithRect:NSMakeRect(150, 260, 55, 25)
+    toneValue = [self drawValueTextFieldWithRect:NSMakeRect(150, 260, 55, MAX_TEXTFIELD_HEIGHT)
                                           toView:self];
 }
 

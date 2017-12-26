@@ -23,7 +23,7 @@
 #import "PhaserUI.h"
 #import "FlangerUI.h"
 #define MAX_HEIGHT  360
-#define MAX_WIDTH   225
+#define MAX_WIDTH   250
 
 NSArray * ampList = @[@"Off",
                       @"Phender BassWoman",
@@ -130,7 +130,7 @@ NSArray * effectsList = @[@"Off",
 
 #pragma mark SETUP_EFFECT_MENU
 - (void)setupEffectSelector1 {
-    _effectSelector1 = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(300, 350, 175, 50) pullsDown:NO];
+    _effectSelector1 = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(320, 350, 175, 50) pullsDown:NO];
     [_effectSelector1 addItemsWithTitles:effectsList];;
     [self.view addSubview:_effectSelector1];
     [_effectSelector1 setNeedsDisplay:YES];
@@ -139,7 +139,7 @@ NSArray * effectsList = @[@"Off",
 }
 
 - (void)setupEffectSelector2 {
-    _effectSelector2 = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(530, 350, 175, 50) pullsDown:NO];
+    _effectSelector2 = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(590, 350, 175, 50) pullsDown:NO];
     [_effectSelector2 addItemsWithTitles:effectsList];;
     [self.view addSubview:_effectSelector2];
     [_effectSelector2 setNeedsDisplay:YES];
@@ -148,7 +148,7 @@ NSArray * effectsList = @[@"Off",
 }
 
 - (void)setupEffectSelector3 {
-    _effectSelector3 = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(770, 350, 175, 50) pullsDown:NO];
+    _effectSelector3 = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(850, 350, 175, 50) pullsDown:NO];
     [_effectSelector3 addItemsWithTitles:effectsList];;
     [self.view addSubview:_effectSelector3];
     [_effectSelector3 setNeedsDisplay:YES];
@@ -157,7 +157,7 @@ NSArray * effectsList = @[@"Off",
 }
 
 - (void)setupEffectSelector4 {
-    _effectSelector4 = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(1010, 350, 175, 50) pullsDown:NO];
+    _effectSelector4 = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(1115, 350, 175, 50) pullsDown:NO];
     [_effectSelector4 addItemsWithTitles:effectsList];
     [self.view addSubview:_effectSelector4];
     [_effectSelector4 setNeedsDisplay:YES];
@@ -187,7 +187,7 @@ NSArray * effectsList = @[@"Off",
     NSLog(@"Effect 1 selection %@ for %@", currEffect1, self.label);
     
     //Turn on new effect and draw new UI
-    [self turnOnSelectedEffect:currEffect1 with:NSMakePoint(270, 0)];
+    [self turnOnSelectedEffect:currEffect1 with:NSMakePoint(285, 0)];
 }
 
 - (void) updateEffect2Selection:(id)sender {
@@ -210,7 +210,7 @@ NSArray * effectsList = @[@"Off",
     NSLog(@"Effect 2 selection %@ for %@", currEffect2, self.label);
     
     //Turn on new effect and draw new UI
-    [self turnOnSelectedEffect:currEffect2 with:NSMakePoint(510, 0)];
+    [self turnOnSelectedEffect:currEffect2 with:NSMakePoint(550, 0)];
     NSLog(@"Effect 2 selection %@ for %@", currEffect2, self.label);
 }
 
@@ -234,7 +234,7 @@ NSArray * effectsList = @[@"Off",
     NSLog(@"Effect 1 selection %@ for %@", currEffect2, self.label);
     
     //Turn on new effect and draw new UI
-    [self turnOnSelectedEffect:currEffect3 with:NSMakePoint(750, 0)];
+    [self turnOnSelectedEffect:currEffect3 with:NSMakePoint(815, 0)];
     NSLog(@"Effect 2 selection %@ for %@", currEffect3, self.label);
 }
 
@@ -258,7 +258,7 @@ NSArray * effectsList = @[@"Off",
     NSLog(@"Effect 4 selection %@ for %@", currEffect4, self.label);
     
     //Turn on new effect and draw new UI
-    [self turnOnSelectedEffect:currEffect4 with:NSMakePoint(990, 0)];
+    [self turnOnSelectedEffect:currEffect4 with:NSMakePoint(1080, 0)];
 }
 
 #pragma mark UI_Utilities

@@ -12,14 +12,17 @@
 	NSSlider *gainSlider;
 	NSSlider *volumeSlider;
 	NSSlider *toneSlider;	//For treble controls
+    NSSlider *mixLevelSlider;
 	
 	NSTextField *gainTitle;
 	NSTextField *volumeTitle;
 	NSTextField *toneTitle;
+    NSTextField *mixTitle;
     
     NSTextField *gainValue;
     NSTextField *volumeValue;
     NSTextField *toneValue;
+    NSTextField *mixLevelValue;
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect {
@@ -27,6 +30,7 @@
     [self setupGainUI];
     [self setupVolumeUI];
     [self setupToneUI];
+    [self setupMixLevelUI];
     return self;
 }
 - (void)drawRect:(NSRect)dirtyRect {
@@ -39,7 +43,7 @@
 #pragma mark SETUP_UI
 
 -(void) setupGainUI {
-    gainTitle = [self drawLabelTextFieldWithRect:NSMakeRect(20, 320, 40, 25)
+    gainTitle = [self drawLabelTextFieldWithRect:NSMakeRect(20, 320, 40, MAX_TEXTFIELD_HEIGHT)
                                        WithTitle:@"Gain"
                                           toView:self];
     
@@ -49,12 +53,12 @@
                                      atDefaultVal:0.5
                                            toView:self
                                      withSelector:@selector(updateGainLevel:)];
-    gainValue = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 40, 25)
+    gainValue = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 40, MAX_TEXTFIELD_HEIGHT)
                                            toView:self];
 }
 
 -(void) setupVolumeUI {
-    volumeTitle = [self drawLabelTextFieldWithRect:NSMakeRect(85, 320, 50, 25)
+    volumeTitle = [self drawLabelTextFieldWithRect:NSMakeRect(85, 320, 50, MAX_TEXTFIELD_HEIGHT)
                                          WithTitle:@"Volume"
                                             toView:self];
     
@@ -64,12 +68,12 @@
                                        atDefaultVal:0.5
                                              toView:self
                                        withSelector:@selector(updateVolumeLevel:)];
-    volumeValue = [self drawValueTextFieldWithRect:NSMakeRect(90, 260, 40, 25)
+    volumeValue = [self drawValueTextFieldWithRect:NSMakeRect(90, 260, 40, MAX_TEXTFIELD_HEIGHT)
                                             toView:self];
 }
 
 -(void) setupToneUI {
-    toneTitle = [self drawLabelTextFieldWithRect:NSMakeRect(160, 320, 40, 25)
+    toneTitle = [self drawLabelTextFieldWithRect:NSMakeRect(160, 320, 40, MAX_TEXTFIELD_HEIGHT)
                                        WithTitle:@"Tone"
                                           toView:self];
     
@@ -79,8 +83,12 @@
                                      atDefaultVal:0.5
                                            toView:self
                                      withSelector:@selector(updateToneLevel:)];
-    toneValue = [self drawValueTextFieldWithRect:NSMakeRect(150, 260, 55, 25)
+    toneValue = [self drawValueTextFieldWithRect:NSMakeRect(150, 260, 55, MAX_TEXTFIELD_HEIGHT)
                                           toView:self];
+}
+
+-(void) setupMixLevelUI {
+    
 }
 
 #pragma mark IBACTION_FUZZ
@@ -98,11 +106,15 @@
 -(IBAction) updateToneLevel:(id)sender {
     toneValue.stringValue = [NSString stringWithFormat:@"%.02f %%", (toneSlider.floatValue * 100)];
     if(toneSlider.floatValue >= .5) {
-        self.soundTabRef.soundBoard->setOverdriveToneLevel((toneSlider.floatValue-.5)/.5 * 12.0);
+        self.soundTabRef.soundBoard->setFuzzToneLevel((toneSlider.floatValue-.5)/.5 * 12.0);
     }
     else {
-        self.soundTabRef.soundBoard->setOverdriveToneLevel(toneSlider.floatValue/.5 * -12.0);
+        self.soundTabRef.soundBoard->setFuzzToneLevel(toneSlider.floatValue/.5 * -12.0);
     }
+}
+
+-(IBAction) updateMixLevel:(id)sender {
+    
 }
 
 @end

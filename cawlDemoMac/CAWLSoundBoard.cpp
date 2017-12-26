@@ -360,7 +360,7 @@ void CAWLSoundBoard::setFuzzToneLevel(double newToneLevel)
 
 void CAWLSoundBoard::setFuzzMixLevel(double newMixLevel)
 {
-    fuzz->setMix(newMixLevel);
+    fuzz->setMixLevel(newMixLevel);
 }
 
 

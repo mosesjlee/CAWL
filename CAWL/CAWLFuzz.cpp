@@ -8,7 +8,7 @@
 
 #include "CAWLFuzz.hpp"
 #define MAX_TONE_GAIN 12.0
-#define MIN_TONE_GAIN 12.0
+#define MIN_TONE_GAIN -12.0
 #define MAX_FUZZ_GAIN 10.0
 
 /*
@@ -17,8 +17,9 @@
 CAWLFuzz::CAWLFuzz()
 {
 	cToneControl.setGain(0);
-	cToneControl.setCenterFreq(10000);
+	cToneControl.setCenterFreq(12000);
 	cGain = 11;
+    cMixLevel = 0.5;
 }
 
 /*
@@ -85,8 +86,13 @@ void CAWLFuzz::setGain(double newGainLevel)
 /*
  Sets the mix level for the fuzz
  */
-void CAWLFuzz::setMix(double newMix)
+void CAWLFuzz::setMixLevel(double newMix)
 {
-	
+    if(newMix > 1.0)
+        cMixLevel = 1.0;
+    else if (newMix < 0)
+        cMixLevel = 0.0;
+    else
+        cMixLevel = newMix;
 }
 

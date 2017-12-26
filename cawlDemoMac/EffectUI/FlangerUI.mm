@@ -38,7 +38,7 @@
 
 #pragma mark FLANGER_UI_SETUP
 - (void)setupModDepthUI {
-    modDepthTitle = [self drawLabelTextFieldWithRect:NSMakeRect(5, 320, 80, 25)
+    modDepthTitle = [self drawLabelTextFieldWithRect:NSMakeRect(5, 320, 80, MAX_TEXTFIELD_HEIGHT)
                                            WithTitle:@"Mod Depth"
                                               toView:self];
     
@@ -49,12 +49,12 @@
                                                toView:self
                                          withSelector:@selector(updateModDepth:)];
     
-    modDepthValue = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 55, 25)
+    modDepthValue = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 55, MAX_TEXTFIELD_HEIGHT)
                                               toView:self];
 }
 
 - (void)setupModSpeedUI {
-    modSpeedTitle = [self drawLabelTextFieldWithRect:NSMakeRect(75, 320, 80, 25)
+    modSpeedTitle = [self drawLabelTextFieldWithRect:NSMakeRect(75, 320, 80, MAX_TEXTFIELD_HEIGHT)
                                            WithTitle:@"Mod Speed"
                                               toView:self];
     
@@ -65,12 +65,12 @@
                                                toView:self
                                          withSelector:@selector(updateModSpeed:)];
     
-    modSpeedValue = [self drawValueTextFieldWithRect:NSMakeRect(85, 260, 55, 25)
+    modSpeedValue = [self drawValueTextFieldWithRect:NSMakeRect(85, 260, 55, MAX_TEXTFIELD_HEIGHT)
                                               toView:self];
 }
 
 - (void) setupMixLevelUI {
-    mixLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(145, 320, 70, 25)
+    mixLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(145, 320, 70, MAX_TEXTFIELD_HEIGHT)
                                            WithTitle:@"Mix Level"
                                               toView:self];
     
@@ -81,7 +81,7 @@
                                                toView:self
                                          withSelector:@selector(updateMixLevel:)];
     
-    mixLevelValue = [self drawValueTextFieldWithRect:NSMakeRect(150, 260, 55, 25)
+    mixLevelValue = [self drawValueTextFieldWithRect:NSMakeRect(150, 260, 55, MAX_TEXTFIELD_HEIGHT)
                                               toView:self];
 }
 

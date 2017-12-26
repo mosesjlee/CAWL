@@ -44,7 +44,7 @@
 }
 #pragma mark SETUP_UI
 -(void) setupMixLevelUI {
-    mixLevelLabel = [self drawLabelTextFieldWithRect:NSMakeRect(40, 320, 30, 25)
+    mixLevelLabel = [self drawLabelTextFieldWithRect:NSMakeRect(40, 320, 30, MAX_TEXTFIELD_HEIGHT)
                                            WithTitle:@"Mix"
                                               toView:self];
     
@@ -55,13 +55,13 @@
                                                toView:self
                         withSelector:@selector(updateMixLevel:)];
     
-    mixLevelValueField = [self drawValueTextFieldWithRect:NSMakeRect(30, 265, 55, 25)
+    mixLevelValueField = [self drawValueTextFieldWithRect:NSMakeRect(30, 265, 55, MAX_TEXTFIELD_HEIGHT)
                                                    toView:self];
     
 }
 
 -(void) setupWahDepthUI {
-    wahDepthLabel = [self drawLabelTextFieldWithRect:NSMakeRect(140, 320, 45, 25)
+    wahDepthLabel = [self drawLabelTextFieldWithRect:NSMakeRect(140, 320, 45, MAX_TEXTFIELD_HEIGHT)
                                            WithTitle:@"Depth"
                                               toView:self];
     
@@ -72,12 +72,12 @@
                                                toView:self
                                          withSelector:@selector(updateWahDepth:)];
     
-   wahDepthValueField = [self drawValueTextFieldWithRect:NSMakeRect(135, 265, 55, 25)
+   wahDepthValueField = [self drawValueTextFieldWithRect:NSMakeRect(135, 265, 55, MAX_TEXTFIELD_HEIGHT)
                                                   toView:self];
 }
 
 -(void) setupWahRateUI {
-   wahRateLabel = [self drawLabelTextFieldWithRect:NSMakeRect(40, 220, 35, 25)
+   wahRateLabel = [self drawLabelTextFieldWithRect:NSMakeRect(40, 220, 35, MAX_TEXTFIELD_HEIGHT)
                            WithTitle:@"Rate"
                               toView:self];
     
@@ -88,12 +88,12 @@
                                               toView:self
                                         withSelector:@selector(updateWahRate:)];
     
-    wahRateValueField = [self drawValueTextFieldWithRect:NSMakeRect(30, 165, 55, 25)
+    wahRateValueField = [self drawValueTextFieldWithRect:NSMakeRect(30, 165, 55, MAX_TEXTFIELD_HEIGHT)
                                                   toView:self];
 }
 
 -(void) setupCenterFreqUI {
-    centerFreqLabel = [self drawLabelTextFieldWithRect:NSMakeRect(130, 220, 80, 25)
+    centerFreqLabel = [self drawLabelTextFieldWithRect:NSMakeRect(130, 220, 80, MAX_TEXTFIELD_HEIGHT)
                                              WithTitle:@"Center Freq"
                                                 toView:self];
     
@@ -104,7 +104,7 @@
                                                  toView:self
                                            withSelector:@selector(updateWahCenterFreq:)];
     
-    centerFreqValueField = [self drawValueTextFieldWithRect:NSMakeRect(135, 165, 55, 25)
+    centerFreqValueField = [self drawValueTextFieldWithRect:NSMakeRect(135, 165, 55, MAX_TEXTFIELD_HEIGHT)
                                                      toView:self];
 }
 #pragma mark IBACTION_WAH

@@ -40,7 +40,7 @@
 
 #pragma mark SETUP_UI
 - (void) setupReverbTimeUI {
-    reverbTimeTitle = [self drawLabelTextFieldWithRect:NSMakeRect(25, 310, 40, 30)
+    reverbTimeTitle = [self drawLabelTextFieldWithRect:NSMakeRect(25, 310, 40, MAX_TEXTFIELD_HEIGHT)
                                              WithTitle:@"Time"
                                                 toView:self];
     
@@ -51,12 +51,12 @@
                                                  toView:self
                                            withSelector:@selector(updateReverbTime:)];
     
-    reverbTimeValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 50, 25)
+    reverbTimeValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 50, MAX_TEXTFIELD_HEIGHT)
                                                      toView:self];
 }
 
 -(void) setupMixLevelUI {
-    mixLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(85, 310, 40, 30)
+    mixLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(85, 310, 40, MAX_TEXTFIELD_HEIGHT)
                                            WithTitle:@"Mix"
                                               toView:self];
     
@@ -67,12 +67,12 @@
                                                toView:self
                                          withSelector:@selector(updateMixLevel:)];
     
-    mixLevelValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(80, 260, 55, 25)
+    mixLevelValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(80, 260, 55, MAX_TEXTFIELD_HEIGHT)
                                                    toView:self];
 }
 
 -(void) setupToneLevelUI {
-	toneLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(155, 310, 40, 30)
+	toneLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(155, 310, 40, MAX_TEXTFIELD_HEIGHT)
                                             WithTitle:@"Tone"
                                                toView:self];
     
@@ -83,7 +83,7 @@
                                                 toView:self
                                           withSelector:@selector(updateToneLevel:)];
     
-    toneLevelValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(150, 260, 55, 25)
+    toneLevelValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(150, 260, 55, MAX_TEXTFIELD_HEIGHT)
                                                     toView:self];
 }
 

@@ -19,7 +19,7 @@ public:
     ~CAWLFuzz();
     void processBuffer(float * audioStreamBuf, const unsigned int numSamples);
     void setGain(double newGain);
-    void setMix(double newMix);
+    void setMixLevel(double newMix);
 	void adjustFuzzTone(double newToneLevel);
     
 private:
