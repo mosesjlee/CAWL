@@ -51,39 +51,39 @@
                                                  toView:self
                                            withSelector:@selector(updateReverbTime:)];
     
-    reverbTimeValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 50, MAX_TEXTFIELD_HEIGHT)
+    reverbTimeValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 60, MAX_TEXTFIELD_HEIGHT)
                                                      toView:self];
 }
 
 -(void) setupMixLevelUI {
-    mixLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(85, 310, 40, MAX_TEXTFIELD_HEIGHT)
+    mixLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(MAX_WIDTH/2-30, 310, 60, MAX_TEXTFIELD_HEIGHT)
                                            WithTitle:@"Mix"
                                               toView:self];
     
-    mixLevelSlider = [self drawCircularSliderWithRect:NSMakeRect(90, 290, 30, 30)
+    mixLevelSlider = [self drawCircularSliderWithRect:NSMakeRect(MAX_WIDTH/2-15, 290, 30, 30)
                                            WithMaxVal:1.0
                                         AndWithMinVal:0.0
                                          atDefaultVal:0.5
                                                toView:self
                                          withSelector:@selector(updateMixLevel:)];
     
-    mixLevelValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(80, 260, 55, MAX_TEXTFIELD_HEIGHT)
+    mixLevelValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(MAX_WIDTH/2-30, 260, 60, MAX_TEXTFIELD_HEIGHT)
                                                    toView:self];
 }
 
 -(void) setupToneLevelUI {
-	toneLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(155, 310, 40, MAX_TEXTFIELD_HEIGHT)
+	toneLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(175, 310, 40, MAX_TEXTFIELD_HEIGHT)
                                             WithTitle:@"Tone"
                                                toView:self];
     
-    toneLevelSlider = [self drawCircularSliderWithRect:NSMakeRect(160, 290, 30, 30)
+    toneLevelSlider = [self drawCircularSliderWithRect:NSMakeRect(180, 290, 30, 30)
                                             WithMaxVal:1.0
                                          AndWithMinVal:0.0
                                           atDefaultVal:0.0
                                                 toView:self
                                           withSelector:@selector(updateToneLevel:)];
     
-    toneLevelValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(150, 260, 55, MAX_TEXTFIELD_HEIGHT)
+    toneLevelValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(170, 260, 60, MAX_TEXTFIELD_HEIGHT)
                                                     toView:self];
 }
 

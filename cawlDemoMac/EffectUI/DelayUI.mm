@@ -52,7 +52,7 @@
                                               toView:self];
     
     //The value label
-	feedbackLabel = [self drawValueTextFieldWithRect:NSMakeRect(15, 280, 55, MAX_TEXTFIELD_HEIGHT)
+	feedbackLabel = [self drawValueTextFieldWithRect:NSMakeRect(15, 280, 60, MAX_TEXTFIELD_HEIGHT)
                                               toView:self];
 
     //The slider
@@ -67,15 +67,15 @@
 
 
 - (void)setupWetMixUI {
-    wetMixTitle = [self drawLabelTextFieldWithRect:NSMakeRect(85, 250, 60, MAX_TEXTFIELD_HEIGHT)
+    wetMixTitle = [self drawLabelTextFieldWithRect:NSMakeRect(MAX_WIDTH/2-30, 250, 60, MAX_TEXTFIELD_HEIGHT)
                                          WithTitle:@"Wet Mix"
                                             toView:self];
 	
     
-    wetMixLabel = [self drawValueTextFieldWithRect:NSMakeRect(85, 280, 55, MAX_TEXTFIELD_HEIGHT)
+    wetMixLabel = [self drawValueTextFieldWithRect:NSMakeRect(MAX_WIDTH/2-30, 280, 60, MAX_TEXTFIELD_HEIGHT)
                                             toView:self];
     
-	wetMixSlider = [self drawCircularSliderWithRect:NSMakeRect(95, 310, 30, 30)
+	wetMixSlider = [self drawCircularSliderWithRect:NSMakeRect(MAX_WIDTH/2-15, 310, 30, 30)
 										 WithMaxVal:1.0
 									  AndWithMinVal:0.0
                                        atDefaultVal:0.5
@@ -85,16 +85,16 @@
 
 - (void)setupDryGainUI {
 	//The title
-	dryMixTitle = [self drawLabelTextFieldWithRect:NSMakeRect(155, 250, 60, MAX_TEXTFIELD_HEIGHT)
+	dryMixTitle = [self drawLabelTextFieldWithRect:NSMakeRect(175, 250, 60, MAX_TEXTFIELD_HEIGHT)
                                          WithTitle:@"Dry Mix"
                                             toView:self];
 	
 	//The value label
-	dryMixLabel = [self drawValueTextFieldWithRect:NSMakeRect(155, 280, 55, MAX_TEXTFIELD_HEIGHT)
+	dryMixLabel = [self drawValueTextFieldWithRect:NSMakeRect(175, 280, 60, MAX_TEXTFIELD_HEIGHT)
                                             toView:self];
 	
 	//The slider
-	dryMixSlider = [self drawCircularSliderWithRect:NSMakeRect(165, 310, 30, 30)
+	dryMixSlider = [self drawCircularSliderWithRect:NSMakeRect(185, 310, 30, 30)
 										   WithMaxVal:1.0
 										AndWithMinVal:0.0
                                        atDefaultVal:0.5
@@ -103,14 +103,14 @@
 }
 
 - (void)setupDelayTimeUI {
-    delayTimeTitle = [self drawLabelTextFieldWithRect:NSMakeRect(65, 160, 90, MAX_TEXTFIELD_HEIGHT)
+    delayTimeTitle = [self drawLabelTextFieldWithRect:NSMakeRect(MAX_WIDTH/2-45, 160, 90, MAX_TEXTFIELD_HEIGHT)
                                             WithTitle:@"Delay Time"
                                                toView:self];
     
-    delayTimeLabel = [self drawValueTextFieldWithRect:NSMakeRect(80, 190, 60, MAX_TEXTFIELD_HEIGHT)
+    delayTimeLabel = [self drawValueTextFieldWithRect:NSMakeRect(MAX_WIDTH/2-30, 190, 60, MAX_TEXTFIELD_HEIGHT)
                                                toView:self];
     
-    delayTimeSlider = [self drawCircularSliderWithRect:NSMakeRect(95, 215, 30, 30)
+    delayTimeSlider = [self drawCircularSliderWithRect:NSMakeRect(MAX_WIDTH/2-15, 215, 30, 30)
                                             WithMaxVal:1500
                                          AndWithMinVal:400
                                           atDefaultVal:300

@@ -9,7 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "CAWLSoundBoard.hpp"
 #import "CAWL.hpp"
-
+#define MAX_HEIGHT  360
+#define MAX_WIDTH   250
 @interface SoundTab : NSTabViewItem
 - (instancetype)initWithIdentifier:(id)identifier;
 - (void)drawLabel:(BOOL)shouldTruncateLabel
