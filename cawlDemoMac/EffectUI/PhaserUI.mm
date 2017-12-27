@@ -42,46 +42,46 @@
                                         WithTitle:@"Depth"
                                            toView:self];
     
-    depthSlider = [self drawCircularSliderWithRect:NSMakeRect(20, 290, 30, 30)
+    depthSlider = [self drawCircularSliderWithRect:NSMakeRect(30, 290, 30, 30)
                                         WithMaxVal:1.0
                                      AndWithMinVal:0.0
                                       atDefaultVal:0.5
                                             toView:self
                                       withSelector:@selector(updateDepth:)];
     
-    depthValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 30, MAX_TEXTFIELD_HEIGHT)
+    depthValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 60, MAX_TEXTFIELD_HEIGHT)
                                                 toView:self];
 }
 
 - (void)setupRateUI {
-    rateTitle = [self drawLabelTextFieldWithRect:NSMakeRect(100, 320, 70, MAX_TEXTFIELD_HEIGHT)
+    rateTitle = [self drawLabelTextFieldWithRect:NSMakeRect(MAX_WIDTH/2-35, 320, 70, MAX_TEXTFIELD_HEIGHT)
                                        WithTitle:@"Rate"
                                           toView:self];
     
-    rateSlider = [self drawCircularSliderWithRect:NSMakeRect(100, 290, 30, 30)
+    rateSlider = [self drawCircularSliderWithRect:NSMakeRect(MAX_WIDTH/2-15, 290, 30, 30)
                                        WithMaxVal:1.0
                                     AndWithMinVal:0.0
                                      atDefaultVal:0.5
                                            toView:self
                                      withSelector:@selector(updateRate:)];
     
-    rateValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(100, 260, 30, MAX_TEXTFIELD_HEIGHT)
+    rateValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(MAX_WIDTH/2-30, 260, 60, MAX_TEXTFIELD_HEIGHT)
                                              toView:self];
 }
 
 - (void)setupMixLevelUI {
-    mixLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(150, 320, 70, MAX_TEXTFIELD_HEIGHT)
+    mixLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(165, 320, 70, MAX_TEXTFIELD_HEIGHT)
                                            WithTitle:@"Mix Level"
                                               toView:self];
     
-    mixLevelSlider = [self drawCircularSliderWithRect:NSMakeRect(150, 290, 30, 30)
+    mixLevelSlider = [self drawCircularSliderWithRect:NSMakeRect(185, 290, 30, 30)
                                            WithMaxVal:1.0
                                         AndWithMinVal:0.0
                                          atDefaultVal:0.5
                                                toView:self
                                          withSelector:@selector(updateMixLevel:)];
     
-    mixLevelValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(150, 260, 30, MAX_TEXTFIELD_HEIGHT)
+    mixLevelValueLabel = [self drawValueTextFieldWithRect:NSMakeRect(170, 260, 60, MAX_TEXTFIELD_HEIGHT)
                                                    toView:self];
 }
 
@@ -97,7 +97,7 @@
 }
 
 - (IBAction)updateMixLevel:(id)sender {
-	mixLevelValueLabel.stringValue = [NSString stringWithFormat:@"%.02f %%", mixLevelSlider.floatValue];
+	mixLevelValueLabel.stringValue = [NSString stringWithFormat:@"%.02f %%", mixLevelSlider.floatValue * 100];
     self.soundTabRef.soundBoard->setPhaserMixLevel(mixLevelSlider.floatValue);
 }
 @end

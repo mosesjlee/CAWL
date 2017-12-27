@@ -73,6 +73,7 @@
     NSTextField * retval = [[NSTextField alloc] initWithFrame:rect];
     [retval setNeedsDisplay:YES];
     [retval setTarget:theView];
+    [retval setEditable:NO];
     [theView addSubview:retval];
     return retval;
 }

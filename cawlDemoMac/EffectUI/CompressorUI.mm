@@ -42,66 +42,66 @@
 
 #pragma mark SETUP_UI
 -(void) setupThresholdUI {
-    thresholdTitle = [self drawLabelTextFieldWithRect:NSMakeRect(5, 320, 65, MAX_TEXTFIELD_HEIGHT)
+    thresholdTitle = [self drawLabelTextFieldWithRect:NSMakeRect(10, 320, 65, MAX_TEXTFIELD_HEIGHT)
                                             WithTitle:@"Threshold"
                                                toView:self];
     
-    thresholdSlider = [self drawCircularSliderWithRect:NSMakeRect(15, 290, 30, 30)
+    thresholdSlider = [self drawCircularSliderWithRect:NSMakeRect(25, 290, 30, 30)
                                             WithMaxVal:0
                                          AndWithMinVal:-60
                                           atDefaultVal:40
                                                 toView:self
                                           withSelector:@selector(updateThresholdLevel:)];
     
-    thresholdLabel = [self drawValueTextFieldWithRect:NSMakeRect(15, 260, 45, MAX_TEXTFIELD_HEIGHT)
+    thresholdLabel = [self drawValueTextFieldWithRect:NSMakeRect(15, 260, 50, MAX_TEXTFIELD_HEIGHT)
                                                toView:self];
 }
 
 -(void) setupKneeUI {
-    kneeTitle = [self drawLabelTextFieldWithRect:NSMakeRect(70, 320, 40, MAX_TEXTFIELD_HEIGHT)
+    kneeTitle = [self drawLabelTextFieldWithRect:NSMakeRect(MAX_WIDTH/2-50, 320, 40, MAX_TEXTFIELD_HEIGHT)
                                        WithTitle:@"Knee"
                                           toView:self];
     
-    kneeSlider = [self drawCircularSliderWithRect:NSMakeRect(70, 290, 40, 30)
+    kneeSlider = [self drawCircularSliderWithRect:NSMakeRect(MAX_WIDTH/2-45, 290, 30, 30)
                                        WithMaxVal:20
                                     AndWithMinVal:0
                                      atDefaultVal:0.5
                                            toView:self
                                      withSelector:@selector(updateKneeLevel:)];
     
-    kneeLabel = [self drawValueTextFieldWithRect:NSMakeRect(70, 260, 40, MAX_TEXTFIELD_HEIGHT)
+    kneeLabel = [self drawValueTextFieldWithRect:NSMakeRect(MAX_WIDTH/2-55, 260, 50, MAX_TEXTFIELD_HEIGHT)
                                           toView:self];
 }
 
 -(void) setupRatioUI {
-    ratioTitle = [self drawLabelTextFieldWithRect:NSMakeRect(120, 320, 40, MAX_TEXTFIELD_HEIGHT)
+    ratioTitle = [self drawLabelTextFieldWithRect:NSMakeRect(MAX_WIDTH/2+5, 320, 40, MAX_TEXTFIELD_HEIGHT)
                                         WithTitle:@"Ratio"
                                            toView:self];
     
-    ratioSlider = [self drawCircularSliderWithRect:NSMakeRect(120, 290, 40, 30)
+    ratioSlider = [self drawCircularSliderWithRect:NSMakeRect(MAX_WIDTH/2, 290, 40, 30)
                                         WithMaxVal:8
                                      AndWithMinVal:1
                                       atDefaultVal:1
                                             toView:self
                                       withSelector:@selector(updateRatio:)];
     
-    ratioLabel = [self drawValueTextFieldWithRect:NSMakeRect(120, 260, 45, MAX_TEXTFIELD_HEIGHT)
+    ratioLabel = [self drawValueTextFieldWithRect:NSMakeRect(MAX_WIDTH/2, 260, 50, MAX_TEXTFIELD_HEIGHT)
                                            toView:self];
 }
 
 -(void) setupGainUI {
-    gainTitle = [self drawLabelTextFieldWithRect:NSMakeRect(170, 320, 35, MAX_TEXTFIELD_HEIGHT)
+    gainTitle = [self drawLabelTextFieldWithRect:NSMakeRect(185, 320, 35, MAX_TEXTFIELD_HEIGHT)
                                        WithTitle:@"Gain"
                                           toView:self];
     
-    gainSlider = [self drawCircularSliderWithRect:NSMakeRect(170, 290, 35, 30)
+    gainSlider = [self drawCircularSliderWithRect:NSMakeRect(180, 290, 35, 30)
                                        WithMaxVal:12
                                     AndWithMinVal:0
                                      atDefaultVal:0
                                            toView:self
                                      withSelector:@selector(gainLevel:)];
     
-    gainLabel = [self drawValueTextFieldWithRect:NSMakeRect(170, 260, 35, MAX_TEXTFIELD_HEIGHT)
+    gainLabel = [self drawValueTextFieldWithRect:NSMakeRect(180, 260, 50, MAX_TEXTFIELD_HEIGHT)
                                           toView:self];
 }
 

@@ -44,67 +44,67 @@
 }
 #pragma mark SETUP_UI
 -(void) setupMixLevelUI {
-    mixLevelLabel = [self drawLabelTextFieldWithRect:NSMakeRect(40, 320, 30, MAX_TEXTFIELD_HEIGHT)
+    mixLevelLabel = [self drawLabelTextFieldWithRect:NSMakeRect(50, 320, 30, MAX_TEXTFIELD_HEIGHT)
                                            WithTitle:@"Mix"
                                               toView:self];
     
-	mixLevelSlider = [self drawCircularSliderWithRect:NSMakeRect(40, 295, 30, 30)
+	mixLevelSlider = [self drawCircularSliderWithRect:NSMakeRect(50, 295, 30, 30)
                                            WithMaxVal:1.0
                                         AndWithMinVal:0
                                          atDefaultVal:1.0
                                                toView:self
                         withSelector:@selector(updateMixLevel:)];
     
-    mixLevelValueField = [self drawValueTextFieldWithRect:NSMakeRect(30, 265, 55, MAX_TEXTFIELD_HEIGHT)
+    mixLevelValueField = [self drawValueTextFieldWithRect:NSMakeRect(40, 265, 55, MAX_TEXTFIELD_HEIGHT)
                                                    toView:self];
     
 }
 
 -(void) setupWahDepthUI {
-    wahDepthLabel = [self drawLabelTextFieldWithRect:NSMakeRect(140, 320, 45, MAX_TEXTFIELD_HEIGHT)
+    wahDepthLabel = [self drawLabelTextFieldWithRect:NSMakeRect(150, 320, 45, MAX_TEXTFIELD_HEIGHT)
                                            WithTitle:@"Depth"
                                               toView:self];
     
-    wahDepthSlider = [self drawCircularSliderWithRect:NSMakeRect(145, 295, 30, 30)
+    wahDepthSlider = [self drawCircularSliderWithRect:NSMakeRect(155, 295, 30, 30)
                                            WithMaxVal:1.0
                                         AndWithMinVal:0
                                          atDefaultVal:1.0
                                                toView:self
                                          withSelector:@selector(updateWahDepth:)];
     
-   wahDepthValueField = [self drawValueTextFieldWithRect:NSMakeRect(135, 265, 55, MAX_TEXTFIELD_HEIGHT)
+   wahDepthValueField = [self drawValueTextFieldWithRect:NSMakeRect(145, 265, 55, MAX_TEXTFIELD_HEIGHT)
                                                   toView:self];
 }
 
 -(void) setupWahRateUI {
-   wahRateLabel = [self drawLabelTextFieldWithRect:NSMakeRect(40, 220, 35, MAX_TEXTFIELD_HEIGHT)
+   wahRateLabel = [self drawLabelTextFieldWithRect:NSMakeRect(50, 220, 35, MAX_TEXTFIELD_HEIGHT)
                            WithTitle:@"Rate"
                               toView:self];
     
-    wahRateSlider = [self drawCircularSliderWithRect:NSMakeRect(40, 195, 30, 30)
+    wahRateSlider = [self drawCircularSliderWithRect:NSMakeRect(50, 195, 30, 30)
                                           WithMaxVal:1.0
                                        AndWithMinVal:0
                                         atDefaultVal:1.0
                                               toView:self
                                         withSelector:@selector(updateWahRate:)];
     
-    wahRateValueField = [self drawValueTextFieldWithRect:NSMakeRect(30, 165, 55, MAX_TEXTFIELD_HEIGHT)
+    wahRateValueField = [self drawValueTextFieldWithRect:NSMakeRect(40, 165, 55, MAX_TEXTFIELD_HEIGHT)
                                                   toView:self];
 }
 
 -(void) setupCenterFreqUI {
-    centerFreqLabel = [self drawLabelTextFieldWithRect:NSMakeRect(130, 220, 80, MAX_TEXTFIELD_HEIGHT)
+    centerFreqLabel = [self drawLabelTextFieldWithRect:NSMakeRect(140, 220, 80, MAX_TEXTFIELD_HEIGHT)
                                              WithTitle:@"Center Freq"
                                                 toView:self];
     
-    centerFreqSlider = [self drawCircularSliderWithRect:NSMakeRect(145, 195, 30, 30)
+    centerFreqSlider = [self drawCircularSliderWithRect:NSMakeRect(155, 195, 30, 30)
                                              WithMaxVal:1400.0
                                           AndWithMinVal:800
                                            atDefaultVal:800
                                                  toView:self
                                            withSelector:@selector(updateWahCenterFreq:)];
     
-    centerFreqValueField = [self drawValueTextFieldWithRect:NSMakeRect(135, 165, 55, MAX_TEXTFIELD_HEIGHT)
+    centerFreqValueField = [self drawValueTextFieldWithRect:NSMakeRect(145, 165, 55, MAX_TEXTFIELD_HEIGHT)
                                                      toView:self];
 }
 #pragma mark IBACTION_WAH

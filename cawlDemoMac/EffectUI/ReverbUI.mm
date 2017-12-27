@@ -72,11 +72,11 @@
 }
 
 -(void) setupToneLevelUI {
-	toneLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(175, 310, 40, MAX_TEXTFIELD_HEIGHT)
+	toneLevelTitle = [self drawLabelTextFieldWithRect:NSMakeRect(180, 310, 40, MAX_TEXTFIELD_HEIGHT)
                                             WithTitle:@"Tone"
                                                toView:self];
     
-    toneLevelSlider = [self drawCircularSliderWithRect:NSMakeRect(180, 290, 30, 30)
+    toneLevelSlider = [self drawCircularSliderWithRect:NSMakeRect(185, 290, 30, 30)
                                             WithMaxVal:1.0
                                          AndWithMinVal:0.0
                                           atDefaultVal:0.0

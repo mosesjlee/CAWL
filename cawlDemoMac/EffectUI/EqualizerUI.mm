@@ -204,7 +204,7 @@
                                               withSelector:@selector(updateLowMidQFactor:)];
     
     //Value
-    lowMidQFactorLabel = [self drawValueTextFieldWithRect:NSMakeRect(75, 50, 30, MAX_TEXTFIELD_HEIGHT)
+    lowMidQFactorLabel = [self drawValueTextFieldWithRect:NSMakeRect(70, 50, 40, MAX_TEXTFIELD_HEIGHT)
                                                    toView:self];
 }
 
@@ -261,7 +261,7 @@
                                               withSelector:@selector(updateHighMidQFactor:)];
     
     //Value
-    highMidQFactorLabel = [self drawValueTextFieldWithRect:NSMakeRect(140, 50, 30, MAX_TEXTFIELD_HEIGHT)
+    highMidQFactorLabel = [self drawValueTextFieldWithRect:NSMakeRect(135, 50, 40, MAX_TEXTFIELD_HEIGHT)
                                                     toView:self];
 }
 

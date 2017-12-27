@@ -40,50 +40,50 @@
 #pragma mark SETUP_UI
 
 -(void) setupChorusRateUI {
-    chorusRateTitle = [self drawLabelTextFieldWithRect:NSMakeRect(20, 320, 40, MAX_TEXTFIELD_HEIGHT)
+    chorusRateTitle = [self drawLabelTextFieldWithRect:NSMakeRect(30, 320, 40, MAX_TEXTFIELD_HEIGHT)
                                              WithTitle:@"Rate"
                                                 toView:self];
     
-    chorusRateSlider = [self drawCircularSliderWithRect:NSMakeRect(20, 290, 30, 30)
+    chorusRateSlider = [self drawCircularSliderWithRect:NSMakeRect(30, 290, 30, 30)
                                              WithMaxVal:2.0
                                           AndWithMinVal:0.25
                                            atDefaultVal:1.0
                                                  toView:self
                                            withSelector:@selector(updateChorusRate:)];
     
-    chorusRateValue = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 50, MAX_TEXTFIELD_HEIGHT)
+    chorusRateValue = [self drawValueTextFieldWithRect:NSMakeRect(20, 260, 60, MAX_TEXTFIELD_HEIGHT)
                                                 toView:self];
 }
 
 -(void) setupChorusDepthUI {
-	chorusDepthTitle = [self drawLabelTextFieldWithRect:NSMakeRect(85, 320, 45, MAX_TEXTFIELD_HEIGHT)
+	chorusDepthTitle = [self drawLabelTextFieldWithRect:NSMakeRect(MAX_WIDTH/2-25, 320, 50, MAX_TEXTFIELD_HEIGHT)
                                               WithTitle:@"Depth"
                                                  toView:self];
     
-    chorusDepthSlider = [self drawCircularSliderWithRect:NSMakeRect(90, 290, 30, 30)
+    chorusDepthSlider = [self drawCircularSliderWithRect:NSMakeRect(MAX_WIDTH/2-15, 290, 30, 30)
                                               WithMaxVal:40
                                            AndWithMinVal:20
                                             atDefaultVal:30
                                                   toView:self
                                             withSelector:@selector(updateChorusDepthLevel:)];
     
-    chorusDepthValue = [self drawValueTextFieldWithRect:NSMakeRect(90, 260, 50, MAX_TEXTFIELD_HEIGHT)
+    chorusDepthValue = [self drawValueTextFieldWithRect:NSMakeRect(MAX_WIDTH/2-30, 260, 60, MAX_TEXTFIELD_HEIGHT)
                                                  toView:self];
 }
 
 -(void) setupMixLevelUI {
-	chorusMixTitle = [self drawLabelTextFieldWithRect:NSMakeRect(160, 320, 30, MAX_TEXTFIELD_HEIGHT)
+	chorusMixTitle = [self drawLabelTextFieldWithRect:NSMakeRect(180, 320, 30, MAX_TEXTFIELD_HEIGHT)
                                             WithTitle:@"Mix"
                                                toView:self];
     
-    chorusMixLevel = [self drawCircularSliderWithRect:NSMakeRect(160, 290, 30, 30)
+    chorusMixLevel = [self drawCircularSliderWithRect:NSMakeRect(180, 290, 30, 30)
                                            WithMaxVal:1.0
                                         AndWithMinVal:0.0
                                          atDefaultVal:1.0
                                                toView:self
                                          withSelector:@selector(updateMixLevel:)];
     
-    chorusMixValue = [self drawValueTextFieldWithRect:NSMakeRect(160, 260, 55, MAX_TEXTFIELD_HEIGHT)
+    chorusMixValue = [self drawValueTextFieldWithRect:NSMakeRect(170, 260, 60, MAX_TEXTFIELD_HEIGHT)
                                                toView:self];
 }
 
