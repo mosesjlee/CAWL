@@ -17,14 +17,25 @@
 CAWLPhaser::CAWLPhaser()
 {
 	triangleWave = new CAWLTriangleWaveOsc();
-    triangleWave->setWaveTableFreq(MIN_PHASER_MOD_RATE);
+    triangleWave->setWaveTableFreq(MAX_PHASER_MOD_RATE);
     centerFrequency = 2200;
     modDepth = 2000;
+	centerFreqs[0] = 808; //16Hz to 1.6 KHz
+	centerFreqs[1] = 1666.6; //33Hz to 3.3 KHz
+	centerFreqs[2] = 2424; //48 Hz to 4.8 KHz
+	centerFreqs[3] = 4949; //98 Hz to 9.8 KHz
+	centerFreqs[4] = 8080; //160 Hz to 16 KHz
+//	centerFreqs[5]
+	modDepths[0] = 792;
+	modDepths[1] = 1633;
+	modDepths[2] = 2376;
+	modDepths[3] = 4851;
     allPassFilters = (CAWLAllPassFilter **) malloc(sizeof(CAWLAllPassFilter *) * NUM_OF_FILTERS);
     for(int i = 0; i < NUM_OF_FILTERS; i++)
     {
         allPassFilters[i] = new CAWLAllPassFilter();
-        allPassFilters[i]->setCenterFreq(centerFrequency);
+//        allPassFilters[i]->setCenterFreq(centerFrequency);
+		allPassFilters[i]->setCenterFreq(centerFreqs[i]);
     }
 }
 
@@ -38,23 +49,24 @@ CAWLPhaser::~CAWLPhaser()
     delete triangleWave;
 }
 
-void CAWLPhaser::processBuffer(float * buf, const unsigned int numSamples)
+void CAWLPhaser::processBuffer(float * audioStreamBuf, const unsigned int numSamples)
 {
     double xCurrSample = 0.0;
     double yCurrOutput = 0.0;
     for(unsigned int i = 0; i < numSamples; i++)
     {
-        xCurrSample = buf[i] + lastFeedbackOutput;
+		xCurrSample = audioStreamBuf[i];// + lastFeedbackOutput;
         yCurrOutput = xCurrSample;
+		double nextValue = triangleWave->getNextSample();
         for(int j = 0; j < NUM_OF_FILTERS; j++)
         {
             yCurrOutput = allPassFilters[j]->processNextSample(yCurrOutput);
-            double nextValue = triangleWave->getNextSample();
-            allPassFilters[j]->setCenterFreq(nextValue * modDepth + centerFrequency);
+//            allPassFilters[j]->setCenterFreq(nextValue * modDepth + centerFrequency);
+			allPassFilters[j]->setCenterFreq(nextValue * modDepths[j] + centerFreqs[j]);
         }
-        buf[i] = yCurrOutput * 0.5 + xCurrSample * 0.5;
-        lastFeedbackOutput = yCurrOutput * .8;
+		audioStreamBuf[i] = yCurrOutput * mixLevel + xCurrSample * (1.0-mixLevel);
     }
+	lastFeedbackOutput = yCurrOutput;
 }
 
 void CAWLPhaser::setModDepth(double newModDepth)

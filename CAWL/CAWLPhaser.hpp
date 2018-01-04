@@ -16,7 +16,7 @@ class CAWLPhaser
 public:
     CAWLPhaser();
     ~CAWLPhaser();
-    void processBuffer(float * buf, const unsigned int numSamples);
+    void processBuffer(float * audioStreamBuf, const unsigned int numSamples);
     void setModDepth(double newModDepth);
     void setModRate(double newModRate);
     void setMixLevel(double newMixLevel);
@@ -29,6 +29,10 @@ private:
     double modRate;
     double mixLevel;
     double lastFeedbackOutput;
+	
+	//WIll pirkles
+	double centerFreqs[6];
+	double modDepths[6];
 };
 
 #endif /* CAWLPhaser_hpp */
