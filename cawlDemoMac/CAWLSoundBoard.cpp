@@ -43,9 +43,6 @@ void CAWLSoundBoard::processBuffer(float * audioStreamBuf, const unsigned int nu
     if(isFlangerOn) {
         flanger->processBuffer(audioStreamBuf, numSamples);
     }
-    if(isReverbOn) {
-        reverb->processBuffer(audioStreamBuf, numSamples);
-    }
     if(isWahOn) {
         wahWah->processBuffer(audioStreamBuf, numSamples);
     }
@@ -61,10 +58,12 @@ void CAWLSoundBoard::processBuffer(float * audioStreamBuf, const unsigned int nu
     if(isFuzzOn) {
         fuzz->processBuffer(audioStreamBuf, numSamples);
     }
+	if(isReverbOn) {
+		reverb->processBuffer(audioStreamBuf, numSamples);
+	}
     if(isAmpOn) {
         ampSim->processBuffer(audioStreamBuf, numSamples);
     }
-    
 }
 
 #pragma mark AMP_CONTROLS
@@ -75,16 +74,29 @@ void CAWLSoundBoard::setNewAmpGain(float gain)
 
 void CAWLSoundBoard::setTurnOnAmp(bool onOff)
 {
-    if(!onOff)
-    {
-        if(ampSim != NULL) delete ampSim;
-        ampSim = NULL;
-    }
-    else
-    {
+	if(ampSim == NULL)
         ampSim = new CAWLAmpSimulator();
-    }
     isAmpOn = onOff;
+}
+
+void CAWLSoundBoard::selectAmpType(int model)
+{
+	ampSim->setAmpModel(model);
+}
+
+void CAWLSoundBoard::setAmpBass(double newBass)
+{
+	ampSim->setAmpBass(newBass);
+}
+
+void CAWLSoundBoard::setAmpMids(double newMids)
+{
+	ampSim->setAmpMid(newMids);
+}
+
+void CAWLSoundBoard::setAmpTreble(double newTreble)
+{
+	ampSim->setAmpTreble(newTreble);
 }
 
 #pragma mark DELAY_CONTROLS

@@ -123,8 +123,17 @@ NSArray * effectsList = @[@"Off",
         [self hideAmpUI];
     } else if ([currAmp isEqualToString:ampList[1]]) {
         _soundBoard->setTurnOnAmp(true);
-        [self drawAmpUI];
-    }
+		_soundBoard->selectAmpType(1);
+		[self drawAmpUI:1];
+	} else if ([currAmp isEqualToString:ampList[2]]) {
+		_soundBoard->setTurnOnAmp(true);
+		_soundBoard->selectAmpType(2);
+		[self drawAmpUI:2];
+	} else if ([currAmp isEqualToString:ampList[3]]) {
+		_soundBoard->setTurnOnAmp(true);
+		_soundBoard->selectAmpType(3);
+		[self drawAmpUI:3];
+	}
 }
 
 #pragma mark SETUP_EFFECT_MENU
@@ -493,8 +502,9 @@ NSArray * effectsList = @[@"Off",
 }
 
 #pragma mark UI_drawing
-- (void)drawAmpUI {
+- (void)drawAmpUI:(int) model {
     [ampUI setHidden:NO];
+	[ampUI setAmpTitle:ampList[model]];
 }
 
 - (void)drawEffectUI:(EffectUI *) ui with:(NSPoint) newPoint{

@@ -117,7 +117,7 @@ int main(int argc, const char * argv[]) {
     CAWLChorus chorus,* chorusPtr=&chorus; chorus.setModulationSpeed(0.25);
     CAWLWahWah wah, *wahPtr=&wah;
     CAWLOverdrive overdrive, * odPtr=&overdrive;
-	CAWLPhaser phaser, * phaserPtr=&phaser; phaser.setModRate(.5); phaser.setMixLevel(.7);
+	CAWLPhaser phaser, * phaserPtr=&phaser; phaser.setModRate(1); phaser.setMixLevel(.8);
 	CAWLFuzz fuzz, *fuzzPtr=&fuzz;
 #endif
     CAWLCompressor compressor, *compPtr=&compressor;

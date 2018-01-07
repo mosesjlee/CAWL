@@ -1,10 +1,10 @@
-//
-//  CAWLAllPassFilter.hpp
-//  CAWL
-//
-//  Created by Moses Lee on 11/21/17.
-//  Copyright © 2017 Moses Lee. All rights reserved.
-//
+/*
+  CAWLAllPassFilter.hpp
+  CAWL
+
+  Created by Moses Lee on 11/21/17.
+  Copyright © 2017 Moses Lee. All rights reserved.
+*/
 
 #ifndef CAWLAllPassFilter_hpp
 #define CAWLAllPassFilter_hpp
