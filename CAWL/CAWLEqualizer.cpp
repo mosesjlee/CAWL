@@ -55,6 +55,7 @@ void CAWLEqualizer::processBuffer(float * audioStreamBuf, const unsigned int num
     cHighMid.processBuffer(audioStreamBuf, numSamples);
     cHighShelf.processBuffer(audioStreamBuf, numSamples);
 }
+
 #pragma mark EQ_SETTERS
 /*
  Sets the center frequency of the low shelving filter

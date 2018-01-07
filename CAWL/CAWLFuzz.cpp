@@ -18,7 +18,7 @@ CAWLFuzz::CAWLFuzz()
 {
 	cToneControl.setGain(0);
 	cToneControl.setCenterFreq(12000);
-	cGain = 11;
+	cGain = 10;
     cMixLevel = 0.5;
 }
 
@@ -39,12 +39,20 @@ void CAWLFuzz::processBuffer(float * AudioStreamBuf, const unsigned int numSampl
 	double xCurrSample = 0.0;
 	double absValue = 0.0;
 	double yCurrOutput = 0.0;
-	
+	double denominator = 0.0;
     for(int i = 0; i < numSamples; i++)
     {
 		xCurrSample = AudioStreamBuf[i];
 		absValue = abs(xCurrSample);
-		yCurrOutput = xCurrSample/absValue * (1 - exp((cGain * xCurrSample * xCurrSample)/absValue));
+		if(xCurrSample == 0.0)
+		{
+			yCurrOutput = xCurrSample;
+		}
+		else
+		{
+			denominator = absValue * (1 - exp((cGain * xCurrSample * xCurrSample)/absValue));
+			yCurrOutput = xCurrSample/denominator;
+		}
         if(yCurrOutput > 1.0)
             yCurrOutput = 1.0;
         if(yCurrOutput < -1.0)

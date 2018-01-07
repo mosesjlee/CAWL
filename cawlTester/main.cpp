@@ -182,10 +182,10 @@ int main(int argc, const char * argv[]) {
 //        flangerPtr->processBuffer(data, numSamples);
 //        chorusPtr->processBuffer(data,numSamples);
 //        bpPtr->processBuffer(data, numSamples);
-//        wahPtr->processBuffer(data, numSamples);
+       wahPtr->processBuffer(data, numSamples);
 //        ptrToValve->processBuffer(data,numSamples);
 //        odPtr->processBuffer(data, numSamples);
-        phaserPtr->processBuffer(data, numSamples);
+//        phaserPtr->processBuffer(data, numSamples);
 //        fuzzPtr->processBuffer(data, numSamples);
 //        compPtr->processBuffer(data, numSamples);
 //        rvrbPtr->processBuffer(data, numSamples);

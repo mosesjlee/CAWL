@@ -116,12 +116,12 @@
 
 -(IBAction) updateWahDepth:(id)sender {
 	wahDepthValueField.stringValue = [NSString stringWithFormat:@"%.02f %%", wahDepthSlider.floatValue * 100];
-    self.soundTabRef.soundBoard->setWahModulationDepth(wahDepthLabel.floatValue);
+    self.soundTabRef.soundBoard->setWahModulationDepth(wahDepthSlider.floatValue * 500);
 }
 
 -(IBAction) updateWahRate:(id)sender {
     wahRateValueField.stringValue = [NSString stringWithFormat:@"%.02f %%", wahRateSlider.floatValue * 100];
-    self.soundTabRef.soundBoard->setWahModulationRate(wahRateSlider.floatValue);
+    self.soundTabRef.soundBoard->setWahModulationRate(wahRateSlider.floatValue * 2);
 }
 
 -(IBAction) updateWahCenterFreq:(id)sender {

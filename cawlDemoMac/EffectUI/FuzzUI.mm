@@ -88,7 +88,18 @@
 }
 
 -(void) setupMixLevelUI {
-    
+	mixTitle = [self drawLabelTextFieldWithRect:NSMakeRect(MAX_WIDTH/2-25, 230, 50, MAX_TEXTFIELD_HEIGHT)
+									  WithTitle:@"Mix Level"
+										 toView:self];
+	
+	mixLevelSlider = [self drawCircularSliderWithRect:NSMakeRect(MAX_WIDTH/2-15, 200, 30, 30)
+										   WithMaxVal:1.0
+									  	AndWithMinVal:0.0
+									   	atDefaultVal:0.5
+											   toView:self
+										 withSelector:@selector(updateMixLevel:)];
+	mixLevelValue = [self drawValueTextFieldWithRect:NSMakeRect(MAX_WIDTH/2-25, 170, 50, MAX_TEXTFIELD_HEIGHT)
+											  toView:self];
 }
 
 #pragma mark IBACTION_FUZZ
@@ -114,7 +125,8 @@
 }
 
 -(IBAction) updateMixLevel:(id)sender {
-    
+	mixLevelValue.stringValue = [NSString stringWithFormat:@"%.02f %%", mixLevelSlider.floatValue * 100];
+	self.soundTabRef.soundBoard->setFuzzMixLevel(mixLevelSlider.floatValue);
 }
 
 @end
