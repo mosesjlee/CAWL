@@ -8,26 +8,38 @@
 
 #include "CAWLPhaser.hpp"
 
-#define MAX_PHASER_MOD_RATE 2
+#define MAX_PHASER_MOD_RATE 10
 #define MIN_PHASER_MOD_RATE 0.25
-#define MAX_PHASER_MOD_DEPTH 2000
-#define MIN_PHASER_MOD_DEPTH 1000
+#define MAX_PHASER_MOD_DEPTH 100
+#define MIN_PHASER_MOD_DEPTH 50
 #define NUM_OF_FILTERS 4
 
+/*
+ Default constructor
+ */
 CAWLPhaser::CAWLPhaser()
 {
 	triangleWave = new CAWLTriangleWaveOsc();
-    triangleWave->setWaveTableFreq(MIN_PHASER_MOD_RATE);
-    centerFrequency = 2200;
-    modDepth = 2000;
+    triangleWave->setWaveTableFreq(0.5);
+    modDepth = 200;
     allPassFilters = (CAWLAllPassFilter **) malloc(sizeof(CAWLAllPassFilter *) * NUM_OF_FILTERS);
     for(int i = 0; i < NUM_OF_FILTERS; i++)
     {
         allPassFilters[i] = new CAWLAllPassFilter();
-        allPassFilters[i]->setCenterFreq(centerFrequency);
     }
+    allPassFilters[0]->setCenterFreq(792);
+    allPassFilters[1]->setCenterFreq(1633);
+    allPassFilters[2]->setCenterFreq(2376);
+    allPassFilters[3]->setCenterFreq(4851);
+    centerFreqs[0] = 792;
+    centerFreqs[1] = 1633;
+    centerFreqs[2] = 2376;
+    centerFreqs[3] = 4851;
 }
 
+/*
+ Default destructor
+ */
 CAWLPhaser::~CAWLPhaser()
 {
     for(int i = 0 ; i < NUM_OF_FILTERS; i++)
@@ -38,25 +50,33 @@ CAWLPhaser::~CAWLPhaser()
     delete triangleWave;
 }
 
-void CAWLPhaser::processBuffer(float * buf, const unsigned int numSamples)
+/*
+ Main processing block
+ @param audioStreambuf the buffer of audio stream in 32 bit float
+ @param numSamples the number of samples in the buffer block
+ */
+void CAWLPhaser::processBuffer(float * audioStreamBuf, const unsigned int numSamples)
 {
     double xCurrSample = 0.0;
-    double yCurrOutput = 0.0;
+    double yCurrOutput = lastFeedbackOutput;
     for(unsigned int i = 0; i < numSamples; i++)
     {
-        xCurrSample = buf[i] + lastFeedbackOutput;
-        yCurrOutput = xCurrSample;
+        xCurrSample = audioStreamBuf[i];
+        double nextSample = xCurrSample;
+        double nextValue = triangleWave->getNextSample();
         for(int j = 0; j < NUM_OF_FILTERS; j++)
         {
-            yCurrOutput = allPassFilters[j]->processNextSample(yCurrOutput);
-            double nextValue = triangleWave->getNextSample();
-            allPassFilters[j]->setCenterFreq(nextValue * modDepth + centerFrequency);
+            nextSample = allPassFilters[j]->processNextSample(nextSample);
+            allPassFilters[j]->setCenterFreq(nextValue * modDepth + centerFreqs[j]);
         }
-        buf[i] = yCurrOutput * 0.5 + xCurrSample * 0.5;
-        lastFeedbackOutput = yCurrOutput * .8;
+        audioStreamBuf[i] = nextSample * 0.7 + xCurrSample * 0.3;
+        yCurrOutput = audioStreamBuf[i];
     }
+    lastFeedbackOutput = yCurrOutput;
 }
 
+/*
+ */
 void CAWLPhaser::setModDepth(double newModDepth)
 {
     if(newModDepth > MAX_PHASER_MOD_DEPTH)
@@ -67,6 +87,8 @@ void CAWLPhaser::setModDepth(double newModDepth)
         modDepth = newModDepth;
 }
 
+/*
+ */
 void CAWLPhaser::setModRate(double newModRate)
 {
     if(newModRate > MAX_PHASER_MOD_RATE)
@@ -77,6 +99,8 @@ void CAWLPhaser::setModRate(double newModRate)
         modRate = newModRate;
 }
 
+/*
+ */
 void CAWLPhaser::setMixLevel(double newMixLevel)
 {
     if(newMixLevel > 1.0)

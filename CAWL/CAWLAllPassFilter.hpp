@@ -17,7 +17,6 @@ class CAWLAllPassFilter : public CAWLBiQuadFilter
 public:
     CAWLAllPassFilter();
     ~CAWLAllPassFilter();
-    void processBuffer(float * buf, const unsigned int numSamples);
     double processNextSample(double inputSample);
     
 protected:

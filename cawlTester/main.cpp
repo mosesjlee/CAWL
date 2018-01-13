@@ -27,6 +27,7 @@
 #include "CAWLOverdrive.hpp"
 #include "CAWLPhaser.hpp"
 #include "CAWLFuzz.hpp"
+#include "CAWLAllPassFilter.hpp"
 #include "CAWLCompressor.hpp"
 #include "CAWLReverb.hpp"
 #include <iostream>
@@ -34,7 +35,7 @@
 
 #define SCALE 0.3
 #define WRITE_TO_FILE
-//#define SHOW_DEBUG_SAMPLES
+#define SHOW_DEBUG_SAMPLES
 #define TEST_BIQUAD 0
 #define TEST_COMB 0
 #define TEST_OSC 0
@@ -61,7 +62,7 @@ int main(int argc, const char * argv[]) {
     double * ptr2 = &cycleLength2;
     double cycleLength3 = 44100. / 659.25;
     
-    float debugBuffer[153600];
+    float *debugBuffer = (float *) calloc(153600, 153600 * sizeof(float));
     float *debugPtr = debugBuffer;
     
     int debugBufWriteCount = 0;
@@ -93,6 +94,7 @@ int main(int argc, const char * argv[]) {
 //    CAWLFIRCombFilter *ptrToFir = &fir;
 //    CAWLIIRCombFilter iir; iir.setDelay(2.2675736961);
 //    CAWLIIRCombFilter *ptrToiir = &iir;
+    CAWLAllPassFilter apf,  *apfPtr = &apf; apf.setCenterFreq(792);
 
     //EQ stuff
     CAWLLowShelfFilter lsf, * lsfPtr = &lsf;
@@ -173,7 +175,7 @@ int main(int argc, const char * argv[]) {
 //        ptrToUcf->processBuffer(data, numSamples);
 //        ptrToAmp->processBuffer(data, numSamples);
 //        lsfPtr->processBuffer(data, numSamples);
-        hsfPtr->processBuffer(data, numSamples);
+//        hsfPtr->processBuffer(data, numSamples);
 //        pfPtr->processBuffer(data, numSamples);
 //        pf2Ptr->processBuffer(data, numSamples);
 		
@@ -185,11 +187,11 @@ int main(int argc, const char * argv[]) {
 //        wahPtr->processBuffer(data, numSamples);
 //        ptrToValve->processBuffer(data,numSamples);
 //        odPtr->processBuffer(data, numSamples);
-//        phaserPtr->processBuffer(data, numSamples);
-        fuzzPtr->processBuffer(data, numSamples);
+        phaserPtr->processBuffer(data, numSamples);
+//        fuzzPtr->processBuffer(data, numSamples);
 //        compPtr->processBuffer(data, numSamples);
 //        rvrbPtr->processBuffer(data, numSamples);
-        
+//        apfPtr->processBuffer(data, numSamples);
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 300) {
             memcpy(debugPtr + (*debugCountPtr) * numSamples, data, (512 *sizeof(float)));
@@ -293,7 +295,7 @@ int main(int argc, const char * argv[]) {
 	}
 #ifdef WRITE_TO_FILE
     std::ofstream out;
-    out.open("/Users/moseslee/Desktop/delayfloat", std::ios::out | std::ios::binary);
+    out.open("/Users/moseslee/Desktop/delayfloat1", std::ios::out | std::ios::binary);
     out.write(reinterpret_cast <const char*> (debugBuffer) , 153600 * sizeof(float));
     out.close();
 #endif
@@ -303,6 +305,7 @@ int main(int argc, const char * argv[]) {
         printf("%f\n", debugBuffer[i]);
     }
 #endif
+    delete [] debugBuffer;
     return 0;
     
 }

@@ -29,6 +29,7 @@ private:
     double modRate;
     double mixLevel;
     double lastFeedbackOutput;
+    double centerFreqs[4];
 };
 
 #endif /* CAWLPhaser_hpp */
