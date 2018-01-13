@@ -20,12 +20,33 @@
 CAWLPhaser::CAWLPhaser()
 {
 	triangleWave = new CAWLTriangleWaveOsc();
+<<<<<<< HEAD
     triangleWave->setWaveTableFreq(0.5);
     modDepth = 200;
+=======
+    triangleWave->setWaveTableFreq(MAX_PHASER_MOD_RATE);
+    centerFrequency = 2200;
+    modDepth = 2000;
+	centerFreqs[0] = 808; //16Hz to 1.6 KHz
+	centerFreqs[1] = 1666.6; //33Hz to 3.3 KHz
+	centerFreqs[2] = 2424; //48 Hz to 4.8 KHz
+	centerFreqs[3] = 4949; //98 Hz to 9.8 KHz
+	centerFreqs[4] = 8080; //160 Hz to 16 KHz
+//	centerFreqs[5]
+	modDepths[0] = 792;
+	modDepths[1] = 1633;
+	modDepths[2] = 2376;
+	modDepths[3] = 4851;
+>>>>>>> 46f6bb5cf331a57513684d9b5312d3cc3fd6da84
     allPassFilters = (CAWLAllPassFilter **) malloc(sizeof(CAWLAllPassFilter *) * NUM_OF_FILTERS);
     for(int i = 0; i < NUM_OF_FILTERS; i++)
     {
         allPassFilters[i] = new CAWLAllPassFilter();
+<<<<<<< HEAD
+=======
+//        allPassFilters[i]->setCenterFreq(centerFrequency);
+		allPassFilters[i]->setCenterFreq(centerFreqs[i]);
+>>>>>>> 46f6bb5cf331a57513684d9b5312d3cc3fd6da84
     }
     allPassFilters[0]->setCenterFreq(792);
     allPassFilters[1]->setCenterFreq(1633);

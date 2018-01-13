@@ -11,4 +11,5 @@
 
 @interface AmpUI : EffectUI
 - (instancetype)initWithFrame:(NSRect)frameRect;
+- (void)setAmpTitle:(NSString*)title;
 @end

@@ -119,7 +119,7 @@ int main(int argc, const char * argv[]) {
     CAWLChorus chorus,* chorusPtr=&chorus; chorus.setModulationSpeed(0.25);
     CAWLWahWah wah, *wahPtr=&wah;
     CAWLOverdrive overdrive, * odPtr=&overdrive;
-    CAWLPhaser phaser, * phaserPtr=&phaser;
+	CAWLPhaser phaser, * phaserPtr=&phaser; phaser.setModRate(1); phaser.setMixLevel(.8);
 	CAWLFuzz fuzz, *fuzzPtr=&fuzz;
 #endif
     CAWLCompressor compressor, *compPtr=&compressor;
@@ -184,7 +184,7 @@ int main(int argc, const char * argv[]) {
 //        flangerPtr->processBuffer(data, numSamples);
 //        chorusPtr->processBuffer(data,numSamples);
 //        bpPtr->processBuffer(data, numSamples);
-//        wahPtr->processBuffer(data, numSamples);
+       wahPtr->processBuffer(data, numSamples);
 //        ptrToValve->processBuffer(data,numSamples);
 //        odPtr->processBuffer(data, numSamples);
         phaserPtr->processBuffer(data, numSamples);

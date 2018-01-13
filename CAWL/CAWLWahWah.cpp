@@ -107,7 +107,7 @@ void CAWLWahWah::setModulationDepth(double newModDepth)
 {
     if(newModDepth > MAX_WAH_DEPTH_FREQ)
         modDepth = MAX_WAH_DEPTH_FREQ;
-    else
+    else if(newModDepth != 0)
         modDepth = newModDepth;
 }
 

@@ -249,6 +249,9 @@ CAWLAmpSimulator::CAWLAmpSimulator(int model)
         stack = ToneStack(princeton);
         std::cout << "princeton" << std::endl;
     }
+	cAmpBass = 0.5;
+	cAmpMid = 0.5;
+	cAmpTreble = 0.5;
     stack.init(cSampleRate);
     lsf.setCenterFreq(720);
     hp1.setCenterFreq(120);
@@ -259,7 +262,6 @@ CAWLAmpSimulator::CAWLAmpSimulator(int model)
  */
 CAWLAmpSimulator::~CAWLAmpSimulator()
 {
-//	delete stack;
 }
 
 /*
@@ -269,30 +271,30 @@ CAWLAmpSimulator::~CAWLAmpSimulator()
  */
 void CAWLAmpSimulator::processBuffer(float *AudioStreamBuf, const unsigned int numOfSamples)
 {
-
-    
 	//1st send it to be processed by the valve simulator
-	valveTube.processBuffer(AudioStreamBuf, numOfSamples);
-    hp1.processBuffer(AudioStreamBuf, numOfSamples);
+	//valveTube.processBuffer(AudioStreamBuf, numOfSamples);
+    //hp1.processBuffer(AudioStreamBuf, numOfSamples);
 //    lsf.processBuffer(buf, numOfSamples);
-    
-//    for(int i = 0; i < numOfSamples; i++)
-//    {
-//        //buf[i] = dcBlocker->processSample(buf[i]);
-//        //buf[i] = ((3.0 * buf[i])/2.0) * (1 - ((buf[i] * buf[i])/3.0));
-//        int sign = 1.0;
-//        if (buf[i] < 0.0)
-//            sign = -1.0;
-//
-//        buf[i] = (fabs(2.5*buf[i]) - (buf[i] * buf[i])) * sign;
-//    }
-	
-	//2nd need to implement low shelving filter
-    //dc->process(buf, numOfSamples);
 
 	//3rd send it to be processed by the tone stack
-    stack.updatecoefs(0.2, 0.2, 1);
+    stack.updatecoefs(cAmpBass, cAmpMid, cAmpTreble);
 	stack.process(AudioStreamBuf, numOfSamples);
+}
+
+void CAWLAmpSimulator::setAmpModel(int model)
+{
+	if(model == 1)
+	{
+		stack.setparams(fender);
+	}
+	else if (model == 2)
+	{
+		stack.setparams(voxAC30);
+	}
+	else if (model == 3)
+	{
+		stack.setparams(princeton);
+	}
 }
 
 /*
@@ -304,8 +306,41 @@ void CAWLAmpSimulator::setGain(float gain)
     valveTube.setGain(gain);
 }
 
+/*
+ */
+void CAWLAmpSimulator::setAmpBass(double newBass)
+{
+	if(newBass > 1.0)
+		cAmpBass = 1.0;
+	else if (newBass < 0.0)
+		cAmpBass = 0.0;
+	else
+		cAmpBass = newBass;
+}
 
+/*
+ */
+void CAWLAmpSimulator::setAmpMid(double newMid)
+{
+	if(newMid > 1.0)
+		cAmpMid = 1.0;
+	else if (newMid < 0.0)
+		cAmpMid = 0.0;
+	else
+		cAmpMid = newMid;
+}
 
+/*
+ */
+void CAWLAmpSimulator::setAmpTreble(double newTreble)
+{
+	if(newTreble > 1.0)
+		cAmpTreble = 1.0;
+	else if (newTreble < 0.0)
+		cAmpTreble = 0.0;
+	else
+		cAmpTreble = newTreble;
+}
 
 
 

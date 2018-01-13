@@ -22,7 +22,6 @@
 #include "CAWLHighPassFilter.hpp"
 #include "CAWLLowShelfFilter.hpp"
 
-class ToneStack;
 class CAWLAmpSimulator : public CAWLSoundModule
 {
 public:
@@ -31,11 +30,17 @@ public:
     ~CAWLAmpSimulator();
 	virtual void processBuffer(float * buf, const unsigned int numOfSamples);
     void setGain(float gain);
+	void setAmpBass(double newBass);
+	void setAmpMid(double newMid);
+	void setAmpTreble(double newTreble);
+	void setAmpModel(int model);
   
 private:
     CAWLValveTubeSimulator valveTube;
-//    ToneStack * stack;
     CAWLHighPassFilter hp1;
     CAWLLowShelfFilter lsf;
+	double cAmpBass;
+	double cAmpMid;
+	double cAmpTreble;
 };
 #endif /* CAWLAmpSimulator_hpp */

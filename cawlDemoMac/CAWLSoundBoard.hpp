@@ -37,7 +37,10 @@ public:
     //Amp Controls
     void setNewAmpGain(float gain);
     void setTurnOnAmp(bool onOff);
-    void selectAmpType(int type);
+	void setAmpBass(double newBass);
+	void setAmpMids(double newMids);
+	void setAmpTreble(double newTreble);
+    void selectAmpType(int model);
     
     //Delay controls
 	void turnOnDelay(bool onOff);

@@ -8,6 +8,9 @@
 
 #include "CAWLAllPassFilter.hpp"
 
+/*
+ Default constructor. Set a default center frequency
+ */
 CAWLAllPassFilter::CAWLAllPassFilter()
 {
     cCenterFrequency = 0;
@@ -15,9 +18,11 @@ CAWLAllPassFilter::CAWLAllPassFilter()
     d0 = 0.0;
 }
 
+/*
+ Default destructor.
+ */
 CAWLAllPassFilter::~CAWLAllPassFilter()
 {
-    
 }
 
 double CAWLAllPassFilter::processNextSample(double inputSample)
@@ -50,6 +55,10 @@ double CAWLAllPassFilter::processNextSample(double inputSample)
 //    return outputSample;
 }
 
+/*
+ Calculate the coeffiencts. Based on the calculations found in
+ Udo Zolzer's DAFX book.
+ */
 void CAWLAllPassFilter::calculateCoefficients()
 {
 //    double K = tan(M_PI * cCenterFrequency/cSampleRate);

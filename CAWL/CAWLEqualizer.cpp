@@ -34,6 +34,8 @@ CAWLEqualizer::CAWLEqualizer()
     cLowMid.setGain(0.0);
     cHighMid.setGain(0.0);
     cHighShelf.setGain(0.0);
+	cLowMid.setQFactor(0.707);
+	cHighMid.setQFactor(0.707);
 }
 
 /*
@@ -55,6 +57,7 @@ void CAWLEqualizer::processBuffer(float * audioStreamBuf, const unsigned int num
     cHighMid.processBuffer(audioStreamBuf, numSamples);
     cHighShelf.processBuffer(audioStreamBuf, numSamples);
 }
+
 #pragma mark EQ_SETTERS
 /*
  Sets the center frequency of the low shelving filter
