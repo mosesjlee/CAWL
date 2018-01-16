@@ -29,7 +29,10 @@ private:
     double modRate;
     double mixLevel;
     double lastFeedbackOutput;
-    double centerFreqs[4];
+	
+	//WIll pirkles
+	double centerFreqs[6];
+	double modDepths[6];
 };
 
 #endif /* CAWLPhaser_hpp */

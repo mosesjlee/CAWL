@@ -25,19 +25,19 @@ CAWLReverb::CAWLReverb()
     for(int i = 0; i < NUM_MOORERS_DELAYLINE; i++) 
         cDelayLineZ_1[i] = cDelayLineOut[i] = cLpfZ_1Samples[i] = 0.0;
     
-    cLpfGain[0] = 0.2482;
-    cLpfGain[1] = 0.2399;
-    cLpfGain[2] = 0.2350;
-    cLpfGain[3] = 0.2316;
-    cLpfGain[4] = 0.2233;
-    cLpfGain[5] = 0.2735;
+    cLpfGain[0] = 0.1482;
+    cLpfGain[1] = 0.1399;
+    cLpfGain[2] = 0.1350;
+    cLpfGain[3] = 0.1316;
+    cLpfGain[4] = 0.1233;
+    cLpfGain[5] = 0.1735;
     
-    cCombGain[0] = 0.26;
-    cCombGain[1] = 0.27;
-    cCombGain[2] = 0.275;
-    cCombGain[3] = 0.28;
-    cCombGain[4] = 0.29;
-    cCombGain[5] = 0.20;
+    cCombGain[0] = 0.16;
+    cCombGain[1] = 0.17;
+    cCombGain[2] = 0.175;
+    cCombGain[3] = 0.18;
+    cCombGain[4] = 0.19;
+    cCombGain[5] = 0.10;
     
     cApDelayLine.setDelayTimeInMilliseconds(6);
     cApGain = 0.7;

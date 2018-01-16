@@ -27,6 +27,9 @@
 
     //Just register here for now
     _cawlInstance->registerInputBlockAtInputChannel([[_soundPageArray objectAtIndex:0] getSoundBoardRef], 0);
+    _cawlInstance->registerInputBlockAtInputChannel([[_soundPageArray objectAtIndex:1] getSoundBoardRef], 1);
+    _cawlInstance->registerInputBlockAtInputChannel([[_soundPageArray objectAtIndex:2] getSoundBoardRef], 2);
+    _cawlInstance->registerInputBlockAtInputChannel([[_soundPageArray objectAtIndex:3] getSoundBoardRef], 3);
     NSLog(@"Finished setting up View");
 }
 

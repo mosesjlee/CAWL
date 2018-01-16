@@ -31,26 +31,8 @@ CAWLSoundBoard::~CAWLSoundBoard()
 #pragma mark SOUND_PROCESSING
 void CAWLSoundBoard::processBuffer(float * audioStreamBuf, const unsigned int numSamples)
 {
-    if(isDelayOn) {
-        delayEffect->processBuffer(audioStreamBuf, numSamples);
-    }
-    if(isEqOn) {
-        equalizer->processBuffer(audioStreamBuf, numSamples);
-    }
-    if(isChorusOn) {
-        chorus->processBuffer(audioStreamBuf, numSamples);
-    }
-    if(isFlangerOn) {
-        flanger->processBuffer(audioStreamBuf, numSamples);
-    }
-    if(isWahOn) {
-        wahWah->processBuffer(audioStreamBuf, numSamples);
-    }
     if(isCompressorOn) {
         compressor->processBuffer(audioStreamBuf, numSamples);
-    }
-    if(isPhaserOn) {
-        phaser->processBuffer(audioStreamBuf, numSamples);
     }
     if(isOverdriveOn) {
         overdrive->processBuffer(audioStreamBuf, numSamples);
@@ -58,9 +40,27 @@ void CAWLSoundBoard::processBuffer(float * audioStreamBuf, const unsigned int nu
     if(isFuzzOn) {
         fuzz->processBuffer(audioStreamBuf, numSamples);
     }
-	if(isReverbOn) {
-		reverb->processBuffer(audioStreamBuf, numSamples);
-	}
+    if(isChorusOn) {
+        chorus->processBuffer(audioStreamBuf, numSamples);
+    }
+    if(isEqOn) {
+        equalizer->processBuffer(audioStreamBuf, numSamples);
+    }
+    if(isReverbOn) {
+        reverb->processBuffer(audioStreamBuf, numSamples);
+    }
+    if(isFlangerOn) {
+        flanger->processBuffer(audioStreamBuf, numSamples);
+    }
+    if(isWahOn) {
+        wahWah->processBuffer(audioStreamBuf, numSamples);
+    }
+    if(isPhaserOn) {
+        phaser->processBuffer(audioStreamBuf, numSamples);
+    }
+    if(isDelayOn) {
+        delayEffect->processBuffer(audioStreamBuf, numSamples);
+    }
     if(isAmpOn) {
         ampSim->processBuffer(audioStreamBuf, numSamples);
     }

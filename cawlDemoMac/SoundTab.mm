@@ -85,12 +85,12 @@ NSArray * effectsList = @[@"Off",
     //Create soundboard object
     _soundBoard = new CAWLSoundBoard();
     
-    fillGuitarStream();
+    //fillGuitarStream();
     
     //Register the block
     __block CAWLSoundBoard * weak = _soundBoard;
     _buffer = ^(float * buf, const unsigned int numSamples) {
-        testBuffer(buf, numSamples);
+        //testBuffer(buf, numSamples);
         weak->processBuffer(buf, numSamples);
     };
     return self;

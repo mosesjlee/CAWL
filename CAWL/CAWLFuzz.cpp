@@ -93,6 +93,7 @@ void CAWLFuzz::setGain(double newGainLevel)
 
 /*
  Sets the mix level for the fuzz
+ @param newMix -> the new mix level
  */
 void CAWLFuzz::setMixLevel(double newMix)
 {
