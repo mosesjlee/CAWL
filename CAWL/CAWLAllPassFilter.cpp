@@ -57,7 +57,7 @@ double CAWLAllPassFilter::processNextSample(double inputSample)
 
 /*
  Calculate the coeffiencts. Based on the calculations found in
- Udo Zolzer's DAFX book.
+ Udo Zolzer's DAFX book. page 49
  */
 void CAWLAllPassFilter::calculateCoefficients()
 {

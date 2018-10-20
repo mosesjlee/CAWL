@@ -40,7 +40,7 @@ CAWLReverb::CAWLReverb()
     cCombGain[5] = 0.10;
     
     cApDelayLine.setDelayTimeInMilliseconds(6);
-    cApGain = 0.7;
+    cApGain = 0.4;
     cApOut = 0.0;
     
     cReverbMix = 1.0;
