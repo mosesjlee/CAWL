@@ -21,7 +21,7 @@
 #endif
 #include "CAWLAudioUnit.hpp"
 
-typedef void (^cawlBuffers)(float * buffer,
+typedef void (^cawlBuffer)(float * buffer,
 							const unsigned int numSamples);
 
 
@@ -29,8 +29,8 @@ class CAWL
 {
 	//Public methods
 public:
-	cawlBuffers getInputBufferAtChannel(const unsigned int channel);
-	bool registerInputBlockAtInputChannel(cawlBuffers buffer, const unsigned int channel);
+	cawlBuffer getInputBufferAtChannel(const unsigned int channel);
+	bool registerInputBlockAtInputChannel(cawlBuffer buffer, const unsigned int channel);
 	static CAWL * Instance();
 	void startPlaying();
 	void stopPlaying();
@@ -70,8 +70,8 @@ private:
 private:
 	static CAWL * cawlInstance;
     
-	//__weak cawlBuffers * sampleBuffer;
-    __weak cawlBuffers * sampleBuffer;
+	//__weak cawlBuffer * sampleBuffer;
+    __weak cawlBuffer * sampleBuffer;
 	
     CAWLAudioUnit * aggregateAudioUnit;
 	AUGraph graph;

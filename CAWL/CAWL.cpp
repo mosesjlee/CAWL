@@ -93,7 +93,7 @@ void CAWL::setupBuffers()
 	
 	printf("Number of input channels: %d\n", aggregateAudioUnit->getASBD().mChannelsPerFrame);
 	numInputChannels = aggregateAudioUnit->getASBD().mChannelsPerFrame;
-	sampleBuffer = new cawlBuffers[numInputChannels];
+	sampleBuffer = new cawlBuffer[numInputChannels];
 	
 	//Allocate a ring buffer
 	ringBuffer = new CARingBuffer();
@@ -336,7 +336,7 @@ OSStatus CAWL::OutputRenderCallBack(void *inRefCon,
 
 /*
  */
-cawlBuffers CAWL::getInputBufferAtChannel(const unsigned int channel)
+cawlBuffer CAWL::getInputBufferAtChannel(const unsigned int channel)
 {
 	if(channel > numInputChannels)
 		return nullptr;
@@ -344,7 +344,7 @@ cawlBuffers CAWL::getInputBufferAtChannel(const unsigned int channel)
 	return sampleBuffer[channel];
 }
 
-bool CAWL::registerInputBlockAtInputChannel(cawlBuffers buffer, const unsigned int channel)
+bool CAWL::registerInputBlockAtInputChannel(cawlBuffer buffer, const unsigned int channel)
 {
 	if(channel > numInputChannels)
 		return false;

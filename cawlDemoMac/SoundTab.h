@@ -15,7 +15,7 @@
 - (instancetype)initWithIdentifier:(id)identifier;
 - (void)drawLabel:(BOOL)shouldTruncateLabel
            inRect:(NSRect)labelRect;
-- (cawlBuffers) getSoundBoardRef;
+- (cawlBuffer) getSoundBoardRef;
 
 @property (strong) NSPopUpButton * ampSelector;
 @property (strong) NSPopUpButton * effectSelector1;
@@ -24,5 +24,5 @@
 @property (strong) NSPopUpButton * effectSelector4;
 
 @property CAWLSoundBoard * soundBoard;
-@property (copy) cawlBuffers buffer;
+@property (copy) cawlBuffer buffer;
 @end

@@ -35,7 +35,7 @@
 
 #define SCALE 0.3
 #define WRITE_TO_FILE
-#define SHOW_DEBUG_SAMPLES
+//#define SHOW_DEBUG_SAMPLES
 #define TEST_BIQUAD 0
 #define TEST_COMB 0
 #define TEST_OSC 0
@@ -126,7 +126,7 @@ int main(int argc, const char * argv[]) {
     compressor.setAttackTime(25); compressor.setReleaseTime(200);
     compressor.setCompressorThreshold(-10); compressor.setCompressorRatio(3); compressor.setKneeLevel(10);
     CAWLReverb reverb, *rvrbPtr=&reverb;
-	cawlBuffers inputChannel1 = (^(float * data,
+	cawlBuffer inputChannel1 = (^(float * data,
 								   const unsigned int numSamples){
         double j = *fc;
         for(int i = 0; i < numSamples; i++)
@@ -184,13 +184,13 @@ int main(int argc, const char * argv[]) {
 //        flangerPtr->processBuffer(data, numSamples);
 //        chorusPtr->processBuffer(data,numSamples);
 //        bpPtr->processBuffer(data, numSamples);
-       wahPtr->processBuffer(data, numSamples);
+//       wahPtr->processBuffer(data, numSamples);
 //        ptrToValve->processBuffer(data,numSamples);
 //        odPtr->processBuffer(data, numSamples);
-        phaserPtr->processBuffer(data, numSamples);
+//        phaserPtr->processBuffer(data, numSamples);
 //        fuzzPtr->processBuffer(data, numSamples);
 //        compPtr->processBuffer(data, numSamples);
-//        rvrbPtr->processBuffer(data, numSamples);
+        rvrbPtr->processBuffer(data, numSamples);
 //        apfPtr->processBuffer(data, numSamples);
 #ifdef WRITE_TO_FILE
         if(*debugCountPtr < 300) {
@@ -201,7 +201,7 @@ int main(int argc, const char * argv[]) {
         
 	});
 	
-	cawlBuffers inputChannel2 = (^(float * data,
+	cawlBuffer inputChannel2 = (^(float * data,
 								   const unsigned int numSamples){
 //        double j = *fc2;
 //        for(int i = 0; i < numSamples; i++)
@@ -221,7 +221,7 @@ int main(int argc, const char * argv[]) {
 		//printf("%f ",j);
 	});
     
-    cawlBuffers inputChannel3 = (^(float * data,
+    cawlBuffer inputChannel3 = (^(float * data,
                                    const unsigned int numSamples){
 //        double j = *fc3;
 //        for(int i = 0; i < numSamples; i++)
@@ -242,7 +242,7 @@ int main(int argc, const char * argv[]) {
         //printf("%f ",j);
     });
 	
-    cawlBuffers inputChannel4 = (^(float * data, const unsigned int numSamples){
+    cawlBuffer inputChannel4 = (^(float * data, const unsigned int numSamples){
         double j = *fc4;
         for(int i = 0; i < numSamples; i++)
         {

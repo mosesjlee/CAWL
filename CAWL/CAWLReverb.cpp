@@ -32,12 +32,12 @@ CAWLReverb::CAWLReverb()
     cLpfGain[4] = 0.1233;
     cLpfGain[5] = 0.1735;
     
-    cCombGain[0] = 0.16;
-    cCombGain[1] = 0.17;
-    cCombGain[2] = 0.175;
-    cCombGain[3] = 0.18;
-    cCombGain[4] = 0.19;
-    cCombGain[5] = 0.10;
+    cCombGain[0] = 0.46;
+    cCombGain[1] = 0.48;
+    cCombGain[2] = 0.50;
+    cCombGain[3] = 0.52;
+    cCombGain[4] = 0.53;
+    cCombGain[5] = 0.55;
     
     cApDelayLine.setDelayTimeInMilliseconds(6);
     cApGain = 0.4;

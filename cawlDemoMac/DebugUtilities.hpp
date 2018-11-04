@@ -14,5 +14,5 @@ void getRawGuitarStream(float * stream);
 void getWhiteNoiseStream(float * stream);
 void fillWhiteNoiseStream();
 void fillGuitarStream();
-extern cawlBuffers testBuffer;
+extern cawlBuffer testBuffer;
 #endif /* DebugUtilities_hpp */

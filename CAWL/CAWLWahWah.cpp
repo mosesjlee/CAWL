@@ -82,7 +82,6 @@ void CAWLWahWah::processBuffer(float * audioStreamBuf, const unsigned int numSam
         audioStreamBuf[i] = (y_b/max_y_b * mixLevel) + (xCurrSample * (1.0f-mixLevel));
         anchorFrequency = (triangeWave->getNextSample() * modDepth) + centerFrequency;
     }
-    
 }
 
 /*

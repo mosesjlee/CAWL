@@ -102,7 +102,7 @@ NSArray * effectsList = @[@"Off",
     [super drawLabel:shouldTruncateLabel inRect:labelRect];
 }
 
-- (cawlBuffers) getSoundBoardRef {
+- (cawlBuffer) getSoundBoardRef {
     return _buffer;
 }
 

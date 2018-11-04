@@ -74,7 +74,7 @@ void fillWhiteNoiseStream()
     getWhiteNoiseStream(whiteNoiseBuffer);
 }
 
-cawlBuffers testBuffer = (^(float * data, const unsigned int numSamples){
+cawlBuffer testBuffer = (^(float * data, const unsigned int numSamples){
     for(int i = 0; i < numSamples; i++)
     {
         //ptrToBuf1[i] = data[i];
