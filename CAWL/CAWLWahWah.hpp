@@ -25,7 +25,7 @@ public:
     
 private:
     void calculateCoefficients();
-    CAWLTriangleWaveOsc * triangeWave;
+    CAWLTriangleWaveOsc * triangleWave;
     double rate;
     double mixLevel;
     double modDepth;
@@ -38,6 +38,6 @@ private:
     double y_l_n1;
     double max_y_b;
     double centerFrequency;
-    double anchorFrequency;
+    double modFrequency;
 };
 #endif /* CAWLWahWah_hpp */

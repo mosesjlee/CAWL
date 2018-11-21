@@ -81,7 +81,7 @@ void CAWLEqualizer::setHighShelfCenterFreq(double centerFreq)
 {
     if(centerFreq < MIN_HIGH_SHELF_FREQ)
         cHighShelf.setCenterFreq(MIN_HIGH_SHELF_FREQ);
-    if(centerFreq > MAX_HIGH_SHELF_FREQ)
+    else if(centerFreq > MAX_HIGH_SHELF_FREQ)
         cHighShelf.setCenterFreq(MAX_HIGH_SHELF_FREQ);
     else
         cHighShelf.setCenterFreq(centerFreq);

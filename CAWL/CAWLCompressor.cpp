@@ -91,7 +91,6 @@ void CAWLCompressor::setAttackTime(double newAttackTime)
     else
         attackTime = newAttackTime;
     attackCoeff = 1 - exp(numeratorValue/(attackTime *.001));
-//    attackCoeff = exp(log(0.01)/(attackTime * DEFAULT_SR * .001));
 }
 
 /*
@@ -106,7 +105,6 @@ void CAWLCompressor::setReleaseTime(double newReleaseTime)
         releaseTime = newReleaseTime;
     
     releaseCoeff = 1 - exp(numeratorValue/(releaseTime *.001));
-//    attackCoeff = exp(log(0.01)/(releaseTime * DEFAULT_SR * .001));
 }
 
 /*

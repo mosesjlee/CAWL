@@ -64,7 +64,6 @@ void CAWLAllPassFilter::calculateCoefficients()
 //    double K = tan(M_PI * cCenterFrequency/cSampleRate);
 //    double theta_c = 2 * M_PI * cCenterFrequency/cSampleRate;
     double alpha = (tan(M_PI*cCenterFrequency/cSampleRate)-1)/(tan(M_PI*cCenterFrequency/cSampleRate)+1);
-//    double beta = -1 * cos(theta_c);
     a0 = alpha;
     a1 = 1.0;
     a2 = 0.0;

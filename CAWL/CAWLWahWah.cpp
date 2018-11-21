@@ -23,10 +23,10 @@
 CAWLWahWah::CAWLWahWah()
 {
     //Initialize the Triangle Wave Oscillator
-    triangeWave = new CAWLTriangleWaveOsc();
-    triangeWave->setWaveTableFreq(0.75);
+    triangleWave = new CAWLTriangleWaveOsc();
+    triangleWave->setWaveTableFreq(0.75);
 	centerFrequency = 800;
-    anchorFrequency = centerFrequency;
+    modFrequency = centerFrequency;
 	
     //State Variable
     y_h = 0;
@@ -46,7 +46,7 @@ CAWLWahWah::CAWLWahWah()
  */
 CAWLWahWah::~CAWLWahWah()
 {
-    delete triangeWave;
+    delete triangleWave;
 }
 
 /*
@@ -69,7 +69,7 @@ void CAWLWahWah::processBuffer(float * audioStreamBuf, const unsigned int numSam
         //y_l = F_1 * y_b(n) + y_l(n-1)
         xCurrSample = audioStreamBuf[i];
         double Q_1 = 2 * damp;
-        double F_1 = 2 * sin(M_PI * (anchorFrequency)/cSampleRate);
+        double F_1 = 2 * sin(M_PI * (modFrequency)/cSampleRate);
         
         y_h = xCurrSample - y_l_n1 - Q_1 * y_b_n1;
         y_b = F_1 * y_h + y_b_n1;
@@ -80,7 +80,7 @@ void CAWLWahWah::processBuffer(float * audioStreamBuf, const unsigned int numSam
         if(fabs(max_y_b) < epsilon) max_y_b = 1.0;
         
         audioStreamBuf[i] = (y_b/max_y_b * mixLevel) + (xCurrSample * (1.0f-mixLevel));
-        anchorFrequency = (triangeWave->getNextSample() * modDepth) + centerFrequency;
+        modFrequency = (triangleWave->getNextSample() * modDepth) + centerFrequency;
     }
 }
 
@@ -131,11 +131,11 @@ void CAWLWahWah::setMixLevel(double newMixLevel)
 void CAWLWahWah::setModulationRate(double newModLevel)
 {
     if(newModLevel > MAX_WAH_MOD_RATE)
-        triangeWave->setWaveTableFreq(MAX_WAH_MOD_RATE);
+        triangleWave->setWaveTableFreq(MAX_WAH_MOD_RATE);
     else if(newModLevel < MIN_WAH_MOD_RATE)
-        triangeWave->setWaveTableFreq(MIN_WAH_MOD_RATE);
+        triangleWave->setWaveTableFreq(MIN_WAH_MOD_RATE);
     else
-        triangeWave->setWaveTableFreq(newModLevel);
+        triangleWave->setWaveTableFreq(newModLevel);
 }
 
 
